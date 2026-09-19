@@ -41,6 +41,18 @@ Per project: `scripts/install.sh --project /path/to/repo` installs into `.claude
 
 Add [`templates/AGENTS.snippet.md`](templates/AGENTS.snippet.md) to a project's `AGENTS.md` so every agent knows the library exists.
 
+### Optional: context-guard hooks
+
+A skill only helps if it loads in time, and an agent judges its own context use poorly. Opt-in hooks
+nudge it to checkpoint around 70% full, block a `/compact` that has no fresh checkpoint, and feed the
+checkpoint back after `/compact` or `/clear`:
+
+```bash
+scripts/hooks/install-hooks.py --claude --dry-run   # preview; --agy for Antigravity
+```
+
+Nothing fires until installed. See [docs/HOOKS.md](docs/HOOKS.md) for events, settings and limits.
+
 ## Repository layout
 
 ```
@@ -51,14 +63,18 @@ plugin.json                   Antigravity plugin manifest
 templates/                    Cursor always-on rule; AGENTS.md snippet
 scripts/lint-skills.py        validates frontmatter, naming, cross-references, portability
 scripts/install.sh            installer for all targets
+scripts/hooks/                opt-in context-guard hooks + their installer
+tests/                        tests for the hook scripts
 docs/EVIDENCE.md              which repos/incidents each skill came from
 docs/TESTING.md               pressure scenarios for validating each skill
+docs/HOOKS.md                 how to turn the context-guard hooks on
 ```
 
 ## Develop
 
 ```bash
 python3 scripts/lint-skills.py --words   # must print OK
+python3 -m unittest discover tests       # hook script tests
 ```
 
 Authoring rules: description starts with "Use when…" and states triggers only (never the workflow); third person; ≤ 1024 chars; body targets ≤ 500 words; one skill per directory, name equals directory; the router must list every skill. See [AGENTS.md](AGENTS.md).

@@ -43,6 +43,7 @@ Compaction and clearing are lossy: whatever lives **only** in the conversation (
 - **Compact** with focus instructions naming what must survive, e.g. `/compact keep: goal, user decisions, files changed, failing test X, next step; checkpoint at docs/plans/checkpoint.md`.
 - **Clear** only with the checkpoint on disk; resume with "Read `<checkpoint>` and verify its state claims."
 - If the agent can't trigger it, it prepares the checkpoint and **gives the user the exact command**.
+- Don't rely on noticing. Where the harness has hooks, wire the reminder, the pre-compaction checkpoint check and the post-reset injection there.
 
 ## After: verify continuity
 

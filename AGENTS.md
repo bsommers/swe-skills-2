@@ -10,6 +10,7 @@ A library of engineering skills (`skills/<name>/SKILL.md`) for Claude Code, Anti
 
 ```bash
 python3 scripts/lint-skills.py --words   # validate all skills; must print OK
+python3 -m unittest discover tests       # tests for scripts/hooks/
 agy plugin validate .                    # validate the Antigravity plugin (read-only)
 scripts/install.sh --dry-run --all       # preview installation
 ```
@@ -20,6 +21,7 @@ scripts/install.sh --dry-run --all       # preview installation
 - `plugin.json`, `.claude-plugin/`, `.cursor-plugin/` — per-tool manifests. Keep versions equal.
 - `docs/EVIDENCE.md` — provenance; update when a skill's source material changes.
 - `docs/TESTING.md` — pressure scenarios; update when adding a skill.
+- `scripts/hooks/` — opt-in hooks that fire `compacting-context-safely`; behavior and settings are documented in `docs/HOOKS.md`, tested in `tests/`.
 
 ## Authoring rules
 
