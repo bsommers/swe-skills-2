@@ -40,7 +40,9 @@ def claude_hooks():
 
 
 def agy_hooks():
-    return {"hooks": {"SessionStart": [{"hooks": [entry("sessionstart")]}]}}
+    # agy takes Claude-style plugin hooks; its matcher is a regex alternation.
+    return {"hooks": {"SessionStart": [{"matcher": "startup|clear|compact|resume",
+                                        "hooks": [entry("sessionstart")]}]}}
 
 
 def strip_ours(groups):

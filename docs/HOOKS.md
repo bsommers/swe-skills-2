@@ -24,6 +24,18 @@ scripts/hooks/install-hooks.py --agy                 # Antigravity (SessionStart
 Add `--dry-run` to preview, `--uninstall` to remove. Installing is idempotent, backs up an existing
 `settings.json`, and leaves hooks you added yourself alone.
 
+For `agy`, the plugin must be re-imported before the new hooks register (installing over an existing
+import updates the files but not the recorded components):
+
+```bash
+scripts/hooks/install-hooks.py --agy
+agy plugin uninstall swe-skills && agy plugin install .   # components become [skills, hooks]
+```
+
+Check with `agy plugin list`. agy copies the plugin, so re-run this after changing `hooks.json`; the
+copied hook command still points at this repo's script, so edits to `context_guard.py` take effect
+immediately.
+
 **Antigravity (`agy`) gets the second half only.** It loads a plugin's hooks from a root `hooks.json`
 and supports `SessionStart`, `SessionEnd`, `PreToolUse` and `Notification` — there is no `PreCompact`
 or `UserPromptSubmit`, so the nudge and the compaction guard are Claude Code only. `--agy` writes
