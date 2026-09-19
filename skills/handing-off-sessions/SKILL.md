@@ -11,6 +11,8 @@ Context evaporates; files persist. Leave a record a **zero-context reader** can 
 
 ## Checkpoint file (write before stopping)
 
+See `references/checkpoint-template.md` for a standalone template.
+
 ```markdown
 # Checkpoint — <topic> — 2026-09-19
 **Status:** IN PROGRESS — needs resume  (or COMPLETE)

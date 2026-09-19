@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "StandardRepositoryScaffold",
+  "description": "Standard repository layout directory structure and files.",
+  "directories": [
+    {
+      "path": "src/",
+      "purpose": "Importable source code with minimal entry points.",
+      "git_tracked": true
+    },
+    {
+      "path": "tests/",
+      "purpose": "Test suites and fixtures/ directory.",
+      "git_tracked": true
+    },
+    {
+      "path": "docs/",
+      "purpose": "Architecture documentation, ADRs, and plans.",
+      "git_tracked": true
+    },
+    {
+      "path": "input/",
+      "purpose": "Read-only input assets and upstream mirrors. Ignored except README.md.",
+      "git_tracked": false
+    },
+    {
+      "path": "output/",
+      "purpose": "Reproducible artifacts generated from input. Ignored except README.md.",
+      "git_tracked": false
+    }
+  ],
+  "required_root_files": [
+    "README.md",
+    ".gitignore"
+  ]
+}

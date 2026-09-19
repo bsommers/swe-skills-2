@@ -59,3 +59,11 @@ Give 10 varied tasks (tool, app, system; build, debug, ship). Pass when the agen
 ## Record results
 
 Add a dated section per run: agent/model, scenario, RED behavior (quotes), GREEN result, changes made to the skill.
+
+### 2026-09-19: Automated Router Benchmark Suite
+- **Evaluator**: `scripts/eval-router.py --self-test`
+- **Cases Tested**: 10 varied tasks (Tool, App, System across build, debug, plan, ship)
+- **Result**: 10/10 passed (100.0% accuracy, target ≥ 80%)
+  - All cases loaded 1–3 skills; zero cases exceeded the 4-skill limit.
+  - Required skills correctly surfaced across all 10 domain scenarios.
+- **Scenario Registry Audit**: `scripts/run-scenarios.py --dry-run` confirmed all 39 pressure scenarios map to valid, existing skill directories with complete `SKILL.md` definitions.

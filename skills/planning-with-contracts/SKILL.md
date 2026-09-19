@@ -20,7 +20,9 @@ A plan is a contract between intent and code. Write **interfaces and constraints
 7. **Threat & failure model** — what can go wrong (bad input, dependency down, half-written state) and the mitigation or accepted risk.
 8. **Verification plan** — exact commands and the expected output/count.
 
-## Task template
+## Task template (and plan skeleton)
+
+See `references/plan-template.md` for a complete skeleton.
 
 ```markdown
 ### Task 3: <verb phrase>

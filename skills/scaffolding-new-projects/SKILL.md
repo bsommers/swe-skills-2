@@ -12,7 +12,7 @@ A scaffold is the first contract a repo makes: where inputs come from, where cod
 ## Recipe
 
 1. **Look first.** List the target directory. Never overwrite existing files; add only what's missing and report what you skipped.
-2. **Create the standard layout** (leave out a directory only if it clearly has no use here):
+2. **Create the standard layout** (see `references/scaffold-manifest.json`; leave out a directory only if it clearly has no use here):
 
    | Path | Holds | Git |
    |---|---|---|

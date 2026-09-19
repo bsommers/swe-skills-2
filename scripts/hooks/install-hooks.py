@@ -20,8 +20,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 GUARD = ROOT / "scripts" / "hooks" / "context_guard.py"
+GIT_GUARD = ROOT / "scripts" / "hooks" / "git_pre_commit.py"
 MARK = "context_guard.py"
 AGY_HOOKS = ROOT / "hooks.json"
+GIT_HOOK = ROOT / ".git" / "hooks" / "pre-commit"
 
 
 def entry(cmd):
@@ -111,16 +113,38 @@ def install_agy(uninstall, dry):
     return 0
 
 
+def install_git(uninstall, dry):
+    hook_script = f"#!/usr/bin/env bash\nexec {sys.executable} {GIT_GUARD}\n"
+    if uninstall:
+        if dry:
+            print(f"DRY: would remove {GIT_HOOK}")
+        elif GIT_HOOK.exists():
+            GIT_HOOK.unlink()
+            print(f"removed {GIT_HOOK}")
+        return 0
+    if dry:
+        print(f"DRY: would write {GIT_HOOK}:\n{hook_script}")
+        return 0
+    GIT_HOOK.parent.mkdir(parents=True, exist_ok=True)
+    if GIT_HOOK.exists():
+        shutil.copy2(GIT_HOOK, GIT_HOOK.with_suffix(GIT_HOOK.suffix + ".bak"))
+    GIT_HOOK.write_text(hook_script, encoding="utf-8")
+    GIT_HOOK.chmod(0o755)
+    print(f"installed git pre-commit hook to {GIT_HOOK}")
+    return 0
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--claude", action="store_true", help="install into Claude Code settings.json")
     ap.add_argument("--agy", action="store_true", help="install into the Antigravity plugin root")
+    ap.add_argument("--git", action="store_true", help="install git pre-commit hook into .git/hooks/pre-commit")
     ap.add_argument("--project", metavar="DIR", help="project-level instead of user-level (Claude Code)")
     ap.add_argument("--uninstall", action="store_true")
     ap.add_argument("--dry-run", action="store_true")
     a = ap.parse_args()
-    if not (a.claude or a.agy):
-        ap.error("choose --claude and/or --agy")
+    if not (a.claude or a.agy or a.git):
+        ap.error("choose --claude, --agy, and/or --git")
     rc = 0
     if a.claude:
         path = Path(a.project).expanduser() / ".claude" / "settings.json" if a.project \
@@ -128,6 +152,8 @@ def main():
         rc |= install_claude(path, a.uninstall, a.dry_run)
     if a.agy:
         rc |= install_agy(a.uninstall, a.dry_run)
+    if a.git:
+        rc |= install_git(a.uninstall, a.dry_run)
     return rc
 
 

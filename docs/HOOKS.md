@@ -9,6 +9,7 @@ Nothing here is active until you install it.
 | `nudge` | `UserPromptSubmit` | Reads token usage from the transcript. Past a threshold (default 70%), injects a reminder to load the skill and checkpoint **while there is still room**. Re-fires every +10%. |
 | `precompact` | `PreCompact` | On a **manual** `/compact` with no checkpoint touched in the last 20 min, exits 2 to block and says what to do. On **auto**-compaction it never blocks: the window is already full and the agent gets no turn to checkpoint, so blocking would stall the session. |
 | `sessionstart` | `SessionStart` (`compact`, `clear`, `resume`) | Injects the newest checkpoint plus the skill's verify-continuity instructions. With no checkpoint after a reset, it says so, and tells the agent to ask rather than reconstruct. |
+| `pre-commit` | Git `pre-commit` | Blocks git commits containing absolute home paths, unmasked secrets/keys, manifest version mismatches, or skill linter failures (`git_pre_commit.py`). |
 
 `scripts/hooks/context_guard.py report` prints current use and the checkpoint it found — useful in a
 status line or when checking configuration.
@@ -19,6 +20,7 @@ status line or when checking configuration.
 scripts/hooks/install-hooks.py --claude              # ~/.claude/settings.json
 scripts/hooks/install-hooks.py --claude --project .  # this repo's .claude/settings.json
 scripts/hooks/install-hooks.py --agy                 # Antigravity (SessionStart only)
+scripts/hooks/install-hooks.py --git                 # .git/hooks/pre-commit
 ```
 
 Add `--dry-run` to preview, `--uninstall` to remove. Installing is idempotent, backs up an existing

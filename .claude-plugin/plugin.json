@@ -1,7 +1,7 @@
 {
   "name": "swe-skills",
   "description": "General software engineering, planning and architecture skills for AI-assisted coding sessions, from small tools to complex systems.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": {
     "name": "bsommers"
   },
