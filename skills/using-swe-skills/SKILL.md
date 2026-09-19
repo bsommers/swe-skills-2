@@ -62,4 +62,5 @@ Load `right-sizing-process` if unsure. Rough ladder:
 
 - Announce which skill you loaded and why, in one line.
 - Skills are guidance, not ceremony. If a step costs more than the risk it removes at this scale, say so and skip it.
+- Default to **git and GitHub** (`gh` CLI) for version control, issues, and PRs, unless the project uses something else.
 - User instructions and project context files override this library.

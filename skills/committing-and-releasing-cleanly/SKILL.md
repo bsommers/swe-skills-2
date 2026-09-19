@@ -19,6 +19,7 @@ Commits are the unit of review and rollback. Keep them **atomic, verified, and e
 
 ## Branch and PR
 
+- Default to git with GitHub as the remote; use `gh` for PRs, checks (`gh pr checks`), and releases.
 - Work on `feature/…`, `fix/…`, `refactor/…`; `main` stays green.
 - Push once, after local verification, to conserve CI minutes; avoid WIP pushes.
 - PR description: summary, why, how verified (commands + results), risks, follow-ups. For grouping issues into PRs and the full template, load `writing-pull-requests`.
@@ -28,7 +29,7 @@ Commits are the unit of review and rollback. Keep them **atomic, verified, and e
 
 1. Pre-release gate: full suite, clean-clone run, security scan, docs check.
 2. Choose the semver bump from the change list: breaking → major, feature → minor, fix → patch.
-3. Update changelog and version; tag; publish.
+3. Update changelog and version; tag; publish (`gh release create <tag> --notes-file <changelog-excerpt>`).
 4. Multiple remotes (authoritative + org mirror): sync **both** with the project's sync script and verify.
 
 ## Ask before you act
