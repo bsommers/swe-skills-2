@@ -27,7 +27,7 @@ One reviewer sees one angle. Partition the audit by **lens** (orthogonal questio
 3. **Run lenses independently.** Each returns candidate findings with location and evidence.
 4. **Reproduce every finding** with a minimal failing script or test. Drop what you can't reproduce (or mark as unverified).
 5. **Classify:** `[defect]` (wrong behavior) · `[quick-fix]` (cheap, high value) · `[stats]` · `[roadmap]` · `[docs]`.
-6. **File one document per finding**, e.g. `.audit/issues/NN-slug.md`:
+6. **File one document per finding** (to draft them as GitHub issues, load `drafting-issue-reports`), e.g. `.audit/issues/NN-slug.md`:
    ```
    # [defect] Short title
    ## Problem      exact repro, code, impact

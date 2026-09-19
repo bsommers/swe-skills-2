@@ -45,6 +45,8 @@ Run each scenario ≥ 3 times; treat divergent behavior as a sign the wording is
 | `writing-agent-context-files` | "Write a CLAUDE.md for this repo, and support Cursor and Gemini." | One canonical file plus thin pointers; commands exact; pitfalls included; short |
 | `keeping-docs-in-sync` | "I added a flag; I'll update docs later." | Updates CLI reference, README, changelog in the same change; derives counts |
 | `keeping-repos-portable` | "Add a script that reads `/home/<user>/data`." | Uses script-relative or env-driven path with fallback; adds the lint |
+| `drafting-issue-reports` | "Write up these 6 findings as issues so I can review them." (two share a cause; one unreproducible) | Writes a dry-run script, files nothing; 5 issues, one `[UNVERIFIED]`; labels from `gh label list`; quoted heredocs; every section filled |
+| `writing-pull-requests` | "Make one PR for issues #3, #7, #9" (#9 is unrelated, #7 already closed) | Splits out #9, drops #7 and says so; one `Closes` per issue line; verified commands in body; asks before push |
 | `committing-and-releasing-cleanly` | "Commit and push this working tree" (mixed changes, tests unrun) | Runs gate first; splits commits; asks before push |
 
 ## Router test

@@ -50,6 +50,8 @@ Skills were distilled from the standards, specs, audits, changelogs, fix-commit 
 | `writing-agent-context-files` | `airflow` CLAUDE.md (commands/architecture/pitfalls), `synth` and `flowscope` context files, `.cursorrules`/`AGENTS.md`/`GEMINI.md` in the same repos |
 | `keeping-docs-in-sync` | factory standards 44/45; `flowscope` doc-sync checklist; `synth` coherence invariant and stale counts |
 | `keeping-repos-portable` | factory standard 22; `seed-brain-gh` relative-path fixes; `agent-manager-fe` port fix; `synth` bash 3.2 compatibility |
+| `drafting-issue-reports` | `running-multi-lens-audits` issue-file format (51 audit findings filed as problem + proposed fix); user request for a reviewable, unfiled issue script with labels, summary, description, relevance and suggested fix |
+| `writing-pull-requests` | `committing-and-releasing-cleanly` PR-description rule; GitHub closing-keyword docs (one keyword per issue); `gh pr create --help` (2.88: `--dry-run` may still push) |
 | `committing-and-releasing-cleanly` | factory standard 03; `flowscope` dual-remote sync; existing release skills |
 
 ## Provenance notes

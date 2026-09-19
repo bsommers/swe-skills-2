@@ -54,6 +54,8 @@ Load `right-sizing-process` if unsure. Rough ladder:
 | Write CLAUDE.md / AGENTS.md / rules | `writing-agent-context-files` |
 | Change behavior that docs describe | `keeping-docs-in-sync` |
 | Script paths, envs, cross-machine use | `keeping-repos-portable` |
+| Write up bugs or findings as issues | `drafting-issue-reports` |
+| Turn issues or a branch into a PR | `writing-pull-requests` |
 | Commit, push, tag, release | `committing-and-releasing-cleanly` |
 
 ## Rules of use

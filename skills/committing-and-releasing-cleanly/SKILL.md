@@ -21,7 +21,7 @@ Commits are the unit of review and rollback. Keep them **atomic, verified, and e
 
 - Work on `feature/…`, `fix/…`, `refactor/…`; `main` stays green.
 - Push once, after local verification, to conserve CI minutes; avoid WIP pushes.
-- PR description: summary, why, how verified (commands + results), risks, follow-ups.
+- PR description: summary, why, how verified (commands + results), risks, follow-ups. For grouping issues into PRs and the full template, load `writing-pull-requests`.
 - Squash or merge per project convention; delete merged branches.
 
 ## Release
