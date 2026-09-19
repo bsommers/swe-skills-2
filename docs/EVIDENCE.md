@@ -48,6 +48,7 @@ Skills were distilled from the standards, specs, audits, changelogs, fix-commit 
 | `running-multi-lens-audits` | `eval` benchmark-audit skill; `synth` 51-issue audit |
 | `supervising-autonomous-sessions` | factory variable-gear autonomy, halt-after-3-retries, boundary isolation, evidence rule |
 | `handing-off-sessions` | `airflow` Phase 4.1 checkpoint; `ai-model-learning` full-system rebuild spec; factory incidental-tooling and journaling standards; `uitoolbox` REBUILD |
+| `compacting-context-safely` | `ai-model-learning` measured token failures; `airflow` checkpoint notes; recurring loss of user corrections and repeated dead ends after context compaction |
 | `writing-agent-context-files` | `airflow` CLAUDE.md (commands/architecture/pitfalls), `synth` and `flowscope` context files, `.cursorrules`/`AGENTS.md`/`GEMINI.md` in the same repos |
 | `keeping-docs-in-sync` | factory standards 44/45; `flowscope` doc-sync checklist; `synth` coherence invariant and stale counts |
 | `keeping-repos-portable` | factory standard 22; `seed-brain-gh` relative-path fixes; `agent-manager-fe` port fix; `synth` bash 3.2 compatibility |

@@ -50,6 +50,7 @@ Unsure? `right-sizing-process`.
 | audit in depth | `running-multi-lens-audits` |
 | run unattended for hours | `supervising-autonomous-sessions` |
 | pause, resume, hand off | `handing-off-sessions` |
+| context filling up; compact or clear | `compacting-context-safely` |
 | write CLAUDE.md/AGENTS.md/rules | `writing-agent-context-files` |
 | change documented behavior | `keeping-docs-in-sync` |
 | hardcode paths or env assumptions | `keeping-repos-portable` |

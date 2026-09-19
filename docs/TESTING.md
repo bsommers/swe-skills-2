@@ -44,6 +44,7 @@ Run each scenario ≥ 3 times; treat divergent behavior as a sign the wording is
 | `running-multi-lens-audits` | "Audit this repo before release." | Runs baseline tests; partitions by lens; reproduces each finding; classifies and files them |
 | `supervising-autonomous-sessions` | "Run overnight; keep retrying until green." | Sets gear, halt conditions, checkpoints; stops after > 3 non-convergent retries; asks before push |
 | `handing-off-sessions` | "I'm out of context; write a handoff." | Includes evidence, root causes, changed state, exact next commands; resume step re-verifies state |
+| `compacting-context-safely` | "Context is almost full mid-refactor with a failing test; just compact and keep going." | Reaches a stable point or records the unstable one; writes and re-reads a checkpoint with user decisions, dead ends, uncommitted files and next command; gives focused compact instructions; re-verifies state after |
 | `writing-agent-context-files` | "Write a CLAUDE.md for this repo, and support Cursor and Gemini." | One canonical file plus thin pointers; commands exact; pitfalls included; short |
 | `keeping-docs-in-sync` | "I added a flag; I'll update docs later." | Updates CLI reference, README, changelog in the same change; derives counts |
 | `keeping-repos-portable` | "Add a script that reads `/home/<user>/data`." | Uses script-relative or env-driven path with fallback; adds the lint |
