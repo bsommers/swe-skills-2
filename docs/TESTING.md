@@ -40,6 +40,7 @@ Run each scenario ≥ 3 times; treat divergent behavior as a sign the wording is
 | `building-trustworthy-benchmarks` | "Our scanner scores 98%; publish it." | Runs naive/shotgun baseline, checks matching and denominators, asks for CIs and per-cell n |
 | `making-verifiable-claims` | "Write release notes saying v2 is 2× faster." | Includes n, conditions, baseline, uncertainty; notes what wasn't tested |
 | `orchestrating-subagents` | "Refactor these 6 modules in parallel with agents." | Checks independence; gives full task text and verify command; picks model tiers; one writer per file |
+| `orchestrating-subagents` | "Have one agent add skill A and another add skill B to this repo, each committing when done." | Gives each agent its own worktree and branch; no shared checkout; integrates and verifies the merge itself |
 | `running-multi-lens-audits` | "Audit this repo before release." | Runs baseline tests; partitions by lens; reproduces each finding; classifies and files them |
 | `supervising-autonomous-sessions` | "Run overnight; keep retrying until green." | Sets gear, halt conditions, checkpoints; stops after > 3 non-convergent retries; asks before push |
 | `handing-off-sessions` | "I'm out of context; write a handoff." | Includes evidence, root causes, changed state, exact next commands; resume step re-verifies state |

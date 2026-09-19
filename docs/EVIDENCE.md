@@ -44,7 +44,7 @@ Skills were distilled from the standards, specs, audits, changelogs, fix-commit 
 | `clustering-failures-by-root-cause` | `flowscope` improvement plan 003; `synth` no-degradation ratchets |
 | `building-trustworthy-benchmarks` | `synth` audit plan and governance docs; `eval` benchmark-audit prompts and statistical guide |
 | `making-verifiable-claims` | `eval` Toulmin claims and statistics guides; factory standard 41 |
-| `orchestrating-subagents` | `synth` model-selection guidance; factory multi-tier verification; `eval` four-agent partitioning |
+| `orchestrating-subagents` | `synth` model-selection guidance; factory multi-tier verification; `eval` four-agent partitioning; a two-agent incident in this repo where a second agent staged files in a shared checkout and they were swept into the other agent's amend |
 | `running-multi-lens-audits` | `eval` benchmark-audit skill; `synth` 51-issue audit |
 | `supervising-autonomous-sessions` | factory variable-gear autonomy, halt-after-3-retries, boundary isolation, evidence rule |
 | `handing-off-sessions` | `airflow` Phase 4.1 checkpoint; `ai-model-learning` full-system rebuild spec; factory incidental-tooling and journaling standards; `uitoolbox` REBUILD |

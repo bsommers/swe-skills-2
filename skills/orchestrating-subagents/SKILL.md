@@ -1,6 +1,6 @@
 ---
 name: orchestrating-subagents
-description: Use when delegating work to subagents or parallel agents, choosing which model tier to use for a task, structuring reviews by fresh-context agents, or when subagent output is too verbose or conflicts with other agents' edits.
+description: Use when delegating work to subagents or parallel agents, choosing which model tier to use for a task, structuring reviews by fresh-context agents, when subagent output is too verbose or conflicts with other agents' edits, or when more than one agent may commit to the same repository.
 ---
 
 # Orchestrating Subagents
@@ -24,7 +24,7 @@ Subagents buy parallelism and fresh context; they cost tokens and can conflict. 
 2. **Full task text, not a pointer.** Give: goal, exact files, interfaces, acceptance criteria, the verification command, and constraints. A subagent starts with nothing.
 3. **Terse output contract.** Ask for: status, what changed (paths), verification result, blockers. No narration, no restating the prompt.
 4. **Parallel only when independent.** Different files, no shared state, no ordering. Otherwise sequence them.
-5. **One writer per file.** Assign ownership; integrate diffs yourself.
+5. **One writer per file, one agent per checkout.** Assign file ownership; integrate diffs yourself. Agents that may commit in parallel each get their own `git worktree add ../<repo>-<task> -b <branch>` (or clone). A shared checkout means a shared index, so one agent's `commit` or `--amend` sweeps up files another agent staged. Merge the branches back yourself.
 6. **Bound the slice.** One task, one component; flush context between tasks so stale assumptions don't leak.
 7. **Review in two passes:** spec compliance first, then code quality.
 8. **Layered verification:** executor self-check → independent reviewer (fresh context) → security/test auditor → second model (optional) → human. Reviewers get the *spec and diff*, not the executor's reasoning.
@@ -48,6 +48,7 @@ Report: status · files changed · verify output · blockers (≤10 lines)
 
 - Same expensive model for everything.
 - Two agents editing one file.
+- Two agents committing in one checkout, including an agent from another project told to "also add this here".
 - Vague "improve X" tasks that produce sprawling diffs.
 - Accepting "all tests pass" without seeing the output.
 - Using subagent review as a rubber stamp by including the executor's justification.
