@@ -5,3 +5,4 @@ __pycache__/
 node_modules/
 .swe-skills-2
 /hooks.json
+/dist/
