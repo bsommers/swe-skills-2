@@ -12,7 +12,7 @@ A PR is a request for a reviewer's attention. Give them **one coherent change, a
 ## Procedure
 
 1. **Load the bundle.** For each issue (numbers, URLs, or a `drafting-issue-reports` script), `gh issue view <n>`. Drop issues that are closed or already fixed on the base branch, and say which you dropped. Drafted issues that aren't filed yet have no numbers: ask to file them first, or leave `Closes #?` placeholders.
-2. **Group into PRs.** Issues share a PR only when they touch the same area *and* a reviewer can judge them together. Split out anything risky, unrelated, or a pure refactor. A PR over ~400 changed lines (excluding generated files) should be split. Show the grouping table (PR · issues · reason) before coding when there is more than one PR.
+2. **Group into PRs.** Issues share a PR only when they touch the same area *and* a reviewer can judge them together. Split out anything risky, unrelated, or a pure refactor. Split at the project's size limit; with none, default to about 400 changed lines, excluding generated files (review effectiveness drops past 200–400 lines). Show the grouping table (PR · issues · reason) before coding when there is more than one PR.
 3. **Branch and commit.** One branch per PR (`fix/…`, `feat/…`). One commit per issue where possible, with a conventional message whose body ends `Refs #<n>`.
 4. **Verify.** Run the project's gate (`layered-verification-gates`). Record the exact commands and their results; they go in the body verbatim.
 5. **Write the body file** from `references/pr-body-template.md` (e.g. `.pr/<branch>.md`). Fill every section; write "None" rather than deleting one.

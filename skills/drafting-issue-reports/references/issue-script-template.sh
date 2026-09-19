@@ -14,14 +14,18 @@ REPO="${REPO:-}"                      # empty = repo of the current directory
 MODE=dry-run
 [[ "${1:-}" == "--file" ]] && MODE=file
 
-# Labels these issues use that the repo does not have yet. Create them only after review:
+# Labels used below that the repo does not have yet. Uncomment after review:
 #   gh label create <name> --color <hex> --description "<text>"
-LABELS_TO_CREATE=()
 
+USED_LABELS=()
+
+# Fail before anything is filed if any label used below is missing from the repo.
 check_labels() {
   local have missing=()
   have="$(gh label list ${REPO:+--repo "$REPO"} --limit 500 --json name -q '.[].name')"
-  for l in "$@"; do grep -qxF "$l" <<<"$have" || missing+=("$l"); done
+  for l in $(printf '%s\n' "${USED_LABELS[@]}" | sort -u); do
+    grep -qxF "$l" <<<"$have" || missing+=("$l")
+  done
   if ((${#missing[@]})); then
     echo "Missing labels: ${missing[*]}. Create them or edit this script." >&2
     exit 1
@@ -32,15 +36,18 @@ check_labels() {
 issue() {
   local title="$1" labels="$2" body
   body="$(cat)"
-  if [[ $MODE == file ]]; then
+  if [[ $MODE == collect ]]; then
+    IFS=, read -ra l <<<"$labels"
+    USED_LABELS+=("${l[@]}")
+  elif [[ $MODE == file ]]; then
     gh issue create ${REPO:+--repo "$REPO"} --title "$title" --label "$labels" --body "$body"
   else
     printf '=== %s  [%s]\n%s\n\n' "$title" "$labels" "$body"
   fi
 }
 
-# Every label used below, checked before anything is created so a run cannot fail halfway.
-[[ $MODE == file ]] && check_labels bug enhancement major minor
+# ---- Issues (edit below) ----
+all_issues() {
 
 issue "CSV export drops last row when input lacks trailing newline" "bug,major" <<'BODY'
 ## Summary
@@ -90,3 +97,13 @@ Add `--dry-run`, which runs the planning step and prints the plan table, then ex
 
 _Source: user request, main @ abc1234_
 BODY
+
+}
+
+# ---- Run ----
+if [[ $MODE == file ]]; then
+  MODE=collect; all_issues
+  check_labels
+  MODE=file
+fi
+all_issues

@@ -16,8 +16,8 @@ Issues go to GitHub via `gh`. Never run the script, `gh issue create`, or any ot
 1. **Gather and verify.** Reproduce each problem, or cite the exact evidence (`file:line`, commit, log line, failing command). If you can't, keep it but mark the claim `[UNVERIFIED]`. Never invent facts (`grounding-ai-outputs`).
 2. **One issue per root cause.** Merge symptoms that share a mechanism; split an item that hides two fixes (`clustering-failures-by-root-cause`).
 3. **Deduplicate.** `gh issue list --state all --search "<keywords>"`. Link to an existing issue instead of re-filing it.
-4. **Read the label set.** `gh label list`. Use existing labels. Put any missing label in the script's `LABELS_TO_CREATE` list for the user to approve; never create one silently.
-5. **Write the script** from `references/issue-script-template.sh`: dry run by default, `--file` to create. Order issues by severity.
+4. **Read the label set.** `gh label list`. Use existing labels. Propose a missing one as a commented `gh label create` line at the top of the script; never create one yourself. With `--file`, the script checks all labels before filing anything.
+5. **Write the script** from `references/issue-script-template.sh`, issues in severity order.
 6. **Check it.** `bash -n` passes, a dry run prints every issue, and no issue has an empty section. Save it where the user prefers (e.g. `.issues/draft-YYYY-MM-DD.sh`).
 7. **Report:** the path, an index table (title · labels · severity), and anything `[UNVERIFIED]`.
 
