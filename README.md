@@ -8,7 +8,7 @@ Every skill is distilled from real projects: bugs that were found, limits that w
 
 Start with **`using-swe-skills`**. It sizes the task (tool / app / system) and routes to the one to three skills that apply. Loading everything at once wastes context, so each skill is short (≈300–500 words) and has a discovery-only description.
 
-## Skills (36)
+## Skills (37)
 
 | Group | Skills |
 |---|---|
@@ -16,7 +16,7 @@ Start with **`using-swe-skills`**. It sizes the task (tool / app / system) and r
 | **Frame & plan** | `right-sizing-process` · `writing-intent-briefs` · `planning-with-contracts` · `sizing-limits-from-measurement` · `choosing-tools-and-substrates` |
 | **Architecture** | `designing-layered-pipelines` · `designing-plugin-contracts` · `designing-testable-seams` · `evolving-schemas-and-contracts` · `defending-architecture-decisions` · `managing-complexity-budgets` · `designing-data-pipelines` |
 | **AI systems** | `building-unattended-agent-loops` · `grounding-ai-outputs` |
-| **Build** | `building-small-cli-tools` · `building-code-generators` · `parsing-untrusted-text-robustly` · `hardening-trust-boundaries` · `engineering-for-determinism` |
+| **Build** | `scaffolding-new-projects` · `building-small-cli-tools` · `building-code-generators` · `parsing-untrusted-text-robustly` · `hardening-trust-boundaries` · `engineering-for-determinism` |
 | **Verify & measure** | `layered-verification-gates` · `hunting-silent-failures` · `debugging-across-layers` · `clustering-failures-by-root-cause` · `building-trustworthy-benchmarks` · `making-verifiable-claims` |
 | **Collaborate & sustain** | `orchestrating-subagents` · `running-multi-lens-audits` · `supervising-autonomous-sessions` · `handing-off-sessions` · `writing-agent-context-files` · `keeping-docs-in-sync` · `keeping-repos-portable` · `drafting-issue-reports` · `writing-pull-requests` · `committing-and-releasing-cleanly` |
 

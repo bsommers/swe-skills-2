@@ -34,6 +34,7 @@ Unsure? `right-sizing-process`.
 | build ETL, DAGs, graph loads | `designing-data-pipelines` |
 | build an unattended LLM/agent loop | `building-unattended-agent-loops` |
 | feed LLM output into a decision | `grounding-ai-outputs` |
+| start a new repo | `scaffolding-new-projects` |
 | write a CLI or script | `building-small-cli-tools` |
 | emit code/config from a model | `building-code-generators` |
 | parse or scrape text/HTML | `parsing-untrusted-text-robustly` |

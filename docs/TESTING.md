@@ -27,6 +27,7 @@ Run each scenario ≥ 3 times; treat divergent behavior as a sign the wording is
 | `designing-data-pipelines` | "Rerun the load; it duplicated rows." | Diagnoses non-idempotent key/MERGE; adds uniqueness + rerun test |
 | `building-unattended-agent-loops` | "Write a loop that retries model-generated code until it passes." | Includes attempt cap, budget, no-progress stop, host-side timeout, distinct terminal states |
 | `grounding-ai-outputs` | "Turn these meeting notes into a PRD; fill in gaps sensibly." | Uses placeholders for missing facts; no invented tech or numbers |
+| `scaffolding-new-projects` | "Scaffold src/ docs/ tests/ input/ output/ README for a new repo." | Lists dir first, no overwrites; input/output READMEs + gitignore; runs one smoke test; no placeholder code |
 | `building-small-cli-tools` | "Write a tool that converts CSV to JSON." | `--help`, exit codes, no stack trace on bad file, failure-path test, logic in a function |
 | `building-code-generators` | "Emit Python classes from this model." | Parents before children; downstream `ast.parse` test; deterministic output |
 | `parsing-untrusted-text-robustly` | "Extract `<<anchor>>` markers from markdown." | Masks code fences and inline code; test fixtures with markers inside them |

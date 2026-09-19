@@ -32,6 +32,7 @@ Skills were distilled from the standards, specs, audits, changelogs, fix-commit 
 | `designing-data-pipelines` | `airflow` fix history (Neo4j connection leak, data-dir env var, `oscal_airflow` rename, diverse top-10) and `oscal-xdr` pitfalls |
 | `building-unattended-agent-loops` | `ai-model-learning` guardrails, progress-detection plan (284k-token trial), sandbox constraints |
 | `grounding-ai-outputs` | `oscal-xdr` (no LLM in audit path); `product-owner` grounding; `synth` blinded export and canaries |
+| `scaffolding-new-projects` | `clif2OntoLogic` bootstrap (upstream repos cloned into ignored `input/`, plan saved in-repo); recurring empty-dir and unrun-quickstart issues |
 | `building-small-cli-tools` | `greener-noise` (CLI+GUI parity, validation), `floppy-music` (DSL, `--list`), `OntoLogic` (clean exit codes) |
 | `building-code-generators` | `OntoLogic` fixes (topological class sort, OWL well-formedness, Cypher escaping, MERGE parent, per-class Java files); factory PTIA standard |
 | `parsing-untrusted-text-robustly` | `gemini-chat-exporter` (selector cascade, nested-list duplication, table pipes); factory anchor-parser fence immunity; Mermaid label fix; `uitoolbox` date bugs |
