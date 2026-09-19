@@ -1,6 +1,6 @@
 ---
 name: committing-and-releasing-cleanly
-description: Use when about to commit, push, open a PR, tag a version, or cut a release; when a working tree mixes unrelated changes; or when unsure whether an action is safe to run without asking.
+description: Use when about to commit, push, tag a version, or cut a release; when a working tree mixes unrelated changes; or when unsure whether an action is safe to run without asking.
 ---
 
 # Committing and Releasing Cleanly

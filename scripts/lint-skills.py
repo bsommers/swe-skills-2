@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Lint every skills/*/SKILL.md: frontmatter, naming, discovery, cross-references, portability.
 
+Supporting files (e.g. references/) are checked for portability and TODO/TBD too.
+
 Exit 0 when clean, 1 when any error is found. Stdlib only.
 Usage: python3 scripts/lint-skills.py [--words]
 """
@@ -34,6 +36,7 @@ def main():
     names = sorted(p.name for p in SKILLS.iterdir() if p.is_dir())
     errors, warnings = [], []
     total_words = 0
+    prefixes = {n.split("-", 1)[0] for n in names}
 
     for name in names:
         f = SKILLS / name / "SKILL.md"
@@ -72,12 +75,19 @@ def main():
         for ref in set(re.findall(r"`([a-z0-9]+(?:-[a-z0-9]+)+)`", body)):
             if ref in names:
                 continue
-            # only flag hyphenated tokens that look like our verb-noun ids
-            if re.match(r"^(using|right|writing|planning|sizing|choosing|designing|evolving|"
-                        r"defending|managing|building|grounding|parsing|hardening|engineering|"
-                        r"layered|hunting|debugging|clustering|making|orchestrating|running|"
-                        r"supervising|handing|keeping|committing)-", ref):
+            # only flag hyphenated tokens whose leading word matches an existing skill's
+            if ref.split("-", 1)[0] in prefixes:
                 errors.append(f"{name}: references unknown skill `{ref}`")
+        for extra_file in sorted(p for p in (SKILLS / name).rglob("*") if p.is_file() and p != f):
+            rel = extra_file.relative_to(SKILLS)
+            try:
+                extra_text = extra_file.read_text(encoding="utf-8")
+            except UnicodeDecodeError:
+                continue
+            if ABS_PATH_RE.search(extra_text):
+                errors.append(f"{rel}: contains an absolute home path")
+            if "TODO" in extra_text or "TBD" in extra_text:
+                errors.append(f"{rel}: contains TODO/TBD")
         words = len(body.split())
         total_words += words
         if words > WARN_WORDS:

@@ -5,62 +5,60 @@ description: Use when starting any software task — building a tool, feature or
 
 # Using swe-skills
 
-## Overview
+Load the **one to three** skills that match the task, never all of them. When a process skill (brainstorming, TDD, debugging, code review) also applies, it sets the *how*; these skills add the domain judgment.
 
-A library of engineering skills distilled from real projects: what broke, what was measured, what held up. Load **one to three** skills that match the task. Loading all of them wastes context and dilutes each.
-
-These skills complement general process skills (brainstorming, TDD, systematic debugging, code review) if your agent has them. Where both apply, run the process skill for the *how*, and this library for the domain judgment.
-
-## Step 1: Size the task
-
-Load `right-sizing-process` if unsure. Rough ladder:
+## 1. Size the task
 
 | Scale | Signals | Process |
 |---|---|---|
-| **Tool** | One purpose, one user, ≤ a day | Intent in 3 lines, stdlib, one happy + one failure test |
-| **App** | Several modules, state or UI, days | Intent brief, task list with verify commands, layered structure |
-| **System** | Multiple services/agents/repos, unattended, others depend on it | Written plan with contracts, ADRs, budgets, audits, checkpoints |
+| **Tool** | one purpose, one user, ≤ a day | 3-line intent, stdlib, one happy + one failure test |
+| **App** | several modules, state or UI, days | intent brief, tasks with verify commands, layers |
+| **System** | many services/agents/repos, unattended, others depend on it | contracts, ADRs, budgets, audits, checkpoints |
 
-## Step 2: Map intent to skill
+Unsure? `right-sizing-process`.
 
-| You are about to… | Load |
+## 2. Pick skills
+
+| When you… | Load |
 |---|---|
-| Start something fuzzy | `writing-intent-briefs` |
-| Write a plan or spec | `planning-with-contracts` |
-| Set a timeout, token cap, batch size, pool size | `sizing-limits-from-measurement` |
-| Pick a language, library or runtime | `choosing-tools-and-substrates` |
-| Structure a multi-stage system | `designing-layered-pipelines`, `designing-plugin-contracts` |
-| Make code testable / handle errors | `designing-testable-seams` |
-| Define data shapes or evolve a schema | `evolving-schemas-and-contracts` |
-| Make a decision you can't cheaply undo | `defending-architecture-decisions` |
-| Notice files or functions getting big | `managing-complexity-budgets` |
-| Build ETL, DAGs, graph loads | `designing-data-pipelines` |
-| Build an LLM/agent loop that runs unattended | `building-unattended-agent-loops`, `grounding-ai-outputs` |
-| Write a CLI or script | `building-small-cli-tools` |
-| Emit code/config from a model | `building-code-generators` |
-| Parse or scrape text/HTML/markup | `parsing-untrusted-text-robustly` |
-| Touch shell, SQL/Cypher, files, secrets, sandboxes | `hardening-trust-boundaries` |
-| See flaky or non-reproducible results | `engineering-for-determinism` |
-| Decide what "done" and "green" mean | `layered-verification-gates` |
-| Suspect untested code hides bugs | `hunting-silent-failures` |
-| Face a failure that ignores your fixes | `debugging-across-layers` |
-| Face dozens of failures/false positives | `clustering-failures-by-root-cause` |
-| Build or trust an eval / benchmark | `building-trustworthy-benchmarks` |
-| Report a number, status, or comparison | `making-verifiable-claims` |
-| Delegate to subagents | `orchestrating-subagents` |
-| Audit a codebase in depth | `running-multi-lens-audits` |
-| Run lights-out for long stretches | `supervising-autonomous-sessions` |
-| Pause, resume, or transfer work | `handing-off-sessions` |
-| Write CLAUDE.md / AGENTS.md / rules | `writing-agent-context-files` |
-| Change behavior that docs describe | `keeping-docs-in-sync` |
-| Script paths, envs, cross-machine use | `keeping-repos-portable` |
-| Write up bugs or findings as issues | `drafting-issue-reports` |
-| Turn issues or a branch into a PR | `writing-pull-requests` |
-| Commit, push, tag, release | `committing-and-releasing-cleanly` |
+| get a fuzzy request | `writing-intent-briefs` |
+| write a plan or spec | `planning-with-contracts` |
+| set a timeout, token cap, batch or pool size | `sizing-limits-from-measurement` |
+| pick a language, library, runtime | `choosing-tools-and-substrates` |
+| structure a multi-stage system | `designing-layered-pipelines` |
+| support swappable backends/drivers | `designing-plugin-contracts` |
+| call DBs, HTTP, clock, LLMs; handle errors | `designing-testable-seams` |
+| define or change data shapes | `evolving-schemas-and-contracts` |
+| make a costly-to-reverse decision | `defending-architecture-decisions` |
+| grow a big file or function | `managing-complexity-budgets` |
+| build ETL, DAGs, graph loads | `designing-data-pipelines` |
+| build an unattended LLM/agent loop | `building-unattended-agent-loops` |
+| feed LLM output into a decision | `grounding-ai-outputs` |
+| write a CLI or script | `building-small-cli-tools` |
+| emit code/config from a model | `building-code-generators` |
+| parse or scrape text/HTML | `parsing-untrusted-text-robustly` |
+| touch shell, SQL, paths, secrets, sandboxes | `hardening-trust-boundaries` |
+| see flaky or churning output | `engineering-for-determinism` |
+| decide what "done" means | `layered-verification-gates` |
+| suspect untested code hides bugs | `hunting-silent-failures` |
+| hit a failure that ignores fixes | `debugging-across-layers` |
+| face dozens of failures | `clustering-failures-by-root-cause` |
+| build or trust a benchmark | `building-trustworthy-benchmarks` |
+| report a number or status | `making-verifiable-claims` |
+| delegate to subagents | `orchestrating-subagents` |
+| audit in depth | `running-multi-lens-audits` |
+| run unattended for hours | `supervising-autonomous-sessions` |
+| pause, resume, hand off | `handing-off-sessions` |
+| write CLAUDE.md/AGENTS.md/rules | `writing-agent-context-files` |
+| change documented behavior | `keeping-docs-in-sync` |
+| hardcode paths or env assumptions | `keeping-repos-portable` |
+| write up bugs or findings as issues | `drafting-issue-reports` |
+| turn issues or a branch into a PR | `writing-pull-requests` |
+| commit, push, tag, release | `committing-and-releasing-cleanly` |
 
-## Rules of use
+## Rules
 
-- Announce which skill you loaded and why, in one line.
-- Skills are guidance, not ceremony. If a step costs more than the risk it removes at this scale, say so and skip it.
+- Announce the skills you loaded, and why, in one line.
+- If a step costs more than the risk it removes at this scale, say so and skip it.
 - Default to **git and GitHub** (`gh` CLI) for version control, issues, and PRs, unless the project uses something else.
 - User instructions and project context files override this library.
