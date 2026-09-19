@@ -33,9 +33,10 @@ def claude_hooks():
         "UserPromptSubmit": [{"hooks": [entry("nudge")]}],
         "PreCompact": [{"matcher": "manual", "hooks": [entry("precompact")]},
                        {"matcher": "auto", "hooks": [entry("precompact")]}],
-        "SessionStart": [{"matcher": "compact", "hooks": [entry("sessionstart")]},
-                         {"matcher": "clear", "hooks": [entry("sessionstart")]},
-                         {"matcher": "resume", "hooks": [entry("sessionstart")]}],
+        # startup/resume included too: the handler only speaks up there when a
+        # checkpoint is fresh (SWE_SKILLS_CHECKPOINT_FRESH_HOURS).
+        "SessionStart": [{"matcher": m, "hooks": [entry("sessionstart")]}
+                         for m in ("startup", "compact", "clear", "resume")],
     }
 
 

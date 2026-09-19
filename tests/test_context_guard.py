@@ -216,10 +216,17 @@ class InstallerCase(unittest.TestCase):
         self.assertEqual(self.install().returncode, 0)
         self.assertEqual(self.install().returncode, 0)
         hooks = self.load()["hooks"]
-        for event, count in (("UserPromptSubmit", 2), ("PreCompact", 2), ("SessionStart", 3)):
+        for event, count in (("UserPromptSubmit", 2), ("PreCompact", 2), ("SessionStart", 4)):
             self.assertEqual(len(hooks[event]), count, event)
         self.install("--uninstall")
         self.assertEqual(self.load(), before, "uninstall restores the original settings")
+
+    def test_session_start_matchers_cover_startup(self):
+        """A fresh session must match too, or a checkpoint only resurfaces after a reset."""
+        self.install()
+        matchers = [g.get("matcher") for g in self.load()["hooks"]["SessionStart"]]
+        for m in ("startup", "compact", "clear", "resume"):
+            self.assertIn(m, matchers)
 
     def test_dry_run_changes_nothing(self):
         before = self.settings.read_text(encoding="utf-8")
