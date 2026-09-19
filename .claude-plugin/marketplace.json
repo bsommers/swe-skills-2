@@ -1,0 +1,15 @@
+{
+  "name": "swe-skills-marketplace",
+  "description": "Local marketplace for the swe-skills plugin",
+  "owner": {
+    "name": "bsommers"
+  },
+  "plugins": [
+    {
+      "name": "swe-skills",
+      "description": "General software engineering, planning and architecture skills for AI-assisted coding sessions.",
+      "version": "0.1.0",
+      "source": "./"
+    }
+  ]
+}

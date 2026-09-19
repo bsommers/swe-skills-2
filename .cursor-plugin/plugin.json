@@ -1,0 +1,12 @@
+{
+  "name": "swe-skills",
+  "displayName": "SWE Skills",
+  "description": "General software engineering, planning and architecture skills for AI-assisted coding sessions.",
+  "version": "0.1.0",
+  "author": {
+    "name": "bsommers"
+  },
+  "license": "MIT",
+  "keywords": ["skills", "architecture", "planning", "verification", "best-practices"],
+  "skills": "./skills/"
+}

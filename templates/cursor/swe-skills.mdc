@@ -1,0 +1,12 @@
+---
+description: Points the agent at the swe-skills library for planning, architecture, verification and release work
+alwaysApply: true
+---
+
+This project uses the **swe-skills** library (installed under `.cursor/skills/`, `~/.cursor/skills/`, or `.agents/skills/`).
+
+- At the start of a software task, read `using-swe-skills` to pick the 1–3 skills that apply and how much process the task deserves.
+- Size the process to the task (tool / app / system). Skip ceremony that costs more than the risk it removes.
+- Before claiming work is done, show the verification command and its output.
+- Ask before pushing, tagging, publishing, deleting, or writing outside this repository.
+- Project rules in `AGENTS.md` take precedence over the library.

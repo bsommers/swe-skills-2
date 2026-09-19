@@ -1,0 +1,17 @@
+{
+  "name": "swe-skills",
+  "description": "General software engineering, planning and architecture skills for AI-assisted coding sessions, from small tools to complex systems.",
+  "version": "0.1.0",
+  "author": {
+    "name": "bsommers"
+  },
+  "license": "MIT",
+  "keywords": [
+    "skills",
+    "architecture",
+    "planning",
+    "verification",
+    "agents",
+    "best-practices"
+  ]
+}
