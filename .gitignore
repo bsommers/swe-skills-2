@@ -4,3 +4,4 @@ __pycache__/
 .venv/
 node_modules/
 .swe-skills-2
+/hooks.json
