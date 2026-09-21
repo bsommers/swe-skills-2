@@ -57,6 +57,7 @@ Unsure? `right-sizing-process`.
 | write up bugs or findings as issues | `drafting-issue-reports` |
 | turn issues or a branch into a PR | `writing-pull-requests` |
 | commit, push, tag, release | `committing-and-releasing-cleanly` |
+| calculate SemVer, tag, and publish releases | `release` |
 
 ## Rules
 

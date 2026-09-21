@@ -24,7 +24,7 @@ Only the first word is matched, and only exactly. "review the auth module" runs 
 |---|---|
 | `review` | `running-multi-lens-audits` |
 | `coverage` | `hunting-silent-failures` |
-| `release`, `commit` | `committing-and-releasing-cleanly` |
+| `commit` | `committing-and-releasing-cleanly` |
 | `pr` | `writing-pull-requests` |
 | `issues` | `drafting-issue-reports` |
 | `plan` | `planning-with-contracts` |

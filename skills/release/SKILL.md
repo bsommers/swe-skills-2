@@ -1,6 +1,6 @@
 ---
 name: release
-description: "Analyze changes since last release, calculate appropriate Semantic Versioning (SemVer) tag bump (major, minor, patch), generate conventional commit and release notes, create annotated git tags, update CHANGELOG.md, and push commits and tags to remote."
+description: Use when analyzing changes since last release, calculating SemVer tag bump, generating changelogs, creating annotated git tags, and publishing releases.
 ---
 
 # Release & Semantic Versioning Skill
