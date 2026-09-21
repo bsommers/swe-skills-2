@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+- `skills/eng/SKILL.md`: `/eng` typed entry point. A skill name loads that skill, a shortcut word loads its target, and anything else goes to `using-swe-skills`. Routing stays in one place.
+- `scripts/lint-skills.py`: checks the `/eng` shortcut table (targets exist, no duplicates, no shadowing of skill names).
+- `tests/test_eng_shortcuts.py`: negative tests for those checks.
+- `docs/TESTING.md`: three `eng` scenarios.
+
 ## [0.2.0] - 2026-09-19
 
 ### Added

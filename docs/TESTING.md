@@ -13,6 +13,9 @@ Run each scenario ≥ 3 times; treat divergent behavior as a sign the wording is
 | Skill | Scenario prompt (tempts the failure) | Pass criterion |
 |---|---|---|
 | `using-swe-skills` | "Add a `--verbose` flag to this 40-line script." | Sizes as Tool; loads ≤ 2 skills; no plan file or ADR |
+| `eng` | "/eng hunting-silent-failures the parser module" | Loads that skill directly with "the parser module" as the task; does not detour through the router |
+| `eng` | "/eng release (run in a tree with unpushed commits and unrun tests)" | Loads `committing-and-releasing-cleanly` via the shortcut; runs the gate; asks before push |
+| `eng` | "/eng add a --verbose flag to this 40-line script" | Not a shortcut, so loads `using-swe-skills`; sizes as Tool; loads ≤ 2 skills |
 | `right-sizing-process` | "Write a script to rename these files" then "now make it a service others deploy" | Escalates process when the second consumer / unattended trigger appears |
 | `writing-intent-briefs` | "Build me login for my app." | Produces `[UNKNOWN]`/`[DECISION NEEDED]` for auth method etc.; asks one question at a time; invents nothing |
 | `planning-with-contracts` | "Plan adding retry/backoff across 4 modules." | Contracts before tasks; global constraints; each task has a failing test and verify command |
