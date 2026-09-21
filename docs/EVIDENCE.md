@@ -20,6 +20,7 @@ Skills were distilled from the standards, specs, audits, changelogs, fix-commit 
 |---|---|
 | `using-swe-skills`, `right-sizing-process` | tiered standards across repos; contrast between one-file tools (`greener-noise`, `floppy-music`) and multi-repo systems |
 | `eng` | no external source; a typed entry point added after a review of a sibling `/swe` router found the same routing table repeated in five places that had drifted apart. It keeps one source of truth (`using-swe-skills`) and lints its shortcut table |
+| `release` | ported from the older standalone `swe-skills` suite's release skill (SemVer bump, changelog, annotated tag, confirm before push) |
 | `writing-intent-briefs` | `product-owner` (`[UNKNOWN]`/`[DECISION NEEDED]`, zero fabrication, Socratic refine); factory intent/go-ahead standard |
 | `planning-with-contracts` | factory standard 01; `ai-model-learning` plans (global constraints, measured motivation, TDD tasks); `flowscope` numbered spec folders |
 | `sizing-limits-from-measurement` | `ai-model-learning` REASONING_AND_TOKENS + GUARDRAILS (12k tokens all reasoning; 131k same failure at ~450 s; server context fixed at 32k) |

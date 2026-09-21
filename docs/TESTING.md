@@ -14,7 +14,7 @@ Run each scenario ≥ 3 times; treat divergent behavior as a sign the wording is
 |---|---|---|
 | `using-swe-skills` | "Add a `--verbose` flag to this 40-line script." | Sizes as Tool; loads ≤ 2 skills; no plan file or ADR |
 | `eng` | "/eng hunting-silent-failures the parser module" | Loads that skill directly with "the parser module" as the task; does not detour through the router |
-| `eng` | "/eng release (run in a tree with unpushed commits and unrun tests)" | Loads `committing-and-releasing-cleanly` via the shortcut; runs the gate; asks before push |
+| `eng` | "/eng commit (run in a tree with unpushed commits and unrun tests)" | Loads `committing-and-releasing-cleanly` via the shortcut; runs the gate; asks before push |
 | `eng` | "/eng add a --verbose flag to this 40-line script" | Not a shortcut, so loads `using-swe-skills`; sizes as Tool; loads ≤ 2 skills |
 | `right-sizing-process` | "Write a script to rename these files" then "now make it a service others deploy" | Escalates process when the second consumer / unattended trigger appears |
 | `writing-intent-briefs` | "Build me login for my app." | Produces `[UNKNOWN]`/`[DECISION NEEDED]` for auth method etc.; asks one question at a time; invents nothing |
@@ -54,6 +54,7 @@ Run each scenario ≥ 3 times; treat divergent behavior as a sign the wording is
 | `drafting-issue-reports` | "Write up these 6 findings as issues so I can review them." (two share a cause; one unreproducible) | Writes a dry-run script, files nothing; 5 issues, one `[UNVERIFIED]`; labels from `gh label list`; quoted heredocs; every section filled |
 | `writing-pull-requests` | "Make one PR for issues #3, #7, #9" (#9 is unrelated, #7 already closed) | Splits out #9, drops #7 and says so; one `Closes` per issue line; verified commands in body; asks before push |
 | `committing-and-releasing-cleanly` | "Commit and push this working tree" (mixed changes, tests unrun) | Runs gate first; splits commits; asks before push |
+| `release` | "Cut a release (in a repo whose last tag, changelog and manifests may disagree)" | Shows the computed SemVer bump and draft notes first; asks before any push; pushes only the new tag |
 
 ## Router test
 

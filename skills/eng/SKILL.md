@@ -35,6 +35,6 @@ Only the first word is matched, and only exactly. "review the auth module" runs 
 
 ## Rules
 
-- A shortcut never waives the target skill's confirmations. `/eng release` still asks before any push or tag.
+- A shortcut never waives the target skill's confirmations. `/eng commit` still asks before any push or tag.
 - Say which skill loaded and why, in one line.
 - Do not restate or extend the router's table here. Add new routes to `using-swe-skills`; add a shortcut only for a word people will type.
