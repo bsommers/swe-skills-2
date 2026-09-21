@@ -101,6 +101,24 @@ def main():
         if name != "using-swe-skills" and f"`{name}`" not in router:
             errors.append(f"router: using-swe-skills does not mention `{name}`")
 
+    # /eng shortcuts: each targets an existing skill; words are unique and never shadow a skill name
+    eng_file = SKILLS / "eng" / "SKILL.md"
+    if eng_file.exists():
+        row_re = re.compile(r"^\|\s*((?:`[a-z0-9-]+`(?:,\s*)?)+)\s*\|\s*`([a-z0-9-]+)`\s*\|\s*$")
+        seen = set()
+        for line in eng_file.read_text(encoding="utf-8").splitlines():
+            m = row_re.match(line)
+            if not m:
+                continue
+            if m.group(2) not in names:
+                errors.append(f"eng: shortcut targets unknown skill `{m.group(2)}`")
+            for word in re.findall(r"`([a-z0-9-]+)`", m.group(1)):
+                if word in names:
+                    errors.append(f"eng: shortcut `{word}` shadows a skill name")
+                if word in seen:
+                    errors.append(f"eng: shortcut `{word}` is defined twice")
+                seen.add(word)
+
     print(f"{len(names)} skills, {total_words} words total")
     for w in warnings:
         print(f"WARN  {w}")

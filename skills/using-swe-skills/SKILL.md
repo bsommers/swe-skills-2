@@ -5,7 +5,7 @@ description: Use when starting any software task — building a tool, feature or
 
 # Using swe-skills
 
-Load the **one to three** skills that match the task, never all of them. When a process skill (brainstorming, TDD, debugging, code review) also applies, it sets the *how*; these skills add the domain judgment.
+Load the **one to three** skills that match the task, never all of them. When a process skill (brainstorming, TDD, debugging, code review) also applies, it sets the *how*; these skills add the domain judgment. The `eng` skill (`/eng <task>`) is a typed shortcut into this router.
 
 ## 1. Size the task
 
