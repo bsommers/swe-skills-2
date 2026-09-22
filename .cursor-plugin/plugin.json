@@ -2,7 +2,7 @@
   "name": "swe-skills",
   "displayName": "SWE Skills",
   "description": "General software engineering, planning and architecture skills for AI-assisted coding sessions.",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "author": {
     "name": "bsommers"
   },
