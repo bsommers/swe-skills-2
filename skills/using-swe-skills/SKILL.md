@@ -27,7 +27,7 @@ Unsure? `right-sizing-process`.
 | pick a language, library, runtime | `choosing-tools-and-substrates` |
 | structure a multi-stage system | `designing-layered-pipelines` |
 | support swappable backends/drivers | `designing-plugin-contracts` |
-| call DBs, HTTP, clock, LLMs; handle errors | `designing-testable-seams` |
+| call APIs, DBs, HTTP, clock, LLMs; testable seams | `designing-testable-seams` |
 | define or change data shapes | `evolving-schemas-and-contracts` |
 | make a costly-to-reverse decision | `defending-architecture-decisions` |
 | grow a big file or function | `managing-complexity-budgets` |
@@ -60,7 +60,7 @@ Unsure? `right-sizing-process`.
 | execute refactoring plan safely with green tests | `refactor-execute` |
 | audit OpenAPI/GraphQL/DTO schema drift | `api-contract-audit` |
 | audit packages for CVE vulnerabilities and licenses | `dependency-audit` |
-| measure test coverage and plan closing gaps | `test-coverage` |
+| measure test coverage and close testing gaps | `test-coverage` |
 | generate reviewable batch issue creation script | `github-issues-script` |
 | write up bugs or findings as issues | `drafting-issue-reports` |
 | turn issues or a branch into a PR | `writing-pull-requests` |

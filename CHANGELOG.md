@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.0] - 2026-09-22
+
+### Added
+- `skills/writing-user-guides/SKILL.md`: Guidance for authoring user guides in a `docs/` subdirectory with table of contents, getting started, examples, reference, and bidirectional links to root `README.md`.
+- `skills/code-architecture-review/`: Structural architecture analysis via Graphify/AST with 5-section improvement plan generation.
+- `skills/api-contract-audit/`: Schema drift and nullability audit for OpenAPI, GraphQL, Protobuf, and DTO contracts.
+- `skills/refactor-execute/`: Safe, step-by-step refactoring engine with green-test gates, Fowler recipes, and rollback logging.
+- `skills/test-coverage/`: Multi-ecosystem coverage measurement, risk-based gap analysis (P0/P1/P2), and shell test-quality checks.
+- `skills/dependency-audit/`: Package vulnerability (CVE) scanning, CVSS score triage, and outdated dependency auditing.
+- `skills/pr-review/`: Multi-lens PR and git diff review engine with GitHub CLI (`gh pr review`) integration.
+- `skills/github-issues-script/`: Standalone batch issue creator (`scripts/create_issues.sh`) with `--dry-run`, coordinates, and heredoc escaping.
+- `scripts/setup_repo_protections.sh`: Configurator for repository rulesets and branch protection gates.
+
+### Changed
+- `skills/using-swe-skills/SKILL.md`: Registered all 8 new skills across lifecycle groups.
+- `skills/eng/SKILL.md`: Added shortcuts `arch`, `schema`, `refactor`, `cov`, `deps`, `diff`, and `tickets`.
+- `README.md`: Updated catalog to 48 skills across entry, planning, architecture, AI systems, build, verify, and sustain groups.
+- `skills/code-architecture-review/`, `skills/test-coverage/`, `skills/github-issues-script/`, `skills/release/`: Extracted reference materials into companion `references/` files to strictly satisfy wordcount budgets without losing detail.
+- `docs/EVIDENCE.md`: Documented evidence sources for all 48 skills.
+- `docs/TESTING.md`: Added pressure test scenarios for all skills (51 scenarios verified).
+
 ## [0.4.0] - 2026-09-21
 
 ### Added

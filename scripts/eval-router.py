@@ -154,7 +154,7 @@ def route_prompt(prompt: str, rules=None) -> list[str]:
     # Direct skill name mention in prompt
     explicit_skills = [
         r["skill"] for r in rules
-        if r["skill"] in prompt.lower() or r["skill"].replace("-", " ") in prompt.lower()
+        if r["skill"] in prompt.lower()
     ]
     if explicit_skills:
         return explicit_skills[:3]
