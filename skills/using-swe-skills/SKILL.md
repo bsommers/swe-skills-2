@@ -52,6 +52,7 @@ Unsure? `right-sizing-process`.
 | pause, resume, hand off | `handing-off-sessions` |
 | context filling up; compact or clear | `compacting-context-safely` |
 | write CLAUDE.md/AGENTS.md/rules | `writing-agent-context-files` |
+| author user guides in docs/ | `writing-user-guides` |
 | change documented behavior | `keeping-docs-in-sync` |
 | hardcode paths or env assumptions | `keeping-repos-portable` |
 | write up bugs or findings as issues | `drafting-issue-reports` |

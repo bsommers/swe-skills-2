@@ -21,7 +21,7 @@ The shortcut words live in one table, in [`skills/eng/SKILL.md`](skills/eng/SKIL
 
 The name is deliberately not `swe`: the older `swe-skills` suite already has a `swe` router, and `eng` lets the two install side by side instead of one replacing the other.
 
-## Skills (40)
+## Skills (41)
 
 | Group | Skills |
 |---|---|
@@ -31,7 +31,7 @@ The name is deliberately not `swe`: the older `swe-skills` suite already has a `
 | **AI systems** | `building-unattended-agent-loops` · `grounding-ai-outputs` |
 | **Build** | `scaffolding-new-projects` · `building-small-cli-tools` · `building-code-generators` · `parsing-untrusted-text-robustly` · `hardening-trust-boundaries` · `engineering-for-determinism` |
 | **Verify & measure** | `layered-verification-gates` · `hunting-silent-failures` · `debugging-across-layers` · `clustering-failures-by-root-cause` · `building-trustworthy-benchmarks` · `making-verifiable-claims` |
-| **Collaborate & sustain** | `orchestrating-subagents` · `running-multi-lens-audits` · `supervising-autonomous-sessions` · `handing-off-sessions` · `compacting-context-safely` · `writing-agent-context-files` · `keeping-docs-in-sync` · `keeping-repos-portable` · `drafting-issue-reports` · `writing-pull-requests` · `committing-and-releasing-cleanly` · `release` |
+| **Collaborate & sustain** | `orchestrating-subagents` · `running-multi-lens-audits` · `supervising-autonomous-sessions` · `handing-off-sessions` · `compacting-context-safely` · `writing-agent-context-files` · `writing-user-guides` · `keeping-docs-in-sync` · `keeping-repos-portable` · `drafting-issue-reports` · `writing-pull-requests` · `committing-and-releasing-cleanly` · `release` |
 
 These complement general process skills (brainstorming, TDD, systematic debugging, code review) rather than replace them.
 

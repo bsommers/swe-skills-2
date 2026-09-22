@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+- `skills/writing-user-guides/SKILL.md`: Guidance for authoring user guides in a `docs/` subdirectory with table of contents, getting started, examples, reference, and bidirectional links to root `README.md`.
+
+### Changed
+- `skills/using-swe-skills/SKILL.md`: Added `writing-user-guides` to the routing table.
+- `README.md`: Updated skill count to 41 and added `writing-user-guides` and `release` to Collaborate & sustain group.
+- `docs/EVIDENCE.md`: Documented evidence sources for `writing-user-guides`.
+- `docs/TESTING.md`: Added pressure test scenario for `writing-user-guides`.
+
 ## [0.4.0] - 2026-09-21
 
 ### Added

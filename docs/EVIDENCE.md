@@ -52,6 +52,7 @@ Skills were distilled from the standards, specs, audits, changelogs, fix-commit 
 | `handing-off-sessions` | `airflow` Phase 4.1 checkpoint; `ai-model-learning` full-system rebuild spec; factory incidental-tooling and journaling standards; `uitoolbox` REBUILD |
 | `compacting-context-safely` | `ai-model-learning` measured token failures; `airflow` checkpoint notes; recurring loss of user corrections and repeated dead ends after context compaction |
 | `writing-agent-context-files` | `airflow` CLAUDE.md (commands/architecture/pitfalls), `synth` and `flowscope` context files, `.cursorrules`/`AGENTS.md`/`GEMINI.md` in the same repos |
+| `writing-user-guides` | `gemini-chat-exporter` and `uitoolbox` user documentation under `docs/`; `scaffolding-new-projects` docs layout; incidents of orphaned documentation subdirectories unreferenced from root READMEs, or missing root READMEs |
 | `keeping-docs-in-sync` | factory standards 44/45; `flowscope` doc-sync checklist; `synth` coherence invariant and stale counts |
 | `keeping-repos-portable` | factory standard 22; `seed-brain-gh` relative-path fixes; `agent-manager-fe` port fix; `synth` bash 3.2 compatibility |
 | `drafting-issue-reports` | `running-multi-lens-audits` issue-file format (51 audit findings filed as problem + proposed fix); user request for a reviewable, unfiled issue script with labels, summary, description, relevance and suggested fix |
