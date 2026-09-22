@@ -55,6 +55,13 @@ Unsure? `right-sizing-process`.
 | author user guides in docs/ | `writing-user-guides` |
 | change documented behavior | `keeping-docs-in-sync` |
 | hardcode paths or env assumptions | `keeping-repos-portable` |
+| audit architecture & code with Graphify/AST | `code-architecture-review` |
+| review a PR, branch diff, or staged changes | `pr-review` |
+| execute refactoring plan safely with green tests | `refactor-execute` |
+| audit OpenAPI/GraphQL/DTO schema drift | `api-contract-audit` |
+| audit packages for CVE vulnerabilities and licenses | `dependency-audit` |
+| measure test coverage and plan closing gaps | `test-coverage` |
+| generate reviewable batch issue creation script | `github-issues-script` |
 | write up bugs or findings as issues | `drafting-issue-reports` |
 | turn issues or a branch into a PR | `writing-pull-requests` |
 | commit, push, tag, release | `committing-and-releasing-cleanly` |

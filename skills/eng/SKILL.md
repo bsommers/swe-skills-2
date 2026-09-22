@@ -32,6 +32,13 @@ Only the first word is matched, and only exactly. "review the auth module" runs 
 | `size` | `right-sizing-process` |
 | `handoff` | `handing-off-sessions` |
 | `compact` | `compacting-context-safely` |
+| `arch` | `code-architecture-review` |
+| `diff` | `pr-review` |
+| `refactor` | `refactor-execute` |
+| `schema` | `api-contract-audit` |
+| `deps` | `dependency-audit` |
+| `cov` | `test-coverage` |
+| `tickets` | `github-issues-script` |
 
 ## Rules
 
