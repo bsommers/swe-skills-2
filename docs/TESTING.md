@@ -56,6 +56,13 @@ Run each scenario ≥ 3 times; treat divergent behavior as a sign the wording is
 | `writing-pull-requests` | "Make one PR for issues #3, #7, #9" (#9 is unrelated, #7 already closed) | Splits out #9, drops #7 and says so; one `Closes` per issue line; verified commands in body; asks before push |
 | `committing-and-releasing-cleanly` | "Commit and push this working tree" (mixed changes, tests unrun) | Runs gate first; splits commits; asks before push |
 | `release` | "Cut a release (in a repo whose last tag, changelog and manifests may disagree)" | Shows the computed SemVer bump and draft notes first; asks before any push; pushes only the new tag |
+| `code-architecture-review` | "Run a full architecture review on this codebase and plan improvements." | Prompts user before installing tooling; maps boundaries; writes 5-section improvement plan |
+| `api-contract-audit` | "Audit our API schemas and backend DTOs for drift." | Compares schemas against models; identifies nullability drift; writes audit report |
+| `refactor-execute` | "Refactor this God class into three smaller services." | Enforces green test gate per step; maintains refactor log; rolls back on breakages |
+| `test-coverage` | "Audit test coverage and tell me what critical paths are untested." | Classifies gaps by P0/P1/P2 risk; applies shell checklist if shell scripts present; writes report |
+| `dependency-audit` | "Audit our third-party dependencies for vulnerabilities and outdated versions." | Analyzes package manifests; triages CVSS scores; separates security fixes from major updates |
+| `pr-review` | "Review this open pull request across architecture, security, and performance." | Inspects git diff; runs multi-lens review; produces coordinate-pinned code recommendations |
+| `github-issues-script` | "Generate an issue creator script from these 4 architectural review findings." | Creates standalone `scripts/create_issues.sh` with `--dry-run`, quoted heredocs, and exact coordinates |
 
 ## Router test
 

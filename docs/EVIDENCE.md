@@ -30,6 +30,9 @@ Skills were distilled from the standards, specs, audits, changelogs, fix-commit 
 | `designing-testable-seams` | `ai-model-learning` constructor-injection rule, typed exceptions, best-effort side paths, narrowed except fix |
 | `evolving-schemas-and-contracts` | `oscal-xdr` PITFALLS; `ai-model-learning` optional `lesson` field, `TokenUsage` invariant |
 | `defending-architecture-decisions` | factory standard 35 (dual-axis defense); `agent-manager-fe` ADR format |
+| `code-architecture-review` | `feed-brain-gh` AST and graph mapping; `uitoolbox` modular architecture review; Graphify structural knowledge graph workflow |
+| `api-contract-audit` | `oscal-xdr` schema drift audit; `agent-manager-fe` DTO / API protocol synchronization; OpenAPI and Protobuf contract checks |
+| `refactor-execute` | `flowscope` spec-driven refactor execution; Fowler refactoring catalogs with green-test gating and rollback protection |
 | `managing-complexity-budgets` | factory standards 31/36/38/39 (budget table, dual-gate introspection) |
 | `designing-data-pipelines` | `airflow` fix history (Neo4j connection leak, data-dir env var, `oscal_airflow` rename, diverse top-10) and `oscal-xdr` pitfalls |
 | `building-unattended-agent-loops` | `ai-model-learning` guardrails, progress-detection plan (284k-token trial), sandbox constraints |
@@ -46,6 +49,8 @@ Skills were distilled from the standards, specs, audits, changelogs, fix-commit 
 | `clustering-failures-by-root-cause` | `flowscope` improvement plan 003; `synth` no-degradation ratchets |
 | `building-trustworthy-benchmarks` | `synth` audit plan and governance docs; `eval` benchmark-audit prompts and statistical guide |
 | `making-verifiable-claims` | `eval` Toulmin claims and statistics guides; factory standard 41 |
+| `test-coverage` | `floppy-music` and `greener-noise` bats test harness; `synth` multi-ecosystem coverage matrix; bats-core/kcov trap debugging and static reachability analysis |
+| `dependency-audit` | `synth` and `security-skills` package CVE vulnerability scanning, CVSS scoring triage, and outdated dependency audits |
 | `orchestrating-subagents` | `synth` model-selection guidance; factory multi-tier verification; `eval` four-agent partitioning; a two-agent incident in this repo where a second agent staged files in a shared checkout and they were swept into the other agent's amend |
 | `running-multi-lens-audits` | `eval` benchmark-audit skill; `synth` 51-issue audit |
 | `supervising-autonomous-sessions` | factory variable-gear autonomy, halt-after-3-retries, boundary isolation, evidence rule |
@@ -56,7 +61,9 @@ Skills were distilled from the standards, specs, audits, changelogs, fix-commit 
 | `keeping-docs-in-sync` | factory standards 44/45; `flowscope` doc-sync checklist; `synth` coherence invariant and stale counts |
 | `keeping-repos-portable` | factory standard 22; `seed-brain-gh` relative-path fixes; `agent-manager-fe` port fix; `synth` bash 3.2 compatibility |
 | `drafting-issue-reports` | `running-multi-lens-audits` issue-file format (51 audit findings filed as problem + proposed fix); user request for a reviewable, unfiled issue script with labels, summary, description, relevance and suggested fix |
+| `github-issues-script` | `running-multi-lens-audits` 51-finding issue filing; batch GitHub issue generation with coordinates, impact, and heredoc escaping |
 | `writing-pull-requests` | `committing-and-releasing-cleanly` PR-description rule; GitHub closing-keyword docs (one keyword per issue); `gh pr create --help` (2.88: `--dry-run` may still push); ~400-line default from the SmartBear/Cisco code-review study (defect-finding falls off beyond 200–400 lines per review) |
+| `pr-review` | `committing-and-releasing-cleanly` review standard; `feed-brain-gh` multi-lens PR review workflow with `gh pr review` |
 | `committing-and-releasing-cleanly` | factory standard 03; `flowscope` dual-remote sync; existing release skills |
 
 ## Provenance notes
