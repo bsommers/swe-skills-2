@@ -9,6 +9,8 @@ description: Use when reviewing code with low test coverage, after adding a perm
 
 The worst bugs don't crash; they return something plausible and wrong. **Read the untested code**, feed it strange but legal inputs, and look for data dropped, coerced, ignored, or swallowed.
 
+For measuring coverage percentage, generating reports, or wiring CI gates, use `test-coverage` instead — this skill is for reading the gaps it finds and probing them for actual bugs, not producing the report.
+
 ## Method
 
 1. List files/functions with no tests (coverage report, or `git grep` for names with no test references).

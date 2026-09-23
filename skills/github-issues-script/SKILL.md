@@ -7,6 +7,8 @@ description: Use when converting a list of findings, review items, architectural
 
 An agent skill to transform code review findings, architectural debt, security vulnerabilities, or task backlogs into a standalone, human-reviewable executable script (e.g. `scripts/create_issues.sh`) that automates creating production-quality GitHub issues via the GitHub CLI (`gh`).
 
+For general findings-to-issues work, prefer `drafting-issue-reports`, which verifies each claim and dedupes against existing issues before filing. Use this skill when findings already carry exact file:line coordinates and the fuller, code-block-heavy template below fits the material.
+
 ---
 
 ## Agent Detection & Mode Tuning

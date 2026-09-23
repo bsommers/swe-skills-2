@@ -9,6 +9,8 @@ Audits an existing test suite, measures real coverage (not just "tests pass"), a
 
 **Core principle:** a coverage percentage is a proxy, not the goal. A codebase at 95% line coverage with every external command unmocked and every dispatch table silently no-op-ing on bad input is less safe than one at 70% that has deliberately targeted the failure modes that actually bite. This skill treats percentage as one input among several, not the deliverable.
 
+This skill produces the report and the gap list. To actually read the gaps it flags and probe them for bugs that pass silently, hand off to `hunting-silent-failures`.
+
 ---
 
 ## Agent Detection & Mode Tuning

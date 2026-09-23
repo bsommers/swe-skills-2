@@ -9,6 +9,8 @@ description: Use when asked to write up bugs, enhancements, or review or audit f
 
 The deliverable is a **reviewable script**, not filed issues. The user reviews, edits, and runs it. Every issue in it is **verified, deduplicated, labeled from the repo's real label set, and actionable by someone with no context.**
 
+Default to this skill for any findings-to-issues job. Use `github-issues-script` instead only when the input already carries exact file:line coordinates (e.g. from `code-architecture-review`) and the richer, code-block-heavy template is wanted; that skill doesn't verify or dedupe against existing issues.
+
 Issues go to GitHub via `gh`. Never run the script, `gh issue create`, or any other GitHub write yourself. Filing is outward-facing (`committing-and-releasing-cleanly`).
 
 ## Procedure
