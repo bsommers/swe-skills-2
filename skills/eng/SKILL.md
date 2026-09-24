@@ -39,6 +39,7 @@ Only the first word is matched, and only exactly. "review the auth module" runs 
 | `deps` | `dependency-audit` |
 | `cov` | `test-coverage` |
 | `tickets` | `github-issues-script` |
+| `finops` | `token-finops` |
 
 ## Rules
 

@@ -62,6 +62,7 @@ Unsure? `right-sizing-process`.
 | audit packages for CVE vulnerabilities and licenses | `dependency-audit` |
 | measure test coverage and close testing gaps | `test-coverage` |
 | generate reviewable batch issue creation script | `github-issues-script` |
+| forecast, track, and budget tokens / USD spend | `token-finops` |
 | write up bugs or findings as issues | `drafting-issue-reports` |
 | turn issues or a branch into a PR | `writing-pull-requests` |
 | commit, push, tag, release | `committing-and-releasing-cleanly` |
