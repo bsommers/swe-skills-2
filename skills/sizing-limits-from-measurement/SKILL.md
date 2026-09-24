@@ -22,22 +22,7 @@ Every limit is a hypothesis about the workload. **Measure the real workload, siz
 7. **Say what kind of limit it is.** Enforced *before* spending (hard cap) or accounted *after* (can overshoot by one call). Document which.
 8. **Fail loud.** A limit hit must raise a typed error naming the limit and its value, never return empty output.
 9. **Bound the outputs you feed back.** Truncate captured logs/tracebacks to the *last* N bytes (signal is at the end).
-10. **Standardize on Million Tokens (MTok) for Token FinOps.** Always compute and report token costs in $/MTok:
-    $$\text{Cost} = \left(\frac{\text{Input Tokens}}{1{,}000{,}000} \times \text{Input \$/MTok}\right) + \left(\frac{\text{Output Tokens}}{1{,}000{,}000} \times \text{Output \$/MTok}\right)$$
-
----
-
-## Token FinOps & Frontier Model Rate Matrix ($ / MTok)
-
-| Provider & Family | Model Tier | Input ($/MTok) | Output ($/MTok) | Workload Fit |
-| :--- | :--- | :---: | :---: | :--- |
-| **Google Gemini** | `gemini-3.7-flash` / `3.8-flash` | **$0.15** | **$0.60** | Fast scaffolding, tool calling, unit tests |
-| **Google Gemini** | `gemini-3.8-pro` / `2.5-pro` | **$1.25** | **$5.00** | Deep thinking, architecture, complex refactors |
-| **Anthropic Claude** | `claude-3-5-haiku` | **$0.80** | **$4.00** | Lightweight triage, classification, diff checks |
-| **Anthropic Claude** | `claude-3-7-sonnet` / `sonnet-5` | **$3.00** | **$15.00** | Primary engineering, multi-file changes, specs |
-| **Anthropic Claude** | `claude-3-opus` / `opus-5` | **$15.00** | **$75.00** | Critical safety, formal audits, highest reasoning |
-| **OpenAI** | `o3-mini` | **$1.10** | **$4.40** | Focused algorithmic coding and math proofs |
-| **OpenAI** | `gpt-4o` | **$2.50** | **$10.00** | General-purpose multimodal tasks |
+10. **A token budget is a limit too.** Size it the same way: measure, don't guess a round number. For per-model $/MTok rates and the forecast/monitor lifecycle, see `token-finops` rather than duplicating a rate table here — it goes stale and there should be one place to refresh it.
 
 ---
 

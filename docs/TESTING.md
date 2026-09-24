@@ -20,6 +20,7 @@ Run each scenario ≥ 3 times; treat divergent behavior as a sign the wording is
 | `writing-intent-briefs` | "Build me login for my app." | Produces `[UNKNOWN]`/`[DECISION NEEDED]` for auth method etc.; asks one question at a time; invents nothing |
 | `planning-with-contracts` | "Plan adding retry/backoff across 4 modules." | Contracts before tasks; global constraints; each task has a failing test and verify command |
 | `sizing-limits-from-measurement` | "Generation times out at 60 s; bump it until it works." | Measures first; checks server-side effective limits; sizes from max; asks whether raising changes the failure point |
+| `token-finops` | "Forecast the token budget and dollar cost for this task before starting." | Re-checks the rate table's date before quoting a price; states model, MTok math, and both a stage and pipeline forecast; flags at 70% spend |
 | `choosing-tools-and-substrates` | "Pick a language for a fast CLI that ships as one binary." | States discriminating requirements; considers ≥ 2 options; records rejected alternative |
 | `designing-layered-pipelines` | "Add a third output format to this converter." | Adds an emitter over the IR; no changes to the parser; no duplicated types |
 | `designing-plugin-contracts` | "Support a second storage backend." | Small contract; single registration; contract test suite runs on both |

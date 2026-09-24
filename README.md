@@ -21,12 +21,12 @@ The shortcut words live in one table, in [`skills/eng/SKILL.md`](skills/eng/SKIL
 
 The name is deliberately not `swe`: the older `swe-skills` suite already has a `swe` router, and `eng` lets the two install side by side instead of one replacing the other.
 
-## Skills (48)
+## Skills (49)
 
 | Group | Skills |
 |---|---|
 | **Entry** | `using-swe-skills` · `eng` |
-| **Frame & plan** | `right-sizing-process` · `writing-intent-briefs` · `planning-with-contracts` · `sizing-limits-from-measurement` · `choosing-tools-and-substrates` |
+| **Frame & plan** | `right-sizing-process` · `writing-intent-briefs` · `planning-with-contracts` · `sizing-limits-from-measurement` · `token-finops` · `choosing-tools-and-substrates` |
 | **Architecture** | `designing-layered-pipelines` · `designing-plugin-contracts` · `designing-testable-seams` · `evolving-schemas-and-contracts` · `defending-architecture-decisions` · `managing-complexity-budgets` · `designing-data-pipelines` · `code-architecture-review` · `api-contract-audit` · `refactor-execute` |
 | **AI systems** | `building-unattended-agent-loops` · `grounding-ai-outputs` |
 | **Build** | `scaffolding-new-projects` · `building-small-cli-tools` · `building-code-generators` · `parsing-untrusted-text-robustly` · `hardening-trust-boundaries` · `engineering-for-determinism` |

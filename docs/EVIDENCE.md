@@ -23,6 +23,7 @@ Skills were distilled from the standards, specs, audits, changelogs, fix-commit 
 | `release` | ported from the older standalone `swe-skills` suite's release skill (SemVer bump, changelog, annotated tag, confirm before push) |
 | `writing-intent-briefs` | `product-owner` (`[UNKNOWN]`/`[DECISION NEEDED]`, zero fabrication, Socratic refine); factory intent/go-ahead standard |
 | `planning-with-contracts` | factory standard 01; `ai-model-learning` plans (global constraints, measured motivation, TDD tasks); `flowscope` numbered spec folders |
+| `token-finops` | no external source; split out of `sizing-limits-from-measurement` to hold the per-model $/MTok rate table in one place instead of two, after the same table was found duplicated (and drifted from actual provider pricing) in both skills |
 | `sizing-limits-from-measurement` | `ai-model-learning` REASONING_AND_TOKENS + GUARDRAILS (12k tokens all reasoning; 131k same failure at ~450 s; server context fixed at 32k) |
 | `choosing-tools-and-substrates` | factory standards 34 and 49 (polyglot substrates, `uv`); `synth` stdlib-only tooling contract; `oscal-xdr` stack rationale |
 | `designing-layered-pipelines` | `OntoLogic` and `feed-brain-gh` architecture; `airflow` thin DAGs; `agent-manager-fe` duplicate protocol types fixed by re-export; lattice tiering (factory standard 19) |

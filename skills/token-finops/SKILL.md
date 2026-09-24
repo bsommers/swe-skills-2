@@ -25,10 +25,11 @@ Before estimating budgets or executing agent pipelines, determine the active mod
    - If the target model cannot be determined unambiguously, **prompt the user** to select or confirm the active model tier.
    - Example prompt:
      > "Which model tier will drive this task?
-     > 1. Gemini 3.8 Flash ($0.15 / $0.60 per MTok) [Recommended for fast iteration]
-     > 2. Gemini 3.8 Pro ($1.25 / $5.00 per MTok) [Recommended for deep reasoning]
-     > 3. Claude Sonnet 5 ($3.00 / $15.00 per MTok)
+     > 1. Gemini 3.8 Flash ($0.75 / $3.75 per MTok) [Recommended for fast iteration]
+     > 2. Gemini 3.1 Pro ($2.00 / $12.00 per MTok) [Recommended for deep reasoning]
+     > 3. Claude Sonnet 5 ($2.00 / $10.00 per MTok)
      > 4. Claude Opus 5 ($5.00 / $25.00 per MTok)"
+     > (Confirm current rates against the Rate Matrix below before quoting these.)
 3. **Multi-Tier Agent Hierarchies**:
    - In hierarchical systems (e.g. `climah`, subagent swarms), resolve rates **per agent role** (e.g. Architect on Pro/Opus, Builder on Flash/Sonnet, Validator on Haiku/Flash).
 
@@ -40,15 +41,21 @@ All calculations must use input and output rates per Million Tokens (MTok):
 
 $$\text{Cost (USD)} = \left(\frac{\text{Input Tokens}}{1{,}000{,}000} \times \text{Input Rate}\right) + \left(\frac{\text{Output Tokens}}{1{,}000{,}000} \times \text{Output Rate}\right)$$
 
+**As of 2026-09-24**, verified against each provider's own pricing page (linked below). Rates change without notice — **before using this table for a new budget or plan, re-check the three pages and update any row that has moved.** Treat this as a cached snapshot, never a live source.
+
 | Provider / Family | Model Identifier | Input ($/MTok) | Output ($/MTok) | Context Window | Typical Workload Role |
 | :--- | :--- | :---: | :---: | :---: | :--- |
-| **Google Gemini** | `gemini-3.7-flash` / `gemini-3.8-flash` | **$0.15** | **$0.60** | 1,000,000 | Fast builds, tool execution, unit test generation |
-| **Google Gemini** | `gemini-3.8-pro` | **$1.25** | **$5.00** | 2,000,000 | Complex planning, architecture design, formal evaluation |
-| **Anthropic Claude** | `claude-sonnet-5` | **$3.00** | **$15.00** | 1,000,000 | Primary code generation, multi-file refactoring, specs |
+| **Google Gemini** | `gemini-3.7-flash` / `gemini-3.8-flash` | **$0.75**¹ | **$3.75**¹ | 1,000,000 | Fast builds, tool execution, unit test generation |
+| **Google Gemini** | `gemini-3.1-pro` (≤200k prompt) | **$2.00** | **$12.00** | 2,000,000 | Complex planning, architecture design, formal evaluation |
+| **Anthropic Claude** | `claude-sonnet-5` | **$2.00** | **$10.00** | 1,000,000 | Primary code generation, multi-file refactoring, specs |
 | **Anthropic Claude** | `claude-opus-5` | **$5.00** | **$25.00** | 1,000,000 | High-stakes security audits, formal verification |
-| **Anthropic Claude** | `claude-3-5-haiku` | **$0.80** | **$4.00** | 200,000 | Fast triage, classification, token counting |
-| **OpenAI** | `o3-mini` | **$1.10** | **$4.40** | 200,000 | Algorithmic tasks, unit test synthesis |
+| **Anthropic Claude** | `claude-haiku-4-5` | **$1.00** | **$5.00** | 200,000 | Fast triage, classification, token counting |
+| **OpenAI** | `o3-mini` / `o4-mini` | **$1.10** | **$4.40** | 200,000 | Algorithmic tasks, unit test synthesis |
 | **OpenAI** | `gpt-4o` | **$2.50** | **$10.00** | 128,000 | General multimodal tasks, documentation |
+
+¹ Promotional rate through 2026-12-31; rises to $1.50 / $7.50 on 2027-01-01. Confirm before budgeting past that date.
+
+Sources: [Claude pricing](https://platform.claude.com/docs/en/about-claude/pricing) · [Gemini API pricing](https://ai.google.dev/gemini-api/docs/pricing) · [OpenAI pricing](https://platform.openai.com/docs/pricing) — the `o3-mini`/`o4-mini` and `gpt-4o` rows were cross-checked across independent sources; OpenAI's newest frontier tier was not, since the page reachable at the time carried names and a price spread too dense to corroborate, so it's omitted rather than guessed.
 
 ---
 
