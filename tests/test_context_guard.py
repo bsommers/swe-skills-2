@@ -97,6 +97,56 @@ class GuardCase(unittest.TestCase):
         r = self.run_guard("nudge", {"session_id": "s", "transcript_path": str(t), "cwd": str(self.dir)})
         self.assertEqual(r.stdout.strip(), "")
 
+    # -------------------------------------------------------- preinvocation
+
+    def test_preinvocation_silent_below_threshold(self):
+        payload = {"conversationId": "c1", "initialNumSteps": 10, "cwd": str(self.dir)}
+        r = self.run_guard("preinvocation", payload)
+        self.assertEqual(r.returncode, 0)
+        self.assertEqual(json.loads(r.stdout), {})
+
+    def test_preinvocation_fires_above_step_threshold(self):
+        payload = {"conversationId": "c1", "initialNumSteps": 55, "cwd": str(self.dir)}
+        r = self.run_guard("preinvocation", payload)
+        self.assertEqual(r.returncode, 0)
+        data = json.loads(r.stdout)
+        self.assertIn("injectSteps", data)
+        msg = data["injectSteps"][0]["ephemeralMessage"]
+        self.assertIn("compacting-context-safely", msg)
+        self.assertIn("55 steps", msg)
+        self.assertIn("No recent checkpoint", msg)
+
+    def test_preinvocation_mentions_existing_checkpoint(self):
+        self.checkpoint()
+        payload = {"conversationId": "c1", "initialNumSteps": 55, "cwd": str(self.dir)}
+        r = self.run_guard("preinvocation", payload)
+        msg = json.loads(r.stdout)["injectSteps"][0]["ephemeralMessage"]
+        self.assertIn("update it rather than starting a new one", msg)
+
+    def test_preinvocation_fires_on_transcript_size(self):
+        t = self.dir / "large.jsonl"
+        t.write_text("x" * 600000, encoding="utf-8")
+        payload = {"conversationId": "c1", "initialNumSteps": 10, "transcriptPath": str(t), "cwd": str(self.dir)}
+        r = self.run_guard("preinvocation", payload)
+        self.assertEqual(r.returncode, 0)
+        data = json.loads(r.stdout)
+        self.assertIn("injectSteps", data)
+        msg = data["injectSteps"][0]["ephemeralMessage"]
+        self.assertIn("Conversation history is substantial", msg)
+
+    def test_preinvocation_throttles_nudges(self):
+        payload = {"conversationId": "c1", "initialNumSteps": 55, "cwd": str(self.dir)}
+        r1 = self.run_guard("preinvocation", payload)
+        self.assertIn("injectSteps", json.loads(r1.stdout))
+
+        payload["initialNumSteps"] = 60
+        r2 = self.run_guard("preinvocation", payload)
+        self.assertEqual(json.loads(r2.stdout), {}, "throttled within step_step")
+
+        payload["initialNumSteps"] = 70
+        r3 = self.run_guard("preinvocation", payload)
+        self.assertIn("injectSteps", json.loads(r3.stdout), "re-fires after +15 steps")
+
     # ----------------------------------------------------------- precompact
 
     def test_precompact_blocks_manual_without_checkpoint(self):
@@ -239,6 +289,15 @@ class InstallerCase(unittest.TestCase):
         r = self.install()
         self.assertEqual(r.returncode, 1)
         self.assertIn("not valid JSON", r.stderr)
+
+    def test_install_agy_dry_run(self):
+        r = subprocess.run(
+            [sys.executable, str(ROOT / "scripts" / "hooks" / "install-hooks.py"), "--agy", "--dry-run"],
+            capture_output=True, text=True,
+        )
+        self.assertEqual(r.returncode, 0)
+        self.assertIn("PreInvocation", r.stdout)
+        self.assertIn("SessionStart", r.stdout)
 
 
 if __name__ == "__main__":

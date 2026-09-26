@@ -6,16 +6,21 @@ stdin and writes the hook's JSON output on stdout:
 
   nudge         UserPromptSubmit — when context passes a threshold, tell the
                 agent to load the skill and checkpoint while it still has room.
+  preinvocation PreInvocation (agy) — when session steps or transcript size
+                pass a threshold, nudge the agent to checkpoint and advise a fresh session.
   precompact    PreCompact — block a *manual* /compact when no fresh checkpoint
                 exists (exit 2); never blocks auto-compaction.
-  sessionstart  SessionStart — after /compact or /clear, inject the newest
-                checkpoint so continuity is verified, not guessed.
+  sessionstart  SessionStart — after /compact, /clear, or session reset, inject the
+                newest checkpoint so continuity is verified, not guessed.
   report        Not a hook: print context use as text (status lines, debugging).
 
 Configuration (all optional, env vars):
   SWE_SKILLS_CONTEXT_LIMIT            context window in tokens (default 200000)
   SWE_SKILLS_CONTEXT_PCT              first nudge at this %% used (default 70)
   SWE_SKILLS_CONTEXT_PCT_STEP         re-nudge every N more %% (default 10)
+  SWE_SKILLS_AGY_STEP_LIMIT           step count before agy nudge (default 50)
+  SWE_SKILLS_AGY_STEP_STEP            re-nudge agy every N more steps (default 15)
+  SWE_SKILLS_AGY_BYTES_LIMIT          transcript bytes before agy nudge (default 500000)
   SWE_SKILLS_CONTEXT_GUARD_BLOCK      1 = block stale manual /compact (default 1)
   SWE_SKILLS_CHECKPOINT_GLOBS         os.pathsep-separated globs, relative to cwd
   SWE_SKILLS_CHECKPOINT_FRESH_MINUTES checkpoint age allowed by precompact (default 20)
@@ -158,7 +163,10 @@ def write_state(session_id, data):
 # ------------------------------------------------------------------ output
 
 def emit(event, context):
-    json.dump({"hookSpecificOutput": {"hookEventName": event, "additionalContext": context}}, sys.stdout)
+    json.dump({
+        "hookSpecificOutput": {"hookEventName": event, "additionalContext": context},
+        "injectSteps": [{"ephemeralMessage": context}],
+    }, sys.stdout)
     sys.stdout.write("\n")
 
 
@@ -246,6 +254,61 @@ def cmd_sessionstart(payload):
     return 0
 
 
+def cmd_preinvocation(payload):
+    session_id = payload.get("conversationId") or payload.get("session_id")
+    steps = payload.get("initialNumSteps") or payload.get("stepIdx") or 0
+    transcript_path = payload.get("transcriptPath") or payload.get("transcript_path")
+
+    step_limit = env_int("SWE_SKILLS_AGY_STEP_LIMIT", 50)
+    step_step = max(env_int("SWE_SKILLS_AGY_STEP_STEP", 15), 1)
+
+    step_triggered = steps >= step_limit
+
+    bytes_limit = env_int("SWE_SKILLS_AGY_BYTES_LIMIT", 500000)
+    size_triggered = False
+    if transcript_path and not step_triggered:
+        try:
+            size_triggered = Path(transcript_path).stat().st_size >= bytes_limit
+        except OSError:
+            pass
+
+    if not (step_triggered or size_triggered):
+        json.dump({}, sys.stdout)
+        sys.stdout.write("\n")
+        return 0
+
+    state = read_state(session_id)
+    last_step = state.get("last_agy_nudge_step")
+    if last_step is not None and steps > 0 and steps < last_step + step_step:
+        json.dump({}, sys.stdout)
+        sys.stdout.write("\n")
+        return 0
+
+    state["last_agy_nudge_step"] = steps if steps > 0 else (last_step or 0) + step_step
+    write_state(session_id, state)
+
+    cwd = payload.get("cwd")
+    if not cwd:
+        ws = payload.get("workspacePaths")
+        cwd = ws[0] if (ws and isinstance(ws, list)) else os.getcwd()
+
+    cp = newest_checkpoint(cwd, env_int("SWE_SKILLS_CHECKPOINT_FRESH_MINUTES", 20) * 60)
+    have = f"A recent checkpoint exists at {cp}; update it rather than starting a new one." if cp else \
+        "No recent checkpoint was found."
+
+    reason = f"Session step count is high ({steps} steps)" if step_triggered else "Conversation history is substantial"
+    msg = (
+        f"[context guard] {reason}. To maintain fast responses and prevent reasoning degradation, "
+        f"load the `{SKILL}` skill: reach a stable point, write or refresh a checkpoint "
+        f"(user decisions verbatim, dead ends, working-tree and background-process state, authorizations, exact next command). "
+        f"{have} Once checkpointed, advise the user to start a fresh session (/exit, Ctrl+D, or New Chat) to resume from the checkpoint."
+    )
+
+    json.dump({"injectSteps": [{"ephemeralMessage": msg}]}, sys.stdout)
+    sys.stdout.write("\n")
+    return 0
+
+
 def cmd_report(payload):
     used, pct = pct_used(payload)
     cwd = payload.get("cwd") or os.getcwd()
@@ -258,7 +321,13 @@ def cmd_report(payload):
     return 0
 
 
-HANDLERS = {"nudge": cmd_nudge, "precompact": cmd_precompact, "sessionstart": cmd_sessionstart, "report": cmd_report}
+HANDLERS = {
+    "nudge": cmd_nudge,
+    "preinvocation": cmd_preinvocation,
+    "precompact": cmd_precompact,
+    "sessionstart": cmd_sessionstart,
+    "report": cmd_report,
+}
 
 
 def main(argv):

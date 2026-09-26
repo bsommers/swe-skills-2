@@ -3,9 +3,8 @@
 
 Claude Code: merges UserPromptSubmit / PreCompact / SessionStart entries into a
 settings.json (user-level by default, or a project's .claude/settings.json).
-Antigravity (agy): writes a plugin-root hooks.json with the SessionStart entry
-(agy has no PreCompact or UserPromptSubmit) and gitignores it, so installing the
-plugin never activates hooks for anyone who did not ask for them.
+Antigravity (agy): writes a plugin-root hooks.json with SessionStart and PreInvocation entries
+and gitignores it, so installing the plugin never activates hooks for anyone who did not ask for them.
 
 Usage:
   scripts/hooks/install-hooks.py --claude [--project DIR] [--dry-run] [--uninstall]
@@ -44,8 +43,21 @@ def claude_hooks():
 
 def agy_hooks():
     # agy takes Claude-style plugin hooks; its matcher is a regex alternation.
-    return {"hooks": {"SessionStart": [{"matcher": "startup|clear|compact|resume",
-                                        "hooks": [entry("sessionstart")]}]}}
+    return {
+        "hooks": {
+            "SessionStart": [
+                {
+                    "matcher": "startup|clear|compact|resume",
+                    "hooks": [entry("sessionstart")],
+                }
+            ],
+            "PreInvocation": [
+                {
+                    "hooks": [entry("preinvocation")],
+                }
+            ],
+        }
+    }
 
 
 def strip_ours(groups):
