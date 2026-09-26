@@ -1,49 +1,41 @@
-# Checkpoint — Release v0.5.0 & Suite Expansion — 2026-09-22
+# Checkpoint — 49 Skills Suite & FinOps Integration — 2026-09-26
 
-**Status:** COMPLETE  
-**Branch:** `main` @ `666cd81`  
+**Status:** COMPLETE (Safe to quit & reboot)  
+**Branch:** `main` @ `9f46e76`  
 **Working Tree:** Clean  
 
 ---
 
 ## 1. Goal & Context
-Integrate specialized software engineering skills, expand the skill suite to 48 skills, enforce strict wordcount budgets via companion references, update documentation and routing shortcuts, and publish semantic release `v0.5.0`.
+Integrate `token-finops` as the 49th engineering skill, parameterize repository protection tooling, cross-reference overlapping skill pairs, tune router benchmark to 100% accuracy, and capture full verified system state before system reboot.
 
 ---
 
 ## 2. Done (With Evidence)
-- **Skill Suite Expansion (38 -> 48 Skills)**:
-  - `skills/eng/SKILL.md`: `/eng` typed entry point and shortcut table (v0.3.0).
-  - `skills/release/SKILL.md`: Automated SemVer release workflow and `scripts/release.sh` (v0.4.0).
-  - `skills/writing-user-guides/SKILL.md`: Structured user guides authoring in `docs/` with root README bridges (v0.5.0).
-  - PR #1 integration of 7 specialized skills (v0.5.0):
-    - `skills/code-architecture-review/`: Structural Graphify/AST architecture analysis.
-    - `skills/api-contract-audit/`: OpenAPI, GraphQL, Protobuf, and DTO schema drift detection.
-    - `skills/refactor-execute/`: Step-by-step refactoring engine with green-test gates and Fowler recipes.
-    - `skills/test-coverage/`: Multi-ecosystem coverage measurement and shell test-quality checks.
-    - `skills/dependency-audit/`: Package vulnerability scanning (CVE) and CVSS score triage.
-    - `skills/pr-review/`: Multi-lens PR and git diff reviewer with `gh pr review` integration.
-    - `skills/github-issues-script/`: Standalone batch issue creator (`scripts/create_issues.sh`).
-- **Wordcount Budget Enforcement**:
-  - Extracted companion reference materials into `references/` directories across `code-architecture-review`, `github-issues-script`, `release`, and `test-coverage`.
-  - `python3 scripts/lint-skills.py --words` → 48 skills, 22,110 words total, 0 errors, 0 warnings.
-- **Routing & Shortcuts**:
-  - `skills/using-swe-skills/SKILL.md`: Registered all 8 new skills across lifecycle groups.
-  - `skills/eng/SKILL.md`: Added non-colliding shortcuts (`arch`, `diff`, `refactor`, `schema`, `deps`, `cov`, `tickets`).
-- **Living Documentation Sync**:
-  - `README.md`: Updated catalog to 48 skills across entry, planning, architecture, AI systems, build, verify, and sustain groups.
-  - `docs/EVIDENCE.md`: Documented evidence sources for all 48 skills.
-  - `docs/TESTING.md`: Added pressure test scenarios for all skills (51 scenarios verified).
-  - `CHANGELOG.md` & `docs/CHANGELOG.md`: Full `[0.5.0]` release notes synchronized.
-- **Validation & Test Coverage**:
-  - `python3 -m unittest discover tests` → 37 tests passing in 1.3s.
-  - `agy plugin validate .` → [ok] (48 skills processed).
+- **Suite Expansion (49 Skills)**:
+  - `skills/token-finops/SKILL.md`: Added frontier model rate table ($/MTok), token budgeting, provider caching rules, and `/eng finops` shortcut.
+  - Sourced provider rates verified against official pricing pages (Anthropic, Google AI, OpenAI) as of 2026-09-24.
+  - Replaced duplicate rate matrix in `sizing-limits-from-measurement` with cross-reference to `token-finops`.
+- **Cross-Referenced Overlapping Skills**:
+  - `test-coverage` <-> `hunting-silent-failures`: Coverage measures and reports gaps; hunting probes gaps for silent bugs.
+  - `github-issues-script` <-> `drafting-issue-reports`: Drafting verifies/dedupes (default); issues-script is for exact file:line coordinates.
+- **Repository Security & Protections Tooling**:
+  - `scripts/setup_repo_protections.sh`: Parameterized with `--org` and `--repo` arguments, supporting split or combined formats with interactive fallbacks.
+  - Stale remote branch `origin/feat/integrate-swe-skills` cleanly pruned.
+- **Router Tuning & Benchmark Accuracy**:
+  - `skills/using-swe-skills/SKILL.md`: Tuned table triggers for `designing-testable-seams` and `test-coverage`.
+  - `scripts/eval-router.py`: Exact kebab-cased skill matching for explicit skill triggers.
+  - `python3 scripts/eval-router.py --self-test` → Accuracy 10/10 (100.0%) PASS.
+- **Multi-Platform Deployment & Distribution**:
+  - Symlinks installed in `~/.claude/skills`, `~/.cursor/skills`, and `~/.agents/skills` (all 49 skills active).
+  - Native Antigravity plugin cache updated (`agy plugin install .` → 49 processed, 1 hook).
+  - Standalone release package `dist/` synchronized and verified (`agy plugin validate dist` → [ok]).
+- **Test & Lint Verification**:
+  - `python3 scripts/lint-skills.py --words` → 49 skills, 23,351 words total, 0 errors.
+  - `python3 -m unittest discover tests` → 37 tests passing in 1.4s.
+  - `agy plugin validate .` → [ok] (49 skills processed, 1 hook).
   - `scripts/install.sh --dry-run --all` → [ok].
-  - `python3 scripts/run-scenarios.py --dry-run` → all 51 scenarios map to valid, existing skills.
-- **Release v0.5.0**:
-  - Manifests bumped to `0.5.0` across `plugin.json`, `.claude-plugin/plugin.json`, `.cursor-plugin/plugin.json`, and `.claude-plugin/marketplace.json`.
-  - Tagged `v0.5.0`, pushed to `origin main --tags`.
-  - GitHub Release `v0.5.0` published with release notes.
+  - `python3 scripts/run-scenarios.py --dry-run` → all 52 scenarios map to valid, existing skills.
 
 ---
 
@@ -54,13 +46,20 @@ Integrate specialized software engineering skills, expand the skill suite to 48 
 
 ## 4. State That May Have Changed
 - Local symlinks in `~/.cursor/skills`, `~/.agents/skills`, and `~/.claude/skills` point to `~/src/swe-skills-2/skills/`.
-- Local Antigravity plugin cache updated (`agy plugin install .`).
-- Remote branch `feat/integrate-swe-skills` pruned.
-- Remote tag `v0.5.0` and GitHub Release `v0.5.0` live with attached `tar.gz` and `.zip` distribution assets.
-- `scripts/eval-router.py --self-test` verified at 10/10 (100.0%) accuracy.
+- Antigravity plugin `swe-skills` active with 49 skills.
+- Working tree clean, in sync with `origin/main` at `9f46e76`.
 
 ---
 
-## 5. Next Steps
-1. Downstream project onboarding: integrate `dist/templates/AGENTS.snippet.md` into target repositories.
-2. Dogfood newly integrated architectural and verification skills on external codebases.
+## 5. Next Steps (Upon Resuming Post-Reboot)
+1. Verify repository state:
+   ```bash
+   cd ~/src/swe-skills-2 && git status
+   ```
+2. Run baseline unit tests and linter:
+   ```bash
+   python3 -m unittest discover tests
+   python3 scripts/lint-skills.py --words
+   ```
+3. Downstream project onboarding: integrate `dist/templates/AGENTS.snippet.md` into target repositories.
+4. Dogfood newly integrated skills (`code-architecture-review`, `test-coverage`, `token-finops`) on active codebases.
