@@ -6,7 +6,7 @@ Nothing here is active until you install it.
 
 | Hook | Event | Behavior |
 |---|---|---|
-| `nudge` | `UserPromptSubmit` | Reads token usage from the transcript. Past a threshold (default 70%), injects a reminder to load the skill and checkpoint **while there is still room**. Re-fires every +10%. |
+| `nudge` | `UserPromptSubmit` | Reads token usage from the transcript. Past a threshold (default 70%), injects a reminder to load the skill, checkpoint **while there is still room**, and provide the user with a tailored `/compact` command. Re-fires every +10%. |
 | `precompact` | `PreCompact` | On a **manual** `/compact` with no checkpoint touched in the last 20 min, exits 2 to block and says what to do. On **auto**-compaction it never blocks: the window is already full and the agent gets no turn to checkpoint, so blocking would stall the session. |
 | `sessionstart` | `SessionStart` (`compact`, `clear`, `resume`) | Injects the newest checkpoint plus the skill's verify-continuity instructions. With no checkpoint after a reset, it says so, and tells the agent to ask rather than reconstruct. |
 | `pre-commit` | Git `pre-commit` | Blocks git commits containing absolute home paths, unmasked secrets/keys, manifest version mismatches, or skill linter failures (`git_pre_commit.py`). |

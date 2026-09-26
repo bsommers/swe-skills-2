@@ -188,6 +188,8 @@ def cmd_nudge(payload):
         f"Load the `{SKILL}` skill and follow its pre-flight before the window fills: reach a stable "
         f"point, then write or refresh a checkpoint (user decisions verbatim, dead ends, working-tree and "
         f"background-process state, authorizations, exact next command). {have} "
+        f"Once checkpointed, provide the user with the tailored /compact command with keep: instructions "
+        f"(or instructions to start a fresh session if in Antigravity). "
         f"Answer the user's request first if it is short; do not silently ignore this."
     ))
     return 0
