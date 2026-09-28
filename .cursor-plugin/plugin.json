@@ -6,7 +6,7 @@
   "author": {
     "name": "bsommers"
   },
-  "license": "MIT",
+  "license": "Apache-2.0",
   "keywords": ["skills", "architecture", "planning", "verification", "best-practices"],
   "skills": "./skills/"
 }

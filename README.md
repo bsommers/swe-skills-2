@@ -98,4 +98,4 @@ v0.1.0. Skills are evidence-derived but **not yet pressure-tested with fresh age
 
 ## License
 
-MIT
+Apache-2.0
