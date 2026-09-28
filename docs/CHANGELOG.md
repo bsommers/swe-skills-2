@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.1] - 2026-09-28
+
+### Added
+- `docs/usermanual/`: Comprehensive 7-chapter user manual covering Getting Started, Skills Catalog, Hooks & Context Guards, Workflows & Practical Recipes, Authoring Skills, CLI Reference, and Troubleshooting/FAQ.
+- ASCII retro DOS style logo banner across `README.md` and `docs/usermanual/README.md`.
+
+### Changed
+- `README.md`: Integrated DOS ASCII banner, added User Manual chapter index, and refreshed skills count to 50 skills.
+- `LICENSE`: Updated project license from MIT to Apache-2.0.
+
 ## [0.5.0] - 2026-09-22
 
 ### Added
