@@ -19,41 +19,63 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 GUARD = ROOT / "scripts" / "hooks" / "context_guard.py"
+ROUTER = ROOT / "scripts" / "hooks" / "model_router.py"
 GIT_GUARD = ROOT / "scripts" / "hooks" / "git_pre_commit.py"
 MARK = "context_guard.py"
+ROUTER_MARK = "model_router.py"
 AGY_HOOKS = ROOT / "hooks.json"
 GIT_HOOK = ROOT / ".git" / "hooks" / "pre-commit"
 
 
-def entry(cmd):
-    return {"type": "command", "command": f"{sys.executable} {GUARD} {cmd}"}
+def resolve_runner(use_uv=None):
+    if use_uv is True:
+        return "uv run"
+    if use_uv is False:
+        return sys.executable
+    if shutil.which("uv"):
+        return "uv run"
+    return sys.executable
 
 
-def claude_hooks():
+def entry(cmd, runner="uv run"):
+    return {"type": "command", "command": f"{runner} {GUARD} {cmd}"}
+
+
+def router_entry(cmd, runner="uv run"):
+    return {"type": "command", "command": f"{runner} {ROUTER} {cmd}"}
+
+
+def claude_hooks(runner="uv run"):
     return {
-        "UserPromptSubmit": [{"hooks": [entry("nudge")]}],
-        "PreCompact": [{"matcher": "manual", "hooks": [entry("precompact")]},
-                       {"matcher": "auto", "hooks": [entry("precompact")]}],
+        "UserPromptSubmit": [{"hooks": [entry("nudge", runner)]}],
+        "PreCompact": [{"matcher": "manual", "hooks": [entry("precompact", runner)]},
+                       {"matcher": "auto", "hooks": [entry("precompact", runner)]}],
         # startup/resume included too: the handler only speaks up there when a
         # checkpoint is fresh (SWE_SKILLS_CHECKPOINT_FRESH_HOURS).
-        "SessionStart": [{"matcher": m, "hooks": [entry("sessionstart")]}
+        "SessionStart": [{"matcher": m, "hooks": [entry("sessionstart", runner)]}
                          for m in ("startup", "compact", "clear", "resume")],
     }
 
 
-def agy_hooks():
+def agy_hooks(runner="uv run"):
     # agy takes Claude-style plugin hooks; its matcher is a regex alternation.
     return {
         "hooks": {
             "SessionStart": [
                 {
                     "matcher": "startup|clear|compact|resume",
-                    "hooks": [entry("sessionstart")],
+                    "hooks": [entry("sessionstart", runner)],
                 }
             ],
             "PreInvocation": [
                 {
-                    "hooks": [entry("preinvocation")],
+                    "hooks": [entry("preinvocation", runner)],
+                }
+            ],
+            "PreToolUse": [
+                {
+                    "matcher": "invoke_subagent",
+                    "hooks": [router_entry("pretooluse", runner)],
                 }
             ],
         }
@@ -63,8 +85,9 @@ def agy_hooks():
 def strip_ours(groups):
     """Drop only the groups this installer added; leave the user's own hooks alone."""
     kept = []
+    marks = (MARK, ROUTER_MARK)
     for g in groups:
-        hooks = [h for h in g.get("hooks", []) if MARK not in str(h.get("command", ""))]
+        hooks = [h for h in g.get("hooks", []) if not any(m in str(h.get("command", "")) for m in marks)]
         if hooks:
             kept.append({**g, "hooks": hooks})
         elif not g.get("hooks"):
@@ -72,7 +95,7 @@ def strip_ours(groups):
     return kept
 
 
-def install_claude(path, uninstall, dry):
+def install_claude(path, uninstall, dry, runner="uv run"):
     settings = {}
     if path.exists():
         try:
@@ -81,7 +104,7 @@ def install_claude(path, uninstall, dry):
             print(f"error: {path} is not valid JSON; fix it first", file=sys.stderr)
             return 1
     hooks = settings.get("hooks") or {}
-    for event, groups in claude_hooks().items():
+    for event, groups in claude_hooks(runner).items():
         existing = strip_ours(hooks.get(event) or [])
         hooks[event] = existing if uninstall else existing + groups
         if not hooks[event]:
@@ -103,7 +126,7 @@ def install_claude(path, uninstall, dry):
     return 0
 
 
-def install_agy(uninstall, dry):
+def install_agy(uninstall, dry, runner="uv run"):
     gitignore = ROOT / ".gitignore"
     line = "/hooks.json\n"
     if uninstall:
@@ -113,7 +136,7 @@ def install_agy(uninstall, dry):
             AGY_HOOKS.unlink()
             print(f"removed {AGY_HOOKS}")
         return 0
-    body = json.dumps(agy_hooks(), indent=2) + "\n"
+    body = json.dumps(agy_hooks(runner), indent=2) + "\n"
     if dry:
         print(f"DRY: would write {AGY_HOOKS}:\n{body}")
         return 0
@@ -125,8 +148,8 @@ def install_agy(uninstall, dry):
     return 0
 
 
-def install_git(uninstall, dry):
-    hook_script = f"#!/usr/bin/env bash\nexec {sys.executable} {GIT_GUARD}\n"
+def install_git(uninstall, dry, runner="uv run"):
+    hook_script = f"#!/usr/bin/env bash\nexec {runner} {GIT_GUARD}\n"
     if uninstall:
         if dry:
             print(f"DRY: would remove {GIT_HOOK}")
@@ -151,21 +174,26 @@ def main():
     ap.add_argument("--claude", action="store_true", help="install into Claude Code settings.json")
     ap.add_argument("--agy", action="store_true", help="install into the Antigravity plugin root")
     ap.add_argument("--git", action="store_true", help="install git pre-commit hook into .git/hooks/pre-commit")
+    ap.add_argument("--uv", dest="use_uv", action="store_const", const=True, default=None,
+                    help="use 'uv run' to execute hooks (default if uv is on PATH)")
+    ap.add_argument("--no-uv", dest="use_uv", action="store_const", const=False, default=None,
+                    help="use sys.executable instead of 'uv run'")
     ap.add_argument("--project", metavar="DIR", help="project-level instead of user-level (Claude Code)")
     ap.add_argument("--uninstall", action="store_true")
     ap.add_argument("--dry-run", action="store_true")
     a = ap.parse_args()
     if not (a.claude or a.agy or a.git):
         ap.error("choose --claude, --agy, and/or --git")
+    runner = resolve_runner(a.use_uv)
     rc = 0
     if a.claude:
         path = Path(a.project).expanduser() / ".claude" / "settings.json" if a.project \
             else Path.home() / ".claude" / "settings.json"
-        rc |= install_claude(path, a.uninstall, a.dry_run)
+        rc |= install_claude(path, a.uninstall, a.dry_run, runner)
     if a.agy:
-        rc |= install_agy(a.uninstall, a.dry_run)
+        rc |= install_agy(a.uninstall, a.dry_run, runner)
     if a.git:
-        rc |= install_git(a.uninstall, a.dry_run)
+        rc |= install_git(a.uninstall, a.dry_run, runner)
     return rc
 
 

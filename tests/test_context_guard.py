@@ -298,6 +298,24 @@ class InstallerCase(unittest.TestCase):
         self.assertEqual(r.returncode, 0)
         self.assertIn("PreInvocation", r.stdout)
         self.assertIn("SessionStart", r.stdout)
+        self.assertIn("PreToolUse", r.stdout)
+        self.assertIn("uv run", r.stdout)
+
+    def test_install_runner_flags(self):
+        r_uv = subprocess.run(
+            [sys.executable, str(ROOT / "scripts" / "hooks" / "install-hooks.py"), "--agy", "--dry-run", "--uv"],
+            capture_output=True, text=True,
+        )
+        self.assertEqual(r_uv.returncode, 0)
+        self.assertIn("uv run", r_uv.stdout)
+
+        r_no_uv = subprocess.run(
+            [sys.executable, str(ROOT / "scripts" / "hooks" / "install-hooks.py"), "--agy", "--dry-run", "--no-uv"],
+            capture_output=True, text=True,
+        )
+        self.assertEqual(r_no_uv.returncode, 0)
+        self.assertNotIn("uv run", r_no_uv.stdout)
+        self.assertIn(sys.executable, r_no_uv.stdout)
 
 
 if __name__ == "__main__":

@@ -14,6 +14,7 @@ Usage:
 import json
 import os
 import re
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -97,7 +98,8 @@ def run_linter():
     if not linter.exists():
         return []
     try:
-        proc = subprocess.run([sys.executable, str(linter)], cwd=ROOT, capture_output=True, text=True)
+        cmd = ["uv", "run", str(linter)] if shutil.which("uv") else [sys.executable, str(linter)]
+        proc = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
         if proc.returncode != 0:
             return [f"lint-skills failed:\n{proc.stdout}\n{proc.stderr}"]
     except OSError as e:

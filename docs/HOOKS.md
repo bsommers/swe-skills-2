@@ -7,7 +7,8 @@ Nothing here is active until you install it.
 | Hook | Event | Behavior |
 |---|---|---|
 | `nudge` | `UserPromptSubmit` | Reads token usage from the transcript. Past a threshold (default 70%), injects a reminder to load the skill, checkpoint **while there is still room**, and provide the user with a tailored `/compact` command. Re-fires every +10%. |
-| `preinvocation` | `PreInvocation` (agy) | Runs before model generation in Antigravity. When session steps (default 50) or transcript size exceeds limits, injects an ephemeral checkpoint and fresh session reminder. Re-fires every +15 steps. |
+| `preinvocation` | `PreInvocation` (agy) | Runs before model generation in Antigravity. When session steps (default 50) or transcript size exceeds limits, injects an ephemeral checkpoint and fresh session reminder. Also provides adaptive model routing hints for high-complexity prompts. |
+| `pretooluse` | `PreToolUse` (agy) | Intercepts `invoke_subagent` calls. Evaluates prompt and role complexity, automatically overwriting `Model` (`pro`, `flash`, `flash_lite`) to conserve tokens. |
 | `precompact` | `PreCompact` | On a **manual** `/compact` with no checkpoint touched in the last 20 min, exits 2 to block and says what to do. On **auto**-compaction it never blocks: the window is already full and the agent gets no turn to checkpoint, so blocking would stall the session. |
 | `sessionstart` | `SessionStart` (`compact`, `clear`, `resume`) | Injects the newest checkpoint plus the skill's verify-continuity instructions. With no checkpoint after a reset, it says so, and tells the agent to ask rather than reconstruct. |
 | `pre-commit` | Git `pre-commit` | Blocks git commits containing absolute home paths, unmasked secrets/keys, manifest version mismatches, or skill linter failures (`git_pre_commit.py`). |
@@ -24,7 +25,7 @@ scripts/hooks/install-hooks.py --agy                 # Antigravity (SessionStart
 scripts/hooks/install-hooks.py --git                 # .git/hooks/pre-commit
 ```
 
-Add `--dry-run` to preview, `--uninstall` to remove. Installing is idempotent, backs up an existing
+Add `--dry-run` to preview, `--uninstall` to remove. Hooks default to executing via `uv run` if `uv` is found on `PATH` (configurable via `--uv` or `--no-uv`). Installing is idempotent, backs up an existing
 `settings.json`, and leaves hooks you added yourself alone.
 
 For `agy`, the plugin must be re-imported before the new hooks register (installing over an existing
@@ -58,6 +59,9 @@ Environment variables, all optional:
 | `SWE_SKILLS_AGY_STEP_LIMIT` | `50` | Step count before agy nudge |
 | `SWE_SKILLS_AGY_STEP_STEP` | `15` | Re-nudge agy every N more steps |
 | `SWE_SKILLS_AGY_BYTES_LIMIT` | `500000` | Transcript bytes before agy nudge |
+| `SWE_SKILLS_MODEL_ROUTER_ENABLED` | `1` | `0` disables adaptive model routing in hooks |
+| `SWE_SKILLS_MODEL_ROUTER_DEFAULT_TIER` | `flash` | Fallback tier for standard tasks (`flash` / `flash_lite`) |
+| `SWE_SKILLS_MODEL_ROUTER_DEBUG` | `0` | `1` prints router debug diagnostics to stderr |
 | `SWE_SKILLS_CONTEXT_GUARD_BLOCK` | `1` | `0` stops blocking manual `/compact` |
 | `SWE_SKILLS_CHECKPOINT_GLOBS` | see below | `:`-separated globs, relative to cwd |
 | `SWE_SKILLS_CHECKPOINT_FRESH_MINUTES` | `20` | Checkpoint age the compaction guard accepts |

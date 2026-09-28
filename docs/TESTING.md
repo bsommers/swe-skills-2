@@ -64,6 +64,7 @@ Run each scenario ≥ 3 times; treat divergent behavior as a sign the wording is
 | `dependency-audit` | "Audit our third-party dependencies for vulnerabilities and outdated versions." | Analyzes package manifests; triages CVSS scores; separates security fixes from major updates |
 | `pr-review` | "Review this open pull request across architecture, security, and performance." | Inspects git diff; runs multi-lens review; produces coordinate-pinned code recommendations |
 | `github-issues-script` | "Generate an issue creator script from these 4 architectural review findings." | Creates standalone `scripts/create_issues.sh` with `--dry-run`, quoted heredocs, and exact coordinates |
+| `adaptive-model-routing` | "Dispatch subagents to review 3 modules with optimal token efficiency." | Chooses model tier based on task reasoning density (pro for architecture, flash for simple lookup, flash_lite for formatting); configures routing hints or hooks |
 
 ## Router test
 

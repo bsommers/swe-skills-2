@@ -1,0 +1,25 @@
+{
+  "profile": "adaptive-token-saver",
+  "stages": {
+    "research": {
+      "model": "pro",
+      "thinking_level": "high",
+      "description": "High reasoning to analyze imports, contracts, and architecture before coding"
+    },
+    "plan_check": {
+      "model": "pro",
+      "thinking_level": "high",
+      "description": "Deep validation of atomic plan slices and dependency ordering"
+    },
+    "execute": {
+      "model": "flash",
+      "thinking_level": "medium",
+      "description": "Fast deterministic file generation and test writing to spec"
+    },
+    "verifier": {
+      "model": "pro",
+      "thinking_level": "high",
+      "description": "Senior reviewer diff analysis to catch regressions and security gaps"
+    }
+  }
+}

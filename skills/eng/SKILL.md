@@ -40,6 +40,7 @@ Only the first word is matched, and only exactly. "review the auth module" runs 
 | `cov` | `test-coverage` |
 | `tickets` | `github-issues-script` |
 | `finops` | `token-finops` |
+| `model` | `adaptive-model-routing` |
 
 ## Rules
 

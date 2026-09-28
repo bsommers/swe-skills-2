@@ -66,6 +66,7 @@ Skills were distilled from the standards, specs, audits, changelogs, fix-commit 
 | `writing-pull-requests` | `committing-and-releasing-cleanly` PR-description rule; GitHub closing-keyword docs (one keyword per issue); `gh pr create --help` (2.88: `--dry-run` may still push); ~400-line default from the SmartBear/Cisco code-review study (defect-finding falls off beyond 200–400 lines per review) |
 | `pr-review` | `committing-and-releasing-cleanly` review standard; `feed-brain-gh` multi-lens PR review workflow with `gh pr review` |
 | `committing-and-releasing-cleanly` | factory standard 03; `flowscope` dual-remote sync; existing release skills |
+| `adaptive-model-routing` | factory model router and multi-tier subagent dispatch; token conservation benchmarks across pro, flash, flash_lite tiers |
 
 ## Provenance notes
 

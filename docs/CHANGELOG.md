@@ -5,15 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.5.1] - 2026-09-28
+## [0.6.0] - 2026-09-28
 
 ### Added
+- `skills/adaptive-model-routing/`: Dynamic LLM tier selection and model gating to conserve token consumption across frontier workflows.
+- `scripts/hooks/model_router.py`: `PreToolUse` hook for Antigravity intercepting `invoke_subagent` calls to automatically select model tiers (`pro`, `flash`, `flash_lite`).
+- `scripts/hooks/install-hooks.py`: Added `--uv` and `--no-uv` runner flags to prioritize Astral `uv` for fast hook execution.
 - `docs/usermanual/`: Comprehensive 7-chapter user manual covering Getting Started, Skills Catalog, Hooks & Context Guards, Workflows & Practical Recipes, Authoring Skills, CLI Reference, and Troubleshooting/FAQ.
 - ASCII retro DOS style logo banner across `README.md` and `docs/usermanual/README.md`.
 
 ### Changed
-- `README.md`: Integrated DOS ASCII banner, added User Manual chapter index, and refreshed skills count to 50 skills.
+- `README.md`: Integrated DOS ASCII banner, added User Manual chapter index, and expanded skills catalog to 50 skills.
 - `LICENSE`: Updated project license from MIT to Apache-2.0.
+- `skills/eng/SKILL.md`: Added `model` shortcut for `adaptive-model-routing`.
+- `skills/using-swe-skills/SKILL.md`: Registered `adaptive-model-routing` in general router.
 
 ## [0.5.0] - 2026-09-22
 
