@@ -44,6 +44,7 @@ Skills were distilled from the standards, specs, audits, changelogs, fix-commit 
 | `parsing-untrusted-text-robustly` | `gemini-chat-exporter` (selector cascade, nested-list duplication, table pipes); factory anchor-parser fence immunity; Mermaid label fix; `uitoolbox` date bugs |
 | `hardening-trust-boundaries` | `OntoLogic` shell-injection and Cypher-escape fixes; `ai-model-learning` Dockerfile allowlist and "speed bump, not a sandbox"; `synth` sanitizer secondary-injection fixes; extension SECURITY doc |
 | `engineering-for-determinism` | factory standard 39; `synth` regeneration/SHA pins; `airflow` seeded generators and Python-version seed-type bug |
+| `nix-environments` | `OntoLogic` and multi-substrate compiler toolchains; hermetic dev shells with `flake.nix` wrapping native toolchains while preserving unprivileged portability via `uv`/`cargo` fallback |
 | `layered-verification-gates` | factory standards 03/04; `airflow` skip behavior; `agent-manager-fe` coverage report; constraint-weakening patterns |
 | `hunting-silent-failures` | `uitoolbox` QA review (four P0 silent bugs) |
 | `debugging-across-layers` | `ai-model-learning` hidden context ceiling; `airflow` shadowing and checkpoint with missing data; port-conflict fix |

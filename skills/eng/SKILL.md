@@ -41,6 +41,7 @@ Only the first word is matched, and only exactly. "review the auth module" runs 
 | `tickets` | `github-issues-script` |
 | `finops` | `token-finops` |
 | `model` | `adaptive-model-routing` |
+| `nix` | `nix-environments` |
 
 ## Rules
 

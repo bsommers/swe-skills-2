@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.0] - 2026-09-28
+
+### Added
+- `skills/nix-environments/`: Progressive enhancement skill establishing a 3-tier environment hierarchy (Hermetic Nix devShell → Native Host Toolchain → Container/CI fallback) to eliminate host dependency barriers while guaranteeing bit-for-bit system reproducibility.
+- `templates/nix/`: Production-ready hybrid templates including `flake.nix` (multi-arch devShell wrapping Python, `uv`, `pkg-config`, `openssl`, and `git`), legacy `shell.nix`, and `envrc` for direnv.
+- `skills/eng/SKILL.md`: Added `/eng nix` shortcut routing directly to `nix-environments`.
+
+### Fixed
+- Fixed retro DOS ASCII logo alignment to strict 80-column standard width across `README.md` and `docs/usermanual/README.md`, eliminating ragged line wraps in terminal and browser viewports.
+
+### Changed
+- `skills/using-swe-skills/SKILL.md`: Registered `nix-environments` in core skill router table.
+- Expanded skill catalog to 51 skills across `README.md` and `docs/usermanual/`.
+
 ## [0.6.0] - 2026-09-28
 
 ### Added

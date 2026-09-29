@@ -1,19 +1,19 @@
 # swe-skills
 
 ```text
-╔═══════════════════════════════════════════════════════════════════════════════════╗
-║                                                                                   ║
-║   ███████╗██╗    ██╗███████╗     ███████╗██╗  ██╗██╗██╗     ██╗     ███████╗      ║
-║   ██╔════╝██║    ██║██╔════╝     ██╔════╝██║ ██╔╝██║██║     ██║     ██╔════╝      ║
-║   ███████╗██║ █╗ ██║█████╗  ═══  ███████╗█████═╝ ██║██║     ██║     ███████╗      ║
-║   ╚════██║██║███╗██║██╔══╝       ╚════██║██╔═██╗ ██║██║     ██║     ╚════██║      ║
-║   ███████║╚███╔███╔╝███████╗     ███████║██║  ██╗██║███████╗███████╗███████║      ║
-║   ╚══════╝ ╚══╝╚══╝ ╚══════╝     ╚══════╝╚═╝  ╚═╝╚═╝╚══════╝╚══════╝╚══════╝      ║
-║                                                                                   ║
-║            SOFTWARE ENGINEERING & ARCHITECTURE SKILLS FOR AI AGENTS               ║
-║                  Claude Code  •  Antigravity (agy)  •  Cursor                     ║
-║                                                                                   ║
-╚═══════════════════════════════════════════════════════════════════════════════════╝
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                              ║
+║  ███████╗██╗    ██╗███████╗    ███████╗██╗  ██╗██╗██╗     ██╗     ███████╗   ║
+║  ██╔════╝██║    ██║██╔════╝    ██╔════╝██║ ██╔╝██║██║     ██║     ██╔════╝   ║
+║  ███████╗██║ █╗ ██║█████╗█████╗███████╗█████╔╝ ██║██║     ██║     ███████╗   ║
+║  ╚════██║██║███╗██║██╔══╝╚════╝╚════██║██╔═██╗ ██║██║     ██║     ╚════██║   ║
+║  ███████║╚███╔███╔╝███████╗    ███████║██║  ██╗██║███████╗███████╗███████║   ║
+║  ╚══════╝ ╚══╝╚══╝ ╚══════╝    ╚══════╝╚═╝  ╚═╝╚═╝╚══════╝╚══════╝╚══════╝   ║
+║                                                                              ║
+║           SOFTWARE ENGINEERING & ARCHITECTURE SKILLS FOR AI AGENTS           ║
+║                 Claude Code  •  Antigravity (agy)  •  Cursor                 ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
 ```
 
 Software engineering, planning, and architecture skills for AI-assisted coding sessions — from a one-file tool to a multi-service system. Works with **Claude Code**, **Antigravity (`agy`)**, and **Cursor** (and anything reading `~/.agents/skills`).
@@ -27,7 +27,7 @@ Every skill is distilled from real projects: bugs that were found, limits that w
 Comprehensive walkthroughs, architectural diagrams, task recipes, and reference documentation live in the [User Manual](docs/usermanual/README.md):
 
 - [Chapter 1: Getting Started](docs/usermanual/01-getting-started.md) — Installation across Claude Code, Antigravity (`agy`), Cursor, and project-level setup.
-- [Chapter 2: Skills Catalog & Classification](docs/usermanual/02-skills-catalog.md) — Full taxonomy of all 50 skills across 7 domains.
+- [Chapter 2: Skills Catalog & Classification](docs/usermanual/02-skills-catalog.md) — Full taxonomy of all 51 skills across 7 domains.
 - [Chapter 3: Hooks & Context Guards](docs/usermanual/03-hooks-and-context-guards.md) — Token monitoring, `/compact` guards, and git pre-commit gates.
 - [Chapter 4: Workflows & Practical Recipes](docs/usermanual/04-workflows-and-recipes.md) — Step-by-step recipes for scaffolding, debugging, refactoring, and releases.
 - [Chapter 5: Authoring & Extending Skills](docs/usermanual/05-authoring-skills.md) — Frontmatter standards, word budgets, linting, and pressure testing.
@@ -55,7 +55,7 @@ The name is deliberately not `swe`: the older `swe-skills` suite already has a `
 
 ---
 
-## Skills (50)
+## Skills (51)
 
 | Group | Skills |
 |---|---|
@@ -63,7 +63,7 @@ The name is deliberately not `swe`: the older `swe-skills` suite already has a `
 | **Frame & plan** | `right-sizing-process` · `writing-intent-briefs` · `planning-with-contracts` · `sizing-limits-from-measurement` · `token-finops` · `choosing-tools-and-substrates` · `adaptive-model-routing` |
 | **Architecture** | `designing-layered-pipelines` · `designing-plugin-contracts` · `designing-testable-seams` · `evolving-schemas-and-contracts` · `defending-architecture-decisions` · `managing-complexity-budgets` · `designing-data-pipelines` · `code-architecture-review` · `api-contract-audit` · `refactor-execute` |
 | **AI systems** | `building-unattended-agent-loops` · `grounding-ai-outputs` |
-| **Build** | `scaffolding-new-projects` · `building-small-cli-tools` · `building-code-generators` · `parsing-untrusted-text-robustly` · `hardening-trust-boundaries` · `engineering-for-determinism` |
+| **Build** | `scaffolding-new-projects` · `building-small-cli-tools` · `building-code-generators` · `parsing-untrusted-text-robustly` · `hardening-trust-boundaries` · `engineering-for-determinism` · `nix-environments` |
 | **Verify & measure** | `layered-verification-gates` · `hunting-silent-failures` · `debugging-across-layers` · `clustering-failures-by-root-cause` · `building-trustworthy-benchmarks` · `making-verifiable-claims` · `test-coverage` · `dependency-audit` |
 | **Collaborate & sustain** | `orchestrating-subagents` · `running-multi-lens-audits` · `supervising-autonomous-sessions` · `handing-off-sessions` · `compacting-context-safely` · `writing-agent-context-files` · `writing-user-guides` · `keeping-docs-in-sync` · `keeping-repos-portable` · `drafting-issue-reports` · `writing-pull-requests` · `pr-review` · `github-issues-script` · `committing-and-releasing-cleanly` · `release` |
 
@@ -135,7 +135,7 @@ Authoring rules: description starts with "Use when…" and states triggers only 
 
 ## Status
 
-v0.6.0. Skills are evidence-derived and verified against multi-agent test scenarios; [docs/TESTING.md](docs/TESTING.md) lists the scenarios to run.
+v0.7.0. Skills are evidence-derived and verified against multi-agent test scenarios; [docs/TESTING.md](docs/TESTING.md) lists the scenarios to run.
 
 ---
 

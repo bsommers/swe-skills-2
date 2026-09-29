@@ -40,6 +40,7 @@ Unsure? `right-sizing-process`.
 | parse or scrape text/HTML | `parsing-untrusted-text-robustly` |
 | touch shell, SQL, paths, secrets, sandboxes | `hardening-trust-boundaries` |
 | see flaky or churning output | `engineering-for-determinism` |
+| configure reproducible dev environments, toolchains, or Nix flakes | `nix-environments` |
 | decide what "done" means | `layered-verification-gates` |
 | suspect untested code hides bugs | `hunting-silent-failures` |
 | hit a failure that ignores fixes | `debugging-across-layers` |

@@ -2,7 +2,7 @@
 
 [← Back to User Manual](README.md) · [← Previous: Getting Started](01-getting-started.md) · [Next: Hooks & Context Guards →](03-hooks-and-context-guards.md)
 
-This chapter provides a structured breakdown of the **50 skills** in `swe-skills`, organized into seven functional domains.
+This chapter provides a structured breakdown of the **51 skills** in `swe-skills`, organized into seven functional domains.
 
 ---
 
@@ -75,6 +75,7 @@ Every skill adheres to strict authoring principles:
 | [`parsing-untrusted-text-robustly`](../../skills/parsing-untrusted-text-robustly/SKILL.md) | Parsing or scraping text, HTML/DOM, markdown, logs, or markup you do not control; when a scraper breaks after a site update; when a parser matches things inside code blocks; or when type-guessing gives wrong results. | Robust, defensive grammar parsing with fallback boundaries. |
 | [`hardening-trust-boundaries`](../../skills/hardening-trust-boundaries/SKILL.md) | Code passes data into a shell, SQL/Cypher/query language, filesystem path, template, container build, extension permission, or secret store; when running model-written or third-party code; or before shipping anything that handles untrusted input. | Injection-proof parameterization and strict input sanitization. |
 | [`engineering-for-determinism`](../../skills/engineering-for-determinism/SKILL.md) | Results differ between runs or machines, tests are flaky, generated files churn in diffs, simulated data must be reproducible, or ground-truth files risk being hand-edited and drifting from their generator. | Bit-for-bit reproducible runs (sorted keys, fixed seeds, UTC timestamps). |
+| [`nix-environments`](../../skills/nix-environments/SKILL.md) | Configuring reproducible development environments, hermetic build toolchains, or system-level dependencies with Nix flakes or devShells, especially when a project requires native C libraries or cross-compiler tools alongside language package managers. | 3-tier environment hierarchy (Hermetic Nix → Native Toolchain → Container/CI fallback) with hybrid `flake.nix`. |
 
 ---
 
