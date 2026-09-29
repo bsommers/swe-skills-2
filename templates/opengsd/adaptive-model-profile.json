@@ -14,7 +14,12 @@
     "execute": {
       "model": "flash",
       "thinking_level": "medium",
-      "description": "Fast deterministic file generation and test writing to spec"
+      "description": "Fast deterministic file generation and boilerplate scaffolding to spec"
+    },
+    "tdd_cycle": {
+      "model": "flash",
+      "thinking_level": "high",
+      "description": "Test-time compute for algorithmic logic, red-green test generation, and bounded refactors"
     },
     "verifier": {
       "model": "pro",

@@ -193,3 +193,48 @@ When code changes are tested, documented, and ready for deployment.
      Proposed release: v0.5.1 -> v0.6.0 (minor)
      Proceed with tag creation and push? [y/N]
      ```
+
+---
+
+## Recipe 7: Adaptive Model Dispatch & Test-Time Compute Optimization
+
+When balancing reasoning quality against token expenditure and API latency across complex multi-step workflows.
+
+### Skills Used
+- [`adaptive-model-routing`](../../skills/adaptive-model-routing/SKILL.md)
+- [`token-finops`](../../skills/token-finops/SKILL.md)
+- [`orchestrating-subagents`](../../skills/orchestrating-subagents/SKILL.md)
+
+### Walkthrough
+
+1. **Classify Workloads Along Scaling Axes:**
+   - **Test-Time Compute (`flash` + High Thinking):** Bounded algorithmic problems with external verification (compilers, linters, unit test suites). Extended reasoning tokens simulate execution branches and self-correct at ~5–10x lower token cost.
+   - **Parametric Scale (`pro` + High Thinking):** Unstated requirements, cross-module architecture (ADRs/RFCs), massive context windows (>200k tokens), and deep security audits.
+
+2. **Trigger via `/eng`:**
+   ```text
+   /eng model dispatch subagents to implement parser logic and audit session security
+   ```
+
+3. **Subagent Execution Dispatch:**
+   - **Algorithmic Worker (`flash` + High Thinking):**
+     ```json
+     {
+       "TypeName": "self",
+       "Role": "Parser Implementer",
+       "Model": "flash",
+       "Prompt": "Implement AST tokenizer in src/parser/tokens.ts with test-driven unit tests. Run pytest until green."
+     }
+     ```
+   - **Security Reviewer (`pro` + High Thinking):**
+     ```json
+     {
+       "TypeName": "research",
+       "Role": "Security Auditor",
+       "Model": "pro",
+       "Prompt": "Audit src/auth/session.ts across all token refresh flows for concurrency race conditions and replay attacks."
+     }
+     ```
+
+4. **Measurement & Verification:**
+   Track token consumption and savings using [`token-finops`](../../skills/token-finops/SKILL.md) to verify cost efficiency targets.

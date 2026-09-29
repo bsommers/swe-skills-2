@@ -96,6 +96,7 @@ flowchart TD
    - [Recipe 4: Multi-Lens Pre-Release Auditing](04-workflows-and-recipes.md#recipe-4-multi-lens-pre-release-auditing)
    - [Recipe 5: Context Compaction and Clean Session Handoffs](04-workflows-and-recipes.md#recipe-5-context-compaction-and-clean-session-handoffs)
    - [Recipe 6: Automated SemVer Versioning and Release](04-workflows-and-recipes.md#recipe-6-automated-semver-versioning-and-release)
+   - [Recipe 7: Adaptive Model Dispatch & Test-Time Compute Optimization](04-workflows-and-recipes.md#recipe-7-adaptive-model-dispatch--test-time-compute-optimization)
 
 5. [Chapter 5: Authoring & Extending Skills](05-authoring-skills.md)
    - [Skill Specification & Frontmatter Standard](05-authoring-skills.md#skill-specification--frontmatter-standard)
