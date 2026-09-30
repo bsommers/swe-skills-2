@@ -5,6 +5,46 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.1] - 2026-09-30
+
+### Added
+- `docs/usermanual/04-workflows-and-recipes.md`: Added Recipe 7 detailing Adaptive Model Dispatch & Test-Time Compute Optimization with subagent configuration examples for fast reasoning vs. architectural review.
+- `templates/opengsd/adaptive-model-profile.json`: Added `tdd_cycle` stage configured with `flash` and high thinking for algorithmic logic, red-green test generation, and bounded refactors.
+
+### Changed
+- `skills/adaptive-model-routing/SKILL.md`: Added decision boundary between Test-Time Compute (`flash` + High Thinking) and Parametric Capacity (`pro` + High Thinking), distinguishing bounded algorithmic tasks from large-scale architectural synthesis.
+- `docs/EVIDENCE.md`: Decoupled provenance documentation from proprietary Dark Factory and DarkOS citations, replacing them with generalized software engineering standards (spec-driven development, prototypical template isolation, complexity budgets).
+- Synchronized all manifests to `0.7.1` (`plugin.json`, `.claude-plugin/`, `.cursor-plugin/`).
+
+## [0.7.0] - 2026-09-28
+
+### Added
+- `skills/nix-environments/`: Progressive enhancement skill establishing a 3-tier environment hierarchy (Hermetic Nix devShell → Native Host Toolchain → Container/CI fallback) to eliminate host dependency barriers while guaranteeing bit-for-bit system reproducibility.
+- `templates/nix/`: Production-ready hybrid templates including `flake.nix` (multi-arch devShell wrapping Python, `uv`, `pkg-config`, `openssl`, and `git`), legacy `shell.nix`, and `envrc` for direnv.
+- `skills/eng/SKILL.md`: Added `/eng nix` shortcut routing directly to `nix-environments`.
+
+### Fixed
+- Fixed retro DOS ASCII logo alignment to strict 80-column standard width across `README.md` and `docs/usermanual/README.md`, eliminating ragged line wraps in terminal and browser viewports.
+
+### Changed
+- `skills/using-swe-skills/SKILL.md`: Registered `nix-environments` in core skill router table.
+- Expanded skill catalog to 51 skills across `README.md` and `docs/usermanual/`.
+
+## [0.6.0] - 2026-09-28
+
+### Added
+- `skills/adaptive-model-routing/`: Dynamic LLM tier selection and model gating to conserve token consumption across frontier workflows.
+- `scripts/hooks/model_router.py`: `PreToolUse` hook for Antigravity intercepting `invoke_subagent` calls to automatically select model tiers (`pro`, `flash`, `flash_lite`).
+- `scripts/hooks/install-hooks.py`: Added `--uv` and `--no-uv` runner flags to prioritize Astral `uv` for fast hook execution.
+- `docs/usermanual/`: Comprehensive 7-chapter user manual covering Getting Started, Skills Catalog, Hooks & Context Guards, Workflows & Practical Recipes, Authoring Skills, CLI Reference, and Troubleshooting/FAQ.
+- ASCII retro DOS style logo banner across `README.md` and `docs/usermanual/README.md`.
+
+### Changed
+- `README.md`: Integrated DOS ASCII banner, added User Manual chapter index, and expanded skills catalog to 50 skills.
+- `LICENSE`: Updated project license from MIT to Apache-2.0.
+- `skills/eng/SKILL.md`: Added `model` shortcut for `adaptive-model-routing`.
+- `skills/using-swe-skills/SKILL.md`: Registered `adaptive-model-routing` in general router.
+
 ## [0.5.0] - 2026-09-22
 
 ### Added

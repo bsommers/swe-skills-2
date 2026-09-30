@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.1] - 2026-09-30
+
+### Added
+- `docs/usermanual/04-workflows-and-recipes.md`: Added Recipe 7 detailing Adaptive Model Dispatch & Test-Time Compute Optimization with subagent configuration examples for fast reasoning vs. architectural review.
+- `templates/opengsd/adaptive-model-profile.json`: Added `tdd_cycle` stage configured with `flash` and high thinking for algorithmic logic, red-green test generation, and bounded refactors.
+
+### Changed
+- `skills/adaptive-model-routing/SKILL.md`: Added decision boundary between Test-Time Compute (`flash` + High Thinking) and Parametric Capacity (`pro` + High Thinking), distinguishing bounded algorithmic tasks from large-scale architectural synthesis.
+- `docs/EVIDENCE.md`: Decoupled provenance documentation from proprietary Dark Factory and DarkOS citations, replacing them with generalized software engineering standards (spec-driven development, prototypical template isolation, complexity budgets).
+- Synchronized all manifests to `0.7.1` (`plugin.json`, `.claude-plugin/`, `.cursor-plugin/`).
+
 ## [0.7.0] - 2026-09-28
 
 ### Added
