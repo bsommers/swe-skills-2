@@ -4,6 +4,27 @@
   <img src="docs/assets/logo.svg" alt="swe-skills logo" width="100%" />
 </p>
 
+<details>
+<summary>📟 Terminal ASCII Art (DOS Banner)</summary>
+
+```text
+╔═══════════════════════════════════════════════════════════════════════════════════╗
+║                                                                                   ║
+║   ███████╗██╗    ██╗███████╗     ███████╗██╗  ██╗██╗██╗     ██╗     ███████╗      ║
+║   ██╔════╝██║    ██║██╔════╝     ██╔════╝██║ ██╔╝██║██║     ██║     ██╔════╝      ║
+║   ███████╗██║ █╗ ██║█████╗  ═══  ███████╗█████═╝ ██║██║     ██║     ███████╗      ║
+║   ╚════██║██║███╗██║██╔══╝       ╚════██║██╔═██╗ ██║██║     ██║     ╚════██║      ║
+║   ███████║╚███╔███╔╝███████╗     ███████║██║  ██╗██║███████╗███████╗███████║      ║
+║   ╚══════╝ ╚══╝╚══╝ ╚══════╝     ╚══════╝╚═╝  ╚═╝╚═╝╚══════╝╚══════╝╚══════╝      ║
+║                                                                                   ║
+║            SOFTWARE ENGINEERING & ARCHITECTURE SKILLS FOR AI AGENTS               ║
+║                  Claude Code  •  Antigravity (agy)  •  Cursor                     ║
+║                                                                                   ║
+╚═══════════════════════════════════════════════════════════════════════════════════╝
+```
+
+</details>
+
 Software engineering, planning, and architecture skills for AI-assisted coding sessions — from a one-file tool to a multi-service system. Works with **Claude Code**, **Antigravity (`agy`)**, and **Cursor** (and anything reading `~/.agents/skills`).
 
 Every skill is distilled from real projects: bugs that were found, limits that were measured, audits that were run, and rules that held up across ~20 repositories (compilers, pipelines, benchmarks, agent frameworks, browser extensions, UI libraries). Provenance is in [docs/EVIDENCE.md](docs/EVIDENCE.md).
