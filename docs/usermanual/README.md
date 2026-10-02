@@ -4,21 +4,9 @@
 
 Welcome to the comprehensive user manual for **`swe-skills`**, a modular suite of 51 software engineering, planning, architecture, and operational skills designed for AI coding agents (**Claude Code**, **Antigravity (`agy`)**, **Cursor**, and any agent consuming `~/.agents/skills`).
 
-```text
-╔═══════════════════════════════════════════════════════════════════════════════════╗
-║                                                                                   ║
-║   ███████╗██╗    ██╗███████╗     ███████╗██╗  ██╗██╗██╗     ██╗     ███████╗      ║
-║   ██╔════╝██║    ██║██╔════╝     ██╔════╝██║ ██╔╝██║██║     ██║     ██╔════╝      ║
-║   ███████╗██║ █╗ ██║█████╗  ═══  ███████╗█████═╝ ██║██║     ██║     ███████╗      ║
-║   ╚════██║██║███╗██║██╔══╝       ╚════██║██╔═██╗ ██║██║     ██║     ╚════██║      ║
-║   ███████║╚███╔███╔╝███████╗     ███████║██║  ██╗██║███████╗███████╗███████║      ║
-║   ╚══════╝ ╚══╝╚══╝ ╚══════╝     ╚══════╝╚═╝  ╚═╝╚═╝╚══════╝╚══════╝╚══════╝      ║
-║                                                                                   ║
-║            SOFTWARE ENGINEERING & ARCHITECTURE SKILLS FOR AI AGENTS               ║
-║                  Claude Code  •  Antigravity (agy)  •  Cursor                     ║
-║                                                                                   ║
-╚═══════════════════════════════════════════════════════════════════════════════════╝
-```
+<p align="center">
+  <img src="../assets/logo.svg" alt="swe-skills logo" width="100%" />
+</p>
 
 ---
 
