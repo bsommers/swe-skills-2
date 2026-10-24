@@ -36,6 +36,7 @@ Unsure? `right-sizing-process`.
 | feed LLM output into a decision | `grounding-ai-outputs` |
 | start a new repo | `scaffolding-new-projects` |
 | write a CLI or script | `building-small-cli-tools` |
+| build an installer, `init` setup, or in-tool next-step workflow guide | `building-installers-and-onboarding` |
 | emit code/config from a model | `building-code-generators` |
 | parse or scrape text/HTML | `parsing-untrusted-text-robustly` |
 | touch shell, SQL, paths, secrets, sandboxes | `hardening-trust-boundaries` |

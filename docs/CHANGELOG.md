@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+- `skills/building-installers-and-onboarding/`: Build-time and post-build remediation skill covering multi-target installers (`--local` user home default, `--global`, and `--prefix` custom path), idempotent `<tool> init` and `doctor` setup commands, progressive in-tool `Next steps:` CLI breadcrumbs, and synchronized user guide workflows.
+- `skills/building-installers-and-onboarding/references/installer-template.sh`: Reusable POSIX/Bash installer template supporting `--local`, `--global`, `--prefix`, `--dry-run`, `--force`, `--uninstall`, and `$PATH` verification.
+- `skills/building-installers-and-onboarding/references/onboarding-cli-patterns.md`: User journey state machine, `print_next_steps` CLI helper, `<tool> guide` workflow subcommand pattern, and post-build remediation checklist.
+- `skills/eng/SKILL.md`: Added `/eng onboard` shortcut routing to `building-installers-and-onboarding`.
+
+### Changed
+- `skills/writing-user-guides/SKILL.md`: Expanded Getting Started requirements to cover multi-scope installation (`--local`, `--global`, `--prefix`), `<tool> init`, and the immediate `init → verify → first run` sequence.
+- `skills/building-small-cli-tools/SKILL.md`: Linked multi-step CLI onboarding and installers to `building-installers-and-onboarding`.
+- `skills/using-swe-skills/SKILL.md`, `README.md`, `docs/usermanual/`, `docs/EVIDENCE.md`, `docs/TESTING.md`: Registered `building-installers-and-onboarding` (52 skills total).
+
 ## [0.7.1] - 2026-09-30
 
 ### Added

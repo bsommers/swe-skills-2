@@ -40,6 +40,7 @@ Skills were distilled from the standards, specs, audits, changelogs, fix-commit 
 | `grounding-ai-outputs` | `oscal-xdr` (no LLM in audit path); `product-owner` grounding; `synth` blinded export and canaries |
 | `scaffolding-new-projects` | `clif2OntoLogic` bootstrap (upstream repos cloned into ignored `input/`, plan saved in-repo); recurring empty-dir and unrun-quickstart issues |
 | `building-small-cli-tools` | `greener-noise` (CLI+GUI parity, validation), `floppy-music` (DSL, `--list`), `OntoLogic` (clean exit codes) |
+| `building-installers-and-onboarding` | `climah` (`climah init` post-init workflow gap where users lacked in-tool next-step breadcrumbs and bootstrap guidance); `swe-skills` multi-scope `scripts/install.sh` (user home, global, custom project/prefix targets) |
 | `building-code-generators` | `OntoLogic` fixes (topological class sort, OWL well-formedness, Cypher escaping, MERGE parent, per-class Java files); prototypical template isolation standard (isolated template files, zero script-embedded heredocs) |
 | `parsing-untrusted-text-robustly` | `gemini-chat-exporter` (selector cascade, nested-list duplication, table pipes); anchor-parser fence immunity; Mermaid label fix; `uitoolbox` date bugs |
 | `hardening-trust-boundaries` | `OntoLogic` shell-injection and Cypher-escape fixes; `ai-model-learning` Dockerfile allowlist and "speed bump, not a sandbox"; `synth` sanitizer secondary-injection fixes; extension SECURITY doc |

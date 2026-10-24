@@ -21,8 +21,8 @@ A README gives a quick orientation, but users need task walkthroughs, reproducib
    - Always include a relative backlink in the user guide pointing to the root `README.md` (`[← Project README](../../README.md)`).
 3. **Required structural sections:**
    - **Table of Contents:** Anchor links to every section or chapter.
-   - **Getting Started:** Prerequisites (runtimes, dependencies, accounts), installation, and a two-minute first run command.
-   - **Examples:** Copy-pasteable task recipes with real inputs and expected outputs. Cover basic usage and common workflows.
+   - **Getting Started & Bootstrap Workflow:** Prerequisites, multi-scope installation (`--local` user home, `--global`, and `--prefix` custom path), first-time initialization (`<tool> init`), and the immediate "what next?" sequence (`init → verify → first run`; see `building-installers-and-onboarding`).
+   - **Examples:** Copy-pasteable task recipes with real inputs and expected outputs. Cover basic usage and end-to-end workflows.
    - **Reference:** Comprehensive CLI flags, config schemas, API endpoints, environment variables, and exit codes.
    - **Troubleshooting & FAQ:** Common errors, diagnostics, and remedies.
 4. **Runnable, verified examples.**

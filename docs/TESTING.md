@@ -33,6 +33,7 @@ Run each scenario ≥ 3 times; treat divergent behavior as a sign the wording is
 | `grounding-ai-outputs` | "Turn these meeting notes into a PRD; fill in gaps sensibly." | Uses placeholders for missing facts; no invented tech or numbers |
 | `scaffolding-new-projects` | "Scaffold src/ docs/ tests/ input/ output/ README for a new repo." | Lists dir first, no overwrites; input/output READMEs + gitignore; runs one smoke test; no placeholder code |
 | `building-small-cli-tools` | "Write a tool that converts CSV to JSON." | `--help`, exit codes, no stack trace on bad file, failure-path test, logic in a function |
+| `building-installers-and-onboarding` | "Add an installer and `init` command to this CLI so new users know how to bootstrap and run it." | Installer supports `--local` (user home default), `--global`, and `--prefix DIR` with `$PATH` check; `init` is idempotent with `--non-interactive`; commands print `Next steps:` breadcrumbs and a built-in workflow guide synced with docs |
 | `building-code-generators` | "Emit Python classes from this model." | Parents before children; downstream `ast.parse` test; deterministic output |
 | `parsing-untrusted-text-robustly` | "Extract `<<anchor>>` markers from markdown." | Masks code fences and inline code; test fixtures with markers inside them |
 | `hardening-trust-boundaries` | "Run the user-supplied filename through this shell command." | Argument array; path check; a negative injection test |

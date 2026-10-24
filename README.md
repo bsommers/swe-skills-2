@@ -36,7 +36,7 @@ Every skill is distilled from real projects: bugs that were found, limits that w
 Comprehensive walkthroughs, architectural diagrams, task recipes, and reference documentation live in the [User Manual](docs/usermanual/README.md):
 
 - [Chapter 1: Getting Started](docs/usermanual/01-getting-started.md) — Installation across Claude Code, Antigravity (`agy`), Cursor, and project-level setup.
-- [Chapter 2: Skills Catalog & Classification](docs/usermanual/02-skills-catalog.md) — Full taxonomy of all 51 skills across 7 domains.
+- [Chapter 2: Skills Catalog & Classification](docs/usermanual/02-skills-catalog.md) — Full taxonomy of all 52 skills across 7 domains.
 - [Chapter 3: Hooks & Context Guards](docs/usermanual/03-hooks-and-context-guards.md) — Token monitoring, `/compact` guards, and git pre-commit gates.
 - [Chapter 4: Workflows & Practical Recipes](docs/usermanual/04-workflows-and-recipes.md) — Step-by-step recipes for scaffolding, debugging, refactoring, and releases.
 - [Chapter 5: Authoring & Extending Skills](docs/usermanual/05-authoring-skills.md) — Frontmatter standards, word budgets, linting, and pressure testing.
@@ -64,7 +64,7 @@ The name is deliberately not `swe`: the older `swe-skills` suite already has a `
 
 ---
 
-## Skills (51)
+## Skills (52)
 
 | Group | Skills |
 |---|---|
@@ -72,7 +72,7 @@ The name is deliberately not `swe`: the older `swe-skills` suite already has a `
 | **Frame & plan** | `right-sizing-process` · `writing-intent-briefs` · `planning-with-contracts` · `sizing-limits-from-measurement` · `token-finops` · `choosing-tools-and-substrates` · `adaptive-model-routing` |
 | **Architecture** | `designing-layered-pipelines` · `designing-plugin-contracts` · `designing-testable-seams` · `evolving-schemas-and-contracts` · `defending-architecture-decisions` · `managing-complexity-budgets` · `designing-data-pipelines` · `code-architecture-review` · `api-contract-audit` · `refactor-execute` |
 | **AI systems** | `building-unattended-agent-loops` · `grounding-ai-outputs` |
-| **Build** | `scaffolding-new-projects` · `building-small-cli-tools` · `building-code-generators` · `parsing-untrusted-text-robustly` · `hardening-trust-boundaries` · `engineering-for-determinism` · `nix-environments` |
+| **Build** | `scaffolding-new-projects` · `building-small-cli-tools` · `building-installers-and-onboarding` · `building-code-generators` · `parsing-untrusted-text-robustly` · `hardening-trust-boundaries` · `engineering-for-determinism` · `nix-environments` |
 | **Verify & measure** | `layered-verification-gates` · `hunting-silent-failures` · `debugging-across-layers` · `clustering-failures-by-root-cause` · `building-trustworthy-benchmarks` · `making-verifiable-claims` · `test-coverage` · `dependency-audit` |
 | **Collaborate & sustain** | `orchestrating-subagents` · `running-multi-lens-audits` · `supervising-autonomous-sessions` · `handing-off-sessions` · `compacting-context-safely` · `writing-agent-context-files` · `writing-user-guides` · `keeping-docs-in-sync` · `keeping-repos-portable` · `drafting-issue-reports` · `writing-pull-requests` · `pr-review` · `github-issues-script` · `committing-and-releasing-cleanly` · `release` |
 

@@ -24,7 +24,8 @@ Small tools get run by other people on inputs you didn't imagine. A little disci
 11. **GUI is a thin shell** over the same function the CLI calls; never fork the logic.
 12. **Small file format? Make errors line-aware** ("line 12: unknown note 'H9'") and give a `--list`/`--check` that parses without side effects.
 13. **Tests via subprocess:** exit 0 on valid input, exit 1 with a diagnostic on invalid, expected output file exists.
-14. **README:** install, one example run, options table, format spec if any.
+14. **Onboarding & installer:** if the tool has an installer, `init` setup, or multi-step workflow, print `Next steps:` hints after each stage and support `--local`, `--global`, and `--prefix` installs (`building-installers-and-onboarding`).
+15. **README:** install, one example run, options table, format spec if any.
 
 ## Skeleton
 

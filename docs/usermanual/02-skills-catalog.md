@@ -2,7 +2,7 @@
 
 [← Back to User Manual](README.md) · [← Previous: Getting Started](01-getting-started.md) · [Next: Hooks & Context Guards →](03-hooks-and-context-guards.md)
 
-This chapter provides a structured breakdown of the **51 skills** in `swe-skills`, organized into seven functional domains.
+This chapter provides a structured breakdown of the **52 skills** in `swe-skills`, organized into seven functional domains.
 
 ---
 
@@ -71,6 +71,7 @@ Every skill adheres to strict authoring principles:
 |---|---|---|
 | [`scaffolding-new-projects`](../../skills/scaffolding-new-projects/SKILL.md) | Starting a new repository or project directory, when asked to "scaffold", "bootstrap", or "set up" a repo layout (src/, docs/, tests/, input/, output/, README), or when a new project is about to receive its first code with no structure yet. | Standardized repo anatomy (`src/`, `docs/`, `tests/`, `scripts/`). |
 | [`building-small-cli-tools`](../../skills/building-small-cli-tools/SKILL.md) | Writing a command-line tool, script, or small utility (converters, generators, exporters, helpers), or adding a GUI or file format on top of one, for reliable behavior and easy sharing. | UNIX-philosophy CLI with clean exit codes and pipeable stdout/stderr. |
+| [`building-installers-and-onboarding`](../../skills/building-installers-and-onboarding/SKILL.md) | Planning, building, or remediating user setup and initialization commands (init, setup, doctor), multi-target installers (user home, global, or custom prefix), or in-tool workflow guidance and next-step hints that show users how to bootstrap and run a project. | Multi-scope installer (`--local`, `--global`, `--prefix`), idempotent `init`/`doctor`, and progressive `Next steps:` CLI breadcrumbs synced with user guides. |
 | [`building-code-generators`](../../skills/building-code-generators/SKILL.md) | Writing emitters, transpilers, scaffolders, or any tool that outputs code, config, schemas, diagrams or queries from a model, especially when generated output must compile, parse, or load in a downstream system. | AST-validated, deterministic emitter architectures. |
 | [`parsing-untrusted-text-robustly`](../../skills/parsing-untrusted-text-robustly/SKILL.md) | Parsing or scraping text, HTML/DOM, markdown, logs, or markup you do not control; when a scraper breaks after a site update; when a parser matches things inside code blocks; or when type-guessing gives wrong results. | Robust, defensive grammar parsing with fallback boundaries. |
 | [`hardening-trust-boundaries`](../../skills/hardening-trust-boundaries/SKILL.md) | Code passes data into a shell, SQL/Cypher/query language, filesystem path, template, container build, extension permission, or secret store; when running model-written or third-party code; or before shipping anything that handles untrusted input. | Injection-proof parameterization and strict input sanitization. |

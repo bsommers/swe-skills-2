@@ -42,6 +42,7 @@ Only the first word is matched, and only exactly. "review the auth module" runs 
 | `finops` | `token-finops` |
 | `model` | `adaptive-model-routing` |
 | `nix` | `nix-environments` |
+| `onboard` | `building-installers-and-onboarding` |
 
 ## Rules
 
