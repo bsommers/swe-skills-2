@@ -97,6 +97,34 @@ class GuardCase(unittest.TestCase):
         r = self.run_guard("nudge", {"session_id": "s", "transcript_path": str(t), "cwd": str(self.dir)})
         self.assertEqual(r.stdout.strip(), "")
 
+    def test_nudge_fires_on_idle_cold_cache_resume(self):
+        t = self.context(50000)  # 25% of 200k (below 70% pct threshold, above 30k token threshold)
+        old = time.time() - 45 * 60  # 45 minutes ago
+        os.utime(t, (old, old))
+        payload = {"session_id": "s_idle", "transcript_path": str(t), "cwd": str(self.dir)}
+        r1 = self.run_guard("nudge", payload)
+        self.assertEqual(r1.returncode, 0)
+        ctx = json.loads(r1.stdout)["hookSpecificOutput"]["additionalContext"]
+        self.assertIn("Session resumed after 45 min idle", ctx)
+        self.assertIn("12.5x", ctx)
+        # Throttled on same turn timestamp
+        r2 = self.run_guard("nudge", payload)
+        self.assertEqual(r2.stdout.strip(), "")
+
+    def test_preinvocation_fires_on_idle_resume(self):
+        t = self.dir / "agy_idle.jsonl"
+        t.write_text("x" * 120000, encoding="utf-8")
+        old = time.time() - 45 * 60
+        os.utime(t, (old, old))
+        payload = {"conversationId": "c_idle", "initialNumSteps": 20, "transcriptPath": str(t), "cwd": str(self.dir)}
+        r1 = self.run_guard("preinvocation", payload)
+        self.assertEqual(r1.returncode, 0)
+        msg = json.loads(r1.stdout)["injectSteps"][0]["ephemeralMessage"]
+        self.assertIn("45 min idle", msg)
+        # Throttled on same mtime
+        r2 = self.run_guard("preinvocation", payload)
+        self.assertEqual(json.loads(r2.stdout), {})
+
     # -------------------------------------------------------- preinvocation
 
     def test_preinvocation_silent_below_threshold(self):

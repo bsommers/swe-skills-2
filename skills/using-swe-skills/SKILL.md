@@ -74,6 +74,7 @@ Unsure? `right-sizing-process`.
 ## Rules
 
 - Announce the skills you loaded, and why, in one line.
+- If a target skill is not registered as a slash command in `~/.claude/skills/`, read its `SKILL.md` directly from the `swe-skills` repository (`skills/<skill-name>/SKILL.md`).
 - If a step costs more than the risk it removes at this scale, say so and skip it.
 - Default to **git and GitHub** (`gh` CLI) for version control, issues, and PRs, unless the project uses something else.
 - User instructions and project context files override this library.

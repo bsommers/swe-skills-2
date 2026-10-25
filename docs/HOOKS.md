@@ -6,8 +6,8 @@ Nothing here is active until you install it.
 
 | Hook | Event | Behavior |
 |---|---|---|
-| `nudge` | `UserPromptSubmit` | Reads token usage from the transcript. Past a threshold (default 70%), injects a reminder to load the skill, checkpoint **while there is still room**, and provide the user with a tailored `/compact` command. Re-fires every +10%. |
-| `preinvocation` | `PreInvocation` (agy) | Runs before model generation in Antigravity. When session steps (default 50) or transcript size exceeds limits, injects an ephemeral checkpoint and fresh session reminder. Also provides adaptive model routing hints for high-complexity prompts. |
+| `nudge` | `UserPromptSubmit` | Reads token usage and last-turn timestamp from the transcript. Past a window threshold (default 70%) **or** when resuming after an idle gap (default 30 min with ≥30k tokens, where the 5-min prompt cache has expired), injects a reminder to load the skill, checkpoint, and `/compact` or `/clear`. |
+| `preinvocation` | `PreInvocation` (agy) | Runs before model generation in Antigravity. When session steps (default 50), transcript size, or idle gap (default 30 min) exceeds limits, injects an ephemeral checkpoint and fresh session reminder. Also provides adaptive model routing hints for high-complexity prompts. |
 | `pretooluse` | `PreToolUse` (agy) | Intercepts `invoke_subagent` calls. Evaluates prompt and role complexity, automatically overwriting `Model` (`pro`, `flash`, `flash_lite`) to conserve tokens. |
 | `precompact` | `PreCompact` | On a **manual** `/compact` with no checkpoint touched in the last 20 min, exits 2 to block and says what to do. On **auto**-compaction it never blocks: the window is already full and the agent gets no turn to checkpoint, so blocking would stall the session. |
 | `sessionstart` | `SessionStart` (`compact`, `clear`, `resume`) | Injects the newest checkpoint plus the skill's verify-continuity instructions. With no checkpoint after a reset, it says so, and tells the agent to ask rather than reconstruct. |
@@ -56,6 +56,8 @@ Environment variables, all optional:
 | `SWE_SKILLS_CONTEXT_LIMIT` | `200000` | Context window size in tokens |
 | `SWE_SKILLS_CONTEXT_PCT` | `70` | First nudge at this percent used |
 | `SWE_SKILLS_CONTEXT_PCT_STEP` | `10` | Re-nudge every N more percent |
+| `SWE_SKILLS_IDLE_MINUTES` | `30` | Idle minutes before cold-cache resume nudge (`0` disables) |
+| `SWE_SKILLS_IDLE_MIN_TOKENS` | `30000` | Minimum context tokens required to trigger idle resume nudge |
 | `SWE_SKILLS_AGY_STEP_LIMIT` | `50` | Step count before agy nudge |
 | `SWE_SKILLS_AGY_STEP_STEP` | `15` | Re-nudge agy every N more steps |
 | `SWE_SKILLS_AGY_BYTES_LIMIT` | `500000` | Transcript bytes before agy nudge |

@@ -29,23 +29,23 @@ GIT_HOOK = ROOT / ".git" / "hooks" / "pre-commit"
 
 def resolve_runner(use_uv=None):
     if use_uv is True:
-        return "uv run"
+        return "uv run --no-project"
     if use_uv is False:
         return sys.executable
     if shutil.which("uv"):
-        return "uv run"
+        return "uv run --no-project"
     return sys.executable
 
 
-def entry(cmd, runner="uv run"):
+def entry(cmd, runner="uv run --no-project"):
     return {"type": "command", "command": f"{runner} {GUARD} {cmd}"}
 
 
-def router_entry(cmd, runner="uv run"):
+def router_entry(cmd, runner="uv run --no-project"):
     return {"type": "command", "command": f"{runner} {ROUTER} {cmd}"}
 
 
-def claude_hooks(runner="uv run"):
+def claude_hooks(runner="uv run --no-project"):
     return {
         "UserPromptSubmit": [{"hooks": [entry("nudge", runner)]}],
         "PreCompact": [{"matcher": "manual", "hooks": [entry("precompact", runner)]},
@@ -57,7 +57,7 @@ def claude_hooks(runner="uv run"):
     }
 
 
-def agy_hooks(runner="uv run"):
+def agy_hooks(runner="uv run --no-project"):
     # agy takes Claude-style plugin hooks; its matcher is a regex alternation.
     return {
         "hooks": {
@@ -95,7 +95,7 @@ def strip_ours(groups):
     return kept
 
 
-def install_claude(path, uninstall, dry, runner="uv run"):
+def install_claude(path, uninstall, dry, runner="uv run --no-project"):
     settings = {}
     if path.exists():
         try:
@@ -126,7 +126,7 @@ def install_claude(path, uninstall, dry, runner="uv run"):
     return 0
 
 
-def install_agy(uninstall, dry, runner="uv run"):
+def install_agy(uninstall, dry, runner="uv run --no-project"):
     gitignore = ROOT / ".gitignore"
     line = "/hooks.json\n"
     if uninstall:
@@ -148,7 +148,7 @@ def install_agy(uninstall, dry, runner="uv run"):
     return 0
 
 
-def install_git(uninstall, dry, runner="uv run"):
+def install_git(uninstall, dry, runner="uv run --no-project"):
     hook_script = f"#!/usr/bin/env bash\nexec {runner} {GIT_GUARD}\n"
     if uninstall:
         if dry:

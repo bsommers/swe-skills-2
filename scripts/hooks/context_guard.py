@@ -18,6 +18,8 @@ Configuration (all optional, env vars):
   SWE_SKILLS_CONTEXT_LIMIT            context window in tokens (default 200000)
   SWE_SKILLS_CONTEXT_PCT              first nudge at this %% used (default 70)
   SWE_SKILLS_CONTEXT_PCT_STEP         re-nudge every N more %% (default 10)
+  SWE_SKILLS_IDLE_MINUTES             idle gap before cold-cache resume nudge (default 30)
+  SWE_SKILLS_IDLE_MIN_TOKENS          min context tokens for idle resume nudge (default 30000)
   SWE_SKILLS_AGY_STEP_LIMIT           step count before agy nudge (default 50)
   SWE_SKILLS_AGY_STEP_STEP            re-nudge agy every N more steps (default 15)
   SWE_SKILLS_AGY_BYTES_LIMIT          transcript bytes before agy nudge (default 500000)
@@ -30,6 +32,7 @@ Configuration (all optional, env vars):
 
 A hook that fails must never break the session: unexpected errors exit 0 silently.
 """
+import datetime
 import glob
 import json
 import os
@@ -62,14 +65,31 @@ def env_flag(name, default=True):
 
 # ---------------------------------------------------------------- transcript
 
-def context_used(transcript_path):
-    """Tokens held by the last main-thread assistant turn, or None if unknown."""
-    if not transcript_path:
+def parse_iso_timestamp(ts):
+    """Parse ISO-8601 timestamp string to epoch seconds, or None."""
+    if not ts or not isinstance(ts, str):
         return None
     try:
-        lines = Path(transcript_path).read_text(encoding="utf-8", errors="replace").splitlines()
-    except OSError:
+        s = ts.strip()
+        if s.endswith("Z"):
+            s = s[:-1] + "+00:00"
+        dt = datetime.datetime.fromisoformat(s)
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=datetime.timezone.utc)
+        return dt.timestamp()
+    except ValueError:
         return None
+
+
+def last_turn_stats(transcript_path):
+    """Return (used_tokens, epoch_timestamp) from the last main-thread assistant turn."""
+    if not transcript_path:
+        return None, None
+    p = Path(transcript_path)
+    try:
+        lines = p.read_text(encoding="utf-8", errors="replace").splitlines()
+    except OSError:
+        return None, None
     for line in reversed(lines):
         line = line.strip()
         if not line:
@@ -86,8 +106,20 @@ def context_used(transcript_path):
             for k in ("input_tokens", "cache_creation_input_tokens", "cache_read_input_tokens", "output_tokens")
         )
         if total > 0:
-            return total
-    return None
+            ts = parse_iso_timestamp(rec.get("timestamp"))
+            if ts is None:
+                try:
+                    ts = p.stat().st_mtime
+                except OSError:
+                    ts = None
+            return total, ts
+    return None, None
+
+
+def context_used(transcript_path):
+    """Tokens held by the last main-thread assistant turn, or None if unknown."""
+    used, _ = last_turn_stats(transcript_path)
+    return used
 
 
 def pct_used(payload):
@@ -96,6 +128,14 @@ def pct_used(payload):
         return None, None
     limit = max(env_int("SWE_SKILLS_CONTEXT_LIMIT", 200000), 1)
     return used, used * 100.0 / limit
+
+
+def idle_minutes(transcript_path):
+    """Minutes since the last main-thread assistant turn, or None if unknown."""
+    _, ts = last_turn_stats(transcript_path)
+    if ts is None:
+        return None
+    return max(0.0, (time.time() - ts) / 60.0)
 
 
 # --------------------------------------------------------------- checkpoints
@@ -173,26 +213,61 @@ def emit(event, context):
 # ---------------------------------------------------------------- handlers
 
 def cmd_nudge(payload):
-    used, pct = pct_used(payload)
-    if pct is None:
+    tpath = payload.get("transcript_path")
+    used, ts = last_turn_stats(tpath)
+    if used is None:
         return 0
+    limit = max(env_int("SWE_SKILLS_CONTEXT_LIMIT", 200000), 1)
+    pct = used * 100.0 / limit
+
     first = env_int("SWE_SKILLS_CONTEXT_PCT", 70)
     step = max(env_int("SWE_SKILLS_CONTEXT_PCT_STEP", 10), 1)
-    if pct < first:
+    idle_thresh = env_int("SWE_SKILLS_IDLE_MINUTES", 30)
+    idle_min_tok = env_int("SWE_SKILLS_IDLE_MIN_TOKENS", 30000)
+
+    idle_min = max(0.0, (time.time() - ts) / 60.0) if ts is not None else 0.0
+    pct_triggered = pct >= first
+    idle_triggered = (idle_thresh > 0) and (idle_min >= idle_thresh) and (used >= idle_min_tok)
+
+    if not (pct_triggered or idle_triggered):
         return 0
+
     session = payload.get("session_id")
     state = read_state(session)
-    last = state.get("last_nudge_pct")
-    if last is not None and pct < last + step:
-        return 0
-    state["last_nudge_pct"] = int(pct // step * step)
+
+    if pct_triggered:
+        last = state.get("last_nudge_pct")
+        if last is not None and pct < last + step and not idle_triggered:
+            return 0
+        state["last_nudge_pct"] = int(pct // step * step)
+
+    if idle_triggered:
+        last_idle_ts = state.get("last_idle_turn_ts")
+        if last_idle_ts is not None and ts is not None and abs(ts - last_idle_ts) < 1.0 and not pct_triggered:
+            return 0
+        state["last_idle_turn_ts"] = ts
+
     write_state(session, state)
 
     cp = newest_checkpoint(payload.get("cwd"), env_int("SWE_SKILLS_CHECKPOINT_FRESH_MINUTES", 20) * 60)
     have = f"A recent checkpoint exists at {cp}; update it rather than starting a new one." if cp else \
         "No recent checkpoint was found."
+
+    if idle_triggered and not pct_triggered:
+        emit("UserPromptSubmit", (
+            f"[context guard] Session resumed after {idle_min:.0f} min idle with {used} tokens ({pct:.0f}% of window). "
+            f"The 5-minute prompt cache has expired, so continuing in this long session rebuilds the full cache at 12.5x cached token cost. "
+            f"Answer the user's immediate request concisely, then load `{SKILL}`: write or refresh a checkpoint ({have}) "
+            f"and recommend `/compact` or `/clear` (or `/exit` before stepping away next time)."
+        ))
+        return 0
+
+    idle_note = (
+        f"Also note: this session was idle for {idle_min:.0f} min (prompt cache expired; cold-cache rebuild penalty applies). "
+        if idle_triggered else ""
+    )
     emit("UserPromptSubmit", (
-        f"[context guard] About {pct:.0f}% of the context window is used ({used} tokens). "
+        f"[context guard] About {pct:.0f}% of the context window is used ({used} tokens). {idle_note}"
         f"Load the `{SKILL}` skill and follow its pre-flight before the window fills: reach a stable "
         f"point, then write or refresh a checkpoint (user decisions verbatim, dead ends, working-tree and "
         f"background-process state, authorizations, exact next command). {have} "
@@ -261,30 +336,49 @@ def cmd_preinvocation(payload):
 
     step_limit = env_int("SWE_SKILLS_AGY_STEP_LIMIT", 50)
     step_step = max(env_int("SWE_SKILLS_AGY_STEP_STEP", 15), 1)
+    idle_thresh = env_int("SWE_SKILLS_IDLE_MINUTES", 30)
 
     step_triggered = steps >= step_limit
 
     bytes_limit = env_int("SWE_SKILLS_AGY_BYTES_LIMIT", 500000)
     size_triggered = False
-    if transcript_path and not step_triggered:
+    idle_triggered = False
+    idle_min = 0.0
+    t_mtime = None
+    if transcript_path:
         try:
-            size_triggered = Path(transcript_path).stat().st_size >= bytes_limit
+            st = Path(transcript_path).stat()
+            t_mtime = st.st_mtime
+            if not step_triggered:
+                size_triggered = st.st_size >= bytes_limit
+            idle_min = max(0.0, (time.time() - st.st_mtime) / 60.0)
+            if idle_thresh > 0 and idle_min >= idle_thresh and (steps >= 15 or st.st_size >= 100000):
+                idle_triggered = True
         except OSError:
             pass
 
-    if not (step_triggered or size_triggered):
+    if not (step_triggered or size_triggered or idle_triggered):
         json.dump({}, sys.stdout)
         sys.stdout.write("\n")
         return 0
 
     state = read_state(session_id)
-    last_step = state.get("last_agy_nudge_step")
-    if last_step is not None and steps > 0 and steps < last_step + step_step:
-        json.dump({}, sys.stdout)
-        sys.stdout.write("\n")
-        return 0
+    if step_triggered or size_triggered:
+        last_step = state.get("last_agy_nudge_step")
+        if last_step is not None and steps > 0 and steps < last_step + step_step and not idle_triggered:
+            json.dump({}, sys.stdout)
+            sys.stdout.write("\n")
+            return 0
+        state["last_agy_nudge_step"] = steps if steps > 0 else (last_step or 0) + step_step
 
-    state["last_agy_nudge_step"] = steps if steps > 0 else (last_step or 0) + step_step
+    if idle_triggered:
+        last_idle_mtime = state.get("last_agy_idle_mtime")
+        if last_idle_mtime is not None and t_mtime is not None and abs(t_mtime - last_idle_mtime) < 1.0 and not (step_triggered or size_triggered):
+            json.dump({}, sys.stdout)
+            sys.stdout.write("\n")
+            return 0
+        state["last_agy_idle_mtime"] = t_mtime
+
     write_state(session_id, state)
 
     cwd = payload.get("cwd")
@@ -296,9 +390,14 @@ def cmd_preinvocation(payload):
     have = f"A recent checkpoint exists at {cp}; update it rather than starting a new one." if cp else \
         "No recent checkpoint was found."
 
-    reason = f"Session step count is high ({steps} steps)" if step_triggered else "Conversation history is substantial"
+    if idle_triggered and not (step_triggered or size_triggered):
+        reason = f"Session resumed after {idle_min:.0f} min idle (cold prompt cache)"
+    elif step_triggered:
+        reason = f"Session step count is high ({steps} steps)"
+    else:
+        reason = "Conversation history is substantial"
     msg = (
-        f"[context guard] {reason}. To maintain fast responses and prevent reasoning degradation, "
+        f"[context guard] {reason}. To maintain fast responses and prevent cold-cache token burn or reasoning degradation, "
         f"load the `{SKILL}` skill: reach a stable point, write or refresh a checkpoint "
         f"(user decisions verbatim, dead ends, working-tree and background-process state, authorizations, exact next command). "
         f"{have} Once checkpointed, advise the user to start a fresh session (/exit, Ctrl+D, or New Chat) to resume from the checkpoint."
@@ -310,12 +409,15 @@ def cmd_preinvocation(payload):
 
 
 def cmd_report(payload):
+    tpath = payload.get("transcript_path")
     used, pct = pct_used(payload)
+    idle_min = idle_minutes(tpath)
     cwd = payload.get("cwd") or os.getcwd()
     if pct is None:
         print("context: unknown (no usage found in transcript)")
     else:
-        print(f"context: {used} tokens, {pct:.0f}% of {env_int('SWE_SKILLS_CONTEXT_LIMIT', 200000)}")
+        idle_str = f", idle {idle_min:.0f}m" if idle_min is not None else ""
+        print(f"context: {used} tokens, {pct:.0f}% of {env_int('SWE_SKILLS_CONTEXT_LIMIT', 200000)}{idle_str}")
     cp = newest_checkpoint(cwd)
     print(f"checkpoint: {cp}" if cp else "checkpoint: none found")
     return 0

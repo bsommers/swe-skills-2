@@ -20,8 +20,16 @@ Compaction and clearing are lossy: unwritten conversation state is lost. **Write
 | Bloat from big outputs, searches | **Trim upstream** first (primary defense in `agy`) |
 | Same goal, history spent (Claude) | **Compact** with focus instructions |
 | Same goal, history spent (`agy`) | **Checkpoint and start fresh session** |
+| Pausing work >15–30 min (cold prompt cache) | **Checkpoint, then `/compact` or `/exit`** (prevents 12.5x cold-cache rebuild penalty on resume) |
 | Unrelated next task, or polluted context | **Clear** (Claude) or fresh session (`agy`) after checkpointing |
 | Mid-edit, tests red, change unverified | **Not yet:** reach a stable point, or record unstable state |
+
+## Pausing work & prompt cache TTL (5-minute cliff)
+
+Anthropic's prompt cache has a **5-minute TTL**. While turns stay `<5 min` apart, cached context reads cost `0.1x` base input rate. Once a session sits idle `>5 min`, the cache expires: the very next message rebuilds the full context cache at `1.25x` base input rate (**12.5x jump**).
+
+- **Short pause (<5 min):** Leave the session open; cache remains warm.
+- **Long break (>15–30 min) or overnight:** Write a checkpoint (`handing-off-sessions`), stop background watchers/subagents, and run `/compact` or `/exit`. Never leave multi-day sessions idling with 100k+ tokens of history or active background tasks that can wake up and rebuild a cold cache.
 
 ## Trim upstream (cheapest)
 

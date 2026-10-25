@@ -5,18 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.8.0] - 2026-10-25
 
 ### Added
 - `skills/building-installers-and-onboarding/`: Build-time and post-build remediation skill covering multi-target installers (`--local` user home default, `--global`, and `--prefix` custom path), idempotent `<tool> init` and `doctor` setup commands, progressive in-tool `Next steps:` CLI breadcrumbs, and synchronized user guide workflows.
 - `skills/building-installers-and-onboarding/references/installer-template.sh`: Reusable POSIX/Bash installer template supporting `--local`, `--global`, `--prefix`, `--dry-run`, `--force`, `--uninstall`, and `$PATH` verification.
 - `skills/building-installers-and-onboarding/references/onboarding-cli-patterns.md`: User journey state machine, `print_next_steps` CLI helper, `<tool> guide` workflow subcommand pattern, and post-build remediation checklist.
 - `skills/eng/SKILL.md`: Added `/eng onboard` shortcut routing to `building-installers-and-onboarding`.
+- `scripts/hooks/context_guard.py`: Added cold-cache idle resume detection (`SWE_SKILLS_IDLE_MINUTES`, `SWE_SKILLS_IDLE_MIN_TOKENS`) for `nudge` (`UserPromptSubmit`) and `preinvocation` (`PreInvocation`) to warn when the 5-minute prompt cache has expired (`12.5x` cold-cache rebuild penalty) and advise checkpointing + `/compact` or `/clear`.
+- `docs/banner.txt` & `scripts/banner.sh`: Added terminal ASCII banner asset, helper script, and vector SVG banner in `README.md`.
 
 ### Changed
+- `skills/compacting-context-safely/SKILL.md` & `skills/handing-off-sessions/SKILL.md`: Added pause/resume workflow rules around Anthropic's 5-minute prompt cache TTL cliff and stopping background jobs before breaks.
 - `skills/writing-user-guides/SKILL.md`: Expanded Getting Started requirements to cover multi-scope installation (`--local`, `--global`, `--prefix`), `<tool> init`, and the immediate `init → verify → first run` sequence.
 - `skills/building-small-cli-tools/SKILL.md`: Linked multi-step CLI onboarding and installers to `building-installers-and-onboarding`.
-- `skills/using-swe-skills/SKILL.md`, `README.md`, `docs/usermanual/`, `docs/EVIDENCE.md`, `docs/TESTING.md`: Registered `building-installers-and-onboarding` (52 skills total).
+- `skills/using-swe-skills/SKILL.md`, `README.md`, `docs/usermanual/`, `docs/EVIDENCE.md`, `docs/TESTING.md`: Registered `building-installers-and-onboarding` (52 skills total) and documented direct `SKILL.md` loading when skills are pruned from `~/.claude/skills/`.
+- Synchronized all manifests to `0.8.0` (`plugin.json`, `.claude-plugin/`, `.cursor-plugin/`).
+
+### Fixed
+- `scripts/hooks/install-hooks.py`: Updated `uv` hook runner from `uv run` to `uv run --no-project` so hook execution succeeds inside target repositories whose `pyproject.toml` lacks a `[project]` table.
 
 ## [0.7.1] - 2026-09-30
 
