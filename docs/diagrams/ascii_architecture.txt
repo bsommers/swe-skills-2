@@ -1,0 +1,91 @@
+================================================================================
+                       SWE-SKILLS ARCHITECTURE SCHEMATIC
+================================================================================
+
++------------------------------------------------------------------------------+
+|                         AGENT RUNTIME HARNESS LAYER                          |
+|                                                                              |
+|  +--------------------+   +-----------------------+   +-------------------+  |
+|  |    Claude Code     |   |   Antigravity (agy)   |   |      Cursor       |  |
+|  | ~/.claude/skills/  |   |    plugin.json        |   | ~/.cursor/skills/ |  |
+|  | settings.json      |   |    hooks.json         |   | swe-skills.mdc    |  |
+|  +---------+----------+   +-----------+-----------+   +---------+---------+  |
+|            |                          |                         |            |
++------------|--------------------------|-------------------------|------------+
+             |                          |                         |
+             v                          v                         v
++------------------------------------------------------------------------------+
+|                       LIFECYCLE & CONTEXT-GUARD HOOKS                        |
+|                                                                              |
+|  [ UserPromptSubmit / PreInvocation ]        [ PreToolUse / Router ]         |
+|  - Step counter & transcript byte monitor    - Intercept invoke_subagent     |
+|  - Token consumption tracking (FinOps)       - Dynamic model routing:        |
+|  - Ephemeral checkpoint & resume hints         pro / flash / flash_lite      |
+|                                                                              |
+|  [ PreCompact Guard ]                        [ SessionStart Injector ]       |
+|  - Exit 2 block on uncheckpointed compact    - Injects newest checkpoint     |
+|  - Guard against lossy state eviction        - Verifies working-tree state   |
++------------------------------------------------------------------------------+
+                                        |
+                                        v
++------------------------------------------------------------------------------+
+|                     TASK DISCOVERY & ROUTING ENGINE                          |
+|                                                                              |
+|           /eng <task>  -->  skills/using-swe-skills/SKILL.md                 |
+|                                                                              |
+|   1. TASK SIZING:                                                            |
+|      - Tool:   <=1 day, 1 purpose   -> 3-line brief, stdlib, 2 tests         |
+|      - App:    days, multi-module   -> intent brief, verify commands, layers |
+|      - System: multi-service/repo   -> ADRs, contracts, audits, budgets      |
+|                                                                              |
+|   2. ACTIVE SKILL SET DISCIPLINE:                                            |
+|      - Bounded active set: Load max 1-3 skills concurrently                  |
+|      - Phase eviction: Drop planning skills when moving to execution         |
++------------------------------------------------------------------------------+
+                                        |
+       +--------------------------------+--------------------------------+
+       |                                |                                |
+       v                                v                                v
++---------------+              +-----------------+              +----------------+
+|  FRAME & PLAN |              |   CONSTRUCT &   |              |    VERIFY &    |
+|               |              |    REFRACTOR    |              |     RELEASE    |
+| - planning-   |              | - designing-    |              | - layered-     |
+|   with-       |              |   testable-     |              |   verification-|
+|   contracts   |              |   seams         |              |   gates        |
+| - writing-    |              | - building-     |              | - pr-review    |
+|   intent-     |              |   code-         |              | - committing-  |
+|   briefs      |              |   generators    |              |   and-         |
+| - token-finops|              | - refactor-     |              |   releasing-   |
+| - adaptive-   |              |   execute       |              |   cleanly      |
+|   model-      |              | - engineering-  |              | - release      |
+|   routing     |              |   for-          |              | - test-coverage|
+|               |              |   determinism   |              |                |
++---------------+              +-----------------+              +----------------+
+       |                                |                                |
+       +--------------------------------+--------------------------------+
+                                        |
+                                        v
++------------------------------------------------------------------------------+
+|                   SUBAGENT LOG ISOLATION PATTERN (FinOps)                    |
+|                                                                              |
+|   +----------------------------------------------------------------------+   |
+|   | PRIMARY ORCHESTRATOR SESSION (pro / Sonnet)                         |   |
+|   | - Holds architecture decisions, contracts, and uncommitted diffs    |   |
+|   | - Context stays pristine; ZERO routine compiler progress lines       |   |
+|   +-----------------------------------+----------------------------------+   |
+|                                       | invoke_subagent                      |
+|                                       | (Model: flash / flash_lite)          |
+|                                       v                                      |
+|   +----------------------------------------------------------------------+   |
+|   | EPHEMERAL WORKER SUBAGENT (flash / Haiku)                            |   |
+|   | - Executes: cargo test -q, pytest -q, npm test -s                    |   |
+|   | - Absorbs hundreds of 'Compiling crate...' & 'test ok' lines         |   |
+|   | - Loops on compile errors in throwaway scratch context               |   |
+|   +-----------------------------------+----------------------------------+   |
+|                                       | returns <=10 line summary:           |
+|                                       | status, verified diff, failures      |
+|                                       v                                      |
+|   +----------------------------------------------------------------------+   |
+|   | Primary session receives verified results without context bloat      |   |
+|   +----------------------------------------------------------------------+   |
++------------------------------------------------------------------------------+

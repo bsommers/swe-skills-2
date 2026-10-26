@@ -1,0 +1,22 @@
+stateDiagram-v2
+    [*] --> ActiveSession: SessionStart (inject checkpoint if present)
+
+    state ActiveSession {
+        [*] --> WarmCache: Turn frequency < 5 min (0.1x cache read)
+        WarmCache --> WarmCache: Execute turn (quiet output -q)
+        WarmCache --> ColdCacheWarning: Idle > 15-30 min (prompt cache expired)
+        ColdCacheWarning --> CheckpointRequired: Nudge triggered by hook
+    }
+
+    ActiveSession --> ContextWarning: Steps >= 50 OR Context >= 70%
+    
+    state ContextWarning {
+        [*] --> CheckpointCreation: Write docs/CHECKPOINT.md
+        CheckpointCreation --> Verification: Zero-context read check
+    }
+
+    ContextWarning --> CompactHarness: Claude Code (/compact)
+    ContextWarning --> ResetHarness: Antigravity agy (fresh session)
+
+    CompactHarness --> ActiveSession: SessionStart (in-place resume)
+    ResetHarness --> ActiveSession: SessionStart (load newest checkpoint)

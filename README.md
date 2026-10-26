@@ -31,17 +31,17 @@ Every skill is distilled from real projects: bugs that were found, limits that w
 
 ---
 
-## User Manual
+## Documentation
 
-Comprehensive walkthroughs, architectural diagrams, task recipes, and reference documentation live in the [User Manual](docs/usermanual/README.md):
+Full architectural specifications, operational runbooks, and multi-format visual diagrams:
 
-- [Chapter 1: Getting Started](docs/usermanual/01-getting-started.md) — Installation across Claude Code, Antigravity (`agy`), Cursor, and project-level setup.
-- [Chapter 2: Skills Catalog & Classification](docs/usermanual/02-skills-catalog.md) — Full taxonomy of all 52 skills across 7 domains.
-- [Chapter 3: Hooks & Context Guards](docs/usermanual/03-hooks-and-context-guards.md) — Token monitoring, `/compact` guards, and git pre-commit gates.
-- [Chapter 4: Workflows & Practical Recipes](docs/usermanual/04-workflows-and-recipes.md) — Step-by-step recipes for scaffolding, debugging, refactoring, and releases.
-- [Chapter 5: Authoring & Extending Skills](docs/usermanual/05-authoring-skills.md) — Frontmatter standards, word budgets, linting, and pressure testing.
-- [Chapter 6: CLI & Script Reference](docs/usermanual/06-reference-and-cli.md) — Comprehensive reference for all utilities, environment variables, and exit codes.
-- [Chapter 7: Troubleshooting & FAQ](docs/usermanual/07-troubleshooting-and-faq.md) — Diagnostic remedies and frequently asked questions.
+- **[Documentation Hub](docs/README.md)** — Complete directory index and reading guide.
+- **[Purpose & Threat Model](docs/purpose.md)** — Problem statement, security model, and FinOps principles.
+- **[System Architecture](docs/architecture.md)** — Internal subsystems, runtime harnesses, and lifecycle hooks.
+- **[Visual Diagrams Catalog](docs/diagrams/README.md)** — Visual models across ASCII, Mermaid (`.mmd`), and native draw.io (`.drawio`).
+- **[Running & Installation](docs/running.md)** — Multi-target installation, skill profiles (`--profile`), and CLI reference.
+- **[How-To Guides & Recipes](docs/how-to.md)** — Step-by-step recipes for planning, subagent log isolation, refactoring, and PR reviews.
+- **[User Manual](docs/usermanual/README.md)** — 7-chapter comprehensive guide.
 
 ---
 

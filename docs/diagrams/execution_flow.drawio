@@ -1,0 +1,85 @@
+<mxfile host="Electron" version="21.6.8" type="device">
+  <diagram id="swe-skills-flow" name="Execution Flow">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Swimlanes -->
+        <mxCell id="lane_user" value="User / Engineer" style="swimlane;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="160" height="720" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_harness" value="Runtime Harness &amp; Hooks" style="swimlane;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="40" width="220" height="720" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_primary" value="Primary Session (pro)" style="swimlane;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="420" y="40" width="200" height="720" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_worker" value="Worker Subagent (flash)" style="swimlane;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="620" y="40" width="180" height="720" as="geometry" />
+        </mxCell>
+
+        <!-- Step 1: User prompt -->
+        <mxCell id="n1" value="Prompt: /eng &lt;task&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;" vertex="1" parent="lane_user">
+          <mxGeometry x="15" y="40" width="130" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Step 2: Hook evaluation -->
+        <mxCell id="n2" value="PreInvocation Check&#xa;Inspects transcript tokens&#xa;&amp; step count" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=11;" vertex="1" parent="lane_harness">
+          <mxGeometry x="25" y="100" width="170" height="45" as="geometry" />
+        </mxCell>
+
+        <!-- Step 3: Router sizing -->
+        <mxCell id="n3" value="using-swe-skills&#xa;Sizes task: Tool/App/System&#xa;Loads 1–3 skills" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;" vertex="1" parent="lane_primary">
+          <mxGeometry x="20" y="160" width="160" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Step 4: Plan synthesis -->
+        <mxCell id="n4" value="Draft Plan / Contracts&#xa;(planning-with-contracts)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;" vertex="1" parent="lane_primary">
+          <mxGeometry x="20" y="230" width="160" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Step 5: Subagent dispatch -->
+        <mxCell id="n5" value="PreToolUse Intercept&#xa;Validates Model=flash&#xa;for worker subagent" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=11;" vertex="1" parent="lane_harness">
+          <mxGeometry x="25" y="290" width="170" height="45" as="geometry" />
+        </mxCell>
+
+        <!-- Step 6: Worker execution -->
+        <mxCell id="n6" value="Run Quiet Verification&#xa;cargo test -q / pytest -q&#xa;Absorbs all log churn" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d79b00;fontSize=11;" vertex="1" parent="lane_worker">
+          <mxGeometry x="15" y="350" width="150" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- Step 7: Worker error fix -->
+        <mxCell id="n7" value="Iterate on compiler error&#xa;in throwaway scratchpad" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d79b00;fontSize=11;" vertex="1" parent="lane_worker">
+          <mxGeometry x="15" y="425" width="150" height="45" as="geometry" />
+        </mxCell>
+
+        <!-- Step 8: Return summary -->
+        <mxCell id="n8" value="Return to Primary&#xa;&lt;=10 line summary&#xa;+ verified git diff" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d79b00;fontSize=11;" vertex="1" parent="lane_worker">
+          <mxGeometry x="15" y="490" width="150" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Step 9: Final Gate -->
+        <mxCell id="n9" value="Layered Gate Check&#xa;cargo test -q&#xa;Verify claim with evidence" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;" vertex="1" parent="lane_primary">
+          <mxGeometry x="20" y="560" width="160" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Step 10: Deliver result -->
+        <mxCell id="n10" value="Deliver Result&#xa;Concise evidence summary" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;" vertex="1" parent="lane_user">
+          <mxGeometry x="15" y="630" width="130" height="45" as="geometry" />
+        </mxCell>
+
+        <!-- Sequence Connectors -->
+        <mxCell id="c1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeWidth=1.5;" edge="1" parent="1" source="n1" target="n2" />
+        <mxCell id="c2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeWidth=1.5;" edge="1" parent="1" source="n2" target="n3" />
+        <mxCell id="c3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeWidth=1.5;" edge="1" parent="1" source="n3" target="n4" />
+        <mxCell id="c4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeWidth=1.5;" edge="1" parent="1" source="n4" target="n5" />
+        <mxCell id="c5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeWidth=1.5;" edge="1" parent="1" source="n5" target="n6" />
+        <mxCell id="c6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeWidth=1.5;" edge="1" parent="1" source="n6" target="n7" />
+        <mxCell id="c7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeWidth=1.5;" edge="1" parent="1" source="n7" target="n8" />
+        <mxCell id="c8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeWidth=1.5;" edge="1" parent="1" source="n8" target="n9" />
+        <mxCell id="c9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeWidth=1.5;" edge="1" parent="1" source="n9" target="n10" />
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

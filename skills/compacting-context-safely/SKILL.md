@@ -9,6 +9,7 @@ description: Use when an agent's context window is filling up, auto-compaction i
 
 Compaction and clearing are lossy: unwritten conversation state is lost. **Write it down, verify on disk, then shrink.**
 
+- **Context replay multiplier:** Every tool turn (run, retry, background check) retransmits cumulative session history as input tokens. High turn counts on deep context multiply spend.
 - **Claude Code:** Supports `/compact` (in-place) and `/clear`.
 - **Antigravity (`agy`):** Has **no `/compact`**. Shrinking context requires starting a fresh session from a checkpoint.
 
@@ -33,9 +34,10 @@ Anthropic's prompt cache has a **5-minute TTL**. While turns stay `<5 min` apart
 
 ## Trim upstream (cheapest)
 
-- Delegate wide searches and log reading to a subagent that returns conclusions (`orchestrating-subagents`).
+- Delegate wide searches, log reading, and iterative build/test loops to an ephemeral subagent (`orchestrating-subagents`).
+- Suppress routine progress lines with quiet flags (`cargo test -q`, `pytest -q`, `npm test -s`). Standard compiler progress (`Compiling <crate>`, `test ... ok`) pollutes history and replays on every future turn; quiet flags cut tool-output tokens by ~90% while surfacing errors.
 - Read line ranges; don't re-read files already in context.
-- Cap output (`| tail -50`, `-q`); send big logs to a file and grep it.
+- Cap output (`| tail -50`); send big logs to a file and grep it.
 
 ## Pre-flight (before compact, clear, or session reset)
 

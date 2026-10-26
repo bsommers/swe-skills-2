@@ -1,0 +1,29 @@
+sequenceDiagram
+    autonumber
+    actor User as Engineer / User
+    participant Harness as Runtime Harness (Claude / agy)
+    participant Hook as Context Guard & Model Router
+    participant Router as using-swe-skills
+    participant Primary as Primary Session (pro/Sonnet)
+    participant Worker as Worker Subagent (flash/Haiku)
+
+    User->>Harness: /eng implement retry logic across API
+    Harness->>Hook: PreInvocation / UserPromptSubmit check
+    Hook-->>Harness: Context healthy (<70%, <50 steps)
+    Harness->>Router: Route task & size scope (Tool/App/System)
+    Router-->>Primary: Load planning-with-contracts & designing-testable-seams
+    Primary->>Primary: Draft PLAN.md with contracts & seams
+    
+    Note over Primary: Phase transition: Planning -> Execution
+    Primary->>Primary: Evict planning skills from active memory
+    
+    Primary->>Hook: invoke_subagent (build/test verification)
+    Hook->>Hook: PreToolUse intercepts & confirms Model=flash
+    Hook->>Worker: Dispatch worker in isolated workspace
+    
+    Worker->>Worker: cargo test -q / pytest -q (hundreds of lines absorbed)
+    Worker->>Worker: Fix compile error in scratchpad
+    Worker-->>Primary: Return <=10 lines: pass status + clean diff
+    
+    Primary->>Primary: Run final quiet gate: cargo test -q
+    Primary->>User: Task complete with verifiable evidence

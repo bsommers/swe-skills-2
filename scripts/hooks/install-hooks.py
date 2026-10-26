@@ -58,20 +58,12 @@ def claude_hooks(runner="uv run --no-project"):
 
 
 def agy_hooks(runner="uv run --no-project"):
-    # agy takes Claude-style plugin hooks; its matcher is a regex alternation.
+    # agy hooks.json maps hook names to event configurations.
+    # SessionStart and PreInvocation are flat handler lists; PreToolUse is grouped.
     return {
-        "hooks": {
-            "SessionStart": [
-                {
-                    "matcher": "startup|clear|compact|resume",
-                    "hooks": [entry("sessionstart", runner)],
-                }
-            ],
-            "PreInvocation": [
-                {
-                    "hooks": [entry("preinvocation", runner)],
-                }
-            ],
+        "context-guard": {
+            "SessionStart": [entry("sessionstart", runner)],
+            "PreInvocation": [entry("preinvocation", runner)],
             "PreToolUse": [
                 {
                     "matcher": "invoke_subagent",

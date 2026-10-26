@@ -74,6 +74,8 @@ Unsure? `right-sizing-process`.
 ## Rules
 
 - Announce the skills you loaded, and why, in one line.
+- **Bounded active set:** Keep at most 1–3 skills loaded in context at any time. Every loaded skill replays its tokens on every tool turn.
+- **Phase-transition eviction:** When transitioning between major phases (planning → execution → shipping), do not accumulate stale skills in history. Follow `compacting-context-safely` to checkpoint and resume with only the active phase's skills.
 - If a target skill is not registered as a slash command in `~/.claude/skills/`, read its `SKILL.md` directly from the `swe-skills` repository (`skills/<skill-name>/SKILL.md`).
 - If a step costs more than the risk it removes at this scale, say so and skip it.
 - Default to **git and GitHub** (`gh` CLI) for version control, issues, and PRs, unless the project uses something else.

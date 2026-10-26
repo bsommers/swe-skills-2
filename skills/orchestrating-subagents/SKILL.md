@@ -14,6 +14,7 @@ Subagents buy parallelism and fresh context; they cost tokens and can conflict. 
 | Delegate | Keep |
 |---|---|
 | Mechanical/templated edits, file surveys, test writing to a spec | architecture decisions, ambiguous trade-offs |
+| Iterative build/test loops, compile remediation | system architecture, high-risk code changes |
 | Independent investigations with no shared files | integration and conflict resolution |
 | Fresh-eyes review of a plan or diff | deciding what the findings mean |
 | Parallel audits by different *lens* | final claims to the user |
@@ -31,6 +32,7 @@ Subagents buy parallelism and fresh context; they cost tokens and can conflict. 
 9. **Never delegate understanding.** Don't write "based on your findings, fix it"; state what to do.
 10. **Respect boundaries.** A subagent working in one repo does not write to sibling repos without explicit human approval.
 11. **Verify claimed results.** A subagent's "done" is a claim; check the diff and run the tests.
+12. **Subagent log isolation.** Keep the main orchestrator on the primary reasoning model for architecture and code synthesis. Offload iterative compile/test/lint loops to an isolated fast-tier subagent (`flash` or `haiku`) so multi-step build logs never pollute main session history. The subagent returns only status and the verified diff.
 
 ## Dispatch template
 

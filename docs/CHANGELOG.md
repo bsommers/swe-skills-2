@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.0] - 2026-10-25
+
+### Added
+- `docs/`: Comprehensive multi-document production documentation hub (`docs/README.md`, `docs/purpose.md`, `docs/architecture.md`, `docs/running.md`, `docs/how-to.md`).
+- `docs/diagrams/`: Multi-format architectural visual models across three distinct formats:
+  - `docs/diagrams/ascii_architecture.txt`: High-resolution terminal-ready ASCII schematic.
+  - `docs/diagrams/architecture.mmd`, `docs/diagrams/execution_flow.mmd`, `docs/diagrams/context_lifecycle.mmd`: Standalone Mermaid diagrams.
+  - `docs/diagrams/architecture.drawio`, `docs/diagrams/execution_flow.drawio`: Native draw.io XML vector diagrams.
+- `scripts/install.sh`: Added `--profile` support (`core`, `build`, `review`, `ship`, `all`) to allow selective installation of skill subsets, reducing static system prompt catalog token overhead by ~85%.
+
+### Changed
+- `skills/compacting-context-safely/SKILL.md`: Added context window turn replay multiplier analysis and quiet-flag tool output suppression directives (`cargo test -q`, `pytest -q`, `npm test -s`).
+- `skills/orchestrating-subagents/SKILL.md`: Added Rule 12 (**Subagent Log Isolation**) and delegation row for iterative build/test/lint loops to quarantine noisy compiler progress inside ephemeral `flash` subagents, shielding the primary orchestrator session from context bloat.
+- `skills/adaptive-model-routing/SKILL.md`: Documented build/test loop routing to `flash` / `flash_lite` worker subagents for log isolation.
+- `skills/layered-verification-gates/SKILL.md`: Mandated quiet verification flags by default (`-q`) across all toolchains to preserve turn token budget.
+- `skills/using-swe-skills/SKILL.md`: Added Bounded Active Set discipline (max 1–3 skills in memory concurrently) and Phase-Transition Eviction rules.
+- Synchronized all manifests to `0.9.0` (`plugin.json`, `.claude-plugin/`, `.cursor-plugin/`).
+
+### Fixed
+- `scripts/hooks/install-hooks.py`: Corrected Antigravity (`agy_hooks()`) JSON structure to use flat handler lists for `SessionStart` and `PreInvocation` with top-level named hook object, resolving `agy plugin validate .` errors.
+
 ## [0.8.0] - 2026-10-25
 
 ### Added

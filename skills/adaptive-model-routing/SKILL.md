@@ -38,6 +38,7 @@ Task Density = (File Impact Radius) × (Logical Ambiguity) × (Safety Criticalit
 - **Localized edits:** Modifying 1–2 files where interfaces are already fixed by a contract.
 - **Informational scans:** Finding usages, listing directory contents, inspecting logs.
 - **Remediation loops:** Fixing syntax errors or formatting warnings where compiler/linter errors provide exact coordinates.
+- **Build/test loops:** Running compile checks and unit tests in isolated worker subagents to shield the main session from log bloat.
 
 ### Route to Fast Reasoning (`flash` + High Thinking)
 - **Algorithmic implementation:** Complex data structures, parsers, state machines, and mathematical transformations.

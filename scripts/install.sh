@@ -21,6 +21,7 @@ Targets (user-level, any combination; default is --all):
                     DIR/.cursor/rules/swe-skills.mdc
 
 Options:
+  --profile NAME    install subset: core (8 essential), build, review, ship, all (default: all)
   --copy            copy instead of symlink
   --force           replace existing entries with the same name
   --uninstall       remove what this script installed (only entries pointing here / marked)
@@ -29,12 +30,13 @@ Options:
 EOF
 }
 
-TARGETS=(); PROJECT=""; MODE=link; FORCE=0; UNINSTALL=0; DRY=0
+TARGETS=(); PROJECT=""; MODE=link; FORCE=0; UNINSTALL=0; DRY=0; PROFILE="all"
 while [ $# -gt 0 ]; do
   case "$1" in
     --claude|--agy|--cursor|--agents) TARGETS+=("${1#--}") ;;
     --all) TARGETS=(claude agy cursor agents) ;;
     --project) PROJECT="${2:?--project needs DIR}"; shift ;;
+    --profile) PROFILE="${2:?--profile needs name (core, build, review, ship, all)}"; shift ;;
     --copy) MODE=copy ;;
     --force) FORCE=1 ;;
     --uninstall) UNINSTALL=1 ;;
@@ -49,10 +51,45 @@ done
 run() { if [ "$DRY" = 1 ]; then echo "DRY: $*"; else "$@"; fi; }
 MARK=".swe-skills-2"   # marker file inside copied skill dirs
 
+is_in_profile() {
+  local name="$1"
+  case "$PROFILE" in
+    all) return 0 ;;
+    core)
+      case "$name" in
+        using-swe-skills|planning-with-contracts|compacting-context-safely|layered-verification-gates|committing-and-releasing-cleanly|orchestrating-subagents|token-finops|adaptive-model-routing) return 0 ;;
+        *) return 1 ;;
+      esac ;;
+    build)
+      case "$name" in
+        using-swe-skills|planning-with-contracts|compacting-context-safely|layered-verification-gates|committing-and-releasing-cleanly|orchestrating-subagents|token-finops|adaptive-model-routing|\
+        building-small-cli-tools|building-code-generators|building-installers-and-onboarding|designing-testable-seams|engineering-for-determinism|scaffolding-new-projects|debugging-across-layers) return 0 ;;
+        *) return 1 ;;
+      esac ;;
+    review)
+      case "$name" in
+        using-swe-skills|planning-with-contracts|compacting-context-safely|layered-verification-gates|committing-and-releasing-cleanly|orchestrating-subagents|token-finops|adaptive-model-routing|\
+        pr-review|code-architecture-review|dependency-audit|api-contract-audit|test-coverage|running-multi-lens-audits|hunting-silent-failures) return 0 ;;
+        *) return 1 ;;
+      esac ;;
+    ship)
+      case "$name" in
+        using-swe-skills|planning-with-contracts|compacting-context-safely|layered-verification-gates|committing-and-releasing-cleanly|orchestrating-subagents|token-finops|adaptive-model-routing|\
+        release|writing-pull-requests|keeping-docs-in-sync|writing-user-guides|github-issues-script) return 0 ;;
+        *) return 1 ;;
+      esac ;;
+    *) echo "unknown profile: $PROFILE (expected core, build, review, ship, all)" >&2; exit 2 ;;
+  esac
+}
+
 install_into() {  # $1 = destination skills dir
   local dest="$1" name target
   run mkdir -p "$dest"
   for skill in "$SRC"/*/; do
+    name="$(basename "$skill")"; target="$dest/$name"
+    if [ "$UNINSTALL" = 0 ] && ! is_in_profile "$name"; then
+      continue
+    fi
     name="$(basename "$skill")"; target="$dest/$name"
     if [ "$UNINSTALL" = 1 ]; then
       if [ -L "$target" ] && [ "$(readlink "$target")" = "${skill%/}" ]; then run rm "$target"; echo "removed $target"

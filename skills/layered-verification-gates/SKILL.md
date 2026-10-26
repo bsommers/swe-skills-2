@@ -31,6 +31,7 @@ description: Use when deciding what "done" or "green" means, before committing, 
 - **Never lower the bar to reach green.** No deleting tests, `@ts-ignore`/`noqa` sprees, assertions removed, thresholds edited down, stubs left. If a check is wrong, fix it in its own reviewed change with the reason.
 - **Coverage is a tripwire**, not a goal. Use a threshold (e.g. ≥ 90% line, ≥ 85% branch) to catch untested code; then read the untested code (`hunting-silent-failures`).
 - **Conserve CI.** Run everything locally before pushing; batch commits; avoid WIP pushes that burn remote minutes.
+- **Quiet verification by default.** Run test and build commands with quiet flags (`cargo test -q`, `pytest -q`, `npm test -s`). Routine progress lines (`Compiling <crate>`, `test ... ok`) permanently bloat conversation context and replay on every subsequent turn; quiet flags cut output tokens by ~90% while preserving failures.
 - **Counts are derived.** Don't hand-type "530 tests" in docs (`keeping-docs-in-sync`).
 - **Clean clone.** Suites must pass without optional generated outputs present.
 

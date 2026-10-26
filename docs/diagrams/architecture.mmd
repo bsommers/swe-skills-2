@@ -1,0 +1,42 @@
+flowchart TD
+    subgraph HarnessLayer["Harness Integration Layer"]
+        Claude["Claude Code (~/.claude/skills)"]
+        Agy["Antigravity agy (plugin.json)"]
+        Cursor["Cursor (~/.cursor/skills)"]
+        Agents["Cross-Platform (~/.agents/skills)"]
+    end
+
+    subgraph HookSubsystem["Lifecycle & Context Guards"]
+        CG_Pre["PreInvocation / UserPromptSubmit"]
+        CG_Comp["PreCompact (Manual compact blocker)"]
+        CG_Start["SessionStart (Checkpoint injector)"]
+        MR_PreTool["PreToolUse (Adaptive Model Router)"]
+    end
+
+    subgraph CoreEngine["Routing & Discovery Engine"]
+        Router["using-swe-skills / eng shortcut"]
+        ActiveSet["Bounded Active Set (Max 1-3 skills)"]
+        PhaseEvict["Phase-Transition Eviction"]
+    end
+
+    subgraph SkillTaxonomy["Domain Skill Taxonomy (52 Skills)"]
+        FramePlan["Frame & Plan (7)<br/>planning-with-contracts<br/>token-finops<br/>adaptive-model-routing"]
+        ArchDomain["Architecture & System (10)<br/>designing-testable-seams<br/>code-architecture-review<br/>refactor-execute"]
+        BuildDomain["Build & Construction (8)<br/>building-small-cli-tools<br/>engineering-for-determinism<br/>scaffolding-new-projects"]
+        VerifyDomain["Verify & Measure (8)<br/>layered-verification-gates<br/>test-coverage<br/>hunting-silent-failures"]
+        ReleaseCollab["Collaborate & Release (15)<br/>committing-and-releasing-cleanly<br/>compacting-context-safely<br/>orchestrating-subagents<br/>release"]
+    end
+
+    subgraph SubagentExecution["Isolated Subagent Boundary"]
+        PrimarySession["Primary Orchestrator (pro / Sonnet)"]
+        WorkerSubagent["Worker Subagent (flash / Haiku)"]
+        PrimarySession -->|Task Brief & Seams| WorkerSubagent
+        WorkerSubagent -->|Quiet Tests -q & Log Churn| WorkerSubagent
+        WorkerSubagent -->|<=10 Line Result & Verified Diff| PrimarySession
+    end
+
+    HarnessLayer --> HookSubsystem
+    HookSubsystem --> CoreEngine
+    CoreEngine --> ActiveSet
+    ActiveSet --> SkillTaxonomy
+    SkillTaxonomy --> SubagentExecution

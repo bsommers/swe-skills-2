@@ -1,0 +1,99 @@
+<mxfile host="Electron" version="21.6.8" type="device">
+  <diagram id="swe-skills-arch" name="SWE-Skills Architecture">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Harness Layer Group -->
+        <mxCell id="harness_group" value="Agent Runtime Harness Layer" style="swimlane;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="1080" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="claude_box" value="Claude Code&#xa;~/.claude/skills/&#xa;settings.json" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="harness_group">
+          <mxGeometry x="30" y="40" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="agy_box" value="Antigravity (agy)&#xa;plugin.json&#xa;hooks.json" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="harness_group">
+          <mxGeometry x="300" y="40" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cursor_box" value="Cursor IDE&#xa;~/.cursor/skills/&#xa;swe-skills.mdc" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="harness_group">
+          <mxGeometry x="570" y="40" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="agents_box" value="Cross-Platform Alias&#xa;~/.agents/skills/&#xa;CLI Tools" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontStyle=1;" vertex="1" parent="harness_group">
+          <mxGeometry x="830" y="40" width="220" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Lifecycle Hooks Group -->
+        <mxCell id="hooks_group" value="Lifecycle &amp; Context Guard Hooks (scripts/hooks/)" style="swimlane;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="40" y="190" width="1080" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="guard_pre" value="context_guard: preinvocation / nudge&#xa;Monitors tokens, steps (&gt;=50), bytes (&gt;=500k)&#xa;Calculates 5-min prompt cache TTL" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=11;" vertex="1" parent="hooks_group">
+          <mxGeometry x="30" y="35" width="280" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="guard_compact" value="context_guard: precompact &amp; sessionstart&#xa;Blocks manual /compact without checkpoint&#xa;Injects newest checkpoint upon resume" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=11;" vertex="1" parent="hooks_group">
+          <mxGeometry x="360" y="35" width="310" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="router_pretool" value="model_router: pretooluse (agy)&#xa;Intercepts invoke_subagent&#xa;Auto-routes: pro / flash / flash_lite" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;fontSize=11;" vertex="1" parent="hooks_group">
+          <mxGeometry x="720" y="35" width="330" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Discovery & Routing Layer -->
+        <mxCell id="router_box" value="Task Sizing &amp; Discovery Router (skills/using-swe-skills/SKILL.md &amp; /eng)&#xa;• Task Sizing: Tool (&lt;=1 day) / App (days, modules) / System (multi-service, contracts)&#xa;• Active Set Discipline: Max 1–3 skills loaded simultaneously | Phase-Transition Context Eviction" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="40" y="330" width="1080" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Core Skill Clusters -->
+        <mxCell id="skills_group" value="Domain Skill Clusters (52 Modular Skills)" style="swimlane;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="40" y="420" width="1080" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="plan_cluster" value="Frame &amp; Plan&#xa;• planning-with-contracts&#xa;• token-finops&#xa;• adaptive-model-routing" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="skills_group">
+          <mxGeometry x="30" y="35" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="arch_cluster" value="Architecture &amp; Seams&#xa;• designing-testable-seams&#xa;• code-architecture-review&#xa;• refactor-execute" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="skills_group">
+          <mxGeometry x="290" y="35" width="230" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="build_cluster" value="Build &amp; Construction&#xa;• building-small-cli-tools&#xa;• engineering-for-determinism&#xa;• scaffolding-new-projects" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="skills_group">
+          <mxGeometry x="560" y="35" width="230" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="verify_cluster" value="Verify &amp; Release&#xa;• layered-verification-gates&#xa;• compacting-context-safely&#xa;• orchestrating-subagents" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="skills_group">
+          <mxGeometry x="830" y="35" width="220" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Subagent Boundary -->
+        <mxCell id="subagent_group" value="Subagent Log Isolation Execution Pattern" style="swimlane;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="40" y="580" width="1080" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="primary_session" value="Primary Orchestrator (pro / Sonnet)&#xa;• Maintains system architecture, contracts, ADRs&#xa;• Context history is kept clean of noisy tool output" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d79b00;fontStyle=1;" vertex="1" parent="subagent_group">
+          <mxGeometry x="40" y="45" width="380" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="worker_subagent" value="Ephemeral Worker Subagent (flash / Haiku)&#xa;• Runs: cargo test -q, pytest -q, npm test -s&#xa;• Absorbs hundreds of compilation &amp; test progress lines&#xa;• Iterates on compiler errors in throwaway scratch context" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d79b00;fontStyle=1;" vertex="1" parent="subagent_group">
+          <mxGeometry x="630" y="45" width="410" height="75" as="geometry" />
+        </mxCell>
+
+        <!-- Connectors -->
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" edge="1" parent="1" source="harness_group" target="hooks_group">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" edge="1" parent="1" source="hooks_group" target="router_box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" edge="1" parent="1" source="router_box" target="skills_group">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;" edge="1" parent="1" source="skills_group" target="subagent_group">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" value="invoke_subagent (task brief)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fillColor=#d79b00;strokeColor=#d79b00;" edge="1" parent="subagent_group" source="primary_session" target="worker_subagent">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" value="&lt;=10 line summary + diff" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fillColor=#82b366;strokeColor=#82b366;" edge="1" parent="subagent_group" source="worker_subagent" target="primary_session">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="580" y="100" />
+              <mxPoint x="490" y="100" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
