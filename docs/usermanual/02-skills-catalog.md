@@ -2,7 +2,7 @@
 
 [← Back to User Manual](README.md) · [← Previous: Getting Started](01-getting-started.md) · [Next: Hooks & Context Guards →](03-hooks-and-context-guards.md)
 
-This chapter provides a structured breakdown of the **52 skills** in `swe-skills`, organized into seven functional domains.
+This chapter provides a structured breakdown of the **54 skills** in `swe-skills`, organized into seven functional domains.
 
 ---
 
@@ -43,6 +43,7 @@ Every skill adheres to strict authoring principles:
 
 | Skill | Trigger ("Use when...") | Primary Deliverable |
 |---|---|---|
+| [`architecture-best-practices`](../../skills/architecture-best-practices/SKILL.md) | Structuring a new system or component, defining subsystem boundaries, decoupling business logic from infrastructure, evaluating technical trade-offs, or refactoring tangled dependencies. | Decoupled domain core, dependency inversion, acyclic dependency graphs, and DTO boundaries. |
 | [`designing-layered-pipelines`](../../skills/designing-layered-pipelines/SKILL.md) | Structuring a system with several stages, inputs, or outputs (compilers, transpilers, ETL, ingest-analyze-report), when logic is leaking into thin wrappers, or when the same types are declared in more than one place. | Strict 3-tier pipeline (Source → Intermediate Representation → Emitter). |
 | [`designing-plugin-contracts`](../../skills/designing-plugin-contracts/SKILL.md) | A host must work with several interchangeable implementations (drivers, adapters, renderers, backends, providers), when adding "just one more" implementation forces changes to the host, or when needing offline/mock modes that match live behavior. | Stable host SPI / API boundary with plugin capability detection. |
 | [`designing-testable-seams`](../../skills/designing-testable-seams/SKILL.md) | Writing code that talks to databases, HTTP, the clock, containers, LLMs, or the filesystem; when tests need live services; or when error handling swallows failures with broad excepts. | Dependency injection seams for zero-IO testing. |
@@ -75,6 +76,7 @@ Every skill adheres to strict authoring principles:
 | [`building-code-generators`](../../skills/building-code-generators/SKILL.md) | Writing emitters, transpilers, scaffolders, or any tool that outputs code, config, schemas, diagrams or queries from a model, especially when generated output must compile, parse, or load in a downstream system. | AST-validated, deterministic emitter architectures. |
 | [`parsing-untrusted-text-robustly`](../../skills/parsing-untrusted-text-robustly/SKILL.md) | Parsing or scraping text, HTML/DOM, markdown, logs, or markup you do not control; when a scraper breaks after a site update; when a parser matches things inside code blocks; or when type-guessing gives wrong results. | Robust, defensive grammar parsing with fallback boundaries. |
 | [`hardening-trust-boundaries`](../../skills/hardening-trust-boundaries/SKILL.md) | Code passes data into a shell, SQL/Cypher/query language, filesystem path, template, container build, extension permission, or secret store; when running model-written or third-party code; or before shipping anything that handles untrusted input. | Injection-proof parameterization and strict input sanitization. |
+| [`security-best-practices`](../../skills/security-best-practices/SKILL.md) | Writing, refactoring, or reviewing code that handles authentication, authorization, cryptography, user input, session tokens, database queries, external integrations, or sensitive data storage. | Secure-by-default architecture, constant-time checks, tenant query isolation, and leak-free errors. |
 | [`engineering-for-determinism`](../../skills/engineering-for-determinism/SKILL.md) | Results differ between runs or machines, tests are flaky, generated files churn in diffs, simulated data must be reproducible, or ground-truth files risk being hand-edited and drifting from their generator. | Bit-for-bit reproducible runs (sorted keys, fixed seeds, UTC timestamps). |
 | [`nix-environments`](../../skills/nix-environments/SKILL.md) | Configuring reproducible development environments, hermetic build toolchains, or system-level dependencies with Nix flakes or devShells, especially when a project requires native C libraries or cross-compiler tools alongside language package managers. | 3-tier environment hierarchy (Hermetic Nix → Native Toolchain → Container/CI fallback) with hybrid `flake.nix`. |
 

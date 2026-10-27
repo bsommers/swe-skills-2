@@ -29,7 +29,7 @@ flowchart TD
         ActiveSet["Bounded Active Set (1-3 skills)"]
     end
 
-    subgraph SkillTaxonomy["4. Domain Skill Library (52 Skills)"]
+    subgraph SkillTaxonomy["4. Domain Skill Library (54 Skills)"]
         FramePlan["Frame & Plan"]
         ArchDomain["Architecture & Seams"]
         BuildDomain["Build & Construction"]

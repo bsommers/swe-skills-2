@@ -43,6 +43,8 @@ Only the first word is matched, and only exactly. "review the auth module" runs 
 | `model` | `adaptive-model-routing` |
 | `nix` | `nix-environments` |
 | `onboard` | `building-installers-and-onboarding` |
+| `security` | `security-best-practices` |
+| `patterns` | `architecture-best-practices` |
 
 ## Rules
 

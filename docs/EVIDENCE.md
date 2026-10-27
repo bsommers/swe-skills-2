@@ -32,6 +32,7 @@ Skills were distilled from the standards, specs, audits, changelogs, fix-commit 
 | `evolving-schemas-and-contracts` | `oscal-xdr` PITFALLS; `ai-model-learning` optional `lesson` field, `TokenUsage` invariant |
 | `defending-architecture-decisions` | dual-axis architectural decision defense standard; `agent-manager-fe` ADR format |
 | `code-architecture-review` | `feed-brain-gh` AST and graph mapping; `uitoolbox` modular architecture review; Graphify structural knowledge graph workflow |
+| `architecture-best-practices` | Hexagonal and clean architecture principles distilled across `feed-brain-gh`, `OntoLogic`, and `agent-manager-fe`; decoupling core domain logic from I/O frameworks, acyclic dependency graphs, and contract-first DTO boundaries |
 | `api-contract-audit` | `oscal-xdr` schema drift audit; `agent-manager-fe` DTO / API protocol synchronization; OpenAPI and Protobuf contract checks |
 | `refactor-execute` | `flowscope` spec-driven refactor execution; Fowler refactoring catalogs with green-test gating and rollback protection |
 | `managing-complexity-budgets` | engineering complexity budget standards (250 LOC per-file budget, dual-gate static analysis) |
@@ -44,6 +45,7 @@ Skills were distilled from the standards, specs, audits, changelogs, fix-commit 
 | `building-code-generators` | `OntoLogic` fixes (topological class sort, OWL well-formedness, Cypher escaping, MERGE parent, per-class Java files); prototypical template isolation standard (isolated template files, zero script-embedded heredocs) |
 | `parsing-untrusted-text-robustly` | `gemini-chat-exporter` (selector cascade, nested-list duplication, table pipes); anchor-parser fence immunity; Mermaid label fix; `uitoolbox` date bugs |
 | `hardening-trust-boundaries` | `OntoLogic` shell-injection and Cypher-escape fixes; `ai-model-learning` Dockerfile allowlist and "speed bump, not a sandbox"; `synth` sanitizer secondary-injection fixes; extension SECURITY doc |
+| `security-best-practices` | OWASP Top 10 mitigations and secure-by-default architecture distilled from `security-skills`, `synth`, and `ontological-firewall`; constant-time comparisons, strict tenant isolation, memory-hard key derivation, and leak-free error handling |
 | `engineering-for-determinism` | deterministic generation standards (SHA pinning, seeded generators); `synth` regeneration/SHA pins; `airflow` seeded generators and Python-version seed-type bug |
 | `nix-environments` | `OntoLogic` and multi-substrate compiler toolchains; hermetic dev shells with `flake.nix` wrapping native toolchains while preserving unprivileged portability via `uv`/`cargo` fallback |
 | `layered-verification-gates` | multi-tier verification standards; `airflow` skip behavior; `agent-manager-fe` coverage report; constraint-weakening patterns |

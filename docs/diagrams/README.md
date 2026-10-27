@@ -12,7 +12,7 @@ This directory contains visual models for the `swe-skills` architecture, lifecyc
 
 | Diagram | Formats | Purpose |
 |---|---|---|
-| **System Architecture** | [`ascii_architecture.txt`](ascii_architecture.txt)<br>[`architecture.mmd`](architecture.mmd)<br>[`architecture.drawio`](architecture.drawio) | Complete layered view: Harnesses (Claude, agy, Cursor) → Lifecycle Hooks → Discovery Router → 52 Skills Taxonomy → Isolated Subagents. |
+| **System Architecture** | [`ascii_architecture.txt`](ascii_architecture.txt)<br>[`architecture.mmd`](architecture.mmd)<br>[`architecture.drawio`](architecture.drawio) | Complete layered view: Harnesses (Claude, agy, Cursor) → Lifecycle Hooks → Discovery Router → 54 Skills Taxonomy → Isolated Subagents. |
 | **Execution Flow** | [`execution_flow.mmd`](execution_flow.mmd)<br>[`execution_flow.drawio`](execution_flow.drawio) | End-to-end task journey from `/eng` invocation, through context guards, planning, subagent build/test isolation, to layered verification gates. |
 | **Context & Cache Lifecycle** | [`context_lifecycle.mmd`](context_lifecycle.mmd) | State machine for Anthropic 5-minute cache TTL, agy 50-step thresholds, checkpointing, and compaction recovery. |
 

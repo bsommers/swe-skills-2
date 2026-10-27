@@ -42,7 +42,7 @@
         </mxCell>
 
         <!-- Core Skill Clusters -->
-        <mxCell id="skills_group" value="Domain Skill Clusters (52 Modular Skills)" style="swimlane;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+        <mxCell id="skills_group" value="Domain Skill Clusters (54 Modular Skills)" style="swimlane;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=14;" vertex="1" parent="1">
           <mxGeometry x="40" y="420" width="1080" height="130" as="geometry" />
         </mxCell>
         <mxCell id="plan_cluster" value="Frame &amp; Plan&#xa;• planning-with-contracts&#xa;• token-finops&#xa;• adaptive-model-routing" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="skills_group">

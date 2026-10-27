@@ -157,4 +157,4 @@ jobs:
 | Antigravity warns of `invalid hook` | `hooks.json` schema mismatch. | Re-run `python3 scripts/hooks/install-hooks.py --agy` to regenerate valid flat handler configurations. |
 | Tool runs produce thousands of tokens of compile progress | Missing quiet flags in build/test commands. | Always append quiet flags: `cargo test -q`, `cargo build -q`, `pytest -q`, `npm test -s`. |
 | Git commit fails with `absolute path` error | A skill or test file contains hardcoded machine paths (e.g. `~username/...`). | Replace absolute machine paths with repo-relative paths (`./` or `$REPO_ROOT`). |
-| System prompt token overhead is high (>2,500 tokens) | All 52 skills are mounted in user skill directory. | Run `scripts/install.sh --claude --profile core` to mount only the 8 essential core skills. |
+| System prompt token overhead is high (>2,500 tokens) | All 54 skills are mounted in user skill directory. | Run `scripts/install.sh --claude --profile core` to mount only the 8 essential core skills. |

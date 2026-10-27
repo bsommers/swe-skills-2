@@ -40,7 +40,9 @@ Unsure? `right-sizing-process`.
 | emit code/config from a model | `building-code-generators` |
 | parse or scrape text/HTML | `parsing-untrusted-text-robustly` |
 | touch shell, SQL, paths, secrets, sandboxes | `hardening-trust-boundaries` |
+| handle auth, sessions, crypto, user input, prevent exploits | `security-best-practices` |
 | see flaky or churning output | `engineering-for-determinism` |
+| structure system, decouple business logic, set module boundaries | `architecture-best-practices` |
 | configure reproducible dev environments, toolchains, or Nix flakes | `nix-environments` |
 | decide what "done" means | `layered-verification-gates` |
 | suspect untested code hides bugs | `hunting-silent-failures` |

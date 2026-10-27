@@ -63,13 +63,13 @@ is_in_profile() {
     build)
       case "$name" in
         using-swe-skills|planning-with-contracts|compacting-context-safely|layered-verification-gates|committing-and-releasing-cleanly|orchestrating-subagents|token-finops|adaptive-model-routing|\
-        building-small-cli-tools|building-code-generators|building-installers-and-onboarding|designing-testable-seams|engineering-for-determinism|scaffolding-new-projects|debugging-across-layers) return 0 ;;
+        building-small-cli-tools|building-code-generators|building-installers-and-onboarding|designing-testable-seams|engineering-for-determinism|scaffolding-new-projects|debugging-across-layers|architecture-best-practices) return 0 ;;
         *) return 1 ;;
       esac ;;
     review)
       case "$name" in
         using-swe-skills|planning-with-contracts|compacting-context-safely|layered-verification-gates|committing-and-releasing-cleanly|orchestrating-subagents|token-finops|adaptive-model-routing|\
-        pr-review|code-architecture-review|dependency-audit|api-contract-audit|test-coverage|running-multi-lens-audits|hunting-silent-failures) return 0 ;;
+        pr-review|code-architecture-review|dependency-audit|api-contract-audit|test-coverage|running-multi-lens-audits|hunting-silent-failures|security-best-practices) return 0 ;;
         *) return 1 ;;
       esac ;;
     ship)
