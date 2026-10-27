@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.10.0] - 2026-10-26
+
+### Added
+- `skills/security-best-practices/`: Defense-in-depth security engineering skill covering constant-time authentication checks, explicit multi-tenant query isolation (preventing IDOR), AEAD cryptography, strict input allowlist schemas, leak-free error handling, and supply chain CVE auditing.
+- `skills/architecture-best-practices/`: Architectural structuring skill enforcing hexagonal dependency inversion (domain core decoupled from I/O and frameworks), versioned DTO contract boundaries, acyclic dependency graphs (DAG), discrete pipeline staging, and resilience patterns (timeouts, circuit breakers).
+- `skills/eng/SKILL.md`: Added `/eng security` and `/eng patterns` shortcuts routing directly to the new skills.
+- `scripts/install.sh`: Added `architecture-best-practices` to the `build` profile and `security-best-practices` to the `review` profile.
+
+### Changed
+- Expanded skills library from 52 to 54 skills across `README.md`, `skills/using-swe-skills/`, `docs/usermanual/`, `docs/EVIDENCE.md`, and `docs/TESTING.md`.
+- Synchronized all manifests to `0.10.0` (`plugin.json`, `.claude-plugin/`, `.cursor-plugin/`).
+
 ## [0.9.0] - 2026-10-25
 
 ### Added
