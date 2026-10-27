@@ -22,6 +22,7 @@ The human can shift gears any time. Prefer lower gears for anything touching sha
 ## Preconditions for lights-out
 
 - A brief with scope and a **go-ahead** (`writing-intent-briefs`), a plan with verify commands (`planning-with-contracts`), and a green baseline.
+- Host permission policy configured with canonical binary prefixes / `always-proceed` rather than brittle literal command strings (see [references/agent-autonomy-and-permissions.md](references/agent-autonomy-and-permissions.md)).
 - Work happens on a branch or worktree.
 - Budgets set (time, tokens, retries) and a visible status output.
 

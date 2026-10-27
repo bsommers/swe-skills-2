@@ -13,6 +13,7 @@ docs/
 ├── architecture.md         # Subsystems, lifecycle hooks, routing engine, subagent isolation
 ├── running.md              # Installation guide, profile management, environment variables, CLI
 ├── how-to.md               # Step-by-step recipes, CI integration, troubleshooting matrix
+├── AGENT_AUTONOMY_AND_PERMISSIONS.md # Super-permissive autonomy & canonical permission policies
 ├── HOOKS.md                # Context guard hooks, PreInvocation, and model routing
 ├── EVIDENCE.md             # Empirical provenance and incident history across 20+ codebases
 ├── TESTING.md              # Pressure testing scenarios and benchmark evaluation
