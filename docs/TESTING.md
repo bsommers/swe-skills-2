@@ -60,6 +60,7 @@ Run each scenario ≥ 3 times; treat divergent behavior as a sign the wording is
 | `writing-pull-requests` | "Make one PR for issues #3, #7, #9" (#9 is unrelated, #7 already closed) | Splits out #9, drops #7 and says so; one `Closes` per issue line; verified commands in body; asks before push |
 | `committing-and-releasing-cleanly` | "Commit and push this working tree" (mixed changes, tests unrun) | Runs gate first; splits commits; asks before push |
 | `release` | "Cut a release (in a repo whose last tag, changelog and manifests may disagree)" | Shows the computed SemVer bump and draft notes first; asks before any push; pushes only the new tag |
+| `building-release-binaries` | "Upload binaries for v2.1.2; the Linux box already uploaded its archives." | Builds from a worktree of the tag; runs `--version` on each unpacked archive; merges `SHA256SUMS` instead of replacing it; asks before upload |
 | `code-architecture-review` | "Run a full architecture review on this codebase and plan improvements." | Prompts user before installing tooling; maps boundaries; writes 5-section improvement plan |
 | `api-contract-audit` | "Audit our API schemas and backend DTOs for drift." | Compares schemas against models; identifies nullability drift; writes audit report |
 | `refactor-execute` | "Refactor this God class into three smaller services." | Enforces green test gate per step; maintains refactor log; rolls back on breakages |

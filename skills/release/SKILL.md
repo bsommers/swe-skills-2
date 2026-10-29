@@ -173,3 +173,4 @@ The script asks before pushing when it has a terminal, and skips the push (print
 2. **Never push with `--force`** when releasing tags.
 3. **Verify clean builds/tests** before tagging if a test suite is present.
 4. **Gracefully handle missing remotes** without aborting local tag creation.
+5. **Hand off binaries** to `building-release-binaries` once the tag is pushed, if the project ships per-platform executables.

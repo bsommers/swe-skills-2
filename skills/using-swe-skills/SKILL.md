@@ -72,6 +72,7 @@ Unsure? `right-sizing-process`.
 | turn issues or a branch into a PR | `writing-pull-requests` |
 | commit, push, tag, release | `committing-and-releasing-cleanly` |
 | calculate SemVer, tag, and publish releases | `release` |
+| build, package, upload per-platform release binaries | `building-release-binaries` |
 
 ## Rules
 
