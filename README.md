@@ -64,7 +64,7 @@ The name is deliberately not `swe`: the older `swe-skills` suite already has a `
 
 ---
 
-## Skills (54)
+## Skills (55)
 
 | Group | Skills |
 |---|---|

@@ -2,7 +2,7 @@
 
 [← Back to User Manual](README.md) · [← Previous: Getting Started](01-getting-started.md) · [Next: Hooks & Context Guards →](03-hooks-and-context-guards.md)
 
-This chapter provides a structured breakdown of the **54 skills** in `swe-skills`, organized into seven functional domains.
+This chapter provides a structured breakdown of the **55 skills** in `swe-skills`, organized into seven functional domains.
 
 ---
 
@@ -116,3 +116,4 @@ Every skill adheres to strict authoring principles:
 | [`github-issues-script`](../../skills/github-issues-script/SKILL.md) | Converting a list of findings, review items, architectural gaps, or bug reports into a structured, reviewable batch script (using gh issue create) with exact file coordinates, impact analysis, and proper labels. | Executable shell batch scripts using GitHub CLI (`gh issue create`). |
 | [`committing-and-releasing-cleanly`](../../skills/committing-and-releasing-cleanly/SKILL.md) | About to commit, push, tag a version, or cut a release; when a working tree mixes unrelated changes; or when unsure whether an action is safe to run without asking. | Verification-first commits, atomic staging, and explicit human confirmation before push. |
 | [`release`](../../skills/release/SKILL.md) | Analyzing changes since last release, calculating SemVer tag bump, generating changelogs, creating annotated git tags, and publishing releases. | Automated semantic version bumps, tag creation, and changelog sync. |
+| [`building-release-binaries`](../../skills/building-release-binaries/SKILL.md) | Building, packaging, or uploading per-platform release binaries for a tagged version, or filling in missing release assets. | Builds from a worktree of the tag on the right host, verifies each archive, merges `SHA256SUMS` across hosts, asks before upload. |

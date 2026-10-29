@@ -75,7 +75,7 @@ is_in_profile() {
     ship)
       case "$name" in
         using-swe-skills|planning-with-contracts|compacting-context-safely|layered-verification-gates|committing-and-releasing-cleanly|orchestrating-subagents|token-finops|adaptive-model-routing|\
-        release|writing-pull-requests|keeping-docs-in-sync|writing-user-guides|github-issues-script) return 0 ;;
+        release|building-release-binaries|writing-pull-requests|keeping-docs-in-sync|writing-user-guides|github-issues-script) return 0 ;;
         *) return 1 ;;
       esac ;;
     *) echo "unknown profile: $PROFILE (expected core, build, review, ship, all)" >&2; exit 2 ;;

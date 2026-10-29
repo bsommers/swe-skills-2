@@ -160,7 +160,7 @@ Start non-trivial tasks with `/eng <task description>` or reference skills direc
 - Frame & plan: `planning-with-contracts`, `sizing-limits-from-measurement`
 - Architecture: `designing-testable-seams`, `designing-layered-pipelines`
 - Verification: `hunting-silent-failures`, `layered-verification-gates`
-- Release & Git: `committing-and-releasing-cleanly`, `release`
+- Release & Git: `committing-and-releasing-cleanly`, `release`, `building-release-binaries`
 <!-- swe-skills-end -->
 ```
 

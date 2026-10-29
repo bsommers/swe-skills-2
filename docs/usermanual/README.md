@@ -2,7 +2,7 @@
 
 [← Back to Repository README](../../README.md)
 
-Welcome to the comprehensive user manual for **`swe-skills`**, a modular suite of 54 software engineering, planning, architecture, and operational skills designed for AI coding agents (**Claude Code**, **Antigravity (`agy`)**, **Cursor**, and any agent consuming `~/.agents/skills`).
+Welcome to the comprehensive user manual for **`swe-skills`**, a modular suite of 55 software engineering, planning, architecture, and operational skills designed for AI coding agents (**Claude Code**, **Antigravity (`agy`)**, **Cursor**, and any agent consuming `~/.agents/skills`).
 
 <p align="center">
   <img src="../assets/logo.svg" alt="swe-skills logo" width="100%" />
@@ -47,7 +47,7 @@ flowchart TD
         UsingSwe["using-swe-skills Router"]
     end
 
-    subgraph SkillSuite["swe-skills Library (54 Skills)"]
+    subgraph SkillSuite["swe-skills Library (55 Skills)"]
         Plan["Frame & Plan (7)"]
         Arch["Architecture & Modeling (11)"]
         AI["AI Systems & Loops (2)"]

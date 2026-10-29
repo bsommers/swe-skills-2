@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.11.0] - 2026-10-29
+
+### Added
+- `skills/building-release-binaries/`: Per-platform release binary skill that picks up after `release` pushes a tag: builds from a worktree of the tag on the host that can link each target, uses consistent archive names, verifies each unpacked archive (architecture, `--version`, dynamic deps, minimum OS), merges `SHA256SUMS` across hosts, and asks before uploading.
+- `skills/building-release-binaries/scripts/build-binaries.sh`: Generic Rust build script that reads the binary name and version from `Cargo.toml`, builds the host's native targets, writes `SHA256SUMS`, and optionally uploads (`--upload`, `--create-release`).
+- `scripts/install.sh`: Added `building-release-binaries` to the profile that includes `release`.
+
+### Changed
+- `skills/release/SKILL.md`: Hands off to `building-release-binaries` once the tag is pushed.
+- Expanded skills library from 54 to 55 skills across `README.md`, `skills/using-swe-skills/`, `docs/usermanual/`, `docs/EVIDENCE.md`, and `docs/TESTING.md`.
+- Synchronized all manifests to `0.11.0` (`plugin.json`, `.claude-plugin/`, `.cursor-plugin/`).
+
 ## [0.10.0] - 2026-10-26
 
 ### Added
