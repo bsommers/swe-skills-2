@@ -265,6 +265,25 @@ class GuardCase(unittest.TestCase):
         self.assertIn("50% of 200000", r.stdout)
         self.assertIn("checkpoint.md", r.stdout)
 
+    def test_handoff_md_injected_on_clear_and_workspace_paths_resolved(self):
+        handoff = self.dir / "docs" / "HANDOFF.md"
+        handoff.parent.mkdir(parents=True, exist_ok=True)
+        handoff.write_text("# Handoff\n**Status:** IN PROGRESS — needs resume\nNext: pytest -q\n", encoding="utf-8")
+        r = self.run_guard("sessionstart", {"source": "clear", "workspacePaths": [str(self.dir)]})
+        self.assertEqual(r.returncode, 0)
+        self.assertIn("HANDOFF.md", r.stdout)
+        self.assertIn("Next: pytest -q", r.stdout)
+
+    def test_chain_session_script_dry_run(self):
+        cp = self.checkpoint(body="# Checkpoint\n**Status:** IN PROGRESS — needs resume\n")
+        r = subprocess.run(
+            ["bash", str(ROOT / "scripts" / "chain-session.sh"), "--agy", "--file", str(cp), "--dry-run"],
+            capture_output=True, text=True,
+        )
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertIn("DRY: agy", r.stdout)
+        self.assertIn(str(cp), r.stdout)
+
 
 class InstallerCase(unittest.TestCase):
     """The opt-in installer must be idempotent and must not disturb other settings."""

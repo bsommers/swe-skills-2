@@ -70,8 +70,15 @@ Environment variables, all optional:
 | `SWE_SKILLS_CHECKPOINT_FRESH_HOURS` | `12` | Checkpoint age injected at an ordinary session start |
 | `SWE_SKILLS_CONTEXT_GUARD_DEBUG` | `0` | `1` prints internal errors to stderr |
 
-Default checkpoint globs: `docs/plans/*checkpoint*.md`, `docs/checkpoints/*.md`, `docs/CHECKPOINT.md`,
-`CHECKPOINT.md`, `.claude/checkpoints/*.md`.
+Default checkpoint globs: `docs/plans/*checkpoint*.md`, `docs/plans/*handoff*.md`, `docs/checkpoints/*.md`, `docs/CHECKPOINT.md`, `docs/HANDOFF.md`,
+`CHECKPOINT.md`, `HANDOFF.md`, `.claude/checkpoints/*.md`.
+
+To chain multiple fresh CLI sessions automatically until a checkpoint or handoff reaches `**Status:** COMPLETE`:
+
+```bash
+scripts/chain-session.sh --claude              # or --agy
+scripts/chain-session.sh --agy --max-sessions 5
+```
 
 ## Notes and limits
 

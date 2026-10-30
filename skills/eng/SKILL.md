@@ -45,6 +45,8 @@ Only the first word is matched, and only exactly. "review the auth module" runs 
 | `onboard` | `building-installers-and-onboarding` |
 | `security` | `security-best-practices` |
 | `patterns` | `architecture-best-practices` |
+| `chain` | `handing-off-sessions` |
+| `binaries` | `building-release-binaries` |
 
 ## Rules
 

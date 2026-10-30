@@ -36,11 +36,14 @@ See `references/checkpoint-template.md` for a standalone template.
 ## Open questions
 ```
 
-## Resuming
+## Resuming & Chaining Sessions
 
-1. Read the checkpoint, then **verify its state claims** (files, services, branch, versions). Trust nothing about state.
+1. Read the checkpoint (`docs/CHECKPOINT.md` or `docs/HANDOFF.md`), then **verify its state claims** (files, services, branch, versions). Trust nothing about state.
 2. Rerun the baseline test command before continuing.
 3. Update the checkpoint as you go.
+4. **Chaining across sessions (`Checkpoint -> Compact -> Handoff -> /clear -> Next Session`):**
+   - Write `docs/CHECKPOINT.md` with `**Status:** IN PROGRESS — needs resume`, compact with focus notes (`/compact keep: ...` in Claude Code), write or refresh `docs/HANDOFF.md` with synthesized findings and the exact next command, then `/clear` (or exit).
+   - The `SessionStart` hook (`context_guard.py`) automatically injects the newest checkpoint or handoff file into the next session, or run `scripts/chain-session.sh` to automatically loop fresh CLI sessions until `**Status:** COMPLETE`.
 
 ## Journals
 

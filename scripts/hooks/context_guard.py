@@ -44,9 +44,12 @@ from pathlib import Path
 SKILL = "compacting-context-safely"
 DEFAULT_GLOBS = [
     "docs/plans/*checkpoint*.md",
+    "docs/plans/*handoff*.md",
     "docs/checkpoints/*.md",
     "docs/CHECKPOINT.md",
+    "docs/HANDOFF.md",
     "CHECKPOINT.md",
+    "HANDOFF.md",
     ".claude/checkpoints/*.md",
 ]
 MAX_INJECT_CHARS = 4000
@@ -443,7 +446,9 @@ def main(argv):
         payload = {}
     if not isinstance(payload, dict):
         payload = {}
-    payload.setdefault("cwd", os.getcwd())
+    if not payload.get("cwd"):
+        ws = payload.get("workspacePaths")
+        payload["cwd"] = ws[0] if (ws and isinstance(ws, list)) else os.getcwd()
     return HANDLERS[argv[1]](payload)
 
 

@@ -55,13 +55,21 @@ Anthropic's prompt cache has a **5-minute TTL**. While turns stay `<5 min` apart
 ## Run it
 
 - **Claude Code:**
-  - **Compact:** `/compact keep: goal, user decisions, files changed, failing test X, next step; checkpoint at docs/plans/checkpoint.md`.
-  - **Clear:** Run `/clear` with checkpoint on disk; resume with `"Read <checkpoint> and verify its state claims."`
+  - **Compact:** `/compact keep: goal, user decisions, files changed, failing test X, next step; checkpoint at docs/CHECKPOINT.md`.
+  - **Clear:** Run `/clear` with checkpoint on disk; `SessionStart` hook auto-injects the checkpoint, or resume with `"Read <checkpoint> and verify its state claims."`
+  - **Full 5-Step Chain (`Checkpoint -> Compact -> Handoff -> /clear -> Resume`):**
+    1. Write initial `docs/CHECKPOINT.md` (unlocks `PreCompact` guard).
+    2. Run `/compact keep: <focus notes>; checkpoint at docs/CHECKPOINT.md` to distill active thread.
+    3. Write final handoff synthesis & journal notes to `docs/HANDOFF.md` (or refresh `docs/CHECKPOINT.md` with `**Status:** IN PROGRESS — needs resume`).
+    4. Run `/clear` (or `scripts/chain-session.sh` for automated CLI chaining) — `SessionStart` automatically injects the newest checkpoint/handoff into the fresh session.
 - **Antigravity (`agy`):**
   - **Never suggest `/compact`** (command does not exist in `agy`).
-  - Write checkpoint, exit (`/exit` or `Ctrl+D`) or new chat, then resume: `"Resume from <checkpoint>. Verify its state claims before continuing."`
+  - Write `docs/CHECKPOINT.md` (and `docs/HANDOFF.md`), then either:
+    - **Interactive:** Exit (`/exit` or `Ctrl+D`) or open New Chat (`SessionStart` hook auto-injects the checkpoint), or
+    - **In-session subagent chain:** Spawn a fresh-context `self` subagent (`invoke_subagent` with `TypeName: "self"`, `"Resume from docs/CHECKPOINT.md. Verify its state claims before continuing."`), or
+    - **Automated CLI loop:** Run `scripts/chain-session.sh --agy`.
 - If unable to trigger reset directly, give the **exact command for the harness**.
-- Hooks: Claude guards `PreCompact` and `UserPromptSubmit`; `agy` injects checkpoint on `SessionStart`.
+- Hooks: Claude guards `PreCompact` and `UserPromptSubmit`; both Claude and `agy` auto-inject the newest checkpoint/handoff on `SessionStart`.
 
 ## After: verify continuity
 
