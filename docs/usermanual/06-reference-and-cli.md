@@ -24,6 +24,7 @@ scripts/install.sh [targets] [options]
 - `--project DIR`: Project-level installation into `DIR/.claude/skills`, `DIR/.cursor/skills`, and `DIR/.cursor/rules/swe-skills.mdc`.
 
 ### Options
+- `--profile NAME`: Install targeted skill subset (`core`, `build`, `review`, `ship`, `all`; default: `all`) to reduce system prompt catalog tokens by up to ~85%.
 - `--copy`: Copy skill directories instead of creating symlinks.
 - `--force`: Overwrite existing files or symlinks with the same name.
 - `--uninstall`: Remove skills installed by this script (matching links or marker files).
@@ -150,3 +151,24 @@ skills/release/scripts/release.sh [options]
 ### Options
 - `--dry-run`: Analyzes commits, calculates bump, and prints preview without writing files.
 - `--force-bump <major|minor|patch>`: Overrides automated commit analysis.
+
+---
+
+## `scripts/chain-session.sh`
+
+Automated CLI session-chaining runner that loops fresh AI sessions from the newest checkpoint or handoff file (`docs/HANDOFF.md` or `docs/CHECKPOINT.md`) until `**Status:** COMPLETE`.
+
+### Usage
+```bash
+scripts/chain-session.sh [options]
+```
+
+### Options
+- `--claude`: Use Claude Code CLI (`claude`, default).
+- `--agy`: Use Antigravity CLI (`agy`).
+- `--file PATH`: Explicit checkpoint or handoff file path.
+- `--max-sessions N`: Maximum chained sessions before stopping (default: `5`).
+- `--once`: Run a single resumed session without looping.
+- `--print-prompt`: Print the exact resume prompt and exit.
+- `--dry-run`: Print the harness command that would execute without running it.
+- `-h, --help`: Show help message.

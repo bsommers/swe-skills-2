@@ -53,7 +53,7 @@ flowchart TD
         AI["AI Systems & Loops (2)"]
         Build["Build & Generation (9)"]
         Verify["Verify & Measure (8)"]
-        Ops["Collaborate & Ops (15)"]
+        Ops["Collaborate & Ops (16)"]
     end
 
     subgraph RuntimeHooks["Context Guards & Verification"]
@@ -94,6 +94,7 @@ flowchart TD
    - [Why Context Guards Matter](03-hooks-and-context-guards.md#why-context-guards-matter)
    - [Claude Code Hooks Lifecycle](03-hooks-and-context-guards.md#claude-code-hooks-lifecycle)
    - [Antigravity (`agy`) Hooks Lifecycle](03-hooks-and-context-guards.md#antigravity-agy-hooks-lifecycle)
+   - [5-Step Session Chaining (`Checkpoint -> Compact -> Handoff -> /clear -> Chain`)](03-hooks-and-context-guards.md#5-step-session-chaining-checkpoint---compact---handoff---clear---chain)
    - [Git Pre-Commit Security & Portability Gate](03-hooks-and-context-guards.md#git-pre-commit-security--portability-gate)
    - [Configuration Reference & Environment Variables](03-hooks-and-context-guards.md#configuration-reference--environment-variables)
    - [Debugging & Diagnostics (`report` command)](03-hooks-and-context-guards.md#debugging--diagnostics-report-command)

@@ -22,6 +22,7 @@ Maintain, expand, and verify the 55-skill `swe-skills` engineering library acros
   - `scripts/chain-session.sh`: Added CLI session-chaining runner supporting `--claude`, `--agy`, `--file`, `--max-sessions`, `--once`, `--print-prompt`, and `--dry-run`, looping fresh sessions until `**Status:** COMPLETE`.
   - `skills/compacting-context-safely/SKILL.md` & `skills/handing-off-sessions/SKILL.md`: Added 5-step session chaining workflow and recipes.
   - `skills/eng/SKILL.md`: Added `/eng chain` (`handing-off-sessions`) and `/eng binaries` (`building-release-binaries`) shortcuts.
+  - `docs/how-to.md`, `docs/running.md`, `docs/HOOKS.md`, `docs/usermanual/`, and `README.md`: Documented the 5-step session-chaining recipe, `scripts/chain-session.sh` CLI flags, `docs/HANDOFF.md` auto-injection on `/clear`, and 55-skill catalog counts.
   - `tests/test_context_guard.py`: Added unit tests for `docs/HANDOFF.md` auto-injection on `/clear`, `workspacePaths` resolution, and `scripts/chain-session.sh --dry-run` (59/59 tests passing).
 - **Installation & Verification Telemetry**:
   - `python3 scripts/lint-skills.py --words` $\rightarrow$ 55 skills, 27,786 words, 0 errors.

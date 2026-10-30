@@ -116,8 +116,28 @@ All settings can be customized via environment variables:
 | `SWE_SKILLS_CHECKPOINT_GLOBS` | *see below* | `:`-separated globs to discover checkpoints relative to repo root. |
 | `SWE_SKILLS_CONTEXT_GUARD_DEBUG` | `0` | Set to `1` to output diagnostic logging to stderr. |
 
-Default checkpoint discovery globs:
-`docs/plans/*checkpoint*.md`, `docs/checkpoints/*.md`, `docs/CHECKPOINT.md`, `CHECKPOINT.md`, `.claude/checkpoints/*.md`.
+Default checkpoint & handoff discovery globs (sorted newest-first by modification time):
+`docs/plans/*checkpoint*.md`, `docs/plans/*handoff*.md`, `docs/checkpoints/*.md`, `docs/CHECKPOINT.md`, `docs/HANDOFF.md`, `CHECKPOINT.md`, `HANDOFF.md`, `.claude/checkpoints/*.md`.
+
+---
+
+## 5-Step Session Chaining (`Checkpoint -> Compact -> Handoff -> /clear -> Chain`)
+
+To transition between sessions cleanly without losing architectural decisions, dead ends, or active working-tree state:
+
+1. **Write Initial Checkpoint (`/eng compact`):** Write `docs/CHECKPOINT.md` with `**Status:** IN PROGRESS — needs resume` (unlocks `PreCompact`).
+2. **Compact with Focus Notes (Claude Code):** Run `/compact keep: <focus notes>; checkpoint at docs/CHECKPOINT.md`.
+3. **Write Handoff (`/eng handoff` or `/eng chain`):** Write `docs/HANDOFF.md` (or update `docs/CHECKPOINT.md`) with distilled session journal notes and the exact next command.
+4. **Reset Context (`/clear` or `/exit`):** Run `/clear` in Claude Code or start a new session in Antigravity (`agy`).
+5. **Auto-Resume (`SessionStart` Hook):** `context_guard.py sessionstart` automatically injects the newest `docs/HANDOFF.md` or `docs/CHECKPOINT.md` into the new session along with verification rules.
+
+For automated multi-session CLI loops that run fresh sessions until `**Status:** COMPLETE`:
+
+```bash
+scripts/chain-session.sh --claude              # loops up to 5 fresh Claude sessions
+scripts/chain-session.sh --agy --once          # runs a single resumed Antigravity session
+scripts/chain-session.sh --print-prompt        # prints the exact resume prompt
+```
 
 ---
 

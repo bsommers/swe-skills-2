@@ -91,26 +91,50 @@ The review evaluates five distinct axes:
 
 ---
 
-## Recipe 5: Emergency Context Compaction & Resumption
+## Recipe 5: Emergency Context Compaction, Handoff & 5-Step Session Chaining
 
-When context utilization approaches 70% or session steps cross 50:
+When context utilization approaches 70% (Claude Code), session steps cross 50 (`agy`), or you want to hand off cleanly across multiple sessions without losing decisions:
 
-1. **Reach a Stable Point:** Pause active edits; run verification (`pytest -q` or `cargo test -q`).
-2. **Write Checkpoint File:** Create `docs/CHECKPOINT.md`:
+### Interactive 5-Step Chain (`Checkpoint -> Compact -> Handoff -> /clear -> Auto-Resume`)
+
+1. **Write Initial Checkpoint (`/eng compact`):**
+   Pause active edits, run verification (`pytest -q` or `cargo test -q`), and write `docs/CHECKPOINT.md` (unlocks the `PreCompact` guard):
    ```markdown
    # Checkpoint: Rate Limiting Implementation
+   **Status:** IN PROGRESS — needs resume
    - **Goal:** Implement token bucket rate limiter for auth routes.
    - **Current State:** `src/limiter.rs` created; unit tests passing (`cargo test -q`).
    - **Next Command:** Integrate limiter middleware into `src/server.rs`.
    - **Uncommitted Changes:** `git status` shows modified `src/limiter.rs`.
    ```
-3. **Reset Context:**
-   - **Claude Code:** Run `/compact keep: goal, uncommitted diffs, and docs/CHECKPOINT.md`.
-   - **Antigravity (`agy`):** Exit session (`/exit` or New Chat) and resume:
-     ```text
-     Resume from docs/CHECKPOINT.md. Verify its state claims before taking any action.
-     ```
-4. **Continuity Verification:** The `SessionStart` hook re-reads `docs/CHECKPOINT.md` and checks `git status` before generating any code.
+2. **Compact with Focus Notes (Claude Code):**
+   ```text
+   /compact keep: goal, user decisions, uncommitted diffs, next step; checkpoint at docs/CHECKPOINT.md
+   ```
+   *(The `PreCompact` hook verifies `docs/CHECKPOINT.md` was updated < 20 min ago, compacts in-place, and `SessionStart` re-injects the checkpoint into the distilled context.)*
+3. **Write Final Handoff (`/eng handoff` or `/eng chain`):**
+   Write `docs/HANDOFF.md` (or refresh `docs/CHECKPOINT.md`) with the post-compaction synthesis, session journal discoveries/dead ends, and exact next command sequence.
+4. **Reset Context (`/clear` or New Session):**
+   - **Claude Code:** Run `/clear`.
+   - **Antigravity (`agy`):** Exit (`/exit`, `Ctrl+D`, or **New Chat**), or spawn an in-session fresh-context `self` subagent (`invoke_subagent` with `TypeName: "self"`).
+5. **Automatic Chain Pickup (`SessionStart` Hook):**
+   When `/clear` or a new session starts, `context_guard.py sessionstart` automatically discovers the newest `docs/HANDOFF.md` or `docs/CHECKPOINT.md` and injects its full contents + continuity verification instructions into the new session—no manual copy-pasting required.
+
+### Automated Multi-Session CLI Loop (`scripts/chain-session.sh`)
+
+To chain fresh CLI sessions automatically until a multi-phase task reaches `**Status:** COMPLETE`:
+
+```bash
+# Loop up to 5 fresh Claude Code sessions automatically from docs/HANDOFF.md or docs/CHECKPOINT.md
+scripts/chain-session.sh --claude
+
+# Launch a single resumed Antigravity CLI session from the newest checkpoint/handoff
+scripts/chain-session.sh --agy --once
+
+# Preview the exact resume prompt or dry-run the command
+scripts/chain-session.sh --print-prompt
+scripts/chain-session.sh --agy --dry-run
+```
 
 ---
 

@@ -55,6 +55,7 @@ Or type **`/eng`**, a shortcut into the same router:
 /eng add retry logic across the four API modules   # free text -> using-swe-skills picks the skills
 /eng hunting-silent-failures src/parser            # a skill name -> loads that skill
 /eng commit                                        # a shortcut word -> committing-and-releasing-cleanly (still asks before push)
+/eng chain                                         # 5-step session chain (checkpoint -> compact -> handoff -> /clear)
 /eng help                                          # the router's skill table
 ```
 
@@ -99,15 +100,16 @@ Per project: `scripts/install.sh --project /path/to/repo` installs into `.claude
 
 Add [`templates/AGENTS.snippet.md`](templates/AGENTS.snippet.md) to a project's `AGENTS.md` so every agent knows the library exists.
 
-### Optional: context-guard hooks
+### Optional: context-guard hooks & session chaining
 
-A skill only helps if it loads in time, and an agent judges its own context use poorly. Opt-in hooks nudge it to checkpoint around 70% full, block a `/compact` that has no fresh checkpoint, and feed the checkpoint back after `/compact` or `/clear`:
+A skill only helps if it loads in time, and an agent judges its own context use poorly. Opt-in hooks nudge it to checkpoint around 70% full, block a `/compact` that has no fresh checkpoint, and feed the latest `docs/HANDOFF.md` or `docs/CHECKPOINT.md` back automatically after `/compact`, `/clear`, or a fresh session launch:
 
 ```bash
 scripts/hooks/install-hooks.py --claude --dry-run   # preview; --agy for Antigravity
+scripts/chain-session.sh --claude                   # chain fresh CLI sessions from docs/HANDOFF.md or docs/CHECKPOINT.md
 ```
 
-Nothing fires until installed. See [docs/HOOKS.md](docs/HOOKS.md) and [User Manual Chapter 3](docs/usermanual/03-hooks-and-context-guards.md) for events, settings, and limits.
+Nothing fires until installed. See [docs/HOOKS.md](docs/HOOKS.md), [How-To Recipe 5](docs/how-to.md#recipe-5-emergency-context-compaction-handoff--5-step-session-chaining), and [User Manual Chapter 3](docs/usermanual/03-hooks-and-context-guards.md) for the 5-step session-chaining workflow (`Checkpoint -> Compact with Notes -> Handoff -> /clear -> Auto-Resume`), events, settings, and limits.
 
 ---
 
@@ -121,6 +123,7 @@ plugin.json                   Antigravity plugin manifest
 templates/                    Cursor always-on rule; AGENTS.md snippet
 scripts/lint-skills.py        validates frontmatter, naming, cross-references, portability
 scripts/install.sh            installer for all targets
+scripts/chain-session.sh      multi-session CLI runner resuming from docs/HANDOFF.md or docs/CHECKPOINT.md
 scripts/hooks/                opt-in context-guard hooks + their installer
 tests/                        tests for the hook scripts
 docs/usermanual/              comprehensive 7-chapter user manual
@@ -144,7 +147,7 @@ Authoring rules: description starts with "Use when…" and states triggers only 
 
 ## Status
 
-v0.7.1. Skills are evidence-derived and verified against multi-agent test scenarios; [docs/TESTING.md](docs/TESTING.md) lists the scenarios to run.
+v0.11.0. Skills are evidence-derived and verified against multi-agent test scenarios; [docs/TESTING.md](docs/TESTING.md) lists the scenarios to run.
 
 ---
 
