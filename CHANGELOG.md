@@ -5,6 +5,51 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.11.0] - 2026-10-29
+
+### Added
+- `skills/building-release-binaries/`: Per-platform release binary skill that picks up after `release` pushes a tag: builds from a worktree of the tag on the host that can link each target, uses consistent archive names, verifies each unpacked archive (architecture, `--version`, dynamic deps, minimum OS), merges `SHA256SUMS` across hosts, and asks before uploading.
+- `skills/building-release-binaries/scripts/build-binaries.sh`: Generic Rust build script that reads the binary name and version from `Cargo.toml`, builds the host's native targets, writes `SHA256SUMS`, and optionally uploads (`--upload`, `--create-release`).
+- `scripts/install.sh`: Added `building-release-binaries` to the profile that includes `release`.
+
+### Changed
+- `skills/release/SKILL.md`: Hands off to `building-release-binaries` once the tag is pushed.
+- Expanded skills library from 54 to 55 skills across `README.md`, `skills/using-swe-skills/`, `docs/usermanual/`, `docs/EVIDENCE.md`, and `docs/TESTING.md`.
+- Synchronized all manifests to `0.11.0` (`plugin.json`, `.claude-plugin/`, `.cursor-plugin/`).
+
+## [0.10.0] - 2026-10-26
+
+### Added
+- `skills/security-best-practices/`: Defense-in-depth security engineering skill covering constant-time authentication checks, explicit multi-tenant query isolation (preventing IDOR), AEAD cryptography, strict input allowlist schemas, leak-free error handling, and supply chain CVE auditing.
+- `skills/architecture-best-practices/`: Architectural structuring skill enforcing hexagonal dependency inversion (domain core decoupled from I/O and frameworks), versioned DTO contract boundaries, acyclic dependency graphs (DAG), discrete pipeline staging, and resilience patterns (timeouts, circuit breakers).
+- `skills/eng/SKILL.md`: Added `/eng security` and `/eng patterns` shortcuts routing directly to the new skills.
+- `scripts/install.sh`: Added `architecture-best-practices` to the `build` profile and `security-best-practices` to the `review` profile.
+
+### Changed
+- Expanded skills library from 52 to 54 skills across `README.md`, `skills/using-swe-skills/`, `docs/usermanual/`, `docs/EVIDENCE.md`, and `docs/TESTING.md`.
+- Synchronized all manifests to `0.10.0` (`plugin.json`, `.claude-plugin/`, `.cursor-plugin/`).
+
+## [0.9.0] - 2026-10-25
+
+### Added
+- `docs/`: Comprehensive multi-document production documentation hub (`docs/README.md`, `docs/purpose.md`, `docs/architecture.md`, `docs/running.md`, `docs/how-to.md`).
+- `docs/diagrams/`: Multi-format architectural visual models across three distinct formats:
+  - `docs/diagrams/ascii_architecture.txt`: High-resolution terminal-ready ASCII schematic.
+  - `docs/diagrams/architecture.mmd`, `docs/diagrams/execution_flow.mmd`, `docs/diagrams/context_lifecycle.mmd`: Standalone Mermaid diagrams.
+  - `docs/diagrams/architecture.drawio`, `docs/diagrams/execution_flow.drawio`: Native draw.io XML vector diagrams.
+- `scripts/install.sh`: Added `--profile` support (`core`, `build`, `review`, `ship`, `all`) to allow selective installation of skill subsets, reducing static system prompt catalog token overhead by ~85%.
+
+### Changed
+- `skills/compacting-context-safely/SKILL.md`: Added context window turn replay multiplier analysis and quiet-flag tool output suppression directives (`cargo test -q`, `pytest -q`, `npm test -s`).
+- `skills/orchestrating-subagents/SKILL.md`: Added Rule 12 (**Subagent Log Isolation**) and delegation row for iterative build/test/lint loops to quarantine noisy compiler progress inside ephemeral `flash` subagents, shielding the primary orchestrator session from context bloat.
+- `skills/adaptive-model-routing/SKILL.md`: Documented build/test loop routing to `flash` / `flash_lite` worker subagents for log isolation.
+- `skills/layered-verification-gates/SKILL.md`: Mandated quiet verification flags by default (`-q`) across all toolchains to preserve turn token budget.
+- `skills/using-swe-skills/SKILL.md`: Added Bounded Active Set discipline (max 1–3 skills in memory concurrently) and Phase-Transition Eviction rules.
+- Synchronized all manifests to `0.9.0` (`plugin.json`, `.claude-plugin/`, `.cursor-plugin/`).
+
+### Fixed
+- `scripts/hooks/install-hooks.py`: Corrected Antigravity (`agy_hooks()`) JSON structure to use flat handler lists for `SessionStart` and `PreInvocation` with top-level named hook object, resolving `agy plugin validate .` errors.
+
 ## [0.8.0] - 2026-10-25
 
 ### Added
