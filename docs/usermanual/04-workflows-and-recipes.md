@@ -187,7 +187,7 @@ When code changes are tested, documented, and ready for deployment.
 3. **Release Execution:**
    - Analyzes git commits since the last annotated tag (`vX.Y.Z`).
    - Calculates semantic bump (`patch`, `minor`, or `major`).
-   - Synchronizes `docs/CHANGELOG.md` with reverse-chronological entry.
+   - Prepends a reverse-chronological entry to the root `CHANGELOG.md`.
    - Prompts human for explicit approval before pushing tag to remote:
      ```text
      Proposed release: v0.5.1 -> v0.6.0 (minor)

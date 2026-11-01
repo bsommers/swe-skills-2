@@ -17,7 +17,6 @@ docs/
 ├── HOOKS.md                # Context guard hooks, PreInvocation, and model routing
 ├── EVIDENCE.md             # Empirical provenance and incident history across 20+ codebases
 ├── TESTING.md              # Pressure testing scenarios and benchmark evaluation
-├── CHANGELOG.md            # Semantic version history and release ledger
 ├── diagrams/               # Multi-format architectural visual models
 │   ├── README.md           # Diagram viewing & editing guide
 │   ├── ascii_architecture.txt # Terminal-friendly ASCII schematics
