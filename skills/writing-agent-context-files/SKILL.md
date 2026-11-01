@@ -12,7 +12,7 @@ A context file is the briefing a cold agent reads at the start of every session.
 ## Contents, in order
 
 1. **What this is** — 2–3 sentences, plus in/out of scope.
-2. **Commands** — exact, copy-pastable: install, run, test (all / one file / one test), lint, build. Mark which need services.
+2. **Commands** — exact, copy-pastable: install, run, test (all / one file / one test), lint, build. Mark which need services. If a one-line gate script exists, name it first and say "PASS = done; on FAIL read only the named fail file" (`layered-verification-gates`).
 3. **Architecture map** — 8–15 lines: layers, key modules, data flow, where new code goes.
 4. **Invariants & contracts** — rules that must not break ("gold files are generated, never edited"; "tools are stdlib-only").
 5. **Pitfalls & quirks** — the things that already bit someone: shadowed package, tests that skip without a service, generated-vs-tracked data, numeric-prefixed modules.

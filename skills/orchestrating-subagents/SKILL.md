@@ -32,7 +32,8 @@ Subagents buy parallelism and fresh context; they cost tokens and can conflict. 
 9. **Never delegate understanding.** Don't write "based on your findings, fix it"; state what to do.
 10. **Respect boundaries.** A subagent working in one repo does not write to sibling repos without explicit human approval.
 11. **Verify claimed results.** A subagent's "done" is a claim; check the diff and run the tests.
-12. **Subagent log isolation.** Keep the main orchestrator on the primary reasoning model for architecture and code synthesis. Offload iterative compile/test/lint loops to an isolated fast-tier subagent (`flash` or `haiku`) so multi-step build logs never pollute main session history. The subagent returns only status and the verified diff.
+12. **Scripted gate over subagent loops.** If the repo has a silent-on-success gate script (`layered-verification-gates`), put it in every task's verify step and have the agent report only its one-line result; read `fail.txt` only on FAIL. A script costs zero tokens; a subagent running tests does not.
+13. **Subagent log isolation.** Keep the main orchestrator on the primary reasoning model for architecture and code synthesis. Offload iterative compile/test/lint loops to an isolated fast-tier subagent (`flash` or `haiku`) so multi-step build logs never pollute main session history. The subagent returns only status and the verified diff.
 
 ## Dispatch template
 

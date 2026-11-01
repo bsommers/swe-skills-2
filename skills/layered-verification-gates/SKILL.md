@@ -31,9 +31,24 @@ description: Use when deciding what "done" or "green" means, before committing, 
 - **Never lower the bar to reach green.** No deleting tests, `@ts-ignore`/`noqa` sprees, assertions removed, thresholds edited down, stubs left. If a check is wrong, fix it in its own reviewed change with the reason.
 - **Coverage is a tripwire**, not a goal. Use a threshold (e.g. ≥ 90% line, ≥ 85% branch) to catch untested code; then read the untested code (`hunting-silent-failures`).
 - **Conserve CI.** Run everything locally before pushing; batch commits; avoid WIP pushes that burn remote minutes.
+- **Scripted verification beats quiet flags.** Use the scripted gate above where one exists. Otherwise:
 - **Quiet verification by default.** Run test and build commands with quiet flags (`cargo test -q`, `pytest -q`, `npm test -s`). Routine progress lines (`Compiling <crate>`, `test ... ok`) permanently bloat conversation context and replay on every subsequent turn; quiet flags cut output tokens by ~90% while preserving failures.
 - **Counts are derived.** Don't hand-type "530 tests" in docs (`keeping-docs-in-sync`).
 - **Clean clone.** Suites must pass without optional generated outputs present.
+
+## Scripted, silent-on-success gates
+
+Prefer a script over an agent running tests and reading output. The script runs everything, writes details to files, and prints **one line**. The agent reads the line, and only on FAIL opens one small file.
+
+- **Contract:** `scripts/verify.sh` prints `PASS 31/31 9s` or `FAIL 2/31: <stages> -> <path>`; exit 0/1. PASS means done: do not inspect logs.
+- **Result tree** (e.g. `target/verify/`, gitignored): `STATUS` (PASS|FAIL), `summary.tsv` (stage, status, secs), and per stage `status`, `fail.txt` (compact excerpt, ≤40 lines: error lines, failing test names, `file:line`), `log` (full output, last resort).
+- **Granular stages:** one per tier, per test file/suite, per gate (lint, unit, each integration file, security, perf, arch). Small stages localize failure so the agent reads kilobytes, not megabytes.
+- **Cheap re-runs:** `--quick` (lint+unit), `--failed` (only last failures), `--only <stage>`, `--list`, `--status` (re-print last result without running).
+- **Auto-discovery:** new test files become stages without editing the script; new gates are added as stages with the same file contract.
+- **Not a loophole:** skips are counted/reported in the excerpt; a stage that is opt-in (e.g. `fmt` with legacy drift) is named in the script header, never silently dropped. Don't lower the bar to get PASS.
+- **Instrument for agents:** document the one-line contract in `AGENTS.md`/`CLAUDE.md` and put the script in every subagent/agy task's verify step so logs never enter context.
+
+Template: `verify.sh.template` in this skill (Rust/cargo flavored; swap `cmd_for` and `all_stages` for pytest/npm/etc.).
 
 ## Gate script skeleton
 
