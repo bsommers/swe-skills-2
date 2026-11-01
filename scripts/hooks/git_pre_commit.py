@@ -6,6 +6,7 @@ Enforces:
   2. No hardcoded secret tokens or private keys (hardening-trust-boundaries).
   3. Consistent version numbers across plugin manifests (committing-and-releasing-cleanly).
   4. Passing skill linter and docs sync (layered-verification-gates, keeping-docs-in-sync).
+  5. No duplicate copies of single-source files such as CHANGELOG.md (keeping-docs-in-sync).
 
 Usage:
   scripts/hooks/git_pre_commit.py [FILES...]
@@ -27,6 +28,10 @@ MANIFEST_PATHS = [
     ".claude-plugin/plugin.json",
     ".cursor-plugin/plugin.json",
 ]
+# Paths that duplicate a single-source file; maps the forbidden path to the canonical one.
+DUPLICATE_PATHS = {
+    "docs/CHANGELOG.md": "CHANGELOG.md",
+}
 
 
 def get_staged_files():
@@ -59,6 +64,14 @@ def check_content_rules(path, text):
     if ("skills/" in str_path or str_path.endswith("SKILL.md")) and ("TODO" in text or "TBD" in text):
         errors.append(f"{path}: contains TODO/TBD in skill definition")
     return errors
+
+
+def check_duplicate_path(rel):
+    """Reject files that duplicate a single-source file kept elsewhere."""
+    canonical = DUPLICATE_PATHS.get(Path(rel).as_posix())
+    if canonical:
+        return [f"{rel}: duplicates {canonical}; edit {canonical} instead (keeping-docs-in-sync)"]
+    return []
 
 
 def check_manifest_versions_from_data(manifest_contents: dict):
@@ -122,9 +135,11 @@ def main(argv=None):
     has_skill_changes = False
 
     for file_path in files_to_check:
+        file_path = file_path.resolve()
+        rel = str(file_path.relative_to(ROOT)) if file_path.is_relative_to(ROOT) else str(file_path)
+        errors.extend(check_duplicate_path(rel))
         if not file_path.exists() or file_path.is_dir():
             continue
-        rel = str(file_path.relative_to(ROOT)) if file_path.is_relative_to(ROOT) else str(file_path)
         if "skills/" in rel:
             has_skill_changes = True
 

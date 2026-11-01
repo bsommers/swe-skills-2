@@ -48,6 +48,19 @@ class TestGitPreCommit(unittest.TestCase):
         finally:
             sys.path.pop(0)
 
+    def test_duplicate_changelog_rejected(self):
+        """A docs/ copy of the root CHANGELOG.md must be flagged."""
+        cmd = [sys.executable, str(GUARD), str(ROOT / "docs" / "CHANGELOG.md")]
+        proc = subprocess.run(cmd, capture_output=True, text=True)
+        self.assertEqual(proc.returncode, 1)
+        self.assertIn("duplicates CHANGELOG.md", proc.stdout + proc.stderr)
+
+    def test_root_changelog_allowed(self):
+        """The canonical root CHANGELOG.md must not be flagged as a duplicate."""
+        cmd = [sys.executable, str(GUARD), str(ROOT / "CHANGELOG.md")]
+        proc = subprocess.run(cmd, capture_output=True, text=True)
+        self.assertNotIn("duplicates", proc.stdout + proc.stderr)
+
     def test_install_git_hook_dry_run(self):
         """install-hooks.py --git --dry-run must preview installation."""
         cmd = [sys.executable, str(INSTALLER), "--git", "--dry-run"]

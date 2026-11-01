@@ -25,7 +25,7 @@ The `swe-skills` context-guard hooks shift monitoring out of the agent's interna
 | `preinvocation` | `PreInvocation` | Antigravity (`agy`) | Runs before each model invocation. When session steps (default 50) or transcript size (default 500 KB) exceed limits, injects an ephemeral message directing the agent to write a checkpoint and advise the user to start a fresh chat (`/exit` or New Chat). Re-fires every +15 steps. |
 | `precompact` | `PreCompact` | Claude Code | On **manual** `/compact`, verifies whether a fresh checkpoint was touched in the last 20 minutes. If absent, exits with code 2 to **block compaction** until the agent saves state. On **auto-compaction**, it never blocks (to avoid stalling a full window). |
 | `sessionstart` | `SessionStart` | Claude Code / Antigravity | Injects the newest checkpoint file into the resumed session along with continuity verification instructions. If no checkpoint exists, instructs the agent to ask the user rather than guess past state. |
-| `pre-commit` | Git `pre-commit` | Git / All Harnesses | Scans staged files before `git commit` to block absolute machine home paths, unmasked credentials, manifest version mismatches, and skill linter errors. |
+| `pre-commit` | Git `pre-commit` | Git / All Harnesses | Scans staged files before `git commit` to block absolute machine home paths, unmasked credentials, manifest version mismatches, skill linter errors, and a duplicate `docs/CHANGELOG.md`. |
 
 ---
 
@@ -89,12 +89,13 @@ Antigravity operates without an in-place `/compact` command. Reducing context re
 
 ## Git Pre-Commit Security & Portability Gate
 
-The pre-commit guard [`scripts/hooks/git_pre_commit.py`](../../scripts/hooks/git_pre_commit.py) validates four essential invariants before allowing any commit:
+The pre-commit guard [`scripts/hooks/git_pre_commit.py`](../../scripts/hooks/git_pre_commit.py) validates five essential invariants before allowing any commit:
 
 1. **Absolute Home Paths:** Rejects any staged file containing hardcoded machine home paths (`$HOME` or user directory paths), enforcing portability (`keeping-repos-portable`).
 2. **Secret & Key Leakage:** Rejects unmasked private keys (`BEGIN PRIVATE KEY`), AWS/GitHub API tokens, and secret patterns.
 3. **Manifest Version Parity:** Verifies that version strings match exactly across `plugin.json`, `.claude-plugin/plugin.json`, `.cursor-plugin/plugin.json`, and `.claude-plugin/marketplace.json`.
 4. **Skill Linter Compliance:** Executes `lint-skills.py` to ensure all 50 skills pass frontmatter and word count validation.
+5. **Single Changelog:** Rejects a staged `docs/CHANGELOG.md`; the root `CHANGELOG.md` is the only changelog, so a second copy would drift out of date.
 
 ---
 

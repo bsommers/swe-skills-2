@@ -109,6 +109,7 @@ python3 scripts/hooks/git_pre_commit.py [FILES...]
 2. Rejects private keys and unmasked API tokens.
 3. Verifies identical version numbers across all 4 plugin manifests.
 4. Runs `scripts/lint-skills.py` to ensure all skills pass linting.
+5. Rejects `docs/CHANGELOG.md`, which would duplicate the root `CHANGELOG.md`.
 
 ---
 

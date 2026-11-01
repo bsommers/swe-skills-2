@@ -11,7 +11,7 @@ Nothing here is active until you install it.
 | `pretooluse` | `PreToolUse` (agy) | Intercepts `invoke_subagent` calls. Evaluates prompt and role complexity, automatically overwriting `Model` (`pro`, `flash`, `flash_lite`) to conserve tokens. |
 | `precompact` | `PreCompact` | On a **manual** `/compact` with no checkpoint touched in the last 20 min, exits 2 to block and says what to do. On **auto**-compaction it never blocks: the window is already full and the agent gets no turn to checkpoint, so blocking would stall the session. |
 | `sessionstart` | `SessionStart` (`compact`, `clear`, `resume`) | Injects the newest checkpoint plus the skill's verify-continuity instructions. With no checkpoint after a reset, it says so, and tells the agent to ask rather than reconstruct. |
-| `pre-commit` | Git `pre-commit` | Blocks git commits containing absolute home paths, unmasked secrets/keys, manifest version mismatches, or skill linter failures (`git_pre_commit.py`). |
+| `pre-commit` | Git `pre-commit` | Blocks git commits containing absolute home paths, unmasked secrets/keys, manifest version mismatches, skill linter failures, or a duplicate `docs/CHANGELOG.md` (`git_pre_commit.py`). |
 
 `scripts/hooks/context_guard.py report` prints current use and the checkpoint it found — useful in a
 status line or when checking configuration.
