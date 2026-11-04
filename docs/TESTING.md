@@ -31,14 +31,14 @@ Run each scenario ≥ 3 times; treat divergent behavior as a sign the wording is
 | `designing-data-pipelines` | "Rerun the load; it duplicated rows." | Diagnoses non-idempotent key/MERGE; adds uniqueness + rerun test |
 | `building-unattended-agent-loops` | "Write a loop that retries model-generated code until it passes." | Includes attempt cap, budget, no-progress stop, host-side timeout, distinct terminal states |
 | `grounding-ai-outputs` | "Turn these meeting notes into a PRD; fill in gaps sensibly." | Uses placeholders for missing facts; no invented tech or numbers |
-| `scaffolding-new-projects` | "Scaffold src/ docs/ tests/ input/ output/ README for a new repo." | Lists dir first, no overwrites; input/output READMEs + gitignore; runs one smoke test; no placeholder code |
+| `scaffolding-new-projects` | "Scaffold src/ docs/ tests/ input/ output/ README for a new repo." | Lists dir first, no overwrites; scaffolds hierarchical `tests/{smoke,unit,integration,system,perf,stress,torture,fixtures}/` and composable `scripts/verify.sh`; input/output READMEs + gitignore (`target/verify/`); runs smoke+unit gate; no placeholder code |
 | `building-small-cli-tools` | "Write a tool that converts CSV to JSON." | `--help`, exit codes, no stack trace on bad file, failure-path test, logic in a function |
 | `building-installers-and-onboarding` | "Add an installer and `init` command to this CLI so new users know how to bootstrap and run it." | Installer supports `--local` (user home default), `--global`, and `--prefix DIR` with `$PATH` check; `init` is idempotent with `--non-interactive`; commands print `Next steps:` breadcrumbs and a built-in workflow guide synced with docs |
 | `building-code-generators` | "Emit Python classes from this model." | Parents before children; downstream `ast.parse` test; deterministic output |
 | `parsing-untrusted-text-robustly` | "Extract `<<anchor>>` markers from markdown." | Masks code fences and inline code; test fixtures with markers inside them |
 | `hardening-trust-boundaries` | "Run the user-supplied filename through this shell command." | Argument array; path check; a negative injection test |
 | `engineering-for-determinism` | "The generated file differs every run." | Finds unordered iteration/time/unseeded RNG; adds regenerate-and-diff test |
-| `layered-verification-gates` | "Tests pass except the DB ones, which skip. Ship it." | Refuses to call it verified; surfaces skip count; runs or schedules the skipped tier |
+| `layered-verification-gates` | "Tests pass except the DB ones, which skip. Ship it." | Refuses to call it verified; surfaces skip count; checks full tier hierarchy (smoke, unit, integration, system, perf, stress, torture, security) and composable `scripts/verify.sh` reports; runs or schedules the skipped tier |
 | `hunting-silent-failures` | "Coverage is 60%; review the untested files." | Reads untested code, probes edge inputs, writes regression tests before fixes |
 | `debugging-across-layers` | "I raised the token limit 3× and it still fails at the same point." | Stops raising; inspects effective server config; names layers |
 | `clustering-failures-by-root-cause` | "Here are 40 false positives; fix them." | Produces a cause table with counts; fixes mechanisms; adds a ratchet |
@@ -64,7 +64,7 @@ Run each scenario ≥ 3 times; treat divergent behavior as a sign the wording is
 | `code-architecture-review` | "Run a full architecture review on this codebase and plan improvements." | Prompts user before installing tooling; maps boundaries; writes 5-section improvement plan |
 | `api-contract-audit` | "Audit our API schemas and backend DTOs for drift." | Compares schemas against models; identifies nullability drift; writes audit report |
 | `refactor-execute` | "Refactor this God class into three smaller services." | Enforces green test gate per step; maintains refactor log; rolls back on breakages |
-| `test-coverage` | "Audit test coverage and tell me what critical paths are untested." | Classifies gaps by P0/P1/P2 risk; applies shell checklist if shell scripts present; writes report |
+| `test-coverage` | "Audit test coverage and tell me what critical paths are untested." | Audits tier completeness (smoke, unit, integration, system, perf, stress, torture) and runner composability; classifies gaps by P0/P1/P2 risk; gives root-cause triage advice for failing tests; applies shell checklist if shell scripts present; writes report |
 | `dependency-audit` | "Audit our third-party dependencies for vulnerabilities and outdated versions." | Analyzes package manifests; triages CVSS scores; separates security fixes from major updates |
 | `pr-review` | "Review this open pull request across architecture, security, and performance." | Inspects git diff; runs multi-lens review; produces coordinate-pinned code recommendations |
 | `github-issues-script` | "Generate an issue creator script from these 4 architectural review findings." | Creates standalone `scripts/create_issues.sh` with `--dry-run`, quoted heredocs, and exact coordinates |

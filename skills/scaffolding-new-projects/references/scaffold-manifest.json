@@ -10,7 +10,22 @@
     },
     {
       "path": "tests/",
-      "purpose": "Test suites and fixtures/ directory.",
+      "purpose": "Hierarchical, selectable test suites (smoke/, unit/, integration/, system/, perf/, stress/, torture/) and fixtures/ directory.",
+      "git_tracked": true,
+      "subdirectories": [
+        "tests/smoke/",
+        "tests/unit/",
+        "tests/integration/",
+        "tests/system/",
+        "tests/perf/",
+        "tests/stress/",
+        "tests/torture/",
+        "tests/fixtures/"
+      ]
+    },
+    {
+      "path": "scripts/",
+      "purpose": "Verification runner (scripts/verify.sh) producing structured reports and logs in target/verify/.",
       "git_tracked": true
     },
     {

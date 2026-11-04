@@ -11,18 +11,24 @@ description: Use when deciding what "done" or "green" means, before committing, 
 
 ## Tiers
 
+Organize suites hierarchically (`tests/<tier>/` or runner markers/tags) so any tier, stage, or single test can be selected independently or composed into gates:
+
 | Tier | Proves | Notes |
 |---|---|---|
-| Unit | logic in isolation | fast (<1 s each); malformed-input negatives |
-| Integration | components and pipelines together | property tests (100+ inputs); downstream toolchain smoke tests |
-| Functional | user journeys | CLI via subprocess, E2E, REPL scripts |
-| Security | boundaries hold | injection payloads, secret/path scans, dependency audit |
+| **Smoke** | boots, imports, wiring, and config sanity | <2 s total; runs first to fail fast on broken builds/env |
+| **Unit** | logic in isolation | fast (<1 s each); boundary values and malformed-input negatives |
+| **Integration** | components, adapters, and pipelines together | property tests (100+ inputs); contract and toolchain checks |
+| **System / E2E** | full user journeys and CLI/service workflows | subprocess/API/UI end-to-end against realistic state |
+| **Performance** | latency, throughput, memory, and complexity budgets | regression ratchets against baseline percentiles |
+| **Stress** | behavior under saturation and resource exhaustion | high concurrency, queue backpressure, pool/FD limits, rate-limit recovery |
+| **Torture / Chaos** | resilience under adversarial, corrupt, and fault conditions | fuzz/property storms, kill `-9`/crash recovery, partial writes, clock skew, flaky I/O |
+| **Security** | trust boundaries hold | injection payloads, authz bypass, secret/path scans, dependency audit |
 
 ## Gates
 
-1. **Pre-commit:** full local suite green, zero warnings (`-Wall -Werror`, `clippy -D warnings`, strict lint), docs synced.
-2. **Pre-phase/milestone:** repeat the full suite, before starting *and* before declaring the phase finished.
-3. **Pre-release:** all of the above plus clean-clone run, security scan, and changelog check.
+1. **Pre-commit (`--quick`):** lint, smoke, and unit green, zero warnings (`-Wall -Werror`, `clippy -D warnings`, strict lint), docs synced.
+2. **Pre-phase/milestone (`--tier smoke,unit,integration,system,security`):** repeat full functional + security suites before starting *and* before declaring the phase finished.
+3. **Pre-release (full suite):** all tiers including performance, stress, and torture/chaos, plus coverage/completeness check (`test-coverage`), clean-clone run, security scan, and changelog check.
 
 ## Rules
 
@@ -41,14 +47,22 @@ description: Use when deciding what "done" or "green" means, before committing, 
 Prefer a script over an agent running tests and reading output. The script runs everything, writes details to files, and prints **one line**. The agent reads the line, and only on FAIL opens one small file.
 
 - **Contract:** `scripts/verify.sh` prints `PASS 31/31 9s` or `FAIL 2/31: <stages> -> <path>`; exit 0/1. PASS means done: do not inspect logs.
-- **Result tree** (e.g. `target/verify/`, gitignored): `STATUS` (PASS|FAIL), `summary.tsv` (stage, status, secs), and per stage `status`, `fail.txt` (compact excerpt, ≤40 lines: error lines, failing test names, `file:line`), `log` (full output, last resort).
-- **Granular stages:** one per tier, per test file/suite, per gate (lint, unit, each integration file, security, perf, arch). Small stages localize failure so the agent reads kilobytes, not megabytes.
-- **Cheap re-runs:** `--quick` (lint+unit), `--failed` (only last failures), `--only <stage>`, `--list`, `--status` (re-print last result without running).
-- **Auto-discovery:** new test files become stages without editing the script; new gates are added as stages with the same file contract.
-- **Not a loophole:** skips are counted/reported in the excerpt; a stage that is opt-in (e.g. `fmt` with legacy drift) is named in the script header, never silently dropped. Don't lower the bar to get PASS.
-- **Instrument for agents:** document the one-line contract in `AGENTS.md`/`CLAUDE.md` and put the script in every subagent/agy task's verify step so logs never enter context.
+- **Reports & result tree** (`target/verify/`, gitignored): `STATUS`, `summary.tsv` (`stage<TAB>tier<TAB>PASS|FAIL<TAB>secs`), `report.md`, `junit.xml`, and per-stage `status`, `fail.txt` (≤40 lines), `log`.
+- **Composable, hierarchical & cherry-picked selection:** `--quick` (lint+smoke+unit), `--tier <t1,t2>`, `--only <stage...>`, `--match <pattern>` (cherry-pick test case), `--failed`, `--list`, `--status`, `--report`.
+- **Auto-discovery:** new test files under `tests/<tier>/` or `tests/` become stages automatically.
+- **Not a loophole:** skips are counted/reported; opt-in stages are named in the script header.
+- **Instrument for agents:** document the one-line contract in `AGENTS.md`/`CLAUDE.md`.
 
-Template: `verify.sh.template` in this skill (Rust/cargo flavored; swap `cmd_for` and `all_stages` for pytest/npm/etc.).
+Templates & references: `verify.sh.template` (supports Rust/cargo and Python/pytest) and `references/TEST_TIERS_AND_TRIAGE.md`.
+
+## Triage & Fixing Failing Tests
+
+When a stage fails, follow `references/TEST_TIERS_AND_TRIAGE.md`:
+1. **Read `fail.txt` first**, then cherry-pick (`scripts/verify.sh --only <stage> --match <test>`).
+2. **Cluster multi-test failures** (`clustering-failures-by-root-cause`) by shared mechanism/layer.
+3. **Fix code, not assertions:** assume a code regression (`debugging-across-layers`) unless the contract intentionally changed. Never weaken tolerances, delete assertions, or add sleeps to mask flakiness (`engineering-for-determinism`).
+4. **Match fix to tier:** Smoke/Unit → logic/boundary; Integration/System → contract/seam (`designing-testable-seams`); Perf/Stress → complexity/contention/leak; Torture → atomicity/crash recovery.
+5. **Re-verify in rings:** `--only` → `--failed` → `--quick` → full `scripts/verify.sh`.
 
 ## Gate script skeleton
 

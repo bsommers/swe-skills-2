@@ -1,15 +1,13 @@
 ---
 name: test-coverage
-description: Use when auditing a repository's test suite to measure real coverage across languages, identify untested critical paths, evaluate shell test quality, or produce a prioritized gap-closing plan.
+description: Use when auditing a repository's test suite to measure real coverage and tier completeness (unit, integration, system, smoke, perf, stress, torture), evaluate shell test quality, diagnose failing tests, or produce a prioritized gap-closing plan.
 ---
 
 # Test Coverage & Suite Robustness Skill
 
-Audits an existing test suite, measures real coverage (not just "tests pass"), and produces a prioritized, saved-to-repo plan for closing the gaps that matter most — critical/security paths first, raw percentage last.
+Audits an existing test suite, checks **tier completeness** (smoke, unit, integration, system, performance, stress, torture/chaos) and **composable runner wiring**, measures real coverage, gives advice on fixing failing tests, and produces a saved-to-repo plan for closing the highest-risk gaps first.
 
-**Core principle:** a coverage percentage is a proxy, not the goal. A codebase at 95% line coverage with every external command unmocked and every dispatch table silently no-op-ing on bad input is less safe than one at 70% that has deliberately targeted the failure modes that actually bite. This skill treats percentage as one input among several, not the deliverable.
-
-This skill produces the report and the gap list. To actually read the gaps it flags and probe them for bugs that pass silently, hand off to `hunting-silent-failures`.
+**Core principle:** coverage percentage is a proxy, not the goal. A codebase at 95% line coverage with only unit tests, unmocked external commands, and zero stress or torture coverage is less safe than one at 70% exercising integration, system, saturation, and fault-injection paths. To probe uncovered code for bugs that pass silently, hand off to `hunting-silent-failures`.
 
 ---
 
@@ -71,24 +69,27 @@ Run the language-specific tool per `references/COVERAGE_TOOLS_MATRIX.md`:
 
 ---
 
-## Step 4: Generate Reports
+## Step 4: Generate Reports & Verify Runner Composability
 
 Produce:
-1. **Terminal summary:** Display to user immediately.
-2. **Machine-readable:** lcov/cobertura/JSON for CI gating.
-3. **HTML:** For human inspection (keep gitignored).
-The deliverable committed to repo is `templates/COVERAGE_REPORT_TEMPLATE.md` filled in.
+1. **Terminal summary & structured logs:** Display summary immediately; write per-stage logs (`log`, `fail.txt`), `summary.tsv`, `report.md`, and `junit.xml` under `target/verify/` (`layered-verification-gates`).
+2. **Coverage artifacts:** Machine-readable (lcov/cobertura/JSON) for CI gating and HTML for human inspection (gitignored).
+3. **Composability check:** Verify the test runner supports hierarchical and cherry-picked execution (`--quick`, `--tier <tier>`, `--only <stage>`, `--match <pattern>`, `--failed`).
+Commit filled-in `templates/COVERAGE_REPORT_TEMPLATE.md` to the repo.
 
 ---
 
-## Step 5: Gap Analysis — Beyond the Percentage
+## Step 5: Suite Completeness, Gap Analysis & Failure Triage
 
-Classify uncovered functions by risk:
-- **P0:** Auth, credentials, user-input command construction, network egress, privilege boundaries, destructive operations (rm/force/delete).
-- **P1:** Core execution paths (backend/driver logic). Tool fails completely if broken.
-- **P2:** Error-handling/edge cases in otherwise tested modules.
-
-Name specific functions and the concrete failure scenarios if broken silently.
+1. **Audit Tier Completeness:** Verify each tier exists, is selectable, and covers its failure class: **Smoke** (boot/import), **Unit** (isolated logic + negatives), **Integration** (contracts + property tests), **System / E2E** (full CLI/API/UI flows), **Performance** (latency/memory ratchets), **Stress** (concurrency, saturation, resource limits), **Torture / Chaos** (corrupt/adversarial inputs, crash recovery, partial I/O), and **Security** (boundaries).
+2. **Classify uncovered functions and missing tiers by risk:**
+   - **P0:** Auth, credentials, command construction, network egress, privilege boundaries, destructive operations, or crash-recovery paths lacking torture tests.
+   - **P1:** Core execution paths or missing integration/system tiers where unit mocks hide wiring bugs.
+   - **P2:** Error-handling/edge cases, performance baselines, or stress limits in otherwise tested modules.
+3. **Diagnose Failing Tests:** When any tier fails, populate Section 5 of `templates/COVERAGE_REPORT_TEMPLATE.md`:
+   - Cluster related failures by root mechanism (`clustering-failures-by-root-cause`).
+   - Distinguish code bugs (default assumption, `debugging-across-layers`) from intentionally changed contracts (`designing-testable-seams`). Never weaken assertions or add sleeps (`engineering-for-determinism`).
+   - Provide the exact fix location and cherry-pick command (`scripts/verify.sh --only <stage> --match <test>`).
 
 ---
 
@@ -102,31 +103,18 @@ Apply whenever the target includes Bash/shell code (details in `references/SHELL
 
 ---
 
-## Step 7: Save the Report
+## Step 7: Save Report & Offer CI Wiring
 
-Write the filled-in `templates/COVERAGE_REPORT_TEMPLATE.md` to:
-- `docs/TEST_COVERAGE.md` (preferred if `docs/` exists), or
-- `.planning/research/TEST_COVERAGE_<date>.md` (GSD/planning-structured projects), or
-- `TEST_COVERAGE.md` at repo root otherwise.
-
-Diff against prior reports if present to highlight regressions vs. improvements.
-
----
-
-## Step 8: Offer CI Wiring
-
-Propose:
-1. CI job running coverage and uploading artifacts.
-2. Threshold gate ("never drop below baseline").
-3. For Bash: `shell_function_reachability.sh` as a deterministic blocking check.
+1. Write filled-in `templates/COVERAGE_REPORT_TEMPLATE.md` to `docs/TEST_COVERAGE.md` (preferred), `.planning/research/TEST_COVERAGE_<date>.md`, or `TEST_COVERAGE.md`. Diff against prior reports to highlight deltas.
+2. Propose CI job running composable tiers + coverage, threshold gate ("never drop below baseline"), and `shell_function_reachability.sh` for Bash repos.
 
 ---
 
 ## Anti-Patterns to Avoid
 
-1. **Do NOT treat a raw percentage as the deliverable.** A number with no gap analysis or prioritization is not actionable.
-2. **Do NOT claim instrumented coverage works when it doesn't.** If kcov+bats produces a report attributing everything to a bats temp file (see `BASH_COVERAGE_NOTES.md`), say so and lean on the reachability script instead of reporting a misleading number.
-3. **Do NOT skip a function's tests just because the required external tool isn't installed in this environment.** Mock it instead — that's the whole point of the External-command mocking checklist item.
-4. **Do NOT install packages/tools without asking first** (matches the pattern in `code-architecture-review`'s Graphify gate).
-5. **Do NOT silently overwrite an existing coverage report** — diff and note deltas.
-6. **Do NOT stop at "tests pass."** A suite that passes 100% of its tests while never exercising the riskiest code paths (per Step 5's P0/P1 classification) is not robust, regardless of the percentage.
+1. **Raw percentage as deliverable:** A number without tier completeness or P0/P1/P2 gap analysis is not actionable.
+2. **Unit-only illusion:** 95% line coverage from unit tests alone misses integration wiring, stress saturation, and torture/crash-recovery bugs.
+3. **Fake instrumented numbers:** If kcov+bats attributes everything to a temp file (`BASH_COVERAGE_NOTES.md`), report static reachability instead.
+4. **Skipping instead of mocking:** Mock absent external tools on `PATH` rather than skipping.
+5. **Weakening failing tests:** Never delete assertions, widen tolerances, or add sleeps to get green.
+6. **Unapproved installs or silent overwrites:** Ask before installing tools; diff against prior coverage reports.

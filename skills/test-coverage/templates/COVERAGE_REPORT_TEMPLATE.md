@@ -5,15 +5,29 @@
 
 ---
 
-## 1. Test Suite Inventory
+## 1. Test Suite Inventory & Runner Composability
 
 | Dimension | Value |
 |---|---|
-| Test framework(s) | `<e.g. bats-core, pytest, vitest>` |
-| Total test files | `<N>` |
-| Total test cases | `<N>` |
+| Test framework(s) | `<e.g. bats-core, pytest, vitest, cargo test>` |
+| Composable runner | `<e.g. scripts/verify.sh (--quick, --tier, --only, --match, --failed)>` |
+| Structured logs & reports | `<e.g. target/verify/{STATUS,summary.tsv,report.md,junit.xml,<stage>/fail.txt}>` |
+| Total test files / cases | `<N files / M cases>` |
 | CI-enforced? | `<yes/no, workflow file>` |
-| Runtime | `<approx wall-clock time>` |
+| Runtime | `<quick vs. full wall-clock time>` |
+
+### Tier Completeness Matrix
+
+| Tier | Path / Marker | Cases | Status (`PASS`/`FAIL`/`MISSING`) | Select Command | Notes / Gaps |
+|---|---|---|---|---|---|
+| **Smoke** | `tests/smoke/` | `<N>` | `<status>` | `scripts/verify.sh --tier smoke` | `<boot, import, config sanity>` |
+| **Unit** | `tests/unit/` | `<N>` | `<status>` | `scripts/verify.sh --tier unit` | `<isolated logic, negatives>` |
+| **Integration** | `tests/integration/` | `<N>` | `<status>` | `scripts/verify.sh --tier integration` | `<adapters, contracts, property>` |
+| **System / E2E** | `tests/system/` | `<N>` | `<status>` | `scripts/verify.sh --tier system` | `<CLI/API/UI full workflows>` |
+| **Performance** | `tests/perf/` | `<N>` | `<status>` | `scripts/verify.sh --tier perf` | `<latency/throughput/memory budgets>` |
+| **Stress** | `tests/stress/` | `<N>` | `<status>` | `scripts/verify.sh --tier stress` | `<concurrency, saturation, limits>` |
+| **Torture / Chaos** | `tests/torture/` | `<N>` | `<status>` | `scripts/verify.sh --tier torture` | `<fuzz, corrupt I/O, crash recovery>` |
+| **Security** | `tests/security/` | `<N>` | `<status>` | `scripts/verify.sh --tier security` | `<injection, authz, boundary scans>` |
 
 ---
 
@@ -61,13 +75,23 @@ Functions that ARE referenced by tests, but only on the happy path — error bra
 
 ---
 
-## 5. Recommended Additions (Action Plan)
+## 5. Failing Test Triage & Remediation Advice (if any failures)
 
-1. `<Concrete test to add, with the file it belongs in>`
+Cluster related failures by root mechanism (`clustering-failures-by-root-cause`) before fixing individual tests:
+
+| Cluster / Stage | Failing Test(s) | Root Cause (`code bug` vs `stale test` vs `seam/fixture`) | Recommended Fix | Cherry-Pick Verify Command |
+|---|---|---|---|---|
+| `<stage>` | `<test_name>` | `<mechanism & file:line from fail.txt>` | `<fix implementation at layer X / update seam>` | `scripts/verify.sh --only <stage> --match <test_name>` |
+
+---
+
+## 6. Recommended Additions (Action Plan)
+
+1. `<Concrete test or missing tier to add, with the file/tier it belongs in>`
 2. `<...>`
 
 ---
 
-## 6. What's Already Solid
+## 7. What's Already Solid
 
 Don't bury the positives — list what's well-tested so the plan doesn't read as universally negative.
