@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.12.0] - 2026-11-03
+
+### Added
+- `skills/layered-verification-gates/verify.sh.template` & `references/TEST_TIERS_AND_TRIAGE.md`: Token-cheap, composable, hierarchical verification runner (`--quick`, `--tier`, `--only`, `--match`, `--failed`, `--list`, `--status`, `--report`) producing one-line terminal verdicts plus structured reports (`STATUS`, `summary.tsv`, `report.md`, `junit.xml`, and per-stage `fail.txt`/`log` in `target/verify/`), alongside an 8-tier test taxonomy (`smoke`, `unit`, `integration`, `system`, `perf`, `stress`, `torture`, `security`) and failing-test triage playbook.
+- `scripts/chain-session.sh` & `docs/AUTONOMY_AND_PERMISSIONS.md`: Deterministic 5-step session chaining (`Checkpoint → Compact → Handoff → Clear → Resume`) and autonomous permission configuration reference across Claude Code, Antigravity, and Cursor.
+- `scripts/hooks/git_pre_commit.py`: Pre-commit guard rejecting duplicate `docs/CHANGELOG.md` files so the root `CHANGELOG.md` remains the single canonical changelog.
+
+### Changed
+- `skills/scaffolding-new-projects/SKILL.md` & `references/scaffold-manifest.json`: Expanded project scaffolding to create the full hierarchical `tests/{smoke,unit,integration,system,perf,stress,torture,fixtures}/` layout and wire `scripts/verify.sh` on day one.
+- `skills/test-coverage/SKILL.md` & `templates/COVERAGE_REPORT_TEMPLATE.md`: Added 8-tier suite completeness auditing, runner composability checks, and root-cause triage & remediation guidance for failing tests.
+- `skills/handing-off-sessions/SKILL.md` & `skills/compacting-context-safely/SKILL.md`: Integrated 5-step session chaining (`scripts/chain-session.sh`) across documentation and user manual guides.
+- Removed duplicate `docs/CHANGELOG.md` and synchronized all references and manifests to `0.12.0` (`plugin.json`, `.claude-plugin/`, `.cursor-plugin/`).
+
 ## [0.11.0] - 2026-10-29
 
 ### Added

@@ -1,9 +1,9 @@
-# Checkpoint — 55 Skills Suite, Session Chaining & Release Binaries — 2026-10-29
+# Checkpoint — 55 Skills Suite, Composable 8-Tier Verification & v0.12.0 Release — 2026-11-03
 
 **Status:** COMPLETE & VERIFIED  
 **Branch:** `main`  
 **Working Tree:** Clean  
-**Active Release Tag:** `v0.11.0`  
+**Active Release Tag:** `v0.12.0`  
 
 ---
 
@@ -24,9 +24,11 @@ Maintain, expand, and verify the 55-skill `swe-skills` engineering library acros
   - `skills/eng/SKILL.md`: Added `/eng chain` (`handing-off-sessions`) and `/eng binaries` (`building-release-binaries`) shortcuts.
   - `docs/how-to.md`, `docs/running.md`, `docs/HOOKS.md`, `docs/usermanual/`, and `README.md`: Documented the 5-step session-chaining recipe, `scripts/chain-session.sh` CLI flags, `docs/HANDOFF.md` auto-injection on `/clear`, and 55-skill catalog counts.
   - `tests/test_context_guard.py`: Added unit tests for `docs/HANDOFF.md` auto-injection on `/clear`, `workspacePaths` resolution, and `scripts/chain-session.sh --dry-run` (59/59 tests passing).
+- **Composable 8-Tier Verification & Suite Completeness (`v0.12.0`)**:
+  - Expanded `scaffolding-new-projects`, `layered-verification-gates`, and `test-coverage` to scaffold and audit the full 8-tier test hierarchy (`smoke`, `unit`, `integration`, `system`, `perf`, `stress`, `torture`, `security`), composable/cherry-picked `scripts/verify.sh` execution (`--quick`, `--tier`, `--only`, `--match`, `--failed`, `--report`), structured reports (`STATUS`, `summary.tsv`, `report.md`, `junit.xml`, `fail.txt`), and failing-test triage/remediation guidance.
 - **Installation & Verification Telemetry**:
-  - `python3 scripts/lint-skills.py --words` $\rightarrow$ 55 skills, 27,786 words, 0 errors.
-  - `python3 -m unittest discover tests` $\rightarrow$ 59/59 tests passing.
+  - `python3 scripts/lint-skills.py --words` $\rightarrow$ 55 skills, 28,371 words, 0 errors.
+  - `python3 -m unittest discover tests` $\rightarrow$ 61/61 tests passing.
   - `agy plugin validate .` $\rightarrow$ PASS (55 skills, 1 hook).
   - `scripts/install.sh --all` $\rightarrow$ Synchronized all 55 skills and hooks across `agy`, Claude Code, Cursor, and `~/.agents/skills`.
 
