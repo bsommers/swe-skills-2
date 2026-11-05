@@ -14,7 +14,7 @@ A plan is a contract between intent and code. Write **interfaces and constraints
 1. **Goal** — 2–3 sentences: the deliverable, not the activity.
 2. **Motivation (measured)** — numbers or observed failures that justify the work ("trial 2 spent 284k tokens and still failed"). No number → say so.
 3. **Current → proposed architecture** — a small diagram; only what changes.
-4. **Contracts** — exact types/signatures/schemas each task produces or consumes. Write these before tasks; they are the seams.
+4. **Contracts** (for user-facing capabilities, include every surface per `designing-uniform-surfaces`) — exact types/signatures/schemas each task produces or consumes. Write these before tasks; they are the seams.
 5. **Global constraints** — invariants the whole change must preserve: "batch and daemon modes stay byte-identical", "no new dependencies", "all N existing tests pass", "everything new is best-effort and must not take down a run".
 6. **Tasks** — numbered, dependency-ordered. Each has: files touched, interface produced/consumed, **failing test first**, verify command, and ends committable.
 7. **Threat & failure model** — what can go wrong (bad input, dependency down, half-written state) and the mitigation or accepted risk.

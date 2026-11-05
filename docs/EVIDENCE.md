@@ -28,6 +28,7 @@ Skills were distilled from the standards, specs, audits, changelogs, fix-commit 
 | `sizing-limits-from-measurement` | `ai-model-learning` REASONING_AND_TOKENS + GUARDRAILS (12k tokens all reasoning; 131k same failure at ~450 s; server context fixed at 32k) |
 | `choosing-tools-and-substrates` | polyglot substrate standards (modern toolchains, Astral `uv` primacy); `synth` stdlib-only tooling contract; `oscal-xdr` stack rationale |
 | `designing-layered-pipelines` | `OntoLogic` and `feed-brain-gh` architecture; `airflow` thin DAGs; `agent-manager-fe` duplicate protocol types fixed by re-export; layered architectural tiering |
+| `designing-uniform-surfaces` | bilterm `Action`/`apply` dispatch and Phase 49 command-parity checklist (colon, palette, keymap, RPC, MCP); user directive (2026-11) that all surfaces be uniform by default |
 | `designing-plugin-contracts` | `agent-manager-fe` ADRs (driver contract, discovery/reattach, mock/live socket); `uitoolbox` ChartPlugin contract |
 | `designing-testable-seams` | `ai-model-learning` constructor-injection rule, typed exceptions, best-effort side paths, narrowed except fix |
 | `evolving-schemas-and-contracts` | `oscal-xdr` PITFALLS; `ai-model-learning` optional `lesson` field, `TokenUsage` invariant |

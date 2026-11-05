@@ -27,6 +27,7 @@ Unsure? `right-sizing-process`.
 | pick a language, library, runtime | `choosing-tools-and-substrates` |
 | structure a multi-stage system | `designing-layered-pipelines` |
 | support swappable backends/drivers | `designing-plugin-contracts` |
+| add a capability users or programs reach by UI, keys, mouse, CLI, API or MCP | `designing-uniform-surfaces` |
 | call APIs, DBs, HTTP, clock, LLMs; testable seams | `designing-testable-seams` |
 | define or change data shapes | `evolving-schemas-and-contracts` |
 | make a costly-to-reverse decision | `defending-architecture-decisions` |

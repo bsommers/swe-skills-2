@@ -71,7 +71,7 @@ The name is deliberately not `swe`: the older `swe-skills` suite already has a `
 |---|---|
 | **Entry** | `using-swe-skills` · `eng` |
 | **Frame & plan** | `right-sizing-process` · `writing-intent-briefs` · `planning-with-contracts` · `sizing-limits-from-measurement` · `token-finops` · `choosing-tools-and-substrates` · `adaptive-model-routing` |
-| **Architecture** | `architecture-best-practices` · `designing-layered-pipelines` · `designing-plugin-contracts` · `designing-testable-seams` · `evolving-schemas-and-contracts` · `defending-architecture-decisions` · `managing-complexity-budgets` · `designing-data-pipelines` · `code-architecture-review` · `api-contract-audit` · `refactor-execute` |
+| **Architecture** | `architecture-best-practices` · `designing-layered-pipelines` · `designing-plugin-contracts` · `designing-uniform-surfaces` · `designing-testable-seams` · `evolving-schemas-and-contracts` · `defending-architecture-decisions` · `managing-complexity-budgets` · `designing-data-pipelines` · `code-architecture-review` · `api-contract-audit` · `refactor-execute` |
 | **AI systems** | `building-unattended-agent-loops` · `grounding-ai-outputs` |
 | **Build** | `scaffolding-new-projects` · `building-small-cli-tools` · `building-installers-and-onboarding` · `building-code-generators` · `parsing-untrusted-text-robustly` · `hardening-trust-boundaries` · `security-best-practices` · `engineering-for-determinism` · `nix-environments` |
 | **Verify & measure** | `layered-verification-gates` · `hunting-silent-failures` · `debugging-across-layers` · `clustering-failures-by-root-cause` · `building-trustworthy-benchmarks` · `making-verifiable-claims` · `test-coverage` · `dependency-audit` |
