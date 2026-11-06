@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.13.0] - 2026-11-05
+
+### Added
+- `skills/designing-uniform-surfaces/`: Surface uniformity skill ensuring commands, flags, endpoints, config keys, and sibling modules share consistent naming, argument order, output shapes, and error semantics.
+- `scripts/install.sh`: Added `designing-uniform-surfaces` to the `build` installation profile.
+
+### Changed
+- `skills/planning-with-contracts/SKILL.md`: Referenced `designing-uniform-surfaces` when specifying sibling commands, flags, or API surfaces.
+- `skills/token-finops/SKILL.md`: Tightened model detection and pricing source prose below the 900-word lint threshold (zero lint warnings across all 56 skills).
+- Expanded skills library from 55 to 56 skills across `README.md`, `skills/using-swe-skills/`, `docs/running.md`, `docs/usermanual/`, `docs/EVIDENCE.md`, and `docs/TESTING.md`.
+- Synchronized all manifests to `0.13.0` (`plugin.json`, `.claude-plugin/`, `.cursor-plugin/`).
+
 ## [0.12.0] - 2026-11-03
 
 ### Added

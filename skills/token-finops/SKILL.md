@@ -15,23 +15,11 @@ Token FinOps provides end-to-end discipline for managing token spend, context de
 
 ## 1. Model Detection & Selection Protocol
 
-Before estimating budgets or executing agent pipelines, determine the active model tier:
+Before estimating budgets or executing pipelines, determine the active model tier:
 
-1. **Autonomous Detection**:
-   - Inspect environment variables (e.g. `ANTHROPIC_MODEL`, `GEMINI_MODEL`, `OPENAI_MODEL`).
-   - Read workspace agent rules (e.g. `.agents/rules/model_selection.md`, `CLAUDE.md`, `AGENTS.md`).
-   - Check local project configuration (`.climah/rate_card.toml`, `settings.json`).
-2. **Interactive Clarification / User Prompting**:
-   - If the target model cannot be determined unambiguously, **prompt the user** to select or confirm the active model tier.
-   - Example prompt:
-     > "Which model tier will drive this task?
-     > 1. Gemini 3.8 Flash ($0.75 / $3.75 per MTok) [Recommended for fast iteration]
-     > 2. Gemini 3.1 Pro ($2.00 / $12.00 per MTok) [Recommended for deep reasoning]
-     > 3. Claude Sonnet 5 ($2.00 / $10.00 per MTok)
-     > 4. Claude Opus 5 ($5.00 / $25.00 per MTok)"
-     > (Confirm current rates against the Rate Matrix below before quoting these.)
-3. **Multi-Tier Agent Hierarchies**:
-   - In hierarchical systems (e.g. `climah`, subagent swarms), resolve rates **per agent role** (e.g. Architect on Pro/Opus, Builder on Flash/Sonnet, Validator on Haiku/Flash).
+1. **Autonomous Detection**: Inspect environment variables (`ANTHROPIC_MODEL`, `GEMINI_MODEL`, `OPENAI_MODEL`), workspace rules (`CLAUDE.md`, `AGENTS.md`), and project configs (`settings.json`).
+2. **Interactive Prompting**: If the target model is ambiguous, prompt the user to confirm the tier (e.g. Gemini 3.8 Flash `$0.75/$3.75`, Gemini 3.1 Pro `$2.00/$12.00`, Claude Sonnet 5 `$2.00/$10.00`, Claude Opus 5 `$5.00/$25.00` per MTok) after verifying against the Rate Matrix below.
+3. **Multi-Tier Hierarchies**: Resolve rates **per agent role** (e.g. Architect on Pro/Opus, Builder on Flash/Sonnet, Validator on Haiku/Flash).
 
 ---
 
@@ -55,7 +43,7 @@ $$\text{Cost (USD)} = \left(\frac{\text{Input Tokens}}{1{,}000{,}000} \times \te
 
 ¹ Promotional rate through 2026-12-31; rises to $1.50 / $7.50 on 2027-01-01. Confirm before budgeting past that date.
 
-Sources: [Claude pricing](https://platform.claude.com/docs/en/about-claude/pricing) · [Gemini API pricing](https://ai.google.dev/gemini-api/docs/pricing) · [OpenAI pricing](https://platform.openai.com/docs/pricing) — the `o3-mini`/`o4-mini` and `gpt-4o` rows were cross-checked across independent sources; OpenAI's newest frontier tier was not, since the page reachable at the time carried names and a price spread too dense to corroborate, so it's omitted rather than guessed.
+Sources: [Claude pricing](https://platform.claude.com/docs/en/about-claude/pricing) · [Gemini API pricing](https://ai.google.dev/gemini-api/docs/pricing) · [OpenAI pricing](https://platform.openai.com/docs/pricing). Uncorroborated frontier rows are omitted rather than guessed.
 
 ---
 

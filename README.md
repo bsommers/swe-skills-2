@@ -65,7 +65,7 @@ The name is deliberately not `swe`: the older `swe-skills` suite already has a `
 
 ---
 
-## Skills (55)
+## Skills (56)
 
 | Group | Skills |
 |---|---|
@@ -147,7 +147,7 @@ Authoring rules: description starts with "Use when…" and states triggers only 
 
 ## Status
 
-v0.12.0. Skills are evidence-derived and verified against multi-agent test scenarios; [docs/TESTING.md](docs/TESTING.md) lists the scenarios to run.
+v0.13.0. Skills are evidence-derived and verified against multi-agent test scenarios; [docs/TESTING.md](docs/TESTING.md) lists the scenarios to run.
 
 ---
 

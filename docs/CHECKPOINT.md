@@ -1,36 +1,30 @@
-# Checkpoint — 55 Skills Suite, Composable 8-Tier Verification & v0.12.0 Release — 2026-11-03
+# Checkpoint — 56 Skills Suite, `designing-uniform-surfaces` & `v0.13.0` Release — 2026-11-05
 
 **Status:** COMPLETE & VERIFIED  
 **Branch:** `main`  
 **Working Tree:** Clean  
-**Active Release Tag:** `v0.12.0`  
+**Active Release Tag:** `v0.13.0`  
 
 ---
 
 ## 1. Goal & Context
-Maintain, expand, and verify the 55-skill `swe-skills` engineering library across Claude Code, Antigravity (`agy`), and Cursor. Ensure seamless 5-step session chaining (`Checkpoint -> Compact -> Handoff -> /clear -> Auto-Resume`), token-efficient skill execution, and multi-harness compatibility.
+Maintain, expand, and verify the 56-skill `swe-skills` engineering library across Claude Code, Antigravity (`agy`), and Cursor. Ensure seamless 5-step session chaining (`Checkpoint -> Compact -> Handoff -> /clear -> Auto-Resume`), composable 8-tier verification, token-efficient skill execution, and multi-harness compatibility.
 
 ---
 
 ## 2. Done (With Evidence)
-- **Remote Sync (`v0.11.0`)**:
-  - Rebased local commits onto `origin/main` (`7cdcfc0`, tag `v0.11.0`), incorporating `skills/building-release-binaries/` (55 skills total).
-- **Session Chaining Pipeline (`Checkpoint -> Compact -> Handoff -> /clear -> Resume`)**:
-  - `scripts/hooks/context_guard.py`:
-    - Added `docs/HANDOFF.md`, `HANDOFF.md`, and `docs/plans/*handoff*.md` to `DEFAULT_GLOBS` so `PreCompact` and `SessionStart` (`compact`, `clear`, `startup`, `resume`) automatically discover and inject whichever checkpoint or handoff file is newest.
-    - Fixed `main(argv)` workspace path resolution so `payload["workspacePaths"][0]` (passed by Antigravity) takes precedence over `os.getcwd()` (which points to the installed plugin directory).
-  - `scripts/chain-session.sh`: Added CLI session-chaining runner supporting `--claude`, `--agy`, `--file`, `--max-sessions`, `--once`, `--print-prompt`, and `--dry-run`, looping fresh sessions until `**Status:** COMPLETE`.
-  - `skills/compacting-context-safely/SKILL.md` & `skills/handing-off-sessions/SKILL.md`: Added 5-step session chaining workflow and recipes.
-  - `skills/eng/SKILL.md`: Added `/eng chain` (`handing-off-sessions`) and `/eng binaries` (`building-release-binaries`) shortcuts.
-  - `docs/how-to.md`, `docs/running.md`, `docs/HOOKS.md`, `docs/usermanual/`, and `README.md`: Documented the 5-step session-chaining recipe, `scripts/chain-session.sh` CLI flags, `docs/HANDOFF.md` auto-injection on `/clear`, and 55-skill catalog counts.
-  - `tests/test_context_guard.py`: Added unit tests for `docs/HANDOFF.md` auto-injection on `/clear`, `workspacePaths` resolution, and `scripts/chain-session.sh --dry-run` (59/59 tests passing).
+- **Merged `feat/uniform-surfaces-skill` & Released `v0.13.0`**:
+  - Fast-forward merged `feat/uniform-surfaces-skill` (`98eed34`) into `main` and deleted the merged feature branch locally and on `origin`.
+  - Added `designing-uniform-surfaces` (56th skill) to the `build` profile in `scripts/install.sh` and ran `scripts/install.sh --all`.
+  - Trimmed `skills/token-finops/SKILL.md` under 900 words so `python3 scripts/lint-skills.py --words` reports **zero warnings and zero errors** across all 56 skills.
+  - Updated skill counts (55 $\rightarrow$ 56) and synchronized all manifests (`plugin.json`, `.claude-plugin/`, `.cursor-plugin/`), `README.md`, and `CHANGELOG.md` to `v0.13.0`.
 - **Composable 8-Tier Verification & Suite Completeness (`v0.12.0`)**:
   - Expanded `scaffolding-new-projects`, `layered-verification-gates`, and `test-coverage` to scaffold and audit the full 8-tier test hierarchy (`smoke`, `unit`, `integration`, `system`, `perf`, `stress`, `torture`, `security`), composable/cherry-picked `scripts/verify.sh` execution (`--quick`, `--tier`, `--only`, `--match`, `--failed`, `--report`), structured reports (`STATUS`, `summary.tsv`, `report.md`, `junit.xml`, `fail.txt`), and failing-test triage/remediation guidance.
 - **Installation & Verification Telemetry**:
-  - `python3 scripts/lint-skills.py --words` $\rightarrow$ 55 skills, 28,371 words, 0 errors.
+  - `python3 scripts/lint-skills.py --words` $\rightarrow$ 56 skills, 0 warnings, 0 errors (`OK`).
   - `python3 -m unittest discover tests` $\rightarrow$ 61/61 tests passing.
-  - `agy plugin validate .` $\rightarrow$ PASS (55 skills, 1 hook).
-  - `scripts/install.sh --all` $\rightarrow$ Synchronized all 55 skills and hooks across `agy`, Claude Code, Cursor, and `~/.agents/skills`.
+  - `agy plugin validate .` $\rightarrow$ PASS (56 skills, 1 hook).
+  - `scripts/install.sh --all` $\rightarrow$ Synchronized all 56 skills and hooks across `agy`, Claude Code, Cursor, and `~/.agents/skills`.
 
 ---
 
@@ -40,8 +34,8 @@ Maintain, expand, and verify the 55-skill `swe-skills` engineering library acros
 ---
 
 ## 4. State That May Have Changed
-- Local symlinks in `~/.cursor/skills`, `~/.agents/skills`, and `~/.claude/skills` point to `~/src/swe-skills-2/skills/` (55 skills linked).
-- Antigravity plugin `swe-skills` active with 55 skills and 1 hook (`context-guard`).
+- Local symlinks in `~/.cursor/skills`, `~/.agents/skills`, and `~/.claude/skills` point to `~/src/swe-skills-2/skills/` (56 skills linked).
+- Antigravity plugin `swe-skills` active with 56 skills and 1 hook (`context-guard`).
 
 ---
 
@@ -49,8 +43,4 @@ Maintain, expand, and verify the 55-skill `swe-skills` engineering library acros
 1. Verify repository state:
    ```bash
    git status -sb && python3 -m unittest discover tests && python3 scripts/lint-skills.py --words
-   ```
-2. Push local commits to `origin/main` when ready:
-   ```bash
-   git push origin main
    ```

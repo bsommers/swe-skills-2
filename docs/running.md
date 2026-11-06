@@ -47,7 +47,7 @@ scripts/install.sh --claude --profile review
 | **`build`** | 16 | ~750 tokens | Greenfields, scaffolding, CLI tools | `core` + `architecture-best-practices`, `building-small-cli-tools`, `building-code-generators`, `building-installers-and-onboarding`, `designing-testable-seams`, `engineering-for-determinism`, `scaffolding-new-projects`, `debugging-across-layers` |
 | **`review`** | 16 | ~750 tokens | PR audits, security review, QA | `core` + `security-best-practices`, `pr-review`, `code-architecture-review`, `dependency-audit`, `api-contract-audit`, `test-coverage`, `running-multi-lens-audits`, `hunting-silent-failures` |
 | **`ship`** | 14 | ~650 tokens | Release cutting, binaries, changelogs | `core` + `release`, `building-release-binaries`, `writing-pull-requests`, `keeping-docs-in-sync`, `writing-user-guides`, `github-issues-script` |
-| **`all`** | 55 | ~2,750 tokens | Full comprehensive library | All 55 skills in `skills/` |
+| **`all`** | 56 | ~2,800 tokens | Full comprehensive library | All 56 skills in `skills/` |
 
 ---
 
@@ -73,7 +73,7 @@ python3 scripts/hooks/install-hooks.py --git
 
 | Command | Purpose |
 |---|---|
-| `python3 scripts/lint-skills.py --words` | Validates frontmatter, word count limits, cross-references, and naming across all 55 skills. |
+| `python3 scripts/lint-skills.py --words` | Validates frontmatter, word count limits, cross-references, and naming across all 56 skills. |
 | `python3 -m unittest discover tests` | Executes test suite for context guards, model routers, and git hooks. |
 | `agy plugin validate .` | Validates plugin manifest (`plugin.json`), hooks schema (`hooks.json`), and skill discovery. |
 | `python3 scripts/eval-router.py --self-test` | Evaluates router accuracy against the 10 benchmark scenarios in `docs/TESTING.md`. |
