@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.14.0] - 2026-11-07
+
+### Added
+- `skills/designing-exhaustive-test-cases/` & `references/test-matrix-template.md`: Pre-build exhaustive test case design skill requiring a 6-dimension test matrix (happy path, boundary/equivalence partitions, negative/malformed/adversarial inputs, idempotency/state/concurrency, dependency failure fakes, and operational/regression ratchets) plus tri-OS driver parity (`Windows`, `macOS`, `Linux`), mapped across the 8-tier test hierarchy (`smoke`, `unit`, `integration`, `system`, `perf`, `stress`, `torture`, `security`), written RED-first before build time, and wired permanently into `scripts/verify.sh` for automatic post-build execution.
+- `skills/designing-plugin-contracts/references/cross-platform-driver-architecture.md`: Cross-platform driver architecture reference for **Windows, macOS, and Linux** covering ConPTY/Job Objects vs. POSIX PTY/process groups, Named Pipes vs. Unix domain sockets (`< 104` byte macOS `sun_path`), atomic file writes (`MoveFileExW` vs. `rename`), standard OS directories (`%APPDATA%`, `~/Library/Application Support`, `$XDG_CONFIG_HOME`), injected syscall seams for cross-host unit coverage, and tri-OS contract test suites.
+- `tests/test_exhaustive_test_design.py`: Automated test suite (`TestExhaustiveTestDesignSkill` and `TestTriOSCoverageAndDriverArchitecture`) verifying `designing-exhaustive-test-cases`, tri-OS driver architecture and test coverage, portable `verify.sh.template` (no Bash 4+ `mapfile` or GNU-only `gensub`), CRLF/LF `shell_function_reachability.sh` execution, router dispatch, `/eng` shortcuts (`tdd`, `testcases`, `driver`, `drivers`), and zero-warning lint compliance.
+- `scripts/install.sh`: Added `designing-exhaustive-test-cases` (`core`, `build`, `review`) and `designing-plugin-contracts` (`build`).
+
+### Changed
+- `skills/designing-plugin-contracts/SKILL.md`: Expanded plugin/driver contract guidance to mandate **Windows, macOS, and Linux** driver support from day one with OS-agnostic host contracts and tri-OS contract test suites.
+- `skills/test-coverage/SKILL.md`, `references/COVERAGE_TOOLS_MATRIX.md`, `templates/COVERAGE_REPORT_TEMPLATE.md`, & `scripts/shell_function_reachability.sh`: Added Windows, macOS, and Linux coverage tool matrix (`cargo llvm-cov`, `llvm-cov`, `pytest-cov`, `vitest`, `coverlet`), OS-gated driver branch auditing, and Windows CRLF/POSIX `find` portability in `shell_function_reachability.sh`.
+- `skills/layered-verification-gates/verify.sh.template`: Replaced Bash 4+ `mapfile` and GNU-gawk `gensub` with POSIX/Bash 3.2 equivalents and portable `PYTHON_BIN` detection so `verify.sh` runs cleanly on Windows (Git Bash/MSYS2/WSL), macOS, and Linux.
+- `scripts/lint-skills.py` & `scripts/hooks/context_guard.py`: Added Windows path linting (`C:\Users\...`) and native tri-OS state directory resolution (`%LOCALAPPDATA%` on Windows, `~/Library/Caches` on macOS, `$XDG_STATE_HOME` on Linux).
+- `skills/planning-with-contracts/SKILL.md` & `references/plan-template.md`: Added mandatory Pre-Build Exhaustive Test Matrix section and post-build `scripts/verify.sh` task verification.
+- `skills/using-swe-skills/SKILL.md` & `skills/eng/SKILL.md`: Added routing rule and `/eng` shortcuts (`tdd`, `testcases`, `driver`, `drivers`).
+- Expanded skills library from 56 to 57 skills across `README.md`, `docs/running.md`, `docs/usermanual/`, `docs/EVIDENCE.md`, and `docs/TESTING.md`, and synchronized all manifests to `0.14.0`.
+
 ## [0.13.0] - 2026-11-05
 
 ### Added

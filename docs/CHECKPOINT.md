@@ -1,30 +1,30 @@
-# Checkpoint — 56 Skills Suite, `designing-uniform-surfaces` & `v0.13.0` Release — 2026-11-05
+# Checkpoint — 57 Skills Suite, `designing-exhaustive-test-cases` & `v0.14.0` — 2026-11-07
 
 **Status:** COMPLETE & VERIFIED  
 **Branch:** `main`  
 **Working Tree:** Clean  
-**Active Release Tag:** `v0.13.0`  
+**Active Release Tag:** `v0.14.0`  
 
 ---
 
 ## 1. Goal & Context
-Maintain, expand, and verify the 56-skill `swe-skills` engineering library across Claude Code, Antigravity (`agy`), and Cursor. Ensure seamless 5-step session chaining (`Checkpoint -> Compact -> Handoff -> /clear -> Auto-Resume`), composable 8-tier verification, token-efficient skill execution, and multi-harness compatibility.
+Maintain, expand, and verify the 57-skill `swe-skills` engineering library across Claude Code, Antigravity (`agy`), and Cursor. Ensure every planned or built feature has exhaustive pre-build test cases designed before coding (`designing-exhaustive-test-cases`) and wired into the tiered post-build test suite (`layered-verification-gates`, `scripts/verify.sh`).
 
 ---
 
 ## 2. Done (With Evidence)
-- **Merged `feat/uniform-surfaces-skill` & Released `v0.13.0`**:
-  - Fast-forward merged `feat/uniform-surfaces-skill` (`98eed34`) into `main` and deleted the merged feature branch locally and on `origin`.
-  - Added `designing-uniform-surfaces` (56th skill) to the `build` profile in `scripts/install.sh` and ran `scripts/install.sh --all`.
-  - Trimmed `skills/token-finops/SKILL.md` under 900 words so `python3 scripts/lint-skills.py --words` reports **zero warnings and zero errors** across all 56 skills.
-  - Updated skill counts (55 $\rightarrow$ 56) and synchronized all manifests (`plugin.json`, `.claude-plugin/`, `.cursor-plugin/`), `README.md`, and `CHANGELOG.md` to `v0.13.0`.
-- **Composable 8-Tier Verification & Suite Completeness (`v0.12.0`)**:
-  - Expanded `scaffolding-new-projects`, `layered-verification-gates`, and `test-coverage` to scaffold and audit the full 8-tier test hierarchy (`smoke`, `unit`, `integration`, `system`, `perf`, `stress`, `torture`, `security`), composable/cherry-picked `scripts/verify.sh` execution (`--quick`, `--tier`, `--only`, `--match`, `--failed`, `--report`), structured reports (`STATUS`, `summary.tsv`, `report.md`, `junit.xml`, `fail.txt`), and failing-test triage/remediation guidance.
-- **Installation & Verification Telemetry**:
-  - `python3 scripts/lint-skills.py --words` $\rightarrow$ 56 skills, 0 warnings, 0 errors (`OK`).
-  - `python3 -m unittest discover tests` $\rightarrow$ 61/61 tests passing.
-  - `agy plugin validate .` $\rightarrow$ PASS (56 skills, 1 hook).
-  - `scripts/install.sh --all` $\rightarrow$ Synchronized all 56 skills and hooks across `agy`, Claude Code, Cursor, and `~/.agents/skills`.
+- **Added `designing-exhaustive-test-cases` (57th skill) & `references/test-matrix-template.md`**:
+  - Mandates a 6-dimension pre-build test matrix (happy path, boundary/equivalence partitions, negative/malformed/adversarial inputs, idempotency/state/concurrency, dependency failure fakes, and operational/regression ratchets) mapped across the 8-tier suite hierarchy (`smoke`, `unit`, `integration`, `system`, `perf`, `stress`, `torture`, `security`), written RED-first before build time, and wired into `scripts/verify.sh` for automatic post-build execution.
+- **Updated Planning, Verification, Coverage & Routing Skills**:
+  - Updated `skills/planning-with-contracts/SKILL.md` and `references/plan-template.md` to require the Exhaustive Pre-Build Test Matrix and post-build `scripts/verify.sh` verification.
+  - Updated `skills/layered-verification-gates/SKILL.md` and `skills/test-coverage/SKILL.md` to enforce pre-build exhaustive test case design and post-build suite integration.
+  - Added routing in `skills/using-swe-skills/SKILL.md`, `/eng` shortcuts (`tdd`, `testcases`) in `skills/eng/SKILL.md`, and `core`/`build`/`review` profile entries in `scripts/install.sh`.
+- **Added Exhaustive Post-Build Test Suite (`tests/test_exhaustive_test_design.py`) & Tri-OS Support (Windows, macOS, Linux)**:
+  - Updated `skills/designing-plugin-contracts/SKILL.md` and added `references/cross-platform-driver-architecture.md` so driver architectures target **Windows, macOS, and Linux** from day one (ConPTY/Job Objects vs. POSIX PTY/process groups, Named Pipes vs. Unix domain sockets, `MoveFileExW` vs. `rename`, `%APPDATA%` vs. `~/Library/Application Support` vs. `$XDG_CONFIG_HOME`, injected syscall seams, and tri-OS contract test suites).
+  - Updated `skills/test-coverage/SKILL.md`, `references/COVERAGE_TOOLS_MATRIX.md`, `templates/COVERAGE_REPORT_TEMPLATE.md`, `scripts/shell_function_reachability.sh`, and `skills/layered-verification-gates/verify.sh.template` for full **Windows, macOS, and Linux** portability (eliminating Bash 4+ `mapfile`, GNU-only `gensub`, and CRLF line-ending issues).
+  - Added 11 automated tests in `tests/test_exhaustive_test_design.py` verifying skill structure, reference template, tri-OS driver and coverage support, CRLF shell reachability, cross-skill integration, router dispatch, installer/docs synchronization, and zero-warning lint compliance (total suite: 72/72 passing).
+- **Synchronized Documentation & Installed Across All Targets**:
+  - Updated `README.md`, `CHANGELOG.md`, `docs/EVIDENCE.md`, `docs/TESTING.md`, `docs/running.md`, `docs/usermanual/`, and manifests (`plugin.json`, `.claude-plugin/`, `.cursor-plugin/`) to `0.14.0` (57 skills).
 
 ---
 
@@ -34,8 +34,8 @@ Maintain, expand, and verify the 56-skill `swe-skills` engineering library acros
 ---
 
 ## 4. State That May Have Changed
-- Local symlinks in `~/.cursor/skills`, `~/.agents/skills`, and `~/.claude/skills` point to `~/src/swe-skills-2/skills/` (56 skills linked).
-- Antigravity plugin `swe-skills` active with 56 skills and 1 hook (`context-guard`).
+- Local symlinks in `~/.cursor/skills`, `~/.agents/skills`, and `~/.claude/skills` point to `~/src/swe-skills-2/skills/` (57 skills linked).
+- Antigravity plugin `swe-skills` active with 57 skills and 1 hook (`context-guard`).
 
 ---
 

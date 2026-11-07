@@ -65,12 +65,12 @@ The name is deliberately not `swe`: the older `swe-skills` suite already has a `
 
 ---
 
-## Skills (56)
+## Skills (57)
 
 | Group | Skills |
 |---|---|
 | **Entry** | `using-swe-skills` · `eng` |
-| **Frame & plan** | `right-sizing-process` · `writing-intent-briefs` · `planning-with-contracts` · `sizing-limits-from-measurement` · `token-finops` · `choosing-tools-and-substrates` · `adaptive-model-routing` |
+| **Frame & plan** | `right-sizing-process` · `writing-intent-briefs` · `planning-with-contracts` · `designing-exhaustive-test-cases` · `sizing-limits-from-measurement` · `token-finops` · `choosing-tools-and-substrates` · `adaptive-model-routing` |
 | **Architecture** | `architecture-best-practices` · `designing-layered-pipelines` · `designing-plugin-contracts` · `designing-uniform-surfaces` · `designing-testable-seams` · `evolving-schemas-and-contracts` · `defending-architecture-decisions` · `managing-complexity-budgets` · `designing-data-pipelines` · `code-architecture-review` · `api-contract-audit` · `refactor-execute` |
 | **AI systems** | `building-unattended-agent-loops` · `grounding-ai-outputs` |
 | **Build** | `scaffolding-new-projects` · `building-small-cli-tools` · `building-installers-and-onboarding` · `building-code-generators` · `parsing-untrusted-text-robustly` · `hardening-trust-boundaries` · `security-best-practices` · `engineering-for-determinism` · `nix-environments` |
@@ -147,7 +147,7 @@ Authoring rules: description starts with "Use when…" and states triggers only 
 
 ## Status
 
-v0.13.0. Skills are evidence-derived and verified against multi-agent test scenarios; [docs/TESTING.md](docs/TESTING.md) lists the scenarios to run.
+v0.14.0. Skills are evidence-derived and verified against multi-agent test scenarios; [docs/TESTING.md](docs/TESTING.md) lists the scenarios to run.
 
 ---
 

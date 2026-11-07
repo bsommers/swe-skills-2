@@ -2,7 +2,7 @@
 
 [← Back to User Manual](README.md) · [← Previous: Getting Started](01-getting-started.md) · [Next: Hooks & Context Guards →](03-hooks-and-context-guards.md)
 
-This chapter provides a structured breakdown of the **56 skills** in `swe-skills`, organized into seven functional domains.
+This chapter provides a structured breakdown of the **57 skills** in `swe-skills`, organized into seven functional domains.
 
 ---
 
@@ -31,7 +31,8 @@ Every skill adheres to strict authoring principles:
 |---|---|---|
 | [`right-sizing-process`](../../skills/right-sizing-process/SKILL.md) | Unsure how much planning, testing, documentation, or review a task deserves, when a quick script is growing into a system, or when process feels heavier or lighter than the risk. | Process tier matrix matching risk to overhead. |
 | [`writing-intent-briefs`](../../skills/writing-intent-briefs/SKILL.md) | A request is vague, when requirements come from meeting notes or a rough idea, before planning or coding starts, or when you are tempted to fill in details the user never stated. | 1-page intent brief defining core problems and non-goals. |
-| [`planning-with-contracts`](../../skills/planning-with-contracts/SKILL.md) | Writing an implementation plan or spec for a multi-file change, before touching code on anything that spans several modules, or when a plan is being executed by an agent with no prior context. | Interface contracts, module boundaries, and atomic task sequence. |
+| [`planning-with-contracts`](../../skills/planning-with-contracts/SKILL.md) | Writing an implementation plan or spec for a multi-file change, before touching code on anything that spans several modules, or when a plan is being executed by an agent with no prior context. | Interface contracts, module boundaries, exhaustive pre-build test matrix, and atomic task sequence. |
+| [`designing-exhaustive-test-cases`](../../skills/designing-exhaustive-test-cases/SKILL.md) | Planning or building new functionality, features, endpoints, CLI commands, or modules, before writing implementation code, to specify exhaustive pre-build test cases and wire them into the automated post-build test suite. | 6-dimension pre-build test matrix mapped to the 8-tier test hierarchy (`tests/<tier>/`) and wired into `scripts/verify.sh`. |
 | [`sizing-limits-from-measurement`](../../skills/sizing-limits-from-measurement/SKILL.md) | Choosing or debugging a timeout, token cap, context window, retry count, batch size, pool size, memory limit or budget, especially when a call fails at the same point no matter how high you raise the limit. | Measured empirical baselines rather than guessed limits. |
 | [`token-finops`](../../skills/token-finops/SKILL.md) | Forecasting, budgeting, tracking, and reporting LLM token consumption and dollar costs ($/MTok) across frontier models and autonomous agent workflows. | Cost modeling matrix across frontier and open-weight models. |
 | [`choosing-tools-and-substrates`](../../skills/choosing-tools-and-substrates/SKILL.md) | Picking a language, framework, database, library, or runtime for a new component, when adding a dependency, or when a proposed stack seems chosen out of habit rather than fit. | Objective trade-off rubric against maintenance burden. |
