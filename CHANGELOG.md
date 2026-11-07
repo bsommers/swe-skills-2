@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.15.0] - 2026-11-07
+
+### Added
+- `skills/compacting-context-safely/references/cadence-and-hooks.md`: Reference guide for dual-trigger periodic checkpointing and compaction (automated hook cadence + natural task-boundary self-checks).
+- `skills/hardening-ci-workflows/`, `skills/bounding-untrusted-resource-use/`, `skills/controlling-processes-safely/`, & `skills/keeping-event-loops-responsive/`: Four new build/security skills covering CI workflow hardening, untrusted allocation bounds, safe PID/process signaling, and non-blocking event-loop waiters (61 skills total).
+
+### Changed
+- `scripts/hooks/context_guard.py` & `docs/HOOKS.md`: Added periodic checkpoint cadence reminders every `12` assistant turns in Claude (`SWE_SKILLS_CHECKPOINT_CADENCE_TURNS`) and every `25` steps in Antigravity (`SWE_SKILLS_CHECKPOINT_CADENCE_STEPS`) when no fresh `<20m` checkpoint exists; expanded `context_guard.py report` with `recommendation:` (`OK`, `CHECKPOINT_DUE`, `COMPACT_OR_RESET_NOW`) and `hooks:` installation diagnostics.
+- `skills/compacting-context-safely/SKILL.md`, `skills/handing-off-sessions/SKILL.md`, `skills/supervising-autonomous-sessions/SKILL.md`, & `skills/writing-agent-context-files/SKILL.md`: Integrated periodic checkpoint cadence, hook verification (`context_guard.py report`), and phase-transition compaction rules.
+- `tests/test_context_guard.py`: Added automated tests for periodic turn/step checkpoint cadence and `report` diagnostics (`74/74` unit tests passing).
+- Synchronized all manifests (`plugin.json`, `.claude-plugin/`, `.cursor-plugin/`), `README.md`, `docs/running.md`, `docs/usermanual/`, and `docs/CHECKPOINT.md` to `0.15.0` (61 skills).
+
 ## [0.14.0] - 2026-11-07
 
 ### Added

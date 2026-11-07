@@ -147,7 +147,7 @@ Authoring rules: description starts with "Use when…" and states triggers only 
 
 ## Status
 
-v0.14.0. Skills are evidence-derived and verified against multi-agent test scenarios; [docs/TESTING.md](docs/TESTING.md) lists the scenarios to run.
+v0.15.0. Skills are evidence-derived and verified against multi-agent test scenarios; [docs/TESTING.md](docs/TESTING.md) lists the scenarios to run.
 
 ---
 

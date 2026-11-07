@@ -1,9 +1,9 @@
-# Checkpoint — 61 Skills Suite (`designing-exhaustive-test-cases`, Tri-OS Drivers & `828175f`) — 2026-11-07
+# Checkpoint — 61 Skills Suite, Periodic Cadence Hooks & `v0.15.0` Release — 2026-11-07
 
 **Status:** COMPLETE & VERIFIED  
-**Branch:** `main` (`828175f`, synced with `origin/main`)  
+**Branch:** `main`  
 **Working Tree:** Clean  
-**Latest Release Tag:** `v0.14.0` (`dbdc4e3`; `HEAD` is 1 commit ahead at `828175f`)  
+**Active Release Tag:** `v0.15.0`  
 
 ---
 
@@ -17,8 +17,9 @@ Maintain, expand, and verify the 61-skill `swe-skills` engineering library acros
   - Added `skills/designing-exhaustive-test-cases/SKILL.md` and `references/test-matrix-template.md` mandating a 6-dimension pre-build test matrix mapped across the 8-tier test hierarchy (`smoke`, `unit`, `integration`, `system`, `perf`, `stress`, `torture`, `security`) and wired into `scripts/verify.sh`.
   - Updated `skills/designing-plugin-contracts/SKILL.md` (+ `references/cross-platform-driver-architecture.md`), `skills/test-coverage/SKILL.md` (+ `references/COVERAGE_TOOLS_MATRIX.md`, `scripts/shell_function_reachability.sh`), and `skills/layered-verification-gates/verify.sh.template` for first-class **Windows, macOS, and Linux** support.
   - Added 11 automated tests in `tests/test_exhaustive_test_design.py` (`72/72` unit tests passing).
-- **Synced Latest `main` Commit (`828175f`)**:
+- **Synced Latest `main` Commit (`828175f`) & Upgraded Periodic Checkpoint/Compaction Cadence**:
   - Includes `bounding-untrusted-resource-use`, `controlling-processes-safely`, `hardening-ci-workflows`, and `keeping-event-loops-responsive` (61 skills total, 0 lint warnings/errors).
+  - Upgraded `scripts/hooks/context_guard.py`, `skills/compacting-context-safely/SKILL.md` (+ `references/cadence-and-hooks.md`), `skills/handing-off-sessions/SKILL.md`, `skills/supervising-autonomous-sessions/SKILL.md`, `skills/writing-agent-context-files/SKILL.md`, and `docs/HOOKS.md` so hooks fire **periodic checkpoint reminders** every `12` assistant turns (Claude `SWE_SKILLS_CHECKPOINT_CADENCE_TURNS`) or `25` steps (`agy` `SWE_SKILLS_CHECKPOINT_CADENCE_STEPS`) when no fresh `<20m` checkpoint exists, `context_guard.py report` outputs `recommendation:` (`OK`, `CHECKPOINT_DUE`, `COMPACT_OR_RESET_NOW`) and `hooks:` installation status, and agents self-check at every phase/commit/release boundary (`74/74` unit tests passing).
   - Installed all 61 skills across Claude Code, Antigravity (`agy`), Cursor, and `~/.agents/skills`.
 
 ---
@@ -42,4 +43,3 @@ Maintain, expand, and verify the 61-skill `swe-skills` engineering library acros
    ```bash
    git status -sb && python3 -m unittest discover tests -q && python3 scripts/lint-skills.py --words
    ```
-2. Optional: Cut `v0.15.0` if tagging `828175f` for release.
