@@ -5,9 +5,9 @@ description: Use when auditing a repository's test suite to measure real coverag
 
 # Test Coverage & Suite Robustness Skill
 
-Audits an existing test suite, checks **tier completeness** (smoke, unit, integration, system, performance, stress, torture/chaos) and **composable runner wiring**, measures real coverage, gives advice on fixing failing tests, and produces a saved-to-repo plan for closing the highest-risk gaps first.
+Audits an existing test suite across **Windows, macOS, and Linux**, checks **tier completeness** (smoke, unit, integration, system, performance, stress, torture/chaos) and **composable runner wiring**, measures real coverage, gives advice on fixing failing tests, and produces a saved-to-repo plan for closing the highest-risk gaps first (`designing-exhaustive-test-cases`).
 
-**Core principle:** coverage percentage is a proxy, not the goal. A codebase at 95% line coverage with only unit tests, unmocked external commands, and zero stress or torture coverage is less safe than one at 70% exercising integration, system, saturation, and fault-injection paths. To probe uncovered code for bugs that pass silently, hand off to `hunting-silent-failures`.
+**Core principle:** coverage percentage is a proxy, not the goal. A codebase at 95% line coverage on Linux with only unit tests, unmocked external commands, and untested Windows/macOS driver branches is less safe than one exercising integration, system, saturation, and fault-injection paths across all target OSes (`designing-plugin-contracts`). To probe uncovered code for silent bugs, hand off to `hunting-silent-failures`.
 
 ---
 
@@ -60,21 +60,21 @@ If the selected tool is uninstalled, ask the user before installing:
 
 ## Step 3: Run the Instrumented Suite
 
-Run the language-specific tool per `references/COVERAGE_TOOLS_MATRIX.md`:
+Run the language-specific tool across **Windows, macOS, and Linux** (`references/COVERAGE_TOOLS_MATRIX.md`):
 - **Python:** `pytest --cov=<package> --cov-report=term-missing --cov-report=html --cov-report=xml`
 - **Node/TS:** `vitest run --coverage` or `jest --coverage`
 - **Go:** `go test -coverprofile=coverage.out ./... && go tool cover -func=coverage.out`
-- **Rust:** `cargo llvm-cov --html`
-- **Bash / bats-core:** Run direct CLI `kcov` invocations per `references/BASH_COVERAGE_NOTES.md`. Always run `scripts/shell_function_reachability.sh` for static floor reachability.
+- **Rust:** `cargo llvm-cov --html` (cross-platform: Windows, macOS, Linux)
+- **Bash / bats-core:** Run `kcov` on Linux/macOS (`references/BASH_COVERAGE_NOTES.md`), and always run `scripts/shell_function_reachability.sh` (Linux, macOS, Windows Git Bash/WSL).
 
 ---
 
 ## Step 4: Generate Reports & Verify Runner Composability
 
 Produce:
-1. **Terminal summary & structured logs:** Display summary immediately; write per-stage logs (`log`, `fail.txt`), `summary.tsv`, `report.md`, and `junit.xml` under `target/verify/` (`layered-verification-gates`).
+1. **Terminal summary & structured logs:** Display summary; write per-stage logs (`log`, `fail.txt`), `summary.tsv`, `report.md`, and `junit.xml` in `target/verify/` (`layered-verification-gates`).
 2. **Coverage artifacts:** Machine-readable (lcov/cobertura/JSON) for CI gating and HTML for human inspection (gitignored).
-3. **Composability check:** Verify the test runner supports hierarchical and cherry-picked execution (`--quick`, `--tier <tier>`, `--only <stage>`, `--match <pattern>`, `--failed`).
+3. **Composability check:** Verify runner supports `--quick`, `--tier <tier>`, `--only <stage>`, `--match <pattern>`, `--failed`.
 Commit filled-in `templates/COVERAGE_REPORT_TEMPLATE.md` to the repo.
 
 ---

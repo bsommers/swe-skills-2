@@ -56,7 +56,7 @@ for p in "${lib_paths[@]}"; do
     elif [[ -d "$p" ]]; then
         while IFS= read -r f; do
             lib_files+=("$f")
-        done < <(find "$p" -type f \( -name "*.sh" -o -perm -u+x \) 2>/dev/null | grep -v '\.bats$' || true)
+        done < <(find "$p" -type f \( -name "*.sh" -o -perm -100 \) 2>/dev/null | grep -v '\.bats$' || true)
     fi
 done
 
@@ -91,11 +91,12 @@ declare -a fn_files=()
 # against this exact failure mode — keep it portable.
 for f in "${lib_files[@]}"; do
     while IFS= read -r line; do
+        line="${line%$'\r'}"
         name="$(sed -E 's/^[[:space:]]*(function[[:space:]]+)?([A-Za-z_][A-Za-z0-9_]*)[[:space:]]*\(\).*/\2/; s/^[[:space:]]*function[[:space:]]+([A-Za-z_][A-Za-z0-9_]*).*/\1/' <<<"$line")"
         [[ -z "$name" ]] && continue
         fn_names+=("$name")
         fn_files+=("$f")
-    done < <(grep -E '^[[:space:]]*(function[[:space:]]+)?[A-Za-z_][A-Za-z0-9_]*[[:space:]]*\(\)[[:space:]]*\{?[[:space:]]*$|^[[:space:]]*function[[:space:]]+[A-Za-z_][A-Za-z0-9_]*[[:space:]]*\{?[[:space:]]*$' "$f" || true)
+    done < <(tr -d '\r' < "$f" | grep -E '^[[:space:]]*(function[[:space:]]+)?[A-Za-z_][A-Za-z0-9_]*[[:space:]]*\(\)[[:space:]]*\{?[[:space:]]*$|^[[:space:]]*function[[:space:]]+[A-Za-z_][A-Za-z0-9_]*[[:space:]]*\{?[[:space:]]*$' || true)
 done
 
 if [[ ${#fn_names[@]} -eq 0 ]]; then
@@ -104,8 +105,8 @@ if [[ ${#fn_names[@]} -eq 0 ]]; then
 fi
 
 # Build one big haystack of test-file contents to grep against (fast: one
-# read instead of N greps per function).
-test_corpus="$(cat "${test_files[@]}" 2>/dev/null || true)"
+# read instead of N greps per function; strip CRLF for Windows compatibility).
+test_corpus="$(cat "${test_files[@]}" 2>/dev/null | tr -d '\r' || true)"
 
 unreached=()
 reached_count=0

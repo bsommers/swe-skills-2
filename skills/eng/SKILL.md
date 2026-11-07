@@ -28,6 +28,7 @@ Only the first word is matched, and only exactly. "review the auth module" runs 
 | `pr` | `writing-pull-requests` |
 | `issues` | `drafting-issue-reports` |
 | `plan` | `planning-with-contracts` |
+| `tdd`, `testcases` | `designing-exhaustive-test-cases` |
 | `debug` | `debugging-across-layers` |
 | `size` | `right-sizing-process` |
 | `handoff` | `handing-off-sessions` |
@@ -45,6 +46,7 @@ Only the first word is matched, and only exactly. "review the auth module" runs 
 | `onboard` | `building-installers-and-onboarding` |
 | `security` | `security-best-practices` |
 | `patterns` | `architecture-best-practices` |
+| `driver`, `drivers` | `designing-plugin-contracts` |
 | `chain` | `handing-off-sessions` |
 | `binaries` | `building-release-binaries` |
 

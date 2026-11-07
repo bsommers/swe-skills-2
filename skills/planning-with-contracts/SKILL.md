@@ -16,9 +16,10 @@ A plan is a contract between intent and code. Write **interfaces and constraints
 3. **Current → proposed architecture** — a small diagram; only what changes.
 4. **Contracts** (for user-facing capabilities, include every surface per `designing-uniform-surfaces`) — exact types/signatures/schemas each task produces or consumes. Write these before tasks; they are the seams.
 5. **Global constraints** — invariants the whole change must preserve: "batch and daemon modes stay byte-identical", "no new dependencies", "all N existing tests pass", "everything new is best-effort and must not take down a run".
-6. **Tasks** — numbered, dependency-ordered. Each has: files touched, interface produced/consumed, **failing test first**, verify command, and ends committable.
-7. **Threat & failure model** — what can go wrong (bad input, dependency down, half-written state) and the mitigation or accepted risk.
-8. **Verification plan** — exact commands and the expected output/count.
+6. **Exhaustive pre-build test matrix** (`designing-exhaustive-test-cases`) — before writing implementation tasks, specify all test cases across happy paths, boundary/equivalence partitions, negative/malformed/adversarial inputs, idempotency/concurrency, and dependency faults, mapped to suite tiers (`smoke`, `unit`, `integration`, `system`, `perf`, `stress`, `torture`, `security`) so they are wired into `scripts/verify.sh` and run after every build (`layered-verification-gates`).
+7. **Tasks** — numbered, dependency-ordered. Each has: files touched, interface produced/consumed, **exhaustive failing tests written first**, verify command, and ends committable.
+8. **Threat & failure model** — what can go wrong (bad input, dependency down, half-written state) and the mitigation or accepted risk.
+9. **Verification plan** — exact post-build suite commands (`scripts/verify.sh`) and the expected output/count.
 
 ## Task template (and plan skeleton)
 
@@ -26,11 +27,11 @@ See `references/plan-template.md` for a complete skeleton.
 
 ```markdown
 ### Task 3: <verb phrase>
-**Files:** modify `a.py`, test `tests/test_a.py`
+**Files:** modify `a.py`, test `tests/unit/test_a.py`, `tests/integration/test_a_flow.py`
 **Produces:** `NoProgressError(AgentFrameworkError)` with `.record`
-- [ ] Write failing test (state the expected failure message)
-- [ ] Implement minimal change
-- [ ] Verify: `pytest tests/test_a.py -q` → all pass
+- [ ] Write failing test cases from pre-build matrix (happy, boundary, negative, fault; state expected failure)
+- [ ] Implement minimal change to satisfy contract
+- [ ] Wire into post-build test suite and verify: `scripts/verify.sh --only test_a` → all pass
 ```
 
 ## Review the plan before executing

@@ -13,7 +13,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SKILLS = ROOT / "skills"
 NAME_RE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
-ABS_PATH_RE = re.compile(r"(/home/[A-Za-z0-9_-]+|/Users/[A-Za-z0-9_-]+)")
+ABS_PATH_RE = re.compile(r"(/home/[A-Za-z0-9_-]+|/Users/[A-Za-z0-9_-]+|[A-Za-z]:\\Users\\[A-Za-z0-9_-]+)")
 MAX_DESC = 1024
 WARN_DESC = 500
 WARN_WORDS = 900

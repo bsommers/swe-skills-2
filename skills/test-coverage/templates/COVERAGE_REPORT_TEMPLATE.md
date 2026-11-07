@@ -13,6 +13,7 @@
 | Composable runner | `<e.g. scripts/verify.sh (--quick, --tier, --only, --match, --failed)>` |
 | Structured logs & reports | `<e.g. target/verify/{STATUS,summary.tsv,report.md,junit.xml,<stage>/fail.txt}>` |
 | Total test files / cases | `<N files / M cases>` |
+| Target OS matrix | `<Windows / macOS / Linux — native CI + injected-seam unit coverage>` |
 | CI-enforced? | `<yes/no, workflow file>` |
 | Runtime | `<quick vs. full wall-clock time>` |
 

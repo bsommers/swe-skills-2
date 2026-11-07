@@ -23,6 +23,7 @@ Unsure? `right-sizing-process`.
 |---|---|
 | get a fuzzy request | `writing-intent-briefs` |
 | write a plan or spec | `planning-with-contracts` |
+| plan or build new functionality; design exhaustive test cases before coding | `designing-exhaustive-test-cases` |
 | set a timeout, token cap, batch or pool size | `sizing-limits-from-measurement` |
 | pick a language, library, runtime | `choosing-tools-and-substrates` |
 | structure a multi-stage system | `designing-layered-pipelines` |

@@ -21,6 +21,7 @@ set -uo pipefail
 cd "$(dirname "$0")/.."
 OUT=target/verify
 mkdir -p "$OUT"
+PYTHON_BIN="${PYTHON:-$(command -v python3 2>/dev/null || command -v python 2>/dev/null || echo python3)}"
 
 TIERS=(lint smoke unit integration system perf stress torture security)
 
@@ -64,7 +65,7 @@ cmd_for() {
     esac
   elif [ -f pyproject.toml ] || [ -d tests ]; then
     case "$s" in
-      lint)   echo "ruff check . 2>/dev/null || python3 -m py_compile src/**/*.py 2>/dev/null || true" ;;
+      lint)   echo "ruff check . 2>/dev/null || $PYTHON_BIN -m py_compile src/**/*.py 2>/dev/null || true" ;;
       unit)   echo "pytest -q -rs tests/unit ${m:+-k $m}" ;;
       *:*)
         local target
@@ -99,7 +100,8 @@ write_reports() {
     echo "| Stage | Tier | Status | Time (s) | Log / Failure Excerpt |"
     echo "|---|---|---|---|---|"
     awk -F'\t' -v out="$OUT" '{
-      ref = ($3 == "FAIL") ? out "/" gensub(/:/, "_", "g", $1) "/fail.txt" : out "/" gensub(/:/, "_", "g", $1) "/log"
+      s = $1; gsub(/:/, "_", s)
+      ref = ($3 == "FAIL") ? out "/" s "/fail.txt" : out "/" s "/log"
       printf "| `%s` | `%s` | **%s** | %ss | `%s` |\n", $1, $2, $3, $4, ref
     }' "$OUT/summary.tsv"
   } >"$OUT/report.md"
@@ -140,10 +142,13 @@ while [ $# -gt 0 ]; do
 done
 
 case $mode in
-  full)   mapfile -t stages < <(all_stages | cut -f1) ;;
-  tier)   mapfile -t stages < <(all_stages | awk -F'\t' -v tl=",$tiers_csv," 'index(tl, ","$2",")>0{print $1}') ;;
-  failed) mapfile -t stages < <(awk -F'\t' '$3=="FAIL"{print $1}' "$OUT/summary.tsv" 2>/dev/null)
-          [ ${#stages[@]} -eq 0 ] && { echo "PASS nothing-failed"; exit 0; } ;;
+  full)
+    while IFS= read -r line_stg; do [ -n "$line_stg" ] && stages+=("$line_stg"); done < <(all_stages | cut -f1) ;;
+  tier)
+    while IFS= read -r line_stg; do [ -n "$line_stg" ] && stages+=("$line_stg"); done < <(all_stages | awk -F'\t' -v tl=",$tiers_csv," 'index(tl, ","$2",")>0{print $1}') ;;
+  failed)
+    while IFS= read -r line_stg; do [ -n "$line_stg" ] && stages+=("$line_stg"); done < <(awk -F'\t' '$3=="FAIL"{print $1}' "$OUT/summary.tsv" 2>/dev/null)
+    [ ${#stages[@]} -eq 0 ] && { echo "PASS nothing-failed"; exit 0; } ;;
 esac
 
 [ ${#stages[@]} -eq 0 ] && { echo "no stages matched (try --list)"; exit 2; }

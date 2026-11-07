@@ -180,10 +180,13 @@ def newest_checkpoint(cwd, max_age_seconds=None):
 def state_file(session_id):
     base = os.environ.get("SWE_SKILLS_CONTEXT_GUARD_STATE_DIR")
     if not base:
-        base = os.path.join(
-            os.environ.get("XDG_STATE_HOME") or os.path.expanduser("~/.local/state"),
-            "swe-skills", "context-guard",
-        )
+        if sys.platform == "win32":
+            root = os.environ.get("LOCALAPPDATA") or os.path.expanduser("~/AppData/Local")
+        elif sys.platform == "darwin":
+            root = os.environ.get("XDG_STATE_HOME") or os.path.expanduser("~/Library/Caches")
+        else:
+            root = os.environ.get("XDG_STATE_HOME") or os.path.expanduser("~/.local/state")
+        base = os.path.join(root, "swe-skills", "context-guard")
     return Path(base) / f"{session_id or 'unknown'}.json"
 
 

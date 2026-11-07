@@ -35,33 +35,45 @@ def process_entry(entry: ProcessingContract) -> bool:
 - All test suites pass with zero warnings.
 - Graceful degradation: errors in auxiliary reporting must not crash main execution.
 
-## 6. Tasks
-<!-- Numbered, dependency-ordered. Failing test first, minimal edit, verify command. -->
+## 6. Pre-Build Exhaustive Test Matrix
+<!-- Specify all test cases BEFORE coding (per designing-exhaustive-test-cases) and wire into tests/<tier>/. -->
+| ID | Dimension | Scenario & Input | Expected Outcome | Tier | Target Test File |
+|---|---|---|---|---|---|
+| TC-01 | Happy Path | Valid `ProcessingContract` payload | Returns `True`, state persisted | `unit` / `system` | `tests/unit/test_models.py` |
+| TC-02 | Boundary | Empty payload `{}`, `0` timestamp, max size | Clean boundary handling or typed limit error | `unit` | `tests/unit/test_models.py` |
+| TC-03 | Negative / Adversarial | Missing `id`, invalid types, injection payload | Raises `ValidationError` with field name | `unit` / `security` | `tests/security/test_validation.py` |
+| TC-04 | Idempotency / Concurrency | Duplicate `id` replay and parallel calls | Idempotent result; no duplicate writes | `integration` / `stress` | `tests/integration/test_engine.py` |
+| TC-05 | Dependency Fault | Downstream store timeout / corrupt I/O via fake | Surfaces typed error; zero partial state | `torture` | `tests/torture/test_engine_faults.py` |
 
-### Task 1: <Contract definition and unit test harness>
-**Files:** `src/models.py`, `tests/test_models.py`
+## 7. Tasks
+<!-- Numbered, dependency-ordered. Failing tests from matrix first, minimal edit, post-build suite verify command. -->
+
+### Task 1: <Contract definition and exhaustive unit/boundary test harness>
+**Files:** `src/models.py`, `tests/unit/test_models.py`, `tests/security/test_validation.py`
 **Produces:** Core data models and validation functions
-- [ ] Write failing test in `tests/test_models.py` (expected: model validation failure on missing fields)
+- [ ] Write failing tests `TC-01`..`TC-03` in `tests/unit/test_models.py` and `tests/security/test_validation.py` (expected: validation failure on missing/malformed fields)
 - [ ] Implement minimal model definitions in `src/models.py`
-- [ ] Verify: `pytest tests/test_models.py -q`
+- [ ] Verify in post-build suite: `scripts/verify.sh --quick`
 
-### Task 2: <Component integration and implementation>
-**Files:** `src/engine.py`, `tests/test_engine.py`
+### Task 2: <Component integration, fault handling, and implementation>
+**Files:** `src/engine.py`, `tests/integration/test_engine.py`, `tests/torture/test_engine_faults.py`
 **Produces:** Integrated pipeline stage honoring contracts
-- [ ] Write failing test in `tests/test_engine.py`
+- [ ] Write failing tests `TC-04`..`TC-05` in `tests/integration/test_engine.py` and `tests/torture/test_engine_faults.py`
 - [ ] Implement pipeline transformation
-- [ ] Verify: `pytest tests/test_engine.py -q`
+- [ ] Verify full post-build suite: `scripts/verify.sh`
 
-## 7. Threat & Failure Model
+## 8. Threat & Failure Model
 <!-- What can go wrong and how it is mitigated or accepted. -->
 | Threat / Edge Case | Likelihood | Impact | Mitigation |
 |---|---|---|---|
 | Malformed input data | High | Med | Validate against contract upfront; return clean nonzero status. |
 | Timeout on large payloads | Med | High | Enforce deadline on client side and process in bounded chunks. |
 
-## 8. Verification Plan
-<!-- Exact terminal commands and expected counts/outputs. -->
+## 9. Verification Plan
+<!-- Exact post-build terminal commands and expected counts/outputs. -->
 ```bash
+scripts/verify.sh --quick
+scripts/verify.sh
 pytest -q tests/
 ruff check .
 python3 -m mypy .

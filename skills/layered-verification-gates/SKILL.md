@@ -32,6 +32,7 @@ Organize suites hierarchically (`tests/<tier>/` or runner markers/tags) so any t
 
 ## Rules
 
+- **Exhaustive pre-build tests wired post-build.** Design the full test matrix before coding (`designing-exhaustive-test-cases`), add cases into `tests/<tier>/`, and run them after every build.
 - **Skipped ≠ passed.** A test skipped because a service is down proves nothing. Print the skip reason, report the skip count, and run the skipped tier somewhere (a container run) before release.
 - **Evidence before assertion.** State results with the command and its output ("`pytest -q` → 384 passed in 6.1s"), never "should be fine".
 - **Never lower the bar to reach green.** No deleting tests, `@ts-ignore`/`noqa` sprees, assertions removed, thresholds edited down, stubs left. If a check is wrong, fix it in its own reviewed change with the reason.
