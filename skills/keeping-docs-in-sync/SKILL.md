@@ -29,6 +29,10 @@ Docs drift silently and then mislead agents and humans alike. Make sync **part o
 8. **Diagrams and text agree.** Every node in a diagram exists in the prose and code; sanitize labels so Mermaid renders (parentheses, colons, and quotes in edge labels break it).
 9. **Docs coherence check** in the gate script: greps for stale terms, verifies links resolve, compares quoted counts to real ones.
 
+## Version strings and context files
+
+Current-version strings drift across badges, headers, man pages, examples, and packaging: derive from the manifest or grep-gate them, and leave historical mentions alone. Agent context files drift on counts and paths. Details: `references/version-and-context-drift.md`.
+
 ## Docs check sketch
 
 ```bash

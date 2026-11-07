@@ -42,6 +42,10 @@ Unsure? `right-sizing-process`.
 | emit code/config from a model | `building-code-generators` |
 | parse or scrape text/HTML | `parsing-untrusted-text-robustly` |
 | touch shell, SQL, paths, secrets, sandboxes | `hardening-trust-boundaries` |
+| write or review CI workflows, pin actions, add dependency gates | `hardening-ci-workflows` |
+| size or count comes from untrusted input; capped lists | `bounding-untrusted-resource-use` |
+| signal a PID from a pid/lock file; stop/status for daemons | `controlling-processes-safely` |
+| add a wait/poll handler to a request or serve loop | `keeping-event-loops-responsive` |
 | handle auth, sessions, crypto, user input, prevent exploits | `security-best-practices` |
 | see flaky or churning output | `engineering-for-determinism` |
 | structure system, decouple business logic, set module boundaries | `architecture-best-practices` |

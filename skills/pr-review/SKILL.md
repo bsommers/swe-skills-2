@@ -142,6 +142,12 @@ gh pr review <PR_NUMBER> --comment --body "<Review Markdown>"
 
 ---
 
+## External and AI-Generated PRs
+
+Check manifest/lockfile/build-script changes, pinned SHAs, `pull_request` vs `_target`, mergeability via `git merge-tree --write-tree`, and the merged result rather than the PR head; order CI/infra merges first. See `references/triaging-external-prs.md` and `hardening-ci-workflows`.
+
+---
+
 ## Review Anti-Patterns
 
 1. **Do NOT nitpick pure style/formatting**: Rely on linters/Prettier. Focus on architecture, correctness, security, and edge cases.

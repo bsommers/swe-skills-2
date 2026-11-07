@@ -20,6 +20,7 @@ Injection happens where data becomes code. At each boundary, **separate data fro
 | Container builds | allowlist base images; forbid fetch-and-exec `RUN` lines; review the Dockerfile as a committed file | build arbitrary third-party images |
 | Executing model/third-party code | no network, drop all capabilities, `no-new-privileges`, pid/mem caps, host-enforced timeout | rely on the script's own restraint |
 | Extensions / plugins | narrowest host permissions; no unneeded web-accessible resources | request "all URLs" for convenience |
+| Control sequences forwarded to a privileged sink (clipboard, host terminal) | bound each by its own terminator; allowlist exact grammar; drop query forms; re-emit parsed parts | prefix-check then pass raw bytes (`references/forwarding-control-sequences.md`) |
 | Telemetry | none by default; offline-capable core | phone home silently |
 | Reflected content (exports, logs) | escape/sanitize for the output context | assume upstream content is safe |
 
@@ -45,4 +46,5 @@ A base-image allowlist and a pipe-to-shell check are **speed bumps, not a sandbo
 - Escaping in one layer and concatenating in the next.
 - Allowlists that match by prefix and are bypassed by lookalikes.
 - Treating "internal only" input as trusted.
+- Unbounded sizes from input (`bounding-untrusted-resource-use`); signalling a PID from a file (`controlling-processes-safely`); workflow files (`hardening-ci-workflows`).
 - Security fixes without a regression test.

@@ -65,7 +65,7 @@ The name is deliberately not `swe`: the older `swe-skills` suite already has a `
 
 ---
 
-## Skills (57)
+## Skills (61)
 
 | Group | Skills |
 |---|---|
@@ -73,7 +73,7 @@ The name is deliberately not `swe`: the older `swe-skills` suite already has a `
 | **Frame & plan** | `right-sizing-process` · `writing-intent-briefs` · `planning-with-contracts` · `designing-exhaustive-test-cases` · `sizing-limits-from-measurement` · `token-finops` · `choosing-tools-and-substrates` · `adaptive-model-routing` |
 | **Architecture** | `architecture-best-practices` · `designing-layered-pipelines` · `designing-plugin-contracts` · `designing-uniform-surfaces` · `designing-testable-seams` · `evolving-schemas-and-contracts` · `defending-architecture-decisions` · `managing-complexity-budgets` · `designing-data-pipelines` · `code-architecture-review` · `api-contract-audit` · `refactor-execute` |
 | **AI systems** | `building-unattended-agent-loops` · `grounding-ai-outputs` |
-| **Build** | `scaffolding-new-projects` · `building-small-cli-tools` · `building-installers-and-onboarding` · `building-code-generators` · `parsing-untrusted-text-robustly` · `hardening-trust-boundaries` · `security-best-practices` · `engineering-for-determinism` · `nix-environments` |
+| **Build** | `scaffolding-new-projects` · `building-small-cli-tools` · `building-installers-and-onboarding` · `building-code-generators` · `parsing-untrusted-text-robustly` · `hardening-trust-boundaries` · `hardening-ci-workflows` · `bounding-untrusted-resource-use` · `controlling-processes-safely` · `keeping-event-loops-responsive` · `security-best-practices` · `engineering-for-determinism` · `nix-environments` |
 | **Verify & measure** | `layered-verification-gates` · `hunting-silent-failures` · `debugging-across-layers` · `clustering-failures-by-root-cause` · `building-trustworthy-benchmarks` · `making-verifiable-claims` · `test-coverage` · `dependency-audit` |
 | **Collaborate & sustain** | `orchestrating-subagents` · `running-multi-lens-audits` · `supervising-autonomous-sessions` · `handing-off-sessions` · `compacting-context-safely` · `writing-agent-context-files` · `writing-user-guides` · `keeping-docs-in-sync` · `keeping-repos-portable` · `drafting-issue-reports` · `writing-pull-requests` · `pr-review` · `github-issues-script` · `committing-and-releasing-cleanly` · `release` · `building-release-binaries` |
 

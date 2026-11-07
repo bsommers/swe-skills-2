@@ -39,6 +39,7 @@ Generate or symlink the pointers so they cannot drift. Keep each file under ~200
 
 - When an agent trips on something twice, add a line under Pitfalls.
 - When a command or count changes, update the file in the same commit (`keeping-docs-in-sync`).
+- Verify stated file counts and module paths by script; a wrong path to a security helper sends agents to a nonexistent module (`keeping-docs-in-sync`).
 - Test it: hand it to a fresh agent and ask it to run the tests and locate where feature X would go.
 
 ## Subagent and output guidance (if wanted)

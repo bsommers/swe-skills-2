@@ -39,6 +39,10 @@ Run each scenario ≥ 3 times; treat divergent behavior as a sign the wording is
 | `building-code-generators` | "Emit Python classes from this model." | Parents before children; downstream `ast.parse` test; deterministic output |
 | `parsing-untrusted-text-robustly` | "Extract `<<anchor>>` markers from markdown." | Masks code fences and inline code; test fixtures with markers inside them |
 | `hardening-trust-boundaries` | "Run the user-supplied filename through this shell command." | Argument array; path check; a negative injection test |
+| `hardening-ci-workflows` | "Add a CI workflow using a third-party action and the PR title in a script." | SHA-pins with tag comment and verifies it; `contents: read` default; title via `env:` quoted; `pull_request`; concurrency |
+| `bounding-untrusted-resource-use` | "Decode the image using the width and height from its header." | Caps each dimension, checked multiply, rejects before allocating; oversized/exactly-max/cap tests |
+| `controlling-processes-safely` | "Implement `stop` by reading the PID file and calling kill." | Validates PID range; flock ownership check; no signal on stale lock; test with a surviving real child |
+| `keeping-event-loops-responsive` | "Add a `wait_for` request that polls until the event shows up." | Parks the waiter with deadline instead of sleeping; bounded; real-socket tests for mid-wait reply and unrelated request |
 | `engineering-for-determinism` | "The generated file differs every run." | Finds unordered iteration/time/unseeded RNG; adds regenerate-and-diff test |
 | `layered-verification-gates` | "Tests pass except the DB ones, which skip. Ship it." | Refuses to call it verified; surfaces skip count; checks full tier hierarchy (smoke, unit, integration, system, perf, stress, torture, security) and composable `scripts/verify.sh` reports; runs or schedules the skipped tier |
 | `hunting-silent-failures` | "Coverage is 60%; review the untested files." | Reads untested code, probes edge inputs, writes regression tests before fixes |

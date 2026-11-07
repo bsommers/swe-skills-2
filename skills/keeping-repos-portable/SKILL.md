@@ -22,6 +22,10 @@ A repo should work from a fresh clone on another machine, in CI, and in a contai
    `SIBLING_DIR="${SIBLING_DIR:-$REPO_ROOT/../sibling}"`.
 4. **Shebangs:** `#!/usr/bin/env bash`, `#!/usr/bin/env python3`.
 5. **POSIX-safe shell.** Avoid bash-4-only features if macOS's bash 3.2 must run it (associative arrays, `mapfile`); avoid GNU-only flags (`sed -i` differs).
+   - macOS `/bin/bash` is 3.2: no `mapfile`/`readarray`; use `while IFS= read -r line; do ...; done`.
+   - Under `set -u`, bash < 4.4 errors on `"${arr[@]}"` for an empty array; use `${arr[@]+"${arr[@]}"}` and handle "no items selected" explicitly.
+   - BSD `wc -l` left-pads; normalize with `$(( $(wc -l <f) ))`.
+   - Test scripts under the oldest shell you claim to support.
 6. **Pin toolchains** and record versions; prefer lockfiles; use `uv` for Python when present with a `venv` fallback.
 7. **Configurable ports and paths.** Defaults that collide with common services (8080) should be unusual or overridable via env.
 8. **No ambient dependence.** Don't rely on files, env vars, running services, or global installs the repo doesn't document or create.

@@ -41,6 +41,8 @@ Security is a fundamental architectural constraint, not an afterthought or final
    - Pin all dependency versions with lockfiles.
    - Scan package trees for known CVEs and obsolete libraries before committing (`dependency-audit`).
 
+7. **Private State Files:** write all state, config, and session files through one helper (0600 atomic files, 0700 dirs) and guard against raw writes; see `references/private-state-files.md`.
+
 ## Common Mistakes
 
 - Hardcoded secrets or permissive defaults in development environments leaking into production.
