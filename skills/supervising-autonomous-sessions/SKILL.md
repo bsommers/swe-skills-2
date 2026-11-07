@@ -39,7 +39,7 @@ Stop and report — do not push through — when:
 ## While running
 
 - **Evidence with every claim** — command and output.
-- **Checkpoint per phase** (`handing-off-sessions`), so a crash resumes instead of restarts.
+- **Checkpoint per phase and on periodic cadence** (`handing-off-sessions`, `compacting-context-safely`), so a crash resumes instead of restarts. Keep `context_guard.py` hooks installed (`scripts/hooks/install-hooks.py --claude --agy`) and check `python3 scripts/hooks/context_guard.py report` between tasks.
 - **Small commits after green,** local verification before any push (CI minutes are finite).
 - **Keep a running blocker/discovery log;** surprises are the most valuable output.
 - **No lateral writes.** Cross-repo changes require human approval.

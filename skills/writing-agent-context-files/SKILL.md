@@ -18,7 +18,8 @@ A context file is the briefing a cold agent reads at the start of every session.
 5. **Pitfalls & quirks** — the things that already bit someone: shadowed package, tests that skip without a service, generated-vs-tracked data, numeric-prefixed modules.
 6. **Style** — only conventions a linter can't enforce.
 7. **Verification before commit** — the gate commands.
-8. **Living vs historical docs** — which files to trust.
+8. **Context & checkpoint cadence** — state the project's checkpoint/compact rhythm (e.g. refresh `docs/CHECKPOINT.md` at phase/commit boundaries and every ~12 turns / ~25 steps via `context_guard.py` hooks; see `compacting-context-safely`).
+9. **Living vs historical docs** — which files to trust.
 
 ## Leave out
 

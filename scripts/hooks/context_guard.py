@@ -20,7 +20,9 @@ Configuration (all optional, env vars):
   SWE_SKILLS_CONTEXT_PCT_STEP         re-nudge every N more %% (default 10)
   SWE_SKILLS_IDLE_MINUTES             idle gap before cold-cache resume nudge (default 30)
   SWE_SKILLS_IDLE_MIN_TOKENS          min context tokens for idle resume nudge (default 30000)
-  SWE_SKILLS_AGY_STEP_LIMIT           step count before agy nudge (default 50)
+  SWE_SKILLS_CHECKPOINT_CADENCE_TURNS periodic checkpoint reminder every N assistant turns (default 12)
+  SWE_SKILLS_CHECKPOINT_CADENCE_STEPS periodic checkpoint reminder every N agy steps (default 25)
+  SWE_SKILLS_AGY_STEP_LIMIT           step count before agy reset nudge (default 50)
   SWE_SKILLS_AGY_STEP_STEP            re-nudge agy every N more steps (default 15)
   SWE_SKILLS_AGY_BYTES_LIMIT          transcript bytes before agy nudge (default 500000)
   SWE_SKILLS_CONTEXT_GUARD_BLOCK      1 = block stale manual /compact (default 1)
@@ -117,6 +119,29 @@ def last_turn_stats(transcript_path):
                     ts = None
             return total, ts
     return None, None
+
+
+def assistant_turns(transcript_path):
+    """Count main-thread assistant turns in transcript_path."""
+    if not transcript_path:
+        return 0
+    p = Path(transcript_path)
+    try:
+        lines = p.read_text(encoding="utf-8", errors="replace").splitlines()
+    except OSError:
+        return 0
+    count = 0
+    for line in lines:
+        line = line.strip()
+        if not line:
+            continue
+        try:
+            rec = json.loads(line)
+        except ValueError:
+            continue
+        if rec.get("type") == "assistant" and not rec.get("isSidechain"):
+            count += 1
+    return count
 
 
 def context_used(transcript_path):
@@ -225,17 +250,22 @@ def cmd_nudge(payload):
         return 0
     limit = max(env_int("SWE_SKILLS_CONTEXT_LIMIT", 200000), 1)
     pct = used * 100.0 / limit
+    turns = assistant_turns(tpath)
 
     first = env_int("SWE_SKILLS_CONTEXT_PCT", 70)
     step = max(env_int("SWE_SKILLS_CONTEXT_PCT_STEP", 10), 1)
     idle_thresh = env_int("SWE_SKILLS_IDLE_MINUTES", 30)
     idle_min_tok = env_int("SWE_SKILLS_IDLE_MIN_TOKENS", 30000)
+    cadence_turns = env_int("SWE_SKILLS_CHECKPOINT_CADENCE_TURNS", 12)
+    fresh_min = env_int("SWE_SKILLS_CHECKPOINT_FRESH_MINUTES", 20)
+    cp = newest_checkpoint(payload.get("cwd"), fresh_min * 60)
 
     idle_min = max(0.0, (time.time() - ts) / 60.0) if ts is not None else 0.0
     pct_triggered = pct >= first
     idle_triggered = (idle_thresh > 0) and (idle_min >= idle_thresh) and (used >= idle_min_tok)
+    cadence_triggered = (cadence_turns > 0) and (turns >= cadence_turns) and (cp is None)
 
-    if not (pct_triggered or idle_triggered):
+    if not (pct_triggered or idle_triggered or cadence_triggered):
         return 0
 
     session = payload.get("session_id")
@@ -253,11 +283,25 @@ def cmd_nudge(payload):
             return 0
         state["last_idle_turn_ts"] = ts
 
+    if cadence_triggered and not (pct_triggered or idle_triggered):
+        last_cadence = state.get("last_cadence_turn")
+        if last_cadence is not None and turns < last_cadence + cadence_turns:
+            return 0
+        state["last_cadence_turn"] = turns
+
     write_state(session, state)
 
-    cp = newest_checkpoint(payload.get("cwd"), env_int("SWE_SKILLS_CHECKPOINT_FRESH_MINUTES", 20) * 60)
     have = f"A recent checkpoint exists at {cp}; update it rather than starting a new one." if cp else \
         "No recent checkpoint was found."
+
+    if cadence_triggered and not (pct_triggered or idle_triggered):
+        emit("UserPromptSubmit", (
+            f"[context guard] Periodic checkpoint cadence reached ({turns} assistant turns, {pct:.0f}% of window) "
+            f"with no fresh checkpoint in the last {fresh_min} min. At the next natural boundary (phase/task completion, "
+            f"green verification gate, or commit), write or refresh `docs/CHECKPOINT.md` (`{SKILL}`) and suggest `/compact` "
+            f"if switching phases."
+        ))
+        return 0
 
     if idle_triggered and not pct_triggered:
         emit("UserPromptSubmit", (
@@ -342,9 +386,18 @@ def cmd_preinvocation(payload):
 
     step_limit = env_int("SWE_SKILLS_AGY_STEP_LIMIT", 50)
     step_step = max(env_int("SWE_SKILLS_AGY_STEP_STEP", 15), 1)
+    cadence_steps = env_int("SWE_SKILLS_CHECKPOINT_CADENCE_STEPS", 25)
+    fresh_min = env_int("SWE_SKILLS_CHECKPOINT_FRESH_MINUTES", 20)
     idle_thresh = env_int("SWE_SKILLS_IDLE_MINUTES", 30)
 
+    cwd = payload.get("cwd")
+    if not cwd:
+        ws = payload.get("workspacePaths")
+        cwd = ws[0] if (ws and isinstance(ws, list)) else os.getcwd()
+    cp = newest_checkpoint(cwd, fresh_min * 60)
+
     step_triggered = steps >= step_limit
+    cadence_triggered = (cadence_steps > 0) and (steps >= cadence_steps) and (cp is None)
 
     bytes_limit = env_int("SWE_SKILLS_AGY_BYTES_LIMIT", 500000)
     size_triggered = False
@@ -363,7 +416,7 @@ def cmd_preinvocation(payload):
         except OSError:
             pass
 
-    if not (step_triggered or size_triggered or idle_triggered):
+    if not (step_triggered or size_triggered or idle_triggered or cadence_triggered):
         json.dump({}, sys.stdout)
         sys.stdout.write("\n")
         return 0
@@ -377,6 +430,14 @@ def cmd_preinvocation(payload):
             return 0
         state["last_agy_nudge_step"] = steps if steps > 0 else (last_step or 0) + step_step
 
+    if cadence_triggered and not (step_triggered or size_triggered or idle_triggered):
+        last_cadence_step = state.get("last_agy_cadence_step")
+        if last_cadence_step is not None and steps > 0 and steps < last_cadence_step + step_step:
+            json.dump({}, sys.stdout)
+            sys.stdout.write("\n")
+            return 0
+        state["last_agy_cadence_step"] = steps if steps > 0 else (last_cadence_step or 0) + step_step
+
     if idle_triggered:
         last_idle_mtime = state.get("last_agy_idle_mtime")
         if last_idle_mtime is not None and t_mtime is not None and abs(t_mtime - last_idle_mtime) < 1.0 and not (step_triggered or size_triggered):
@@ -387,14 +448,18 @@ def cmd_preinvocation(payload):
 
     write_state(session_id, state)
 
-    cwd = payload.get("cwd")
-    if not cwd:
-        ws = payload.get("workspacePaths")
-        cwd = ws[0] if (ws and isinstance(ws, list)) else os.getcwd()
-
-    cp = newest_checkpoint(cwd, env_int("SWE_SKILLS_CHECKPOINT_FRESH_MINUTES", 20) * 60)
     have = f"A recent checkpoint exists at {cp}; update it rather than starting a new one." if cp else \
         "No recent checkpoint was found."
+
+    if cadence_triggered and not (step_triggered or size_triggered or idle_triggered):
+        msg = (
+            f"[context guard] Periodic checkpoint cadence reached ({steps} steps without a fresh checkpoint in the last {fresh_min} min). "
+            f"At the next natural boundary (phase/task completion, green test gate, or commit), write or refresh `docs/CHECKPOINT.md` (`{SKILL}`), "
+            f"and if switching phases, advise starting a fresh session."
+        )
+        json.dump({"injectSteps": [{"ephemeralMessage": msg}]}, sys.stdout)
+        sys.stdout.write("\n")
+        return 0
 
     if idle_triggered and not (step_triggered or size_triggered):
         reason = f"Session resumed after {idle_min:.0f} min idle (cold prompt cache)"
@@ -418,14 +483,38 @@ def cmd_report(payload):
     tpath = payload.get("transcript_path")
     used, pct = pct_used(payload)
     idle_min = idle_minutes(tpath)
+    turns = assistant_turns(tpath)
     cwd = payload.get("cwd") or os.getcwd()
+    fresh_min = env_int("SWE_SKILLS_CHECKPOINT_FRESH_MINUTES", 20)
     if pct is None:
         print("context: unknown (no usage found in transcript)")
     else:
         idle_str = f", idle {idle_min:.0f}m" if idle_min is not None else ""
-        print(f"context: {used} tokens, {pct:.0f}% of {env_int('SWE_SKILLS_CONTEXT_LIMIT', 200000)}{idle_str}")
+        print(f"context: {used} tokens, {pct:.0f}% of {env_int('SWE_SKILLS_CONTEXT_LIMIT', 200000)}, {turns} turns{idle_str}")
     cp = newest_checkpoint(cwd)
-    print(f"checkpoint: {cp}" if cp else "checkpoint: none found")
+    cp_fresh = newest_checkpoint(cwd, fresh_min * 60)
+    if cp:
+        age_m = max(0.0, (time.time() - cp.stat().st_mtime) / 60.0)
+        status_tag = "fresh" if cp_fresh else "stale"
+        print(f"checkpoint: {cp} (age {age_m:.0f}m, {status_tag})")
+    else:
+        print("checkpoint: none found")
+
+    if pct is not None and pct >= env_int("SWE_SKILLS_CONTEXT_PCT", 70):
+        rec = f"COMPACT_OR_RESET_NOW (window at {pct:.0f}%)"
+    elif idle_min is not None and idle_min >= env_int("SWE_SKILLS_IDLE_MINUTES", 30) and (used or 0) >= env_int("SWE_SKILLS_IDLE_MIN_TOKENS", 30000):
+        rec = f"COMPACT_OR_RESET_NOW (idle {idle_min:.0f}m, cold cache)"
+    elif cp_fresh is None and turns >= env_int("SWE_SKILLS_CHECKPOINT_CADENCE_TURNS", 12):
+        rec = f"CHECKPOINT_DUE ({turns} turns without fresh checkpoint)"
+    else:
+        rec = "OK"
+    print(f"recommendation: {rec}")
+
+    claude_cfg = Path.home() / ".claude" / "settings.json"
+    claude_ok = claude_cfg.exists() and "context_guard.py" in claude_cfg.read_text(encoding="utf-8", errors="ignore")
+    agy_cfg = Path(__file__).resolve().parent.parent.parent / "hooks.json"
+    agy_ok = agy_cfg.exists() and "context_guard.py" in agy_cfg.read_text(encoding="utf-8", errors="ignore")
+    print(f"hooks: claude={'installed' if claude_ok else 'missing'} agy={'installed' if agy_ok else 'missing'}")
     return 0
 
 

@@ -264,6 +264,48 @@ class GuardCase(unittest.TestCase):
         r = self.run_guard("report", {"transcript_path": str(self.context(100000)), "cwd": str(self.dir)})
         self.assertIn("50% of 200000", r.stdout)
         self.assertIn("checkpoint.md", r.stdout)
+        self.assertIn("recommendation:", r.stdout)
+        self.assertIn("hooks:", r.stdout)
+
+    def test_nudge_fires_on_periodic_turn_cadence_without_fresh_checkpoint(self):
+        t = self.dir / "cadence.jsonl"
+        recs = []
+        for i in range(12):
+            recs.append({"type": "user", "message": {"role": "user", "content": f"turn {i}"}})
+            recs.append({"type": "assistant", "message": {"usage": {
+                "input_tokens": 100,
+                "cache_creation_input_tokens": 100,
+                "cache_read_input_tokens": 30000,
+                "output_tokens": 50,
+            }}})
+        t.write_text("".join(json.dumps(r) + "\n" for r in recs), encoding="utf-8")
+        payload = {"session_id": "s_cadence", "transcript_path": str(t), "cwd": str(self.dir)}
+        # No checkpoint -> periodic cadence fires even though 30k is only 15% of 200k window
+        r1 = self.run_guard("nudge", payload)
+        self.assertEqual(r1.returncode, 0)
+        ctx = json.loads(r1.stdout)["hookSpecificOutput"]["additionalContext"]
+        self.assertIn("Periodic checkpoint cadence", ctx)
+        self.assertIn("12 assistant turns", ctx)
+        # Throttled on immediate next check at same turn count
+        r2 = self.run_guard("nudge", payload)
+        self.assertEqual(r2.stdout.strip(), "")
+        # With a fresh checkpoint, a new session at 12 turns stays silent below 70%
+        self.checkpoint()
+        r3 = self.run_guard("nudge", {"session_id": "s_cadence_fresh", "transcript_path": str(t), "cwd": str(self.dir)})
+        self.assertEqual(r3.stdout.strip(), "")
+
+    def test_preinvocation_fires_on_periodic_step_cadence_without_fresh_checkpoint(self):
+        # 30 steps is below the 50-step reset threshold, but >= 25-step checkpoint cadence
+        payload = {"conversationId": "c_cadence", "initialNumSteps": 30, "cwd": str(self.dir)}
+        r1 = self.run_guard("preinvocation", payload)
+        self.assertEqual(r1.returncode, 0)
+        msg = json.loads(r1.stdout)["injectSteps"][0]["ephemeralMessage"]
+        self.assertIn("Periodic checkpoint cadence", msg)
+        self.assertIn("30 steps", msg)
+        # With a fresh checkpoint, 30 steps is silent (since < 50 steps)
+        self.checkpoint()
+        r2 = self.run_guard("preinvocation", {"conversationId": "c_cadence_fresh", "initialNumSteps": 30, "cwd": str(self.dir)})
+        self.assertEqual(json.loads(r2.stdout), {})
 
     def test_handoff_md_injected_on_clear_and_workspace_paths_resolved(self):
         handoff = self.dir / "docs" / "HANDOFF.md"

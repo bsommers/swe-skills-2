@@ -9,8 +9,9 @@ description: Use when pausing or ending a work session, resuming after a break o
 
 Context evaporates; files persist. Leave a record a **zero-context reader** can act on in minutes: what's done (with evidence), what failed (with cause), what changed underneath, and the exact next command.
 
-## Pausing vs. ending a session
+## Pausing vs. ending a session (and periodic checkpoint cadence)
 
+- **Periodic cadence during active work:** Do not wait until context is exhausted. Refresh `docs/CHECKPOINT.md` at every completed phase/commit/release boundary and whenever `context_guard.py` flags `CHECKPOINT_DUE` (every `12` turns in Claude or `25` steps in `agy` without a `<20 min` checkpoint; see `compacting-context-safely`).
 - **Short break (<5 min):** Leave the session open so the 5-minute prompt cache stays warm.
 - **Extended pause (>15–30 min) or switching tasks:** Write the checkpoint file below, terminate any background watchers/daemons (`bg` jobs can auto-wake and rebuild expired prompt caches at 12.5x token cost), and either `/compact`, `/clear`, or `/exit`.
 - **Resuming after an uncompacted pause:** If `context_guard.py` flags a cold-cache resume (`>30 min` idle with `≥30k` tokens), answer the immediate prompt concisely, write/update the checkpoint, and compact or clear before continuing multi-turn work.
