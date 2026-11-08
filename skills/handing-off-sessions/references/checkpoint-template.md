@@ -1,3 +1,9 @@
+---
+status: IN PROGRESS — needs resume   # or COMPLETE; one line
+next: `git status && pytest -q`      # single exact next command
+depends: []                          # optional repo names this waits on
+---
+
 # Checkpoint — <Topic / Component> — YYYY-MM-DD
 
 **Status:** IN PROGRESS — needs resume <!-- or COMPLETE -->

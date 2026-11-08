@@ -37,6 +37,23 @@ See `references/checkpoint-template.md` for a standalone template.
 ## Open questions
 ```
 
+## Machine-readable header (for cross-repo coordinators)
+
+Tools like `~/src/tools/coordinator` index every repo's checkpoint with plain parsing, no LLM. Keep it exact by putting a small frontmatter block at the top of `docs/CHECKPOINT.md` / `docs/HANDOFF.md` / `docs/STATUS.md` and refreshing it whenever the checkpoint changes:
+
+```markdown
+---
+status: IN PROGRESS — needs resume     # one line; or COMPLETE
+next: `pytest -q tests/unit`           # the single exact next command
+depends: [other-repo, another]         # optional; names of repos this one waits on
+---
+```
+
+- Keep the `**Status:**` line and a `## Next steps` heading (numbered prefixes like `## 6. Next Steps` are fine). The coordinator falls back to them, but frontmatter wins.
+- Never let a checkpoint go stale against the last commit: if work landed after the checkpoint, update the checkpoint (`stale-status` gap in the coordinator).
+- If `coordinator gaps` lists your repo, that is the cue to fix the checkpoint (or run `coordinator brief <repo>` and record `coordinator note <repo> --status ... --next ...`), not to write a long narrative.
+- Do not make status docs depend on coordinator output (its status repo is derived data); `depends:` is for authored relationships only.
+
 ## Resuming & Chaining Sessions
 
 1. Read the checkpoint (`docs/CHECKPOINT.md` or `docs/HANDOFF.md`), then **verify its state claims** (files, services, branch, versions). Trust nothing about state.
@@ -75,6 +92,7 @@ When a codebase must be reproducible by a fresh agent, write a spec **from the l
 ## Common mistakes
 
 - Handoff that says what was done but not what to run next.
+- Checkpoint with no machine-readable `status:`/`next:` (invisible to the coordinator).
 - Copying a stale "status" without re-verifying.
 - Deleting scratch tools "for cleanliness".
 - A rebuild spec written from the old prompt instead of the code.
