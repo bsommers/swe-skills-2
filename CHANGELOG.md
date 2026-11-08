@@ -5,11 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.16.0] - 2026-11-07
 
 ### Added
 - `skills/driving-browsers-for-qa/` with `references/` (tool choice, `playwright.config.template.ts`, `plan-steps.e2e.template.ts`, `QA-REPORT.template.md`): automating a manual QA plan with Playwright and recorded evidence against a live stack (62 skills total).
 - `/eng` shortcuts `qa-drive` and `qa-report`; `scripts/install.sh` adds the skill to the `build` and `review` profiles.
+
+### Changed
+- Synchronized all manifests (`plugin.json`, `.claude-plugin/`, `.cursor-plugin/`), `README.md`, `docs/running.md`, `docs/usermanual/`, and `docs/CHECKPOINT.md` to `0.16.0` (62 skills).
 
 ## [0.15.0] - 2026-11-07
 
