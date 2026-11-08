@@ -1,0 +1,171 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-void" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#03060d" />
+      <stop offset="45%" stop-color="#071022" />
+      <stop offset="100%" stop-color="#030710" />
+    </linearGradient>
+    <radialGradient id="neon-aura" cx="50%" cy="42%" r="60%">
+      <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.18" />
+      <stop offset="45%" stop-color="#38bdf8" stop-opacity="0.07" />
+      <stop offset="100%" stop-color="#03060d" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="cyan-beam" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.05" />
+      <stop offset="50%" stop-color="#00e5ff" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.05" />
+    </linearGradient>
+    <linearGradient id="core-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00ff9d" />
+      <stop offset="50%" stop-color="#00e5ff" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+    <linearGradient id="panel-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0b162c" stop-opacity="0.92" />
+      <stop offset="100%" stop-color="#060c1a" stop-opacity="0.95" />
+    </linearGradient>
+    <pattern id="minor-grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#38bdf8" stroke-width="0.6" stroke-opacity="0.09" />
+    </pattern>
+    <pattern id="major-grid" width="96" height="96" patternUnits="userSpaceOnUse">
+      <rect width="96" height="96" fill="url(#minor-grid)" />
+      <path d="M 96 0 L 0 0 0 96" fill="none" stroke="#00e5ff" stroke-width="1.0" stroke-opacity="0.20" />
+      <circle cx="0" cy="0" r="1.6" fill="#00e5ff" fill-opacity="0.45" />
+    </pattern>
+    <filter id="glow-strong" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="5" result="b1" />
+      <feGaussianBlur stdDeviation="2" result="b2" />
+      <feMerge>
+        <feMergeNode in="b1" />
+        <feMergeNode in="b2" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter id="glow-soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2.5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <style>
+      .f-mono { font-family: ui-monospace, 'Cascadia Code', 'Fira Code', 'JetBrains Mono', 'Source Code Pro', Menlo, Consolas, monospace; }
+      .f-sans { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Ubuntu, sans-serif; }
+    </style>
+  </defs>
+  <rect width="1200" height="620" rx="16" fill="url(#bg-void)" />
+  <rect width="1200" height="620" rx="16" fill="url(#major-grid)" />
+  <g id="perspective-grid">
+    <line x1="0" y1="495" x2="1200" y2="495" stroke="#00e5ff" stroke-width="1" stroke-opacity="0.09" />
+    <line x1="0" y1="509" x2="1200" y2="509" stroke="#00e5ff" stroke-width="1" stroke-opacity="0.11" />
+    <line x1="0" y1="526" x2="1200" y2="526" stroke="#00e5ff" stroke-width="1" stroke-opacity="0.14" />
+    <line x1="0" y1="548" x2="1200" y2="548" stroke="#00e5ff" stroke-width="1" stroke-opacity="0.16" />
+    <line x1="0" y1="574" x2="1200" y2="574" stroke="#00e5ff" stroke-width="1" stroke-opacity="0.20" />
+    <line x1="0" y1="603" x2="1200" y2="603" stroke="#00e5ff" stroke-width="1" stroke-opacity="0.24" />
+    <line x1="348" y1="485" x2="-435" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.08" />
+    <line x1="376" y1="485" x2="-320" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.10" />
+    <line x1="404" y1="485" x2="-205" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.12" />
+    <line x1="432" y1="485" x2="-90" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.13" />
+    <line x1="460" y1="485" x2="25" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.15" />
+    <line x1="488" y1="485" x2="140" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.16" />
+    <line x1="516" y1="485" x2="255" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.17" />
+    <line x1="544" y1="485" x2="370" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.19" />
+    <line x1="572" y1="485" x2="485" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.21" />
+    <line x1="600" y1="485" x2="600" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.22" />
+    <line x1="628" y1="485" x2="715" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.21" />
+    <line x1="656" y1="485" x2="830" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.19" />
+    <line x1="684" y1="485" x2="945" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.17" />
+    <line x1="712" y1="485" x2="1060" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.16" />
+    <line x1="740" y1="485" x2="1175" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.15" />
+    <line x1="768" y1="485" x2="1290" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.13" />
+    <line x1="796" y1="485" x2="1405" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.12" />
+    <line x1="824" y1="485" x2="1520" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.10" />
+    <line x1="852" y1="485" x2="1635" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.08" />
+  </g>
+  <rect width="1200" height="620" rx="16" fill="url(#neon-aura)" />
+  <rect x="12" y="12" width="1176" height="596" rx="12" fill="none" stroke="#0284c7" stroke-width="1.5" stroke-opacity="0.65" />
+  <path d="M 22 42 L 22 22 L 42 22" fill="none" stroke="#00e5ff" stroke-width="2.4" />
+  <path d="M 1158 22 L 1178 22 L 1178 42" fill="none" stroke="#00e5ff" stroke-width="2.4" />
+  <path d="M 22 578 L 22 598 L 42 598" fill="none" stroke="#00e5ff" stroke-width="2.4" />
+  <path d="M 1158 598 L 1178 598 L 1178 578" fill="none" stroke="#00e5ff" stroke-width="2.4" />
+
+  <!-- Header -->
+  <rect x="42" y="30" width="260" height="26" rx="5" fill="#071936" stroke="#00e5ff" stroke-width="1.3" />
+  <text x="172" y="47" text-anchor="middle" class="f-mono" font-size="11.5" font-weight="700" fill="#00e5ff" letter-spacing="1.2">EXAMPLE 03 // CONTEXT GUARD</text>
+  <text x="320" y="49" class="f-sans" font-size="22.5" font-weight="800" fill="#f0f6fc" letter-spacing="0.4">Periodic Cadence Hooks &amp; 5-Step Lossless Session Chaining</text>
+  <text x="42" y="77" class="f-mono" font-size="13" fill="#94a3b8">Automated turn/step cadence reminders, PreCompact blocking, and zero-loss multi-session chaining</text>
+  <line x1="42" y1="92" x2="1158" y2="92" stroke="url(#cyan-beam)" stroke-width="1.5" />
+
+  <!-- Body Content -->
+  <rect x="56" y="122" width="204" height="196" rx="10" fill="url(#panel-grad)" stroke="#00e5ff" stroke-width="1.8" />
+  <text x="74" y="150" class="f-mono" font-size="11.5" font-weight="700" fill="#00e5ff">STEP 1</text>
+  <text x="74" y="176" class="f-sans" font-size="17" font-weight="800" fill="#f0f6fc">CHECKPOINT</text>
+  <line x1="74" y1="190" x2="242" y2="190" stroke="#00e5ff" stroke-width="1" stroke-opacity="0.5" />
+  <text x="74" y="220" class="f-mono" font-size="11.8" fill="#e2e8f0">Write verified state</text>
+  <text x="74" y="242" class="f-mono" font-size="11.8" fill="#e2e8f0">to docs/CHECKPOINT.md</text>
+  <text x="74" y="264" class="f-mono" font-size="11.8" fill="#e2e8f0">every 12 turns / 25 steps</text>
+  <text x="74" y="286" class="f-mono" font-size="11.8" fill="#e2e8f0">or at 70% context cap</text>
+  <line x1="260" y1="220" x2="276" y2="220" stroke="#00e5ff" stroke-width="2.2" />
+  <polygon points="271,215 278,220 271,225" fill="#00ff9d" />
+  <rect x="276" y="122" width="204" height="196" rx="10" fill="url(#panel-grad)" stroke="#00ff9d" stroke-width="1.8" />
+  <text x="294" y="150" class="f-mono" font-size="11.5" font-weight="700" fill="#00ff9d">STEP 2</text>
+  <text x="294" y="176" class="f-sans" font-size="17" font-weight="800" fill="#f0f6fc">PRECOMPACT</text>
+  <line x1="294" y1="190" x2="462" y2="190" stroke="#00ff9d" stroke-width="1" stroke-opacity="0.5" />
+  <text x="294" y="220" class="f-mono" font-size="11.8" fill="#e2e8f0">context_guard.py checks</text>
+  <text x="294" y="242" class="f-mono" font-size="11.8" fill="#e2e8f0">checkpoint age &lt; 20m;</text>
+  <text x="294" y="264" class="f-mono" font-size="11.8" fill="#e2e8f0">blocks unsafe /compact</text>
+  <text x="294" y="286" class="f-mono" font-size="11.8" fill="#e2e8f0">(exit code 2 if stale)</text>
+  <line x1="480" y1="220" x2="496" y2="220" stroke="#00e5ff" stroke-width="2.2" />
+  <polygon points="491,215 498,220 491,225" fill="#00ff9d" />
+  <rect x="496" y="122" width="204" height="196" rx="10" fill="url(#panel-grad)" stroke="#38bdf8" stroke-width="1.8" />
+  <text x="514" y="150" class="f-mono" font-size="11.5" font-weight="700" fill="#38bdf8">STEP 3</text>
+  <text x="514" y="176" class="f-sans" font-size="17" font-weight="800" fill="#f0f6fc">COMPACT</text>
+  <line x1="514" y1="190" x2="682" y2="190" stroke="#38bdf8" stroke-width="1" stroke-opacity="0.5" />
+  <text x="514" y="220" class="f-mono" font-size="11.8" fill="#e2e8f0">Run /compact with</text>
+  <text x="514" y="242" class="f-mono" font-size="11.8" fill="#e2e8f0">focus notes keeping</text>
+  <text x="514" y="264" class="f-mono" font-size="11.8" fill="#e2e8f0">goal, decisions, diffs</text>
+  <text x="514" y="286" class="f-mono" font-size="11.8" fill="#e2e8f0">&amp; next verify command</text>
+  <line x1="700" y1="220" x2="716" y2="220" stroke="#00e5ff" stroke-width="2.2" />
+  <polygon points="711,215 718,220 711,225" fill="#00ff9d" />
+  <rect x="716" y="122" width="204" height="196" rx="10" fill="url(#panel-grad)" stroke="#a855f7" stroke-width="1.8" />
+  <text x="734" y="150" class="f-mono" font-size="11.5" font-weight="700" fill="#a855f7">STEP 4</text>
+  <text x="734" y="176" class="f-sans" font-size="17" font-weight="800" fill="#f0f6fc">HANDOFF</text>
+  <line x1="734" y1="190" x2="902" y2="190" stroke="#a855f7" stroke-width="1" stroke-opacity="0.5" />
+  <text x="734" y="220" class="f-mono" font-size="11.8" fill="#e2e8f0">Write docs/HANDOFF.md</text>
+  <text x="734" y="242" class="f-mono" font-size="11.8" fill="#e2e8f0">with dead-ends, lessons</text>
+  <text x="734" y="264" class="f-mono" font-size="11.8" fill="#e2e8f0">&amp; exact next command</text>
+  <text x="734" y="286" class="f-mono" font-size="11.8" fill="#e2e8f0">then /clear or /exit</text>
+  <line x1="920" y1="220" x2="936" y2="220" stroke="#00e5ff" stroke-width="2.2" />
+  <polygon points="931,215 938,220 931,225" fill="#00ff9d" />
+  <rect x="936" y="122" width="204" height="196" rx="10" fill="url(#panel-grad)" stroke="#00ff9d" stroke-width="1.8" />
+  <text x="954" y="150" class="f-mono" font-size="11.5" font-weight="700" fill="#00ff9d">STEP 5</text>
+  <text x="954" y="176" class="f-sans" font-size="17" font-weight="800" fill="#f0f6fc">AUTO-RESUME</text>
+  <line x1="954" y1="190" x2="1122" y2="190" stroke="#00ff9d" stroke-width="1" stroke-opacity="0.5" />
+  <text x="954" y="220" class="f-mono" font-size="11.8" fill="#e2e8f0">SessionStart hook or</text>
+  <text x="954" y="242" class="f-mono" font-size="11.8" fill="#e2e8f0">chain-session.sh injects</text>
+  <text x="954" y="264" class="f-mono" font-size="11.8" fill="#e2e8f0">checkpoint &amp; verifies</text>
+  <text x="954" y="286" class="f-mono" font-size="11.8" fill="#e2e8f0">git status before edits</text>
+  <!-- Dual Trigger Telemetry Panel -->
+  <rect x="56" y="346" width="1084" height="190" rx="10" fill="url(#panel-grad)" stroke="#00e5ff" stroke-width="1.8" />
+  <text x="80" y="376" class="f-mono" font-size="14" font-weight="700" fill="#00e5ff">DUAL-TRIGGER CADENCE &amp; CLI DIAGNOSTIC (context_guard.py report &amp; scripts/chain-session.sh)</text>
+
+  <rect x="80" y="394" width="505" height="122" rx="6" fill="#040812" stroke="#0284c7" stroke-width="1.2" />
+  <text x="98" y="418" class="f-mono" font-size="12" fill="#00ff9d">$ python3 scripts/hooks/context_guard.py report</text>
+  <text x="98" y="440" class="f-mono" font-size="12" fill="#f0f6fc">context: 42.1% (~84,200 / 200,000 tokens) · turns: 12</text>
+  <text x="98" y="462" class="f-mono" font-size="12" fill="#ffb800">recommendation: CHECKPOINT_DUE (cadence: 12 turns reached)</text>
+  <text x="98" y="484" class="f-mono" font-size="12" fill="#38bdf8">hooks: claude=installed · agy=installed</text>
+  <text x="98" y="504" class="f-mono" font-size="12" fill="#00ff9d">checkpoint: docs/CHECKPOINT.md (fresh, 2m ago)</text>
+
+  <rect x="610" y="394" width="506" height="122" rx="6" fill="#040812" stroke="#0284c7" stroke-width="1.2" />
+  <text x="628" y="418" class="f-mono" font-size="12" fill="#00e5ff">$ scripts/chain-session.sh --claude</text>
+  <text x="628" y="440" class="f-mono" font-size="12" fill="#f0f6fc">[chain] Iteration 1/5 — resuming from docs/HANDOFF.md</text>
+  <text x="628" y="462" class="f-mono" font-size="12" fill="#94a3b8">[chain] Verifying git status &amp; baseline tests...</text>
+  <text x="628" y="484" class="f-mono" font-size="12" fill="#00ff9d">[chain] Status: COMPLETE detected in docs/CHECKPOINT.md</text>
+  <text x="628" y="504" class="f-mono" font-size="12" fill="#00ff9d">[chain] All phases verified &amp; committed cleanly.</text>
+
+
+  <!-- Footer Telemetry -->
+  <line x1="42" y1="566" x2="1158" y2="566" stroke="#0284c7" stroke-width="1" stroke-opacity="0.5" />
+  <text x="42" y="590" class="f-mono" font-size="11.5" fill="#38bdf8">SKILLS: compacting-context-safely • handing-off-sessions</text>
+  <text x="1158" y="590" text-anchor="end" class="f-mono" font-size="11.5" fill="#00ff9d">HOOKS: UserPromptSubmit • PreInvocation • PreCompact • SessionStart</text>
+</svg>

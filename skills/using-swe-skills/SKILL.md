@@ -5,7 +5,7 @@ description: Use when starting any software task — building a tool, feature or
 
 # Using swe-skills
 
-Load the **one to three** skills that match the task, never all of them. When a process skill (brainstorming, TDD, debugging, code review) also applies, it sets the *how*; these skills add the domain judgment. The `eng` skill (`/eng <task>`) is a typed shortcut into this router.
+Load **one to three** skills that match the task, never all of them. Process skills (brainstorming, TDD, debugging, review) set the *how*; these skills add domain judgment. The `eng` skill (`/eng <task>`) is a typed shortcut into this router.
 
 ## 1. Size the task
 
@@ -13,7 +13,7 @@ Load the **one to three** skills that match the task, never all of them. When a 
 |---|---|---|
 | **Tool** | one purpose, one user, ≤ a day | 3-line intent, stdlib, one happy + one failure test |
 | **App** | several modules, state or UI, days | intent brief, tasks with verify commands, layers |
-| **System** | many services/agents/repos, unattended, others depend on it | contracts, ADRs, budgets, audits, checkpoints |
+| **System** | many services/agents/repos, unattended | contracts, ADRs, budgets, audits, checkpoints |
 
 Unsure? `right-sizing-process`.
 
@@ -23,12 +23,13 @@ Unsure? `right-sizing-process`.
 |---|---|
 | get a fuzzy request | `writing-intent-briefs` |
 | write a plan or spec | `planning-with-contracts` |
-| plan or build new functionality; design exhaustive test cases before coding | `designing-exhaustive-test-cases` |
+| plan/build new functionality; pre-build test matrix | `designing-exhaustive-test-cases` |
 | set a timeout, token cap, batch or pool size | `sizing-limits-from-measurement` |
 | pick a language, library, runtime | `choosing-tools-and-substrates` |
+| discover local tools, VM sandboxes (`cvm`, `win-devvm`), or analyzers in `~/src` | `using-local-tool-registry` |
 | structure a multi-stage system | `designing-layered-pipelines` |
 | support swappable backends/drivers | `designing-plugin-contracts` |
-| add a capability users or programs reach by UI, keys, mouse, CLI, API or MCP | `designing-uniform-surfaces` |
+| expose a capability across UI, keys, CLI, API, MCP | `designing-uniform-surfaces` |
 | call APIs, DBs, HTTP, clock, LLMs; testable seams | `designing-testable-seams` |
 | define or change data shapes | `evolving-schemas-and-contracts` |
 | make a costly-to-reverse decision | `defending-architecture-decisions` |
@@ -38,20 +39,21 @@ Unsure? `right-sizing-process`.
 | feed LLM output into a decision | `grounding-ai-outputs` |
 | start a new repo | `scaffolding-new-projects` |
 | write a CLI or script | `building-small-cli-tools` |
-| build an installer, `init` setup, or in-tool next-step workflow guide | `building-installers-and-onboarding` |
+| build an installer, `init`, or next-step CLI guide | `building-installers-and-onboarding` |
 | emit code/config from a model | `building-code-generators` |
 | parse or scrape text/HTML | `parsing-untrusted-text-robustly` |
 | touch shell, SQL, paths, secrets, sandboxes | `hardening-trust-boundaries` |
-| write or review CI workflows, pin actions, add dependency gates | `hardening-ci-workflows` |
-| size or count comes from untrusted input; capped lists | `bounding-untrusted-resource-use` |
-| signal a PID from a pid/lock file; stop/status for daemons | `controlling-processes-safely` |
-| add a wait/poll handler to a request or serve loop | `keeping-event-loops-responsive` |
-| handle auth, sessions, crypto, user input, prevent exploits | `security-best-practices` |
+| write/review CI workflows, pin actions, dep gates | `hardening-ci-workflows` |
+| run CI locally first and conserve hosted GitHub Actions minutes | `running-local-ci` |
+| size or count from untrusted input; capped lists | `bounding-untrusted-resource-use` |
+| signal a PID from a pid/lock file; daemon control | `controlling-processes-safely` |
+| add a wait/poll handler to a request/serve loop | `keeping-event-loops-responsive` |
+| handle auth, sessions, crypto, input, exploits | `security-best-practices` |
 | see flaky or churning output | `engineering-for-determinism` |
-| structure system, decouple business logic, set module boundaries | `architecture-best-practices` |
-| configure reproducible dev environments, toolchains, or Nix flakes | `nix-environments` |
+| decouple business logic, set module boundaries | `architecture-best-practices` |
+| configure reproducible dev envs or Nix flakes | `nix-environments` |
 | decide what "done" means | `layered-verification-gates` |
-| automate a manual QA plan or UI checklist with a browser driver and recorded evidence | `driving-browsers-for-qa` |
+| automate browser QA plan with recorded evidence | `driving-browsers-for-qa` |
 | suspect untested code hides bugs | `hunting-silent-failures` |
 | hit a failure that ignores fixes | `debugging-across-layers` |
 | face dozens of failures | `clustering-failures-by-root-cause` |
@@ -63,30 +65,34 @@ Unsure? `right-sizing-process`.
 | pause, resume, hand off | `handing-off-sessions` |
 | context filling up; compact or clear | `compacting-context-safely` |
 | write CLAUDE.md/AGENTS.md/rules | `writing-agent-context-files` |
-| author user guides in docs/ | `writing-user-guides` |
+| write/refresh user guides, README, arch, purpose | `writing-user-guides` |
+| render SVG/PNG visual diagrams for docs/examples | `rendering-graphic-examples` |
+| showcase graphics in docs with neon-grid theme | `showcasing-graphics-in-docs` |
+| design project logo, banner, or SVG/PNG icons | `designing-logos-and-icons` |
+| build/update a GitHub Pages site in `docs/` | `building-github-pages-sites` |
 | change documented behavior | `keeping-docs-in-sync` |
 | hardcode paths or env assumptions | `keeping-repos-portable` |
 | audit architecture & code with Graphify/AST | `code-architecture-review` |
 | review a PR, branch diff, or staged changes | `pr-review` |
 | execute refactoring plan safely with green tests | `refactor-execute` |
 | audit OpenAPI/GraphQL/DTO schema drift | `api-contract-audit` |
-| audit packages for CVE vulnerabilities and licenses | `dependency-audit` |
+| audit packages for CVEs and licenses | `dependency-audit` |
 | measure test coverage and close testing gaps | `test-coverage` |
-| generate reviewable batch issue creation script | `github-issues-script` |
-| forecast, track, and budget tokens / USD spend | `token-finops` |
-| select or switch models dynamically; token conservation | `adaptive-model-routing` |
+| generate reviewable batch issue script | `github-issues-script` |
+| forecast, track, budget tokens / USD spend | `token-finops` |
+| select/switch models dynamically; save tokens | `adaptive-model-routing` |
 | write up bugs or findings as issues | `drafting-issue-reports` |
 | turn issues or a branch into a PR | `writing-pull-requests` |
 | commit, push, tag, release | `committing-and-releasing-cleanly` |
 | calculate SemVer, tag, and publish releases | `release` |
-| build, package, upload per-platform release binaries | `building-release-binaries` |
+| build, package, upload release binaries | `building-release-binaries` |
 
 ## Rules
 
-- Announce the skills you loaded, and why, in one line.
-- **Bounded active set:** Keep at most 1–3 skills loaded in context at any time. Every loaded skill replays its tokens on every tool turn.
-- **Phase-transition eviction:** When transitioning between major phases (planning → execution → shipping), do not accumulate stale skills in history. Follow `compacting-context-safely` to checkpoint and resume with only the active phase's skills.
-- If a target skill is not registered as a slash command in `~/.claude/skills/`, read its `SKILL.md` directly from the `swe-skills` repository (`skills/<skill-name>/SKILL.md`).
-- If a step costs more than the risk it removes at this scale, say so and skip it.
-- Default to **git and GitHub** (`gh` CLI) for version control, issues, and PRs, unless the project uses something else.
+- Announce loaded skills and why in one line.
+- **Bounded active set:** Keep at most 1–3 skills in context; every loaded skill replays tokens each turn.
+- **Phase-transition eviction:** Between major phases (plan → build → ship), follow `compacting-context-safely` to checkpoint and resume with only active-phase skills.
+- If a skill is not in `~/.claude/skills/`, read `skills/<skill-name>/SKILL.md` directly.
+- Skip steps that cost more than the risk they remove at this scale.
+- Default to **git and GitHub** (`gh` CLI) unless the project uses another host.
 - User instructions and project context files override this library.

@@ -50,6 +50,13 @@ Only the first word is matched, and only exactly. "review the auth module" runs 
 | `chain` | `handing-off-sessions` |
 | `binaries` | `building-release-binaries` |
 | `qa-drive`, `qa-report` | `driving-browsers-for-qa` |
+| `docs`, `guide` | `writing-user-guides` |
+| `graphics`, `svg` | `rendering-graphic-examples` |
+| `showcase`, `neon` | `showcasing-graphics-in-docs` |
+| `logo`, `icons` | `designing-logos-and-icons` |
+| `pages`, `gh-pages` | `building-github-pages-sites` |
+| `tools`, `vms`, `registry` | `using-local-tool-registry` |
+| `local-ci`, `ci` | `running-local-ci` |
 
 ## Rules
 

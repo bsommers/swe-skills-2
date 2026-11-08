@@ -1,0 +1,435 @@
+{
+  "schema_version": "1.0",
+  "description": "Portable seed catalog of local engineering, VM, sandbox, and CI tools in ~/src.",
+  "tool_count": 14,
+  "tools": [
+    {
+      "name": "cvm",
+      "path": "~/src/ai/projects/cvm",
+      "category": "vm-sandbox",
+      "lifecycle_phases": [
+        "plan",
+        "build",
+        "execute",
+        "test",
+        "ci",
+        "release"
+      ],
+      "platforms": [
+        "linux",
+        "macos",
+        "windows",
+        "freebsd"
+      ],
+      "summary": "Code Virtual Machine (v1.2.0): automated VM & container sandbox runner across 13 backends (KVM/QEMU, Firecracker, Cloud Hypervisor, Apple VZ/Tart, macOS Seatbelt, Docker, Podman, VirtualBox, VMware, Hyper-V, Proxmox, bhyve) with COW snapshots, branching, multi-agent mesh, and MCP server.",
+      "entrypoints": [
+        "~/src/ai/projects/cvm/bin/cvm run --backend kvm -- <cmd>",
+        "~/src/ai/projects/cvm/bin/cvm snapshot <workspace>",
+        "~/src/ai/projects/cvm/bin/cvm branch <workspace> <branch-name>",
+        "~/src/ai/projects/cvm/bin/cvm restore <workspace> <snapshot>",
+        "~/src/ai/projects/cvm/bin/cvm serve-mcp"
+      ],
+      "tags": [
+        "vm",
+        "sandbox",
+        "kvm",
+        "qemu",
+        "firecracker",
+        "microvm",
+        "apple-vz",
+        "seatbelt",
+        "docker",
+        "podman",
+        "bhyve",
+        "snapshot",
+        "branch",
+        "agent",
+        "isolation",
+        "cvm",
+        "mcp"
+      ],
+      "source": "curated"
+    },
+    {
+      "name": "win-devvm",
+      "path": "~/src/infra/win-devvm",
+      "category": "cross-platform-vm",
+      "lifecycle_phases": [
+        "build",
+        "test",
+        "ci",
+        "release"
+      ],
+      "platforms": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "summary": "Unattended Windows 11 dev VM (rootless KVM/libvirt x64 on Linux; Parallels ARM64 on macOS) pre-provisioned with MSVC Build Tools (x64 + ARM64), rustup, Python, Node, CMake, Git, and key-based SSH/RDP for local Windows build, driver, and release testing.",
+      "entrypoints": [
+        "cd ~/src/infra/win-devvm && ./provision.sh",
+        "cd ~/src/infra/win-devvm && ./vm.sh start",
+        "cd ~/src/infra/win-devvm && ./vm.sh ssh",
+        "cd ~/src/infra/win-devvm && ./vm.sh status",
+        "cd ~/src/infra/win-devvm && ./vm.sh stop"
+      ],
+      "tags": [
+        "windows",
+        "windows-11",
+        "vm",
+        "kvm",
+        "libvirt",
+        "parallels",
+        "msvc",
+        "rust",
+        "cross-platform",
+        "driver",
+        "binaries",
+        "ssh",
+        "rdp",
+        "win-devvm"
+      ],
+      "source": "curated"
+    },
+    {
+      "name": "gha-vm-runners",
+      "path": "~/src/gha-vm-runners",
+      "category": "local-ci",
+      "lifecycle_phases": [
+        "test",
+        "ci",
+        "release"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "summary": "Local CI runner (local-ci.sh) and disposable Ubuntu 24.04 KVM self-hosted GitHub Actions VM runner (gha-vm-runners.sh) that executes full repository CI pipelines locally without spending hosted GitHub Actions minutes.",
+      "entrypoints": [
+        "~/src/gha-vm-runners/local-ci.sh <repo-path>",
+        "~/src/gha-vm-runners/local-ci.sh --full <repo-path>",
+        "~/src/gha-vm-runners/gha-vm-runners.sh status",
+        "~/src/gha-vm-runners/gha-vm-runners.sh start",
+        "~/src/gha-vm-runners/gha-vm-runners.sh stop"
+      ],
+      "tags": [
+        "ci",
+        "local-ci",
+        "github-actions",
+        "runner",
+        "vm",
+        "kvm",
+        "ubuntu",
+        "minutes",
+        "finops",
+        "verification",
+        "gha-vm-runners"
+      ],
+      "source": "curated"
+    },
+    {
+      "name": "fedora-vms",
+      "path": "~/src/infra/fedora-vms",
+      "category": "cross-platform-vm",
+      "lifecycle_phases": [
+        "build",
+        "test",
+        "ci"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "summary": "Fedora Linux KVM/QEMU guest launcher (cr-fedora-latest.sh) for testing RPM packaging, systemd services, SELinux policies, and Linux distribution portability.",
+      "entrypoints": [
+        "cd ~/src/infra/fedora-vms && ./cr-fedora-latest.sh"
+      ],
+      "tags": [
+        "fedora",
+        "vm",
+        "kvm",
+        "linux",
+        "rpm",
+        "systemd",
+        "distro",
+        "portability"
+      ],
+      "source": "curated"
+    },
+    {
+      "name": "freebsd-kvm",
+      "path": "~/src/vms/scripts",
+      "category": "cross-platform-vm",
+      "lifecycle_phases": [
+        "build",
+        "test",
+        "ci",
+        "release"
+      ],
+      "platforms": [
+        "freebsd",
+        "linux"
+      ],
+      "summary": "FreeBSD 15.x KVM/QEMU virtual machine scripts and QCOW2 disk images (run-fbsd.sh, kvm-freebsd-15.2.sh) for BSD portability, kqueue/jail driver testing, and release binary verification.",
+      "entrypoints": [
+        "cd ~/src/vms/scripts && ./run-fbsd.sh",
+        "cd ~/src/vms/scripts && ./run-kvm-freebsd15.2.sh"
+      ],
+      "tags": [
+        "freebsd",
+        "bsd",
+        "vm",
+        "kvm",
+        "qemu",
+        "qcow2",
+        "kqueue",
+        "portability"
+      ],
+      "source": "curated"
+    },
+    {
+      "name": "flowscope",
+      "path": "~/src/flowscope",
+      "category": "static-analysis",
+      "lifecycle_phases": [
+        "build",
+        "test",
+        "ci",
+        "release"
+      ],
+      "platforms": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "summary": "High-speed static analysis and taint/flow scanner outputting SARIF and HTML security reports for pre-commit and local CI security gates.",
+      "entrypoints": [
+        "flowscope scan . --format sarif -o report.sarif",
+        "flowscope scan . --format html -o report.html"
+      ],
+      "tags": [
+        "sast",
+        "security",
+        "static-analysis",
+        "sarif",
+        "taint",
+        "scanner",
+        "flowscope"
+      ],
+      "source": "curated"
+    },
+    {
+      "name": "synth",
+      "path": "~/src/synth",
+      "category": "benchmark-eval",
+      "lifecycle_phases": [
+        "test",
+        "ci"
+      ],
+      "platforms": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "summary": "Synthetic vulnerability corpus and gold-standard SARIF evaluation harness for benchmarking SAST scanners reproducibly against ground truth.",
+      "entrypoints": [
+        "cd ~/src/synth && pytest -q"
+      ],
+      "tags": [
+        "benchmark",
+        "sast",
+        "sarif",
+        "corpus",
+        "security",
+        "evaluation",
+        "synth"
+      ],
+      "source": "curated"
+    },
+    {
+      "name": "eval",
+      "path": "~/src/eval",
+      "category": "benchmark-eval",
+      "lifecycle_phases": [
+        "plan",
+        "test",
+        "release"
+      ],
+      "platforms": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "summary": "Academic Evaluation & Benchmark Auditing Suite (OmniReview Academic) for statistical reproducibility, AST cyclomatic complexity, layer boundary checks, and Toulmin claim verification.",
+      "entrypoints": [
+        "cd ~/src/eval && python3 -m unittest"
+      ],
+      "tags": [
+        "benchmark",
+        "audit",
+        "statistics",
+        "complexity",
+        "ast",
+        "evaluation",
+        "omnireview"
+      ],
+      "source": "curated"
+    },
+    {
+      "name": "gitnexus",
+      "path": "~/src/coding/GitNexus",
+      "category": "code-intelligence",
+      "lifecycle_phases": [
+        "plan",
+        "build",
+        "test"
+      ],
+      "platforms": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "summary": "Repository structural graph and code intelligence analyzer for mapping cross-file dependencies and call graphs before refactoring.",
+      "entrypoints": [
+        "cd ~/src/coding/GitNexus"
+      ],
+      "tags": [
+        "graph",
+        "ast",
+        "architecture",
+        "dependencies",
+        "code-intelligence",
+        "gitnexus"
+      ],
+      "source": "curated"
+    },
+    {
+      "name": "ontologic",
+      "path": "~/src/ontology/OntoLogic",
+      "category": "code-intelligence",
+      "lifecycle_phases": [
+        "plan",
+        "build",
+        "test"
+      ],
+      "platforms": [
+        "linux",
+        "macos"
+      ],
+      "summary": "Ontology-driven knowledge graph and reasoning engine with multi-substrate toolchains and local CI integration.",
+      "entrypoints": [
+        "~/src/gha-vm-runners/local-ci.sh ~/src/ontology/OntoLogic"
+      ],
+      "tags": [
+        "ontology",
+        "knowledge-graph",
+        "reasoning",
+        "ontologic"
+      ],
+      "source": "curated"
+    },
+    {
+      "name": "cli-anything",
+      "path": "~/src/utilities/CLI-Anything",
+      "category": "cli-automation",
+      "lifecycle_phases": [
+        "build",
+        "execute",
+        "test"
+      ],
+      "platforms": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "summary": "Collection of 50+ scriptable CLI adapters and agent skills for desktop and developer applications (Inkscape, GIMP, Blender, Audacity, OBS, Draw.io, Mermaid, LibreOffice, LLDB, WireMock).",
+      "entrypoints": [
+        "ls ~/src/utilities/CLI-Anything"
+      ],
+      "tags": [
+        "cli",
+        "automation",
+        "adapters",
+        "inkscape",
+        "drawio",
+        "mermaid",
+        "lldb",
+        "wiremock"
+      ],
+      "source": "curated"
+    },
+    {
+      "name": "bilterm",
+      "path": "~/src/ai/bilterm",
+      "category": "cli-automation",
+      "lifecycle_phases": [
+        "execute",
+        "test"
+      ],
+      "platforms": [
+        "linux",
+        "macos"
+      ],
+      "summary": "Terminal emulator and PTY session harness for interactive CLI and TUI verification.",
+      "entrypoints": [
+        "cd ~/src/ai/bilterm"
+      ],
+      "tags": [
+        "terminal",
+        "pty",
+        "tui",
+        "cli",
+        "bilterm"
+      ],
+      "source": "curated"
+    },
+    {
+      "name": "feed-brain-gh",
+      "path": "~/src/meta/feed-brain-gh",
+      "category": "code-intelligence",
+      "lifecycle_phases": [
+        "plan",
+        "release"
+      ],
+      "platforms": [
+        "linux",
+        "macos"
+      ],
+      "summary": "Multi-repository knowledge extraction and pattern harvesting engine.",
+      "entrypoints": [
+        "cd ~/src/meta/feed-brain-gh"
+      ],
+      "tags": [
+        "knowledge",
+        "meta",
+        "mining",
+        "patterns",
+        "feed-brain-gh"
+      ],
+      "source": "curated"
+    },
+    {
+      "name": "seed-brain-gh",
+      "path": "~/src/meta/seed-brain-gh",
+      "category": "code-intelligence",
+      "lifecycle_phases": [
+        "plan",
+        "build"
+      ],
+      "platforms": [
+        "linux",
+        "macos"
+      ],
+      "summary": "Non-destructive engineering standards and skill seeding engine across repositories.",
+      "entrypoints": [
+        "cd ~/src/meta/seed-brain-gh"
+      ],
+      "tags": [
+        "seeding",
+        "standards",
+        "templates",
+        "meta",
+        "seed-brain-gh"
+      ],
+      "source": "curated"
+    }
+  ]
+}

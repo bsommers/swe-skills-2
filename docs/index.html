@@ -1,0 +1,1821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>swe-skills v0.17.0 — Deterministic Engineering &amp; Architecture Skills for AI Coding Agents</title>
+  <meta name="description" content="68 evidence-derived software engineering, planning, architecture, and verification skills for Claude Code, Antigravity (agy), and Cursor." />
+  <meta property="og:title" content="swe-skills v0.17.0 — 68 Engineering Skills for AI Agents" />
+  <meta property="og:description" content="Deterministic software engineering, architecture, Tri-OS drivers, 8-tier verification, and context-guard skills for Claude Code, Antigravity, and Cursor." />
+  <meta property="og:image" content="assets/logo.png" />
+  <link rel="icon" type="image/svg+xml" href="assets/icon.svg" />
+  <link rel="alternate icon" type="image/png" href="assets/icon.png" />
+  <style>
+    :root {
+      --bg-void: #04070f;
+      --bg-deep: #070d1c;
+      --bg-panel: rgba(10, 20, 42, 0.88);
+      --bg-panel-hover: rgba(14, 28, 58, 0.95);
+      --neon-cyan: #00e5ff;
+      --neon-blue: #38bdf8;
+      --neon-deep: #0284c7;
+      --neon-emerald: #00ff9d;
+      --neon-purple: #a855f7;
+      --neon-magenta: #ff2a85;
+      --text-bright: #f0f6fc;
+      --text-body: #cbd5e1;
+      --text-muted: #94a3b8;
+      --border-cyan: rgba(0, 229, 255, 0.35);
+      --glow-cyan: 0 0 22px rgba(0, 229, 255, 0.22);
+      --font-mono: ui-monospace, 'Cascadia Code', 'Fira Code', 'JetBrains Mono', 'Source Code Pro', Menlo, Consolas, monospace;
+      --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, Ubuntu, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-void);
+      background-image:
+        radial-gradient(circle at 50% 0%, rgba(0, 229, 255, 0.16), transparent 52%),
+        radial-gradient(circle at 85% 35%, rgba(56, 189, 248, 0.10), transparent 45%),
+        linear-gradient(rgba(0, 229, 255, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 229, 255, 0.08) 1px, transparent 1px),
+        linear-gradient(rgba(56, 189, 248, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(56, 189, 248, 0.035) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 96px 96px, 96px 96px, 24px 24px, 24px 24px;
+      background-attachment: fixed;
+      color: var(--text-bright);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    a {
+      color: var(--neon-cyan);
+      text-decoration: none;
+      transition: color 0.15s ease, text-shadow 0.15s ease;
+    }
+
+    a:hover {
+      color: var(--neon-emerald);
+      text-shadow: 0 0 10px rgba(0, 255, 157, 0.45);
+    }
+
+    /* Top Cyber Navbar */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(4, 7, 15, 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-cyan);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+    }
+
+    .nav-inner {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: 1.5px;
+      color: var(--text-bright);
+    }
+
+    .brand-badge {
+      font-size: 0.75rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      background: rgba(0, 255, 157, 0.12);
+      border: 1px solid var(--neon-emerald);
+      color: var(--neon-emerald);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+      font-family: var(--font-mono);
+      font-size: 0.86rem;
+    }
+
+    .container {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 5rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .hero-banner-wrap {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1.5px solid var(--border-cyan);
+      box-shadow: var(--glow-cyan), 0 18px 50px rgba(0, 0, 0, 0.75);
+      margin-bottom: 1.75rem;
+      background: #04070f;
+    }
+
+    .hero-banner-wrap img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .hero-lead {
+      max-width: 920px;
+      margin: 0 auto 1.75rem;
+      font-size: 1.12rem;
+      color: var(--text-body);
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.72rem 1.35rem;
+      border-radius: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.22), rgba(2, 132, 199, 0.35));
+      border: 1.5px solid var(--neon-cyan);
+      color: var(--text-bright);
+      box-shadow: var(--glow-cyan);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, rgba(0, 255, 157, 0.25), rgba(0, 229, 255, 0.35));
+      border-color: var(--neon-emerald);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: var(--bg-panel);
+      border: 1.5px solid rgba(56, 189, 248, 0.45);
+      color: var(--neon-blue);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--neon-cyan);
+      color: var(--text-bright);
+    }
+
+    /* Telemetry Stat Strip */
+    .telemetry-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .stat-card {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-cyan);
+      border-radius: 10px;
+      padding: 1.15rem 1.25rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--glow-cyan);
+    }
+
+    .stat-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--neon-cyan);
+    }
+
+    .stat-value {
+      font-family: var(--font-mono);
+      font-size: 1.75rem;
+      font-weight: 900;
+      color: var(--neon-cyan);
+      line-height: 1.2;
+    }
+
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 0.25rem;
+    }
+
+    /* Section Headers */
+    .section-head {
+      margin-bottom: 1.75rem;
+      border-bottom: 1px solid rgba(0, 229, 255, 0.25);
+      padding-bottom: 0.75rem;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .section-tag {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--neon-emerald);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    .section-title {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--text-bright);
+      letter-spacing: 0.5px;
+    }
+
+    /* Visual Showcase Gallery */
+    .showcase-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .showcase-card {
+      background: var(--bg-panel);
+      border: 1.5px solid var(--border-cyan);
+      border-radius: 14px;
+      padding: 1.25rem;
+      box-shadow: var(--glow-cyan);
+      transition: border-color 0.2s ease;
+    }
+
+    .showcase-card:hover {
+      border-color: var(--neon-cyan);
+    }
+
+    .showcase-img-wrap {
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      background: #03060d;
+      margin-bottom: 1rem;
+    }
+
+    .showcase-img-wrap img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .showcase-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .showcase-caption {
+      font-size: 0.95rem;
+      color: var(--text-body);
+    }
+
+    .format-links {
+      display: flex;
+      gap: 0.6rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+    }
+
+    .format-pill {
+      padding: 0.25rem 0.65rem;
+      border-radius: 5px;
+      background: rgba(0, 229, 255, 0.1);
+      border: 1px solid var(--border-cyan);
+      color: var(--neon-cyan);
+    }
+
+    /* Quickstart & Recipes Grid */
+    .recipes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 4rem;
+    }
+
+    .recipe-card {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-cyan);
+      border-radius: 12px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .recipe-title {
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--neon-cyan);
+      margin-bottom: 0.4rem;
+    }
+
+    .recipe-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 0.85rem;
+    }
+
+    .code-block {
+      background: #03060d;
+      border: 1px solid rgba(2, 132, 199, 0.5);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: #e2e8f0;
+      overflow-x: auto;
+      position: relative;
+      white-space: pre;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 0.45rem;
+      right: 0.45rem;
+      background: rgba(0, 229, 255, 0.14);
+      border: 1px solid var(--neon-cyan);
+      color: var(--neon-cyan);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .copy-btn:hover {
+      background: var(--neon-cyan);
+      color: #03060d;
+    }
+
+    /* Interactive Skill Explorer */
+    .explorer-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      background: var(--bg-panel);
+      padding: 1rem 1.25rem;
+      border-radius: 12px;
+      border: 1px solid var(--border-cyan);
+    }
+
+    .search-input {
+      flex: 1 1 280px;
+      background: #03060d;
+      border: 1.5px solid var(--neon-deep);
+      border-radius: 8px;
+      padding: 0.65rem 1rem;
+      color: var(--text-bright);
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    .search-input:focus {
+      border-color: var(--neon-cyan);
+      box-shadow: var(--glow-cyan);
+    }
+
+    .filter-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+
+    .filter-btn {
+      background: #061024;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: var(--text-body);
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      padding: 0.45rem 0.8rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: rgba(0, 229, 255, 0.18);
+      border-color: var(--neon-cyan);
+      color: var(--neon-cyan);
+      font-weight: 700;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.1rem;
+      margin-bottom: 4rem;
+    }
+
+    .skill-card {
+      background: var(--bg-panel);
+      border: 1px solid rgba(0, 229, 255, 0.25);
+      border-radius: 11px;
+      padding: 1.15rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.16s ease, border-color 0.16s ease, background 0.16s ease;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--neon-cyan);
+      background: var(--bg-panel-hover);
+      box-shadow: var(--glow-cyan);
+    }
+
+    .skill-card-head {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 0.65rem;
+    }
+
+    .skill-cat-icon {
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .skill-title-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .skill-name code {
+      font-family: var(--font-mono);
+      font-size: 0.96rem;
+      font-weight: 700;
+      color: var(--text-bright);
+    }
+
+    .skill-cat-tag {
+      display: inline-block;
+      align-self: flex-start;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      padding: 0.08rem 0.45rem;
+      border-radius: 4px;
+      border: 1px solid;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+
+    .skill-desc {
+      font-size: 0.86rem;
+      color: var(--text-body);
+      margin-bottom: 0.85rem;
+      flex-grow: 1;
+    }
+
+    .skill-footer {
+      border-top: 1px solid rgba(56, 189, 248, 0.16);
+      padding-top: 0.55rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .sc-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    .sc-pill {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      padding: 0.12rem 0.5rem;
+      border-radius: 4px;
+      background: rgba(0, 255, 157, 0.12);
+      border: 1px solid rgba(0, 255, 157, 0.5);
+      color: var(--neon-emerald);
+    }
+
+    .sc-none {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    /* Documentation Hub Cards */
+    .docs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.15rem;
+      margin-bottom: 3rem;
+    }
+
+    .doc-card {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-cyan);
+      border-radius: 11px;
+      padding: 1.2rem;
+      display: block;
+      transition: all 0.18s ease;
+    }
+
+    .doc-card:hover {
+      border-color: var(--neon-emerald);
+      transform: translateY(-2px);
+      box-shadow: 0 0 20px rgba(0, 255, 157, 0.18);
+    }
+
+    .doc-card h3 {
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      color: var(--neon-cyan);
+      margin-bottom: 0.4rem;
+    }
+
+    .doc-card p {
+      font-size: 0.86rem;
+      color: var(--text-body);
+    }
+
+    footer {
+      border-top: 1px solid var(--border-cyan);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      background: rgba(4, 7, 15, 0.9);
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-inner">
+      <div class="brand">
+        <img src="assets/icon.svg" alt="swe-skills icon" width="32" height="32" />
+        <span>SWE-SKILLS</span>
+        <span class="brand-badge">v0.17.0 • 68 SKILLS</span>
+      </div>
+      <div class="nav-links">
+        <a href="#showcase">Visual Showcase</a>
+        <a href="#quickstart">Quickstart &amp; Examples</a>
+        <a href="#explorer">Skill Explorer (68)</a>
+        <a href="#docs-hub">Documentation Hub</a>
+        <a href="usermanual/README.md">User Manual</a>
+        <a href="https://github.com/bsommers/swe-skills-2">GitHub</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <!-- Hero Banner -->
+    <section class="hero">
+      <div class="hero-banner-wrap">
+        <img src="assets/logo.svg" alt="swe-skills futuristic cyber-core banner" width="1200" height="380" />
+      </div>
+      <p class="hero-lead">
+        A deterministic software engineering, planning, architecture, and multi-tier verification skill library for
+        <strong>Claude Code</strong>, <strong>Antigravity (<code>agy</code>)</strong>, and <strong>Cursor</strong>.
+        Distilled from real-world incidents across 20+ production repositories.
+      </p>
+      <div class="hero-actions">
+        <a href="#explorer" class="btn btn-primary">Explore All 68 Skills</a>
+        <a href="#showcase" class="btn btn-secondary">View Graphic Examples</a>
+        <a href="usermanual/README.md" class="btn btn-secondary">Read 7-Chapter User Manual</a>
+      </div>
+    </section>
+
+    <!-- Telemetry Strip -->
+    <section class="telemetry-grid">
+      <div class="stat-card">
+        <div class="stat-value">68</div>
+        <div class="stat-label">Verified Engineering Skills</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">1–3</div>
+        <div class="stat-label">Bounded Active Skills / Turn</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">8 Tiers</div>
+        <div class="stat-label">Smoke • Unit • Integr • Sys • Perf • Stress • Torture • Sec</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">Tri-OS</div>
+        <div class="stat-label">Windows • macOS • Linux Parity</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">-85%</div>
+        <div class="stat-label">Prompt Token Overhead via Profiles</div>
+      </div>
+    </section>
+
+    <!-- Visual Architecture & Graphic Examples Showcase -->
+    <section id="showcase">
+      <div class="section-head">
+        <div>
+          <span class="section-tag">FUTURISTIC NEON-GRID TELEMETRY // SVG + PNG</span>
+          <h2 class="section-title">Architecture &amp; Workflow Graphic Examples</h2>
+        </div>
+        <span style="font-family:var(--font-mono);font-size:0.82rem;color:var(--text-muted)">
+          Generated deterministically by <code>scripts/render-graphics.py</code>
+        </span>
+      </div>
+
+      <div class="showcase-grid">
+        <div class="showcase-card">
+          <div class="showcase-img-wrap">
+            <img src="assets/examples/architecture-overview.svg" alt="5-Tier Runtime Engineering Governance Architecture" loading="lazy" />
+          </div>
+          <div class="showcase-meta">
+            <p class="showcase-caption">
+              <strong>5-Tier Runtime Governance Architecture:</strong> Multi-harness adapters, stdlib lifecycle hooks (<code>context_guard.py</code>, <code>model_router.py</code>), <code>/eng</code> task sizer, 68-skill taxonomy, and subagent log isolation.
+            </p>
+            <div class="format-links">
+              <a class="format-pill" href="assets/examples/architecture-overview.svg">Vector SVG</a>
+              <a class="format-pill" href="assets/examples/architecture-overview.png">Hi-DPI PNG</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="showcase-card">
+          <div class="showcase-img-wrap">
+            <img src="assets/examples/workflow-eng-routing.svg" alt="/eng Dispatch, Bounded Skill Set and 8-Tier Verification Matrix" loading="lazy" />
+          </div>
+          <div class="showcase-meta">
+            <p class="showcase-caption">
+              <strong>Example 01 — <code>/eng</code> Routing &amp; Pre-Build Exhaustive Test Matrix:</strong> Sizing a feature, loading 1–3 skills, writing the 6-dimension RED test matrix, and gating completion with <code>scripts/verify.sh --quick</code>.
+            </p>
+            <div class="format-links">
+              <a class="format-pill" href="assets/examples/workflow-eng-routing.svg">Vector SVG</a>
+              <a class="format-pill" href="assets/examples/workflow-eng-routing.png">Hi-DPI PNG</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="showcase-card">
+          <div class="showcase-img-wrap">
+            <img src="assets/examples/workflow-subagent-isolation.svg" alt="Subagent Log Isolation and Adaptive Model Routing" loading="lazy" />
+          </div>
+          <div class="showcase-meta">
+            <p class="showcase-caption">
+              <strong>Example 02 — Subagent Log Isolation &amp; FinOps:</strong> Quarantining noisy compiler/test retry loops inside ephemeral <code>flash</code> / Haiku worker subagents so the primary <code>pro</code> session stays crystal-clear.
+            </p>
+            <div class="format-links">
+              <a class="format-pill" href="assets/examples/workflow-subagent-isolation.svg">Vector SVG</a>
+              <a class="format-pill" href="assets/examples/workflow-subagent-isolation.png">Hi-DPI PNG</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="showcase-card">
+          <div class="showcase-img-wrap">
+            <img src="assets/examples/workflow-session-chaining.svg" alt="Periodic Cadence Hooks and 5-Step Lossless Session Chaining" loading="lazy" />
+          </div>
+          <div class="showcase-meta">
+            <p class="showcase-caption">
+              <strong>Example 03 — Periodic Cadence Hooks &amp; 5-Step Session Chaining:</strong> Automated 12-turn / 25-step checkpoint reminders, <code>PreCompact</code> blocking, and zero-loss chaining via <code>scripts/chain-session.sh</code>.
+            </p>
+            <div class="format-links">
+              <a class="format-pill" href="assets/examples/workflow-session-chaining.svg">Vector SVG</a>
+              <a class="format-pill" href="assets/examples/workflow-session-chaining.png">Hi-DPI PNG</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="showcase-card">
+          <div class="showcase-img-wrap">
+            <img src="assets/examples/workflow-browser-qa-tri-os.svg" alt="Browser QA Automation and Cross-Platform Tri-OS Driver Architecture" loading="lazy" />
+          </div>
+          <div class="showcase-meta">
+            <p class="showcase-caption">
+              <strong>Example 04 — Browser QA Automation &amp; Tri-OS Driver Architecture:</strong> Live Playwright/WebDriver BiDi verification with recorded traces alongside Windows, macOS, and Linux driver contracts.
+            </p>
+            <div class="format-links">
+              <a class="format-pill" href="assets/examples/workflow-browser-qa-tri-os.svg">Vector SVG</a>
+              <a class="format-pill" href="assets/examples/workflow-browser-qa-tri-os.png">Hi-DPI PNG</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="showcase-card">
+          <div class="showcase-img-wrap">
+            <img src="assets/examples/workflow-local-tools-and-ci.svg" alt="Searchable Local Tool Registry, VM Sandboxes and Zero-Minute Local CI" loading="lazy" />
+          </div>
+          <div class="showcase-meta">
+            <p class="showcase-caption">
+              <strong>Example 05 — Local Tool Registry, VM Sandboxes &amp; Local-First CI:</strong> Discovering <code>~/src</code> VMs (<code>cvm</code>, <code>win-devvm</code>, <code>gha-vm-runners</code>, <code>fedora-vms</code>, <code>freebsd-kvm</code>) and executing CI locally to conserve hosted GitHub Actions minutes.
+            </p>
+            <div class="format-links">
+              <a class="format-pill" href="assets/examples/workflow-local-tools-and-ci.svg">Vector SVG</a>
+              <a class="format-pill" href="assets/examples/workflow-local-tools-and-ci.png">Hi-DPI PNG</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quickstart & Runnable Recipes -->
+    <section id="quickstart">
+      <div class="section-head">
+        <div>
+          <span class="section-tag">COPY-PASTEABLE WORKFLOWS</span>
+          <h2 class="section-title">Quickstart &amp; Operational Recipes</h2>
+        </div>
+      </div>
+
+      <div class="recipes-grid">
+        <div class="recipe-card">
+          <div>
+            <div class="recipe-title">1. Multi-Harness Install &amp; Profiles</div>
+            <p class="recipe-desc">Install all 68 skills across Claude Code, Antigravity, and Cursor, or mount a focused profile to save ~85% prompt tokens.</p>
+          </div>
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>scripts/install.sh --all
+scripts/install.sh --claude --profile core
+python3 scripts/hooks/install-hooks.py --claude --agy</div>
+        </div>
+
+        <div class="recipe-card">
+          <div>
+            <div class="recipe-title">2. /eng Unified Router &amp; Shortcuts</div>
+            <p class="recipe-desc">Type <code>/eng</code> with free text to size &amp; route automatically, or invoke an exact shortcut word.</p>
+          </div>
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>/eng add retry logic across API modules
+/eng tdd        # designing-exhaustive-test-cases
+/eng qa-drive   # driving-browsers-for-qa
+/eng chain      # 5-step lossless session chain</div>
+        </div>
+
+        <div class="recipe-card">
+          <div>
+            <div class="recipe-title">3. Render SVG/PNG Graphics &amp; Verify Suite</div>
+            <p class="recipe-desc">Re-render all 13 SVG + 13 PNG neon-grid visuals, rebuild GitHub Pages, and run the verification suite.</p>
+          </div>
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>python3 scripts/render-graphics.py
+python3 scripts/build-pages.py
+python3 scripts/lint-skills.py --words
+python3 -m unittest discover tests -q</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Skill Explorer -->
+    <section id="explorer">
+      <div class="section-head">
+        <div>
+          <span class="section-tag">INTERACTIVE CATALOG</span>
+          <h2 class="section-title">Skill &amp; Shortcut Explorer (<span id="visible-count">68</span> / 68)</h2>
+        </div>
+      </div>
+
+      <div class="explorer-controls">
+        <input
+          type="search"
+          id="skill-search"
+          class="search-input"
+          placeholder="Search 68 skills by name, trigger keyword, or /eng shortcut..."
+          oninput="filterSkills()"
+        />
+        <div class="filter-tabs">
+          <button class="filter-btn active" data-cat="all" onclick="setCategory('all', this)">All (68)</button>
+          <button class="filter-btn" data-cat="entry" onclick="setCategory('entry', this)">Entry</button>
+          <button class="filter-btn" data-cat="plan" onclick="setCategory('plan', this)">Frame &amp; Plan</button>
+          <button class="filter-btn" data-cat="arch" onclick="setCategory('arch', this)">Architecture</button>
+          <button class="filter-btn" data-cat="build" onclick="setCategory('build', this)">Build &amp; Security</button>
+          <button class="filter-btn" data-cat="verify" onclick="setCategory('verify', this)">Verify &amp; QA</button>
+          <button class="filter-btn" data-cat="sustain" onclick="setCategory('sustain', this)">Sustain &amp; Docs</button>
+        </div>
+      </div>
+
+      <div class="skills-grid" id="skills-grid">
+      <article class="skill-card" data-category="plan" data-search="adaptive-model-routing use when selecting or switching models dynamically during a session to conserve tokens, choosing model tiers for subtasks, configuring lifecycle hooks for model gating, or dispatching subagents with matched reasoning density. model">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-plan.svg" alt="Frame, Plan &amp; FinOps" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>adaptive-model-routing</code></h3>
+            <span class="skill-cat-tag" style="border-color:#00e5ff;color:#00e5ff">Frame, Plan &amp; FinOps</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when selecting or switching models dynamically during a session to conserve tokens, choosing model tiers for subtasks, configuring lifecycle hooks for model gating, or dispatching subagents with matched reasoning density.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-pill">/eng model</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="arch" data-search="api-contract-audit use when auditing api contracts, openapi/swagger specifications, graphql schemas, protobufs, and dtos against backend route implementations to detect schema drift, undocumented endpoints, type mismatches, and breaking contract changes. schema">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-arch.svg" alt="Architecture &amp; Drivers" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>api-contract-audit</code></h3>
+            <span class="skill-cat-tag" style="border-color:#38bdf8;color:#38bdf8">Architecture &amp; Drivers</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when auditing API contracts, OpenAPI/Swagger specifications, GraphQL schemas, Protobufs, and DTOs against backend route implementations to detect schema drift, undocumented endpoints, type mismatches, and breaking contract changes.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-pill">/eng schema</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="arch" data-search="architecture-best-practices use when structuring a new system or component, defining subsystem boundaries, decoupling business logic from infrastructure, evaluating technical trade-offs, or refactoring tangled dependencies. patterns">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-arch.svg" alt="Architecture &amp; Drivers" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>architecture-best-practices</code></h3>
+            <span class="skill-cat-tag" style="border-color:#38bdf8;color:#38bdf8">Architecture &amp; Drivers</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when structuring a new system or component, defining subsystem boundaries, decoupling business logic from infrastructure, evaluating technical trade-offs, or refactoring tangled dependencies.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-pill">/eng patterns</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="build" data-search="bounding-untrusted-resource-use use when code allocates memory, buffers, or retained history based on sizes or counts that arrive in untrusted input (image or file headers, protocol lengths, escape sequences, notifications, events, links), or when a list that grows from external input has no cap. ">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-build.svg" alt="Build, AI &amp; Security" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>bounding-untrusted-resource-use</code></h3>
+            <span class="skill-cat-tag" style="border-color:#00e5ff;color:#00e5ff">Build, AI &amp; Security</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when code allocates memory, buffers, or retained history based on sizes or counts that arrive in untrusted input (image or file headers, protocol lengths, escape sequences, notifications, events, links), or when a list that grows from external input has no cap.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-none">Router auto-selects</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="build" data-search="building-code-generators use when writing emitters, transpilers, scaffolders, or any tool that outputs code, config, schemas, diagrams or queries from a model, especially when generated output must compile, parse, or load in a downstream system. ">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-build.svg" alt="Build, AI &amp; Security" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>building-code-generators</code></h3>
+            <span class="skill-cat-tag" style="border-color:#00e5ff;color:#00e5ff">Build, AI &amp; Security</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when writing emitters, transpilers, scaffolders, or any tool that outputs code, config, schemas, diagrams or queries from a model, especially when generated output must compile, parse, or load in a downstream system.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-none">Router auto-selects</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="sustain" data-search="building-github-pages-sites use when creating, styling, or deploying an accompanying github pages showcase and documentation site for a repository, syncing it with readme and docs/ content, or configuring github actions / docs/ publishing. pages gh-pages">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-sustain.svg" alt="Collaborate, Docs &amp; Release" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>building-github-pages-sites</code></h3>
+            <span class="skill-cat-tag" style="border-color:#38bdf8;color:#38bdf8">Collaborate, Docs &amp; Release</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when creating, styling, or deploying an accompanying GitHub Pages showcase and documentation site for a repository, syncing it with README and docs/ content, or configuring GitHub Actions / docs/ publishing.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-pill">/eng pages</span><span class="sc-pill">/eng gh-pages</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="build" data-search="building-installers-and-onboarding use when planning, building, or remediating user setup and initialization commands (init, setup, doctor), multi-target installers (user home, global, or custom prefix), or in-tool workflow guidance and next-step hints that show users how to bootstrap and run a project. onboard">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-build.svg" alt="Build, AI &amp; Security" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>building-installers-and-onboarding</code></h3>
+            <span class="skill-cat-tag" style="border-color:#00e5ff;color:#00e5ff">Build, AI &amp; Security</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when planning, building, or remediating user setup and initialization commands (init, setup, doctor), multi-target installers (user home, global, or custom prefix), or in-tool workflow guidance and next-step hints that show users how to bootstrap and run a project.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-pill">/eng onboard</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="sustain" data-search="building-release-binaries use when building, packaging, or uploading per-platform release binaries (macos, linux, windows) for a tagged version, when a github release is missing assets for some platform, or when cross-compiling a rust cli for distribution. binaries">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-sustain.svg" alt="Collaborate, Docs &amp; Release" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>building-release-binaries</code></h3>
+            <span class="skill-cat-tag" style="border-color:#38bdf8;color:#38bdf8">Collaborate, Docs &amp; Release</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when building, packaging, or uploading per-platform release binaries (macOS, Linux, Windows) for a tagged version, when a GitHub release is missing assets for some platform, or when cross-compiling a Rust CLI for distribution.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-pill">/eng binaries</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="build" data-search="building-small-cli-tools use when writing a command-line tool, script, or small utility (converters, generators, exporters, helpers), or adding a gui or file format on top of one, for reliable behavior and easy sharing. ">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-build.svg" alt="Build, AI &amp; Security" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>building-small-cli-tools</code></h3>
+            <span class="skill-cat-tag" style="border-color:#00e5ff;color:#00e5ff">Build, AI &amp; Security</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when writing a command-line tool, script, or small utility (converters, generators, exporters, helpers), or adding a GUI or file format on top of one, for reliable behavior and easy sharing.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-none">Router auto-selects</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="verify" data-search="building-trustworthy-benchmarks use when building or trusting an evaluation suite, benchmark corpus, scorer, or leaderboard; when comparing tools or models; when a score looks too good; or when ground truth labels might be wrong. ">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-verify.svg" alt="Verify, QA &amp; Coverage" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>building-trustworthy-benchmarks</code></h3>
+            <span class="skill-cat-tag" style="border-color:#00ff9d;color:#00ff9d">Verify, QA &amp; Coverage</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when building or trusting an evaluation suite, benchmark corpus, scorer, or leaderboard; when comparing tools or models; when a score looks too good; or when ground truth labels might be wrong.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-none">Router auto-selects</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="build" data-search="building-unattended-agent-loops use when building an llm or agent system that generates and runs code, retries on failure, or runs for hours or days without supervision, including self-healing loops, daemons, batch runners, and sandboxes. ">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-build.svg" alt="Build, AI &amp; Security" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>building-unattended-agent-loops</code></h3>
+            <span class="skill-cat-tag" style="border-color:#00e5ff;color:#00e5ff">Build, AI &amp; Security</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when building an LLM or agent system that generates and runs code, retries on failure, or runs for hours or days without supervision, including self-healing loops, daemons, batch runners, and sandboxes.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-none">Router auto-selects</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="plan" data-search="choosing-tools-and-substrates use when picking a language, framework, database, library, or runtime for a new component, when adding a dependency, or when a proposed stack seems chosen out of habit rather than fit. ">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-plan.svg" alt="Frame, Plan &amp; FinOps" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>choosing-tools-and-substrates</code></h3>
+            <span class="skill-cat-tag" style="border-color:#00e5ff;color:#00e5ff">Frame, Plan &amp; FinOps</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when picking a language, framework, database, library, or runtime for a new component, when adding a dependency, or when a proposed stack seems chosen out of habit rather than fit.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-none">Router auto-selects</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="verify" data-search="clustering-failures-by-root-cause use when facing many failing tests, false positives, review findings, or bug reports at once, or when improving a metric like precision or recall without regressing another. ">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-verify.svg" alt="Verify, QA &amp; Coverage" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>clustering-failures-by-root-cause</code></h3>
+            <span class="skill-cat-tag" style="border-color:#00ff9d;color:#00ff9d">Verify, QA &amp; Coverage</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when facing many failing tests, false positives, review findings, or bug reports at once, or when improving a metric like precision or recall without regressing another.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-none">Router auto-selects</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="arch" data-search="code-architecture-review use when conducting a comprehensive code and architecture review of any repository using graph-based structural analysis (graphify/ast) and producing a detailed, actionable improvement plan. arch">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-arch.svg" alt="Architecture &amp; Drivers" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>code-architecture-review</code></h3>
+            <span class="skill-cat-tag" style="border-color:#38bdf8;color:#38bdf8">Architecture &amp; Drivers</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when conducting a comprehensive code and architecture review of any repository using graph-based structural analysis (Graphify/AST) and producing a detailed, actionable improvement plan.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-pill">/eng arch</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="sustain" data-search="committing-and-releasing-cleanly use when about to commit, push, tag a version, or cut a release; when a working tree mixes unrelated changes; or when unsure whether an action is safe to run without asking. commit">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-sustain.svg" alt="Collaborate, Docs &amp; Release" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>committing-and-releasing-cleanly</code></h3>
+            <span class="skill-cat-tag" style="border-color:#38bdf8;color:#38bdf8">Collaborate, Docs &amp; Release</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when about to commit, push, tag a version, or cut a release; when a working tree mixes unrelated changes; or when unsure whether an action is safe to run without asking.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-pill">/eng commit</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="sustain" data-search="compacting-context-safely use when an agent&#x27;s context window is filling up, auto-compaction is near, responses are slowing or forgetting earlier decisions, the task is switching to unrelated work, or before running /compact, /clear, or starting a fresh session mid-task. compact">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-sustain.svg" alt="Collaborate, Docs &amp; Release" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>compacting-context-safely</code></h3>
+            <span class="skill-cat-tag" style="border-color:#38bdf8;color:#38bdf8">Collaborate, Docs &amp; Release</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when an agent&#x27;s context window is filling up, auto-compaction is near, responses are slowing or forgetting earlier decisions, the task is switching to unrelated work, or before running /compact, /clear, or starting a fresh session mid-task.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-pill">/eng compact</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="build" data-search="controlling-processes-safely use when code reads a pid from a pid or lock file, sends signals to a daemon or child process, implements stop/restart/status for a background service, or decides whether a process is still running. ">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-build.svg" alt="Build, AI &amp; Security" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>controlling-processes-safely</code></h3>
+            <span class="skill-cat-tag" style="border-color:#00e5ff;color:#00e5ff">Build, AI &amp; Security</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when code reads a PID from a pid or lock file, sends signals to a daemon or child process, implements stop/restart/status for a background service, or decides whether a process is still running.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-none">Router auto-selects</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="verify" data-search="debugging-across-layers use when a failure persists no matter which setting you change, when behavior differs between environments, when imports or config resolve to the wrong thing, or after resuming work from a checkpoint where state may have changed. debug">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-verify.svg" alt="Verify, QA &amp; Coverage" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>debugging-across-layers</code></h3>
+            <span class="skill-cat-tag" style="border-color:#00ff9d;color:#00ff9d">Verify, QA &amp; Coverage</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when a failure persists no matter which setting you change, when behavior differs between environments, when imports or config resolve to the wrong thing, or after resuming work from a checkpoint where state may have changed.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-pill">/eng debug</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="arch" data-search="defending-architecture-decisions use when making an architectural or technology decision that is costly to reverse, choosing between competing designs, writing an adr or rfc, or noticing that one option seems so obvious that alternatives were never listed. ">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-arch.svg" alt="Architecture &amp; Drivers" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>defending-architecture-decisions</code></h3>
+            <span class="skill-cat-tag" style="border-color:#38bdf8;color:#38bdf8">Architecture &amp; Drivers</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when making an architectural or technology decision that is costly to reverse, choosing between competing designs, writing an ADR or RFC, or noticing that one option seems so obvious that alternatives were never listed.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-none">Router auto-selects</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="verify" data-search="dependency-audit use when auditing third-party package dependencies across js/ts, python, rust, go, java, and ruby for known security vulnerabilities (cves), outdated packages, license compliance risks, and supply chain threats. deps">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-verify.svg" alt="Verify, QA &amp; Coverage" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>dependency-audit</code></h3>
+            <span class="skill-cat-tag" style="border-color:#00ff9d;color:#00ff9d">Verify, QA &amp; Coverage</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when auditing third-party package dependencies across JS/TS, Python, Rust, Go, Java, and Ruby for known security vulnerabilities (CVEs), outdated packages, license compliance risks, and supply chain threats.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-pill">/eng deps</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="arch" data-search="designing-data-pipelines use when building etl, scheduled dag workflows, knowledge-graph or database loads, simulated data generation, or report pipelines; when reruns duplicate data, history gets overwritten, or queries time out. ">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-arch.svg" alt="Architecture &amp; Drivers" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>designing-data-pipelines</code></h3>
+            <span class="skill-cat-tag" style="border-color:#38bdf8;color:#38bdf8">Architecture &amp; Drivers</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when building ETL, scheduled DAG workflows, knowledge-graph or database loads, simulated data generation, or report pipelines; when reruns duplicate data, history gets overwritten, or queries time out.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-none">Router auto-selects</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="plan" data-search="designing-exhaustive-test-cases use when planning or building new functionality, features, endpoints, cli commands, or modules, before writing implementation code, to specify exhaustive pre-build test cases and wire them into the automated post-build test suite. tdd testcases">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-plan.svg" alt="Frame, Plan &amp; FinOps" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>designing-exhaustive-test-cases</code></h3>
+            <span class="skill-cat-tag" style="border-color:#00e5ff;color:#00e5ff">Frame, Plan &amp; FinOps</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when planning or building new functionality, features, endpoints, CLI commands, or modules, before writing implementation code, to specify exhaustive pre-build test cases and wire them into the automated post-build test suite.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-pill">/eng tdd</span><span class="sc-pill">/eng testcases</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="arch" data-search="designing-layered-pipelines use when structuring a system with several stages, inputs, or outputs (compilers, transpilers, etl, ingest-analyze-report), when logic is leaking into thin wrappers, or when the same types are declared in more than one place. ">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-arch.svg" alt="Architecture &amp; Drivers" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>designing-layered-pipelines</code></h3>
+            <span class="skill-cat-tag" style="border-color:#38bdf8;color:#38bdf8">Architecture &amp; Drivers</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when structuring a system with several stages, inputs, or outputs (compilers, transpilers, ETL, ingest-analyze-report), when logic is leaking into thin wrappers, or when the same types are declared in more than one place.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-none">Router auto-selects</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="sustain" data-search="designing-logos-and-icons use when designing, generating, or refreshing a project logo, hero banner, square plugin icon, favicon set, or domain category icons in svg and png formats for a repository, cli, plugin manifest, or documentation site. logo icons">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-sustain.svg" alt="Collaborate, Docs &amp; Release" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>designing-logos-and-icons</code></h3>
+            <span class="skill-cat-tag" style="border-color:#38bdf8;color:#38bdf8">Collaborate, Docs &amp; Release</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when designing, generating, or refreshing a project logo, hero banner, square plugin icon, favicon set, or domain category icons in SVG and PNG formats for a repository, CLI, plugin manifest, or documentation site.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-pill">/eng logo</span><span class="sc-pill">/eng icons</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="arch" data-search="designing-plugin-contracts use when a host must work with several interchangeable implementations (drivers, adapters, renderers, backends, providers), when building cross-platform drivers for windows, macos, and linux, when adding &quot;just one more&quot; implementation forces changes to the host, or when needing offline/mock modes that match live behavior. driver drivers">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-arch.svg" alt="Architecture &amp; Drivers" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>designing-plugin-contracts</code></h3>
+            <span class="skill-cat-tag" style="border-color:#38bdf8;color:#38bdf8">Architecture &amp; Drivers</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when a host must work with several interchangeable implementations (drivers, adapters, renderers, backends, providers), when building cross-platform drivers for Windows, macOS, and Linux, when adding &quot;just one more&quot; implementation forces changes to the host, or when needing offline/mock modes that match live behavior.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-pill">/eng driver</span><span class="sc-pill">/eng drivers</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="arch" data-search="designing-testable-seams use when writing code that talks to databases, http, the clock, containers, llms, or the filesystem; when tests need live services; or when error handling swallows failures with broad excepts. ">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-arch.svg" alt="Architecture &amp; Drivers" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>designing-testable-seams</code></h3>
+            <span class="skill-cat-tag" style="border-color:#38bdf8;color:#38bdf8">Architecture &amp; Drivers</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when writing code that talks to databases, HTTP, the clock, containers, LLMs, or the filesystem; when tests need live services; or when error handling swallows failures with broad excepts.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-none">Router auto-selects</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="arch" data-search="designing-uniform-surfaces use when designing or planning a feature, tool, or service that people or programs will use through more than one interface (ui, keyboard, mouse, cli, rest/rpc api, mcp, scripts), when a capability exists on one surface but not another, or when writing a plan or spec that adds user-facing functionality. ">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-arch.svg" alt="Architecture &amp; Drivers" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>designing-uniform-surfaces</code></h3>
+            <span class="skill-cat-tag" style="border-color:#38bdf8;color:#38bdf8">Architecture &amp; Drivers</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when designing or planning a feature, tool, or service that people or programs will use through more than one interface (UI, keyboard, mouse, CLI, REST/RPC API, MCP, scripts), when a capability exists on one surface but not another, or when writing a plan or spec that adds user-facing functionality.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-none">Router auto-selects</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="sustain" data-search="drafting-issue-reports use when asked to write up bugs, enhancements, or review or audit findings as github issues, when turning a list of problems into a backlog, or when issues should be prepared for human review before anything is filed. issues">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-sustain.svg" alt="Collaborate, Docs &amp; Release" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>drafting-issue-reports</code></h3>
+            <span class="skill-cat-tag" style="border-color:#38bdf8;color:#38bdf8">Collaborate, Docs &amp; Release</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when asked to write up bugs, enhancements, or review or audit findings as GitHub issues, when turning a list of problems into a backlog, or when issues should be prepared for human review before anything is filed.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-pill">/eng issues</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="verify" data-search="driving-browsers-for-qa use when automating a web app&#x27;s manual qa plan or ui checklist with a browser driver (playwright, selenium, puppeteer), recording video, screenshot or trace evidence, running against an already-running dev stack, or reporting per-step pass/fail results. qa-drive qa-report">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-verify.svg" alt="Verify, QA &amp; Coverage" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>driving-browsers-for-qa</code></h3>
+            <span class="skill-cat-tag" style="border-color:#00ff9d;color:#00ff9d">Verify, QA &amp; Coverage</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when automating a web app&#x27;s manual QA plan or UI checklist with a browser driver (Playwright, Selenium, Puppeteer), recording video, screenshot or trace evidence, running against an already-running dev stack, or reporting per-step pass/fail results.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-pill">/eng qa-drive</span><span class="sc-pill">/eng qa-report</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="entry" data-search="eng use when the user types /eng, with or without a task, a skill name, or a shortcut word, to start a software task or load one swe-skills skill directly. ">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-entry.svg" alt="Entry &amp; Routing" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>eng</code></h3>
+            <span class="skill-cat-tag" style="border-color:#00ff9d;color:#00ff9d">Entry &amp; Routing</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when the user types /eng, with or without a task, a skill name, or a shortcut word, to start a software task or load one swe-skills skill directly.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-none">Router auto-selects</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="build" data-search="engineering-for-determinism use when results differ between runs or machines, tests are flaky, generated files churn in diffs, simulated data must be reproducible, or ground-truth files risk being hand-edited and drifting from their generator. ">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-build.svg" alt="Build, AI &amp; Security" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>engineering-for-determinism</code></h3>
+            <span class="skill-cat-tag" style="border-color:#00e5ff;color:#00e5ff">Build, AI &amp; Security</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when results differ between runs or machines, tests are flaky, generated files churn in diffs, simulated data must be reproducible, or ground-truth files risk being hand-edited and drifting from their generator.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-none">Router auto-selects</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="arch" data-search="evolving-schemas-and-contracts use when defining data shapes for apis, events, files, or databases, ingesting third-party or vendor data, adding a field to stored records, or renaming/removing something other code depends on. ">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-arch.svg" alt="Architecture &amp; Drivers" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>evolving-schemas-and-contracts</code></h3>
+            <span class="skill-cat-tag" style="border-color:#38bdf8;color:#38bdf8">Architecture &amp; Drivers</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when defining data shapes for APIs, events, files, or databases, ingesting third-party or vendor data, adding a field to stored records, or renaming/removing something other code depends on.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-none">Router auto-selects</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="sustain" data-search="github-issues-script use when converting a list of findings, review items, architectural gaps, or bug reports into a structured, reviewable batch script (using gh issue create) with exact file coordinates, impact analysis, and proper labels. tickets">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-sustain.svg" alt="Collaborate, Docs &amp; Release" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>github-issues-script</code></h3>
+            <span class="skill-cat-tag" style="border-color:#38bdf8;color:#38bdf8">Collaborate, Docs &amp; Release</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when converting a list of findings, review items, architectural gaps, or bug reports into a structured, reviewable batch script (using gh issue create) with exact file coordinates, impact analysis, and proper labels.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-pill">/eng tickets</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="build" data-search="grounding-ai-outputs use when an llm&#x27;s output feeds a decision of record (compliance, audit, security mapping, requirements, status), when synthesizing specs from notes, or when a model might invent details the source never contained. ">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-build.svg" alt="Build, AI &amp; Security" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>grounding-ai-outputs</code></h3>
+            <span class="skill-cat-tag" style="border-color:#00e5ff;color:#00e5ff">Build, AI &amp; Security</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when an LLM&#x27;s output feeds a decision of record (compliance, audit, security mapping, requirements, status), when synthesizing specs from notes, or when a model might invent details the source never contained.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-none">Router auto-selects</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="sustain" data-search="handing-off-sessions use when pausing or ending a work session, resuming after a break or context reset, transferring work to another agent or person, or preserving what was learned, including scratch tools and as-built specifications. handoff chain">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-sustain.svg" alt="Collaborate, Docs &amp; Release" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>handing-off-sessions</code></h3>
+            <span class="skill-cat-tag" style="border-color:#38bdf8;color:#38bdf8">Collaborate, Docs &amp; Release</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when pausing or ending a work session, resuming after a break or context reset, transferring work to another agent or person, or preserving what was learned, including scratch tools and as-built specifications.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-pill">/eng handoff</span><span class="sc-pill">/eng chain</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="build" data-search="hardening-ci-workflows use when writing or reviewing ci/cd workflow files (github actions or similar), adding third-party actions, granting workflow permissions, adding a dependency policy or format gate, or when a workflow handles pull requests from forks. ">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-build.svg" alt="Build, AI &amp; Security" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>hardening-ci-workflows</code></h3>
+            <span class="skill-cat-tag" style="border-color:#00e5ff;color:#00e5ff">Build, AI &amp; Security</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when writing or reviewing CI/CD workflow files (GitHub Actions or similar), adding third-party actions, granting workflow permissions, adding a dependency policy or format gate, or when a workflow handles pull requests from forks.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-none">Router auto-selects</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="build" data-search="hardening-trust-boundaries use when code passes data into a shell, sql/cypher/query language, filesystem path, template, container build, extension permission, or secret store; when running model-written or third-party code; or before shipping anything that handles untrusted input. ">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-build.svg" alt="Build, AI &amp; Security" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>hardening-trust-boundaries</code></h3>
+            <span class="skill-cat-tag" style="border-color:#00e5ff;color:#00e5ff">Build, AI &amp; Security</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when code passes data into a shell, SQL/Cypher/query language, filesystem path, template, container build, extension permission, or secret store; when running model-written or third-party code; or before shipping anything that handles untrusted input.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-none">Router auto-selects</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="verify" data-search="hunting-silent-failures use when reviewing code with low test coverage, after adding a permissive parser or adapter, when output looks plausible but subtly wrong or empty, or when asked to qa a test suite for real gaps rather than count coverage. coverage">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-verify.svg" alt="Verify, QA &amp; Coverage" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>hunting-silent-failures</code></h3>
+            <span class="skill-cat-tag" style="border-color:#00ff9d;color:#00ff9d">Verify, QA &amp; Coverage</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when reviewing code with low test coverage, after adding a permissive parser or adapter, when output looks plausible but subtly wrong or empty, or when asked to QA a test suite for real gaps rather than count coverage.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-pill">/eng coverage</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="sustain" data-search="keeping-docs-in-sync use when a change alters commands, flags, behavior, capabilities, counts, or architecture that documentation describes; before committing feature work; or when docs, rendered graphics, or github pages contain numbers or examples that may have drifted. ">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-sustain.svg" alt="Collaborate, Docs &amp; Release" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>keeping-docs-in-sync</code></h3>
+            <span class="skill-cat-tag" style="border-color:#38bdf8;color:#38bdf8">Collaborate, Docs &amp; Release</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when a change alters commands, flags, behavior, capabilities, counts, or architecture that documentation describes; before committing feature work; or when docs, rendered graphics, or GitHub Pages contain numbers or examples that may have drifted.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-none">Router auto-selects</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="build" data-search="keeping-event-loops-responsive use when adding a wait, sleep, poll, or &quot;wait until x&quot; request handler to a single-threaded or single-owner request/serve loop (rpc, socket, mcp, or ipc server), when a server hangs until a wait times out, or when adding an input filter/debounce/dedup (e.g. dropping key auto-repeat) ahead of a router that may forward the input. ">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-build.svg" alt="Build, AI &amp; Security" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>keeping-event-loops-responsive</code></h3>
+            <span class="skill-cat-tag" style="border-color:#00e5ff;color:#00e5ff">Build, AI &amp; Security</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when adding a wait, sleep, poll, or &quot;wait until X&quot; request handler to a single-threaded or single-owner request/serve loop (RPC, socket, MCP, or IPC server), when a server hangs until a wait times out, or when adding an input filter/debounce/dedup (e.g. dropping key auto-repeat) ahead of a router that may forward the input.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-none">Router auto-selects</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="sustain" data-search="keeping-repos-portable use when writing scripts, configs, docs links or cross-repo references; when something works only on one machine or from one directory; when adding ports, paths or environment assumptions; or before sharing or containerizing a repo. ">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-sustain.svg" alt="Collaborate, Docs &amp; Release" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>keeping-repos-portable</code></h3>
+            <span class="skill-cat-tag" style="border-color:#38bdf8;color:#38bdf8">Collaborate, Docs &amp; Release</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when writing scripts, configs, docs links or cross-repo references; when something works only on one machine or from one directory; when adding ports, paths or environment assumptions; or before sharing or containerizing a repo.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-none">Router auto-selects</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="verify" data-search="layered-verification-gates use when deciding what &quot;done&quot; or &quot;green&quot; means, before committing, before a phase or release, when tests are skipped or unavailable, or when tempted to weaken a check to get past a gate. ">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-verify.svg" alt="Verify, QA &amp; Coverage" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>layered-verification-gates</code></h3>
+            <span class="skill-cat-tag" style="border-color:#00ff9d;color:#00ff9d">Verify, QA &amp; Coverage</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when deciding what &quot;done&quot; or &quot;green&quot; means, before committing, before a phase or release, when tests are skipped or unavailable, or when tempted to weaken a check to get past a gate.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-none">Router auto-selects</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="verify" data-search="making-verifiable-claims use when reporting status, results, performance, security posture or comparisons (&quot;done&quot;, &quot;faster&quot;, &quot;secure&quot;, &quot;passes&quot;), writing release notes or docs with numbers, or reviewing someone else&#x27;s claims. ">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-verify.svg" alt="Verify, QA &amp; Coverage" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>making-verifiable-claims</code></h3>
+            <span class="skill-cat-tag" style="border-color:#00ff9d;color:#00ff9d">Verify, QA &amp; Coverage</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when reporting status, results, performance, security posture or comparisons (&quot;done&quot;, &quot;faster&quot;, &quot;secure&quot;, &quot;passes&quot;), writing release notes or docs with numbers, or reviewing someone else&#x27;s claims.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-none">Router auto-selects</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="arch" data-search="managing-complexity-budgets use when files or functions are growing large, before adding a feature to an already big module, when an agent&#x27;s edits keep breaking unrelated things, or when planning where new code should live. ">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-arch.svg" alt="Architecture &amp; Drivers" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>managing-complexity-budgets</code></h3>
+            <span class="skill-cat-tag" style="border-color:#38bdf8;color:#38bdf8">Architecture &amp; Drivers</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when files or functions are growing large, before adding a feature to an already big module, when an agent&#x27;s edits keep breaking unrelated things, or when planning where new code should live.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-none">Router auto-selects</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="build" data-search="nix-environments use when configuring reproducible development environments, hermetic build toolchains, or system-level dependencies with nix flakes or devshells, especially when a project requires native c libraries or cross-compiler tools alongside language package managers. nix">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-build.svg" alt="Build, AI &amp; Security" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>nix-environments</code></h3>
+            <span class="skill-cat-tag" style="border-color:#00e5ff;color:#00e5ff">Build, AI &amp; Security</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when configuring reproducible development environments, hermetic build toolchains, or system-level dependencies with Nix flakes or devShells, especially when a project requires native C libraries or cross-compiler tools alongside language package managers.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-pill">/eng nix</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="sustain" data-search="orchestrating-subagents use when delegating work to subagents or parallel agents, choosing which model tier to use for a task, structuring reviews by fresh-context agents, when subagent output is too verbose or conflicts with other agents&#x27; edits, or when more than one agent may commit to the same repository. ">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-sustain.svg" alt="Collaborate, Docs &amp; Release" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>orchestrating-subagents</code></h3>
+            <span class="skill-cat-tag" style="border-color:#38bdf8;color:#38bdf8">Collaborate, Docs &amp; Release</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when delegating work to subagents or parallel agents, choosing which model tier to use for a task, structuring reviews by fresh-context agents, when subagent output is too verbose or conflicts with other agents&#x27; edits, or when more than one agent may commit to the same repository.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-none">Router auto-selects</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="build" data-search="parsing-untrusted-text-robustly use when parsing or scraping text, html/dom, markdown, logs, or markup you do not control; when a scraper breaks after a site update; when a parser matches things inside code blocks; or when type-guessing gives wrong results. ">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-build.svg" alt="Build, AI &amp; Security" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>parsing-untrusted-text-robustly</code></h3>
+            <span class="skill-cat-tag" style="border-color:#00e5ff;color:#00e5ff">Build, AI &amp; Security</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when parsing or scraping text, HTML/DOM, markdown, logs, or markup you do not control; when a scraper breaks after a site update; when a parser matches things inside code blocks; or when type-guessing gives wrong results.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-none">Router auto-selects</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="plan" data-search="planning-with-contracts use when writing an implementation plan or spec for a multi-file change, before touching code on anything that spans several modules, or when a plan is being executed by an agent with no prior context. plan">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-plan.svg" alt="Frame, Plan &amp; FinOps" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>planning-with-contracts</code></h3>
+            <span class="skill-cat-tag" style="border-color:#00e5ff;color:#00e5ff">Frame, Plan &amp; FinOps</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when writing an implementation plan or spec for a multi-file change, before touching code on anything that spans several modules, or when a plan is being executed by an agent with no prior context.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-pill">/eng plan</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="sustain" data-search="pr-review use when reviewing pull requests and git branch diffs against architectural rules, breaking changes, test coverage, error handling, security boundaries, and edge cases to generate actionable line-by-line review comments. diff">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-sustain.svg" alt="Collaborate, Docs &amp; Release" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>pr-review</code></h3>
+            <span class="skill-cat-tag" style="border-color:#38bdf8;color:#38bdf8">Collaborate, Docs &amp; Release</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when reviewing pull requests and git branch diffs against architectural rules, breaking changes, test coverage, error handling, security boundaries, and edge cases to generate actionable line-by-line review comments.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-pill">/eng diff</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="arch" data-search="refactor-execute use when safely executing architectural refactorings and code improvements step-by-step from an improvement plan or task list with green baseline tests, atomic commits, behavioral invariance, and incremental verification. refactor">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-arch.svg" alt="Architecture &amp; Drivers" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>refactor-execute</code></h3>
+            <span class="skill-cat-tag" style="border-color:#38bdf8;color:#38bdf8">Architecture &amp; Drivers</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when safely executing architectural refactorings and code improvements step-by-step from an improvement plan or task list with green baseline tests, atomic commits, behavioral invariance, and incremental verification.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-pill">/eng refactor</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="sustain" data-search="release use when analyzing changes since last release, calculating semver tag bump, generating changelogs, creating annotated git tags, and publishing releases. ">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-sustain.svg" alt="Collaborate, Docs &amp; Release" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>release</code></h3>
+            <span class="skill-cat-tag" style="border-color:#38bdf8;color:#38bdf8">Collaborate, Docs &amp; Release</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when analyzing changes since last release, calculating SemVer tag bump, generating changelogs, creating annotated git tags, and publishing releases.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-none">Router auto-selects</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="sustain" data-search="rendering-graphic-examples use when generating, rendering, or updating svg and png visual diagrams, terminal captures, architecture schematics, or workflow illustrations to accompany code examples, recipes, and repository documentation. graphics svg">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-sustain.svg" alt="Collaborate, Docs &amp; Release" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>rendering-graphic-examples</code></h3>
+            <span class="skill-cat-tag" style="border-color:#38bdf8;color:#38bdf8">Collaborate, Docs &amp; Release</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when generating, rendering, or updating SVG and PNG visual diagrams, terminal captures, architecture schematics, or workflow illustrations to accompany code examples, recipes, and repository documentation.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-pill">/eng graphics</span><span class="sc-pill">/eng svg</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="plan" data-search="right-sizing-process use when unsure how much planning, testing, documentation, or review a task deserves, when a quick script is growing into a system, or when process feels heavier or lighter than the risk. size">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-plan.svg" alt="Frame, Plan &amp; FinOps" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>right-sizing-process</code></h3>
+            <span class="skill-cat-tag" style="border-color:#00e5ff;color:#00e5ff">Frame, Plan &amp; FinOps</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when unsure how much planning, testing, documentation, or review a task deserves, when a quick script is growing into a system, or when process feels heavier or lighter than the risk.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-pill">/eng size</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="build" data-search="running-local-ci use when running ci checks, validating branches before push or pr, configuring github actions triggers, or testing across os targets while conserving hosted github actions ci minutes as a standing rule. local-ci ci">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-build.svg" alt="Build, AI &amp; Security" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>running-local-ci</code></h3>
+            <span class="skill-cat-tag" style="border-color:#00e5ff;color:#00e5ff">Build, AI &amp; Security</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when running CI checks, validating branches before push or PR, configuring GitHub Actions triggers, or testing across OS targets while conserving hosted GitHub Actions CI minutes as a standing rule.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-pill">/eng local-ci</span><span class="sc-pill">/eng ci</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="sustain" data-search="running-multi-lens-audits use when auditing a codebase, test suite, benchmark, or plan in depth before a release, after a big milestone, or when a single reviewer keeps missing whole classes of problems. review">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-sustain.svg" alt="Collaborate, Docs &amp; Release" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>running-multi-lens-audits</code></h3>
+            <span class="skill-cat-tag" style="border-color:#38bdf8;color:#38bdf8">Collaborate, Docs &amp; Release</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when auditing a codebase, test suite, benchmark, or plan in depth before a release, after a big milestone, or when a single reviewer keeps missing whole classes of problems.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-pill">/eng review</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="build" data-search="scaffolding-new-projects use when starting a new repository or project directory, when asked to &quot;scaffold&quot;, &quot;bootstrap&quot;, or &quot;set up&quot; a repo layout (src/, docs/, tests/, input/, output/, readme), or when a new project is about to receive its first code with no structure yet. ">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-build.svg" alt="Build, AI &amp; Security" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>scaffolding-new-projects</code></h3>
+            <span class="skill-cat-tag" style="border-color:#00e5ff;color:#00e5ff">Build, AI &amp; Security</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when starting a new repository or project directory, when asked to &quot;scaffold&quot;, &quot;bootstrap&quot;, or &quot;set up&quot; a repo layout (src/, docs/, tests/, input/, output/, README), or when a new project is about to receive its first code with no structure yet.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-none">Router auto-selects</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="build" data-search="security-best-practices use when writing, refactoring, or reviewing code that handles authentication, authorization, cryptography, user input, session tokens, database queries, external integrations, or sensitive data storage. security">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-build.svg" alt="Build, AI &amp; Security" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>security-best-practices</code></h3>
+            <span class="skill-cat-tag" style="border-color:#00e5ff;color:#00e5ff">Build, AI &amp; Security</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when writing, refactoring, or reviewing code that handles authentication, authorization, cryptography, user input, session tokens, database queries, external integrations, or sensitive data storage.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-pill">/eng security</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="sustain" data-search="showcasing-graphics-in-docs use when styling documentation visuals, embedding showcase graphics and rich visual examples into readme or docs pages, or applying a cohesive visual theme such as a futuristic obsidian-black background with a light-blue neon grid (or a user-specified palette). showcase neon">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-sustain.svg" alt="Collaborate, Docs &amp; Release" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>showcasing-graphics-in-docs</code></h3>
+            <span class="skill-cat-tag" style="border-color:#38bdf8;color:#38bdf8">Collaborate, Docs &amp; Release</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when styling documentation visuals, embedding showcase graphics and rich visual examples into README or docs pages, or applying a cohesive visual theme such as a futuristic obsidian-black background with a light-blue neon grid (or a user-specified palette).</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-pill">/eng showcase</span><span class="sc-pill">/eng neon</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="plan" data-search="sizing-limits-from-measurement use when choosing or debugging a timeout, token cap, context window, retry count, batch size, pool size, memory limit or budget, especially when a call fails at the same point no matter how high you raise the limit. ">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-plan.svg" alt="Frame, Plan &amp; FinOps" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>sizing-limits-from-measurement</code></h3>
+            <span class="skill-cat-tag" style="border-color:#00e5ff;color:#00e5ff">Frame, Plan &amp; FinOps</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when choosing or debugging a timeout, token cap, context window, retry count, batch size, pool size, memory limit or budget, especially when a call fails at the same point no matter how high you raise the limit.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-none">Router auto-selects</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="sustain" data-search="supervising-autonomous-sessions use when letting an ai coding session run for long stretches with little supervision, deciding how much autonomy to grant, when a session keeps retrying without progress, or when an agent might touch things outside its task. ">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-sustain.svg" alt="Collaborate, Docs &amp; Release" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>supervising-autonomous-sessions</code></h3>
+            <span class="skill-cat-tag" style="border-color:#38bdf8;color:#38bdf8">Collaborate, Docs &amp; Release</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when letting an AI coding session run for long stretches with little supervision, deciding how much autonomy to grant, when a session keeps retrying without progress, or when an agent might touch things outside its task.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-none">Router auto-selects</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="verify" data-search="test-coverage use when auditing a repository&#x27;s test suite to measure real coverage and tier completeness (unit, integration, system, smoke, perf, stress, torture), evaluate shell test quality, diagnose failing tests, or produce a prioritized gap-closing plan. cov">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-verify.svg" alt="Verify, QA &amp; Coverage" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>test-coverage</code></h3>
+            <span class="skill-cat-tag" style="border-color:#00ff9d;color:#00ff9d">Verify, QA &amp; Coverage</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when auditing a repository&#x27;s test suite to measure real coverage and tier completeness (unit, integration, system, smoke, perf, stress, torture), evaluate shell test quality, diagnose failing tests, or produce a prioritized gap-closing plan.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-pill">/eng cov</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="plan" data-search="token-finops use when forecasting, budgeting, tracking, and reporting llm token consumption and dollar costs ($/mtok) across frontier models and autonomous agent workflows. finops">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-plan.svg" alt="Frame, Plan &amp; FinOps" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>token-finops</code></h3>
+            <span class="skill-cat-tag" style="border-color:#00e5ff;color:#00e5ff">Frame, Plan &amp; FinOps</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when forecasting, budgeting, tracking, and reporting LLM token consumption and dollar costs ($/MTok) across frontier models and autonomous agent workflows.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-pill">/eng finops</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="plan" data-search="using-local-tool-registry use when starting or optimizing planning, build, execution, cross-platform testing, or release cycles to discover and leverage local tools, vm sandboxes (cvm, win-devvm, fedora-vms, freebsd-kvm), local ci runners (gha-vm-runners), and static analyzers in ~/src. tools vms registry">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-plan.svg" alt="Frame, Plan &amp; FinOps" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>using-local-tool-registry</code></h3>
+            <span class="skill-cat-tag" style="border-color:#00e5ff;color:#00e5ff">Frame, Plan &amp; FinOps</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when starting or optimizing planning, build, execution, cross-platform testing, or release cycles to discover and leverage local tools, VM sandboxes (cvm, win-devvm, fedora-vms, freebsd-kvm), local CI runners (gha-vm-runners), and static analyzers in ~/src.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-pill">/eng tools</span><span class="sc-pill">/eng vms</span><span class="sc-pill">/eng registry</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="entry" data-search="using-swe-skills use when starting any software task — building a tool, feature or system, planning or architecting, debugging, reviewing, or shipping — to decide which swe-skills apply and how much process the task deserves. ">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-entry.svg" alt="Entry &amp; Routing" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>using-swe-skills</code></h3>
+            <span class="skill-cat-tag" style="border-color:#00ff9d;color:#00ff9d">Entry &amp; Routing</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when starting any software task — building a tool, feature or system, planning or architecting, debugging, reviewing, or shipping — to decide which swe-skills apply and how much process the task deserves.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-none">Router auto-selects</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="sustain" data-search="writing-agent-context-files use when creating or updating claude.md, agents.md, gemini.md, .cursor/rules, or other instruction files that ai coding agents read; when agents keep repeating a mistake in a repo; or when supporting several agent tools in one repository. ">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-sustain.svg" alt="Collaborate, Docs &amp; Release" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>writing-agent-context-files</code></h3>
+            <span class="skill-cat-tag" style="border-color:#38bdf8;color:#38bdf8">Collaborate, Docs &amp; Release</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when creating or updating CLAUDE.md, AGENTS.md, GEMINI.md, .cursor/rules, or other instruction files that AI coding agents read; when agents keep repeating a mistake in a repo; or when supporting several agent tools in one repository.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-none">Router auto-selects</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="plan" data-search="writing-intent-briefs use when a request is vague, when requirements come from meeting notes or a rough idea, before planning or coding starts, or when you are tempted to fill in details the user never stated. ">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-plan.svg" alt="Frame, Plan &amp; FinOps" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>writing-intent-briefs</code></h3>
+            <span class="skill-cat-tag" style="border-color:#00e5ff;color:#00e5ff">Frame, Plan &amp; FinOps</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when a request is vague, when requirements come from meeting notes or a rough idea, before planning or coding starts, or when you are tempted to fill in details the user never stated.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-none">Router auto-selects</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="sustain" data-search="writing-pull-requests use when turning one or more issues or a finished branch into a github pull request, when deciding which issues belong in the same pr, when writing a pr title or description, or when a pr should be drafted for human review before it is opened. pr">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-sustain.svg" alt="Collaborate, Docs &amp; Release" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>writing-pull-requests</code></h3>
+            <span class="skill-cat-tag" style="border-color:#38bdf8;color:#38bdf8">Collaborate, Docs &amp; Release</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when turning one or more issues or a finished branch into a GitHub pull request, when deciding which issues belong in the same PR, when writing a PR title or description, or when a PR should be drafted for human review before it is opened.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-pill">/eng pr</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="sustain" data-search="writing-user-guides use when authoring, structuring, or refreshing user guide documentation, readme, purpose, architecture, running/using, or how-to docs for a repository, cli, library, or service; when documentation belongs in docs/; or when connecting a quickstart readme to a full documentation suite. docs guide">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-sustain.svg" alt="Collaborate, Docs &amp; Release" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>writing-user-guides</code></h3>
+            <span class="skill-cat-tag" style="border-color:#38bdf8;color:#38bdf8">Collaborate, Docs &amp; Release</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when authoring, structuring, or refreshing user guide documentation, README, purpose, architecture, running/using, or how-to docs for a repository, CLI, library, or service; when documentation belongs in docs/; or when connecting a quickstart README to a full documentation suite.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-pill">/eng docs</span><span class="sc-pill">/eng guide</span></div>
+        </div>
+      </article>
+      </div>
+    </section>
+
+    <!-- Documentation Hub -->
+    <section id="docs-hub">
+      <div class="section-head">
+        <div>
+          <span class="section-tag">COMPLETE REFERENCE SUITE</span>
+          <h2 class="section-title">Documentation Hub</h2>
+        </div>
+      </div>
+
+      <div class="docs-grid">
+        <a class="doc-card" href="README.md">
+          <h3>Documentation Index</h3>
+          <p>Central navigational map and recommended reading order across all guides and visual diagrams.</p>
+        </a>
+        <a class="doc-card" href="purpose.md">
+          <h3>Purpose &amp; Threat Model</h3>
+          <p>Systemic LLM failure modes, defense-in-depth security boundaries, and token economics.</p>
+        </a>
+        <a class="doc-card" href="architecture.md">
+          <h3>System Architecture</h3>
+          <p>5-tier runtime governance, multi-harness integration, lifecycle hooks, and subagent log isolation.</p>
+        </a>
+        <a class="doc-card" href="running.md">
+          <h3>Running &amp; Configuration</h3>
+          <p>Installation targets, token-saving skill profiles, CLI tools, environment variables, and exit codes.</p>
+        </a>
+        <a class="doc-card" href="how-to.md">
+          <h3>How-To Recipes &amp; Examples</h3>
+          <p>Step-by-step operational recipes paired with rendered SVG/PNG visual walkthroughs.</p>
+        </a>
+        <a class="doc-card" href="usermanual/README.md">
+          <h3>7-Chapter User Manual</h3>
+          <p>Exhaustive reference covering getting started, full catalog, hooks, workflows, skill authoring, and FAQ.</p>
+        </a>
+        <a class="doc-card" href="HOOKS.md">
+          <h3>Lifecycle Hooks &amp; Cadence</h3>
+          <p>Periodic turn/step checkpoint cadence, PreCompact guards, cold-cache detection, and model routing.</p>
+        </a>
+        <a class="doc-card" href="EVIDENCE.md">
+          <h3>Empirical Provenance</h3>
+          <p>Concrete post-mortems, commit histories, and incident sources across 20+ repositories.</p>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>swe-skills v0.17.0 • 68 Evidence-Derived Engineering Skills • Apache-2.0 License</p>
+  </footer>
+
+  <script>
+    let activeCategory = 'all';
+
+    function setCategory(cat, btn) {
+      activeCategory = cat;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      filterSkills();
+    }
+
+    function filterSkills() {
+      const query = (document.getElementById('skill-search').value || '').trim().toLowerCase();
+      const cards = document.querySelectorAll('.skill-card');
+      let shown = 0;
+      cards.forEach(card => {
+        const catMatch = activeCategory === 'all' || card.dataset.category === activeCategory;
+        const searchMatch = !query || card.dataset.search.includes(query);
+        if (catMatch && searchMatch) {
+          card.style.display = 'flex';
+          shown++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+      document.getElementById('visible-count').textContent = shown;
+    }
+
+    function copyCode(btn) {
+      const block = btn.parentElement;
+      const text = block.textContent.replace(/^Copy/, '').trim();
+      navigator.clipboard.writeText(text).then(() => {
+        const orig = btn.textContent;
+        btn.textContent = 'Copied!';
+        setTimeout(() => { btn.textContent = orig; }, 1400);
+      });
+    }
+  </script>
+</body>
+</html>

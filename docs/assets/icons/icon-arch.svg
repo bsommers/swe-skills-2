@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <pattern id="g" width="16" height="16" patternUnits="userSpaceOnUse">
+      <path d="M 16 0 L 0 0 0 16" fill="none" stroke="#00e5ff" stroke-width="0.6" stroke-opacity="0.16" />
+    </pattern>
+  </defs>
+  <rect x="3" y="3" width="58" height="58" rx="14" fill="#050914" stroke="#00e5ff" stroke-width="2" />
+  <rect x="3" y="3" width="58" height="58" rx="14" fill="url(#g)" />
+  
+    <polygon points="32,12 49,22 49,42 32,52 15,42 15,22" fill="#09152b" stroke="#00e5ff" stroke-width="2.4" />
+    <polygon points="32,21 41,26.5 41,37.5 32,43 23,37.5 23,26.5" fill="none" stroke="#38bdf8" stroke-width="1.8" />
+    <circle cx="32" cy="32" r="4" fill="#00ff9d" />
+</svg>

@@ -1,0 +1,166 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-void" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#03060d" />
+      <stop offset="45%" stop-color="#071022" />
+      <stop offset="100%" stop-color="#030710" />
+    </linearGradient>
+    <radialGradient id="neon-aura" cx="50%" cy="42%" r="60%">
+      <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.18" />
+      <stop offset="45%" stop-color="#38bdf8" stop-opacity="0.07" />
+      <stop offset="100%" stop-color="#03060d" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="cyan-beam" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.05" />
+      <stop offset="50%" stop-color="#00e5ff" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.05" />
+    </linearGradient>
+    <linearGradient id="core-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00ff9d" />
+      <stop offset="50%" stop-color="#00e5ff" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+    <linearGradient id="panel-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0b162c" stop-opacity="0.92" />
+      <stop offset="100%" stop-color="#060c1a" stop-opacity="0.95" />
+    </linearGradient>
+    <pattern id="minor-grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#38bdf8" stroke-width="0.6" stroke-opacity="0.09" />
+    </pattern>
+    <pattern id="major-grid" width="96" height="96" patternUnits="userSpaceOnUse">
+      <rect width="96" height="96" fill="url(#minor-grid)" />
+      <path d="M 96 0 L 0 0 0 96" fill="none" stroke="#00e5ff" stroke-width="1.0" stroke-opacity="0.20" />
+      <circle cx="0" cy="0" r="1.6" fill="#00e5ff" fill-opacity="0.45" />
+    </pattern>
+    <filter id="glow-strong" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="5" result="b1" />
+      <feGaussianBlur stdDeviation="2" result="b2" />
+      <feMerge>
+        <feMergeNode in="b1" />
+        <feMergeNode in="b2" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter id="glow-soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2.5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <style>
+      .f-mono { font-family: ui-monospace, 'Cascadia Code', 'Fira Code', 'JetBrains Mono', 'Source Code Pro', Menlo, Consolas, monospace; }
+      .f-sans { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Ubuntu, sans-serif; }
+    </style>
+  </defs>
+  <rect width="1200" height="620" rx="16" fill="url(#bg-void)" />
+  <rect width="1200" height="620" rx="16" fill="url(#major-grid)" />
+  <g id="perspective-grid">
+    <line x1="0" y1="495" x2="1200" y2="495" stroke="#00e5ff" stroke-width="1" stroke-opacity="0.09" />
+    <line x1="0" y1="509" x2="1200" y2="509" stroke="#00e5ff" stroke-width="1" stroke-opacity="0.11" />
+    <line x1="0" y1="526" x2="1200" y2="526" stroke="#00e5ff" stroke-width="1" stroke-opacity="0.14" />
+    <line x1="0" y1="548" x2="1200" y2="548" stroke="#00e5ff" stroke-width="1" stroke-opacity="0.16" />
+    <line x1="0" y1="574" x2="1200" y2="574" stroke="#00e5ff" stroke-width="1" stroke-opacity="0.20" />
+    <line x1="0" y1="603" x2="1200" y2="603" stroke="#00e5ff" stroke-width="1" stroke-opacity="0.24" />
+    <line x1="348" y1="485" x2="-435" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.08" />
+    <line x1="376" y1="485" x2="-320" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.10" />
+    <line x1="404" y1="485" x2="-205" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.12" />
+    <line x1="432" y1="485" x2="-90" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.13" />
+    <line x1="460" y1="485" x2="25" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.15" />
+    <line x1="488" y1="485" x2="140" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.16" />
+    <line x1="516" y1="485" x2="255" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.17" />
+    <line x1="544" y1="485" x2="370" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.19" />
+    <line x1="572" y1="485" x2="485" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.21" />
+    <line x1="600" y1="485" x2="600" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.22" />
+    <line x1="628" y1="485" x2="715" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.21" />
+    <line x1="656" y1="485" x2="830" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.19" />
+    <line x1="684" y1="485" x2="945" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.17" />
+    <line x1="712" y1="485" x2="1060" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.16" />
+    <line x1="740" y1="485" x2="1175" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.15" />
+    <line x1="768" y1="485" x2="1290" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.13" />
+    <line x1="796" y1="485" x2="1405" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.12" />
+    <line x1="824" y1="485" x2="1520" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.10" />
+    <line x1="852" y1="485" x2="1635" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.08" />
+  </g>
+  <rect width="1200" height="620" rx="16" fill="url(#neon-aura)" />
+  <rect x="12" y="12" width="1176" height="596" rx="12" fill="none" stroke="#0284c7" stroke-width="1.5" stroke-opacity="0.65" />
+  <path d="M 22 42 L 22 22 L 42 22" fill="none" stroke="#00e5ff" stroke-width="2.4" />
+  <path d="M 1158 22 L 1178 22 L 1178 42" fill="none" stroke="#00e5ff" stroke-width="2.4" />
+  <path d="M 22 578 L 22 598 L 42 598" fill="none" stroke="#00e5ff" stroke-width="2.4" />
+  <path d="M 1158 598 L 1178 598 L 1178 578" fill="none" stroke="#00e5ff" stroke-width="2.4" />
+
+  <!-- Header -->
+  <rect x="42" y="30" width="311" height="26" rx="5" fill="#071936" stroke="#00e5ff" stroke-width="1.3" />
+  <text x="197" y="47" text-anchor="middle" class="f-mono" font-size="11.5" font-weight="700" fill="#00e5ff" letter-spacing="1.2">EXAMPLE 04 // QA &amp; TRI-OS DRIVERS</text>
+  <text x="371" y="49" class="f-sans" font-size="22.5" font-weight="800" fill="#f0f6fc" letter-spacing="0.4">Browser QA Automation &amp; Cross-Platform Tri-OS Driver Architecture</text>
+  <text x="42" y="77" class="f-mono" font-size="13" fill="#94a3b8">End-to-end browser verification with recorded evidence alongside Windows, macOS, and Linux driver parity</text>
+  <line x1="42" y1="92" x2="1158" y2="92" stroke="url(#cyan-beam)" stroke-width="1.5" />
+
+  <!-- Body Content -->
+
+  <!-- Left Panel: Browser QA Driver -->
+  <rect x="52" y="118" width="532" height="418" rx="10" fill="url(#panel-grad)" stroke="#00e5ff" stroke-width="1.8" />
+  <text x="76" y="148" class="f-mono" font-size="14" font-weight="700" fill="#00e5ff">AUTOMATED BROWSER QA (driving-browsers-for-qa)</text>
+  <text x="76" y="172" class="f-sans" font-size="13" fill="#94a3b8">Playwright / WebDriver BiDi against live stack with zero-tolerance listeners</text>
+
+  <rect x="76" y="192" width="484" height="145" rx="6" fill="#040812" stroke="#0284c7" stroke-width="1.2" />
+  <text x="94" y="216" class="f-mono" font-size="12" fill="#00ff9d">// Attached to every QA plan step (plan-steps.e2e.ts)</text>
+  <text x="94" y="238" class="f-mono" font-size="12" fill="#f0f6fc">page.on('pageerror', err =&gt; failures.push(err));</text>
+  <text x="94" y="260" class="f-mono" font-size="12" fill="#f0f6fc">page.on('console', msg =&gt; msg.type()==='error' &amp;&amp; ...);</text>
+  <text x="94" y="282" class="f-mono" font-size="12" fill="#f0f6fc">page.on('response', r =&gt; r.status()&gt;=500 &amp;&amp; ...);</text>
+  <text x="94" y="306" class="f-mono" font-size="12" fill="#38bdf8">trace: 'retain-on-failure'  |  screenshot: 'on'</text>
+  <text x="94" y="325" class="f-mono" font-size="12" fill="#00ff9d">output: QA-REPORT.md + trace.zip + step screenshots</text>
+
+  <rect x="76" y="355" width="484" height="158" rx="6" fill="#06152d" stroke="#00ff9d" stroke-width="1.4" />
+  <text x="94" y="382" class="f-mono" font-size="12.5" font-weight="700" fill="#00ff9d">LIVE QA VERIFICATION REPORT SUMMARY:</text>
+  <text x="94" y="406" class="f-mono" font-size="12" fill="#f0f6fc">Step 01: Auth Login &amp; Session Cookie    [PASS] 180ms</text>
+  <text x="94" y="428" class="f-mono" font-size="12" fill="#f0f6fc">Step 02: Create Rate-Limited API Key    [PASS] 240ms</text>
+  <text x="94" y="450" class="f-mono" font-size="12" fill="#f0f6fc">Step 03: Console/PageError/5xx Gate     [0 ERRORS]</text>
+  <text x="94" y="472" class="f-mono" font-size="12" fill="#38bdf8">Evidence: test-results/step-02/trace.zip</text>
+  <text x="94" y="496" class="f-mono" font-size="12" fill="#00e5ff">Shortcut: /eng qa-drive  |  /eng qa-report</text>
+
+  <!-- Right Panel: Tri-OS Driver Architecture -->
+  <rect x="616" y="118" width="532" height="418" rx="10" fill="url(#panel-grad)" stroke="#38bdf8" stroke-width="1.8" />
+  <text x="640" y="148" class="f-mono" font-size="14" font-weight="700" fill="#38bdf8">TRI-OS DRIVER CONTRACTS (designing-plugin-contracts)</text>
+  <text x="640" y="172" class="f-sans" font-size="13" fill="#94a3b8">Host code speaks one OS-agnostic trait; platform seams isolate syscalls</text>
+
+  <g class="f-mono" font-size="12">
+    <rect x="640" y="192" width="152" height="136" rx="6" fill="#06152d" stroke="#00e5ff" stroke-width="1.4" />
+    <text x="716" y="216" text-anchor="middle" font-weight="700" fill="#00e5ff">WINDOWS</text>
+    <text x="652" y="240" fill="#e2e8f0">• ConPTY</text>
+    <text x="652" y="260" fill="#e2e8f0">• Job Objects</text>
+    <text x="652" y="280" fill="#e2e8f0">• Named Pipes</text>
+    <text x="652" y="300" fill="#e2e8f0">• MoveFileExW</text>
+    <text x="652" y="318" fill="#94a3b8">• %APPDATA%</text>
+
+    <rect x="806" y="192" width="152" height="136" rx="6" fill="#06152d" stroke="#00ff9d" stroke-width="1.4" />
+    <text x="882" y="216" text-anchor="middle" font-weight="700" fill="#00ff9d">macOS</text>
+    <text x="818" y="240" fill="#e2e8f0">• POSIX openpty</text>
+    <text x="818" y="260" fill="#e2e8f0">• killpg / kqueue</text>
+    <text x="818" y="280" fill="#e2e8f0">• Unix Sock &lt;104B</text>
+    <text x="818" y="300" fill="#e2e8f0">• FSEvents</text>
+    <text x="818" y="318" fill="#94a3b8">• ~/Library/...</text>
+
+    <rect x="972" y="192" width="152" height="136" rx="6" fill="#06152d" stroke="#38bdf8" stroke-width="1.4" />
+    <text x="1048" y="216" text-anchor="middle" font-weight="700" fill="#38bdf8">LINUX</text>
+    <text x="984" y="240" fill="#e2e8f0">• openpty / epoll</text>
+    <text x="984" y="260" fill="#e2e8f0">• PR_SET_PDEATHSIG</text>
+    <text x="984" y="280" fill="#e2e8f0">• Unix Sock &lt;108B</text>
+    <text x="984" y="300" fill="#e2e8f0">• inotify / rename</text>
+    <text x="984" y="318" fill="#94a3b8">• $XDG_STATE_HOME</text>
+  </g>
+
+  <rect x="640" y="355" width="484" height="158" rx="6" fill="#040812" stroke="#0284c7" stroke-width="1.2" />
+  <text x="658" y="382" class="f-mono" font-size="12.5" font-weight="700" fill="#00e5ff">SHARED CONTRACT SUITE + INJECTED SYSCALL FAKES:</text>
+  <text x="658" y="406" class="f-mono" font-size="12" fill="#f0f6fc">run_driver_contract_suite(driver) -&gt; runs on all 3 OSes</text>
+  <text x="658" y="428" class="f-mono" font-size="12" fill="#f0f6fc">test-coverage audits #[cfg(windows/macos/linux)] branches</text>
+  <text x="658" y="450" class="f-mono" font-size="12" fill="#00ff9d">verify.sh.template: Bash 3.2 + Git Bash + macOS + Linux</text>
+  <text x="658" y="472" class="f-mono" font-size="12" fill="#38bdf8">llvm-cov / pytest-cov / vitest / coverlet merged reports</text>
+  <text x="658" y="496" class="f-mono" font-size="12" fill="#00e5ff">Shortcut: /eng driver  |  /eng cov</text>
+
+
+  <!-- Footer Telemetry -->
+  <line x1="42" y1="566" x2="1158" y2="566" stroke="#0284c7" stroke-width="1" stroke-opacity="0.5" />
+  <text x="42" y="590" class="f-mono" font-size="11.5" fill="#38bdf8">SKILLS: driving-browsers-for-qa • designing-plugin-contracts • test-coverage</text>
+  <text x="1158" y="590" text-anchor="end" class="f-mono" font-size="11.5" fill="#00ff9d">PLATFORMS: WINDOWS • MACOS • LINUX • CHROMIUM/WEBKIT/FIREFOX</text>
+</svg>

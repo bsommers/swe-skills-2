@@ -1,0 +1,152 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-void" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#03060d" />
+      <stop offset="45%" stop-color="#071022" />
+      <stop offset="100%" stop-color="#030710" />
+    </linearGradient>
+    <radialGradient id="neon-aura" cx="50%" cy="42%" r="60%">
+      <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.18" />
+      <stop offset="45%" stop-color="#38bdf8" stop-opacity="0.07" />
+      <stop offset="100%" stop-color="#03060d" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="cyan-beam" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.05" />
+      <stop offset="50%" stop-color="#00e5ff" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.05" />
+    </linearGradient>
+    <linearGradient id="core-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00ff9d" />
+      <stop offset="50%" stop-color="#00e5ff" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+    <linearGradient id="panel-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0b162c" stop-opacity="0.92" />
+      <stop offset="100%" stop-color="#060c1a" stop-opacity="0.95" />
+    </linearGradient>
+    <pattern id="minor-grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#38bdf8" stroke-width="0.6" stroke-opacity="0.09" />
+    </pattern>
+    <pattern id="major-grid" width="96" height="96" patternUnits="userSpaceOnUse">
+      <rect width="96" height="96" fill="url(#minor-grid)" />
+      <path d="M 96 0 L 0 0 0 96" fill="none" stroke="#00e5ff" stroke-width="1.0" stroke-opacity="0.20" />
+      <circle cx="0" cy="0" r="1.6" fill="#00e5ff" fill-opacity="0.45" />
+    </pattern>
+    <filter id="glow-strong" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="5" result="b1" />
+      <feGaussianBlur stdDeviation="2" result="b2" />
+      <feMerge>
+        <feMergeNode in="b1" />
+        <feMergeNode in="b2" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter id="glow-soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2.5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <style>
+      .f-mono { font-family: ui-monospace, 'Cascadia Code', 'Fira Code', 'JetBrains Mono', 'Source Code Pro', Menlo, Consolas, monospace; }
+      .f-sans { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Ubuntu, sans-serif; }
+    </style>
+  </defs>
+  <rect width="1200" height="620" rx="16" fill="url(#bg-void)" />
+  <rect width="1200" height="620" rx="16" fill="url(#major-grid)" />
+  <g id="perspective-grid">
+    <line x1="0" y1="495" x2="1200" y2="495" stroke="#00e5ff" stroke-width="1" stroke-opacity="0.09" />
+    <line x1="0" y1="509" x2="1200" y2="509" stroke="#00e5ff" stroke-width="1" stroke-opacity="0.11" />
+    <line x1="0" y1="526" x2="1200" y2="526" stroke="#00e5ff" stroke-width="1" stroke-opacity="0.14" />
+    <line x1="0" y1="548" x2="1200" y2="548" stroke="#00e5ff" stroke-width="1" stroke-opacity="0.16" />
+    <line x1="0" y1="574" x2="1200" y2="574" stroke="#00e5ff" stroke-width="1" stroke-opacity="0.20" />
+    <line x1="0" y1="603" x2="1200" y2="603" stroke="#00e5ff" stroke-width="1" stroke-opacity="0.24" />
+    <line x1="348" y1="485" x2="-435" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.08" />
+    <line x1="376" y1="485" x2="-320" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.10" />
+    <line x1="404" y1="485" x2="-205" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.12" />
+    <line x1="432" y1="485" x2="-90" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.13" />
+    <line x1="460" y1="485" x2="25" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.15" />
+    <line x1="488" y1="485" x2="140" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.16" />
+    <line x1="516" y1="485" x2="255" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.17" />
+    <line x1="544" y1="485" x2="370" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.19" />
+    <line x1="572" y1="485" x2="485" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.21" />
+    <line x1="600" y1="485" x2="600" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.22" />
+    <line x1="628" y1="485" x2="715" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.21" />
+    <line x1="656" y1="485" x2="830" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.19" />
+    <line x1="684" y1="485" x2="945" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.17" />
+    <line x1="712" y1="485" x2="1060" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.16" />
+    <line x1="740" y1="485" x2="1175" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.15" />
+    <line x1="768" y1="485" x2="1290" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.13" />
+    <line x1="796" y1="485" x2="1405" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.12" />
+    <line x1="824" y1="485" x2="1520" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.10" />
+    <line x1="852" y1="485" x2="1635" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.08" />
+  </g>
+  <rect width="1200" height="620" rx="16" fill="url(#neon-aura)" />
+  <rect x="12" y="12" width="1176" height="596" rx="12" fill="none" stroke="#0284c7" stroke-width="1.5" stroke-opacity="0.65" />
+  <path d="M 22 42 L 22 22 L 42 22" fill="none" stroke="#00e5ff" stroke-width="2.4" />
+  <path d="M 1158 22 L 1178 22 L 1178 42" fill="none" stroke="#00e5ff" stroke-width="2.4" />
+  <path d="M 22 578 L 22 598 L 42 598" fill="none" stroke="#00e5ff" stroke-width="2.4" />
+  <path d="M 1158 598 L 1178 598 L 1178 578" fill="none" stroke="#00e5ff" stroke-width="2.4" />
+
+  <!-- Header -->
+  <rect x="42" y="30" width="260" height="26" rx="5" fill="#071936" stroke="#00e5ff" stroke-width="1.3" />
+  <text x="172" y="47" text-anchor="middle" class="f-mono" font-size="11.5" font-weight="700" fill="#00e5ff" letter-spacing="1.2">EXAMPLE 02 // LOG ISOLATION</text>
+  <text x="320" y="49" class="f-sans" font-size="22.5" font-weight="800" fill="#f0f6fc" letter-spacing="0.4">Subagent Log Isolation &amp; Adaptive Model Routing</text>
+  <text x="42" y="77" class="f-mono" font-size="13" fill="#94a3b8">Quarantining noisy compiler/test loops inside cheap worker subagents to keep the primary context crystal-clear</text>
+  <line x1="42" y1="92" x2="1158" y2="92" stroke="url(#cyan-beam)" stroke-width="1.5" />
+
+  <!-- Body Content -->
+
+  <!-- Left: Primary Orchestrator -->
+  <rect x="52" y="118" width="480" height="418" rx="10" fill="url(#panel-grad)" stroke="#00e5ff" stroke-width="1.8" />
+  <text x="76" y="148" class="f-mono" font-size="14" font-weight="700" fill="#00e5ff">PRIMARY ORCHESTRATOR SESSION (pro / Sonnet)</text>
+  <text x="76" y="172" class="f-sans" font-size="13" fill="#94a3b8">Holds architectural invariants, contracts &amp; user intent only</text>
+
+  <rect x="76" y="192" width="432" height="96" rx="6" fill="#040812" stroke="#0284c7" stroke-width="1.2" />
+  <text x="92" y="216" class="f-mono" font-size="12" fill="#38bdf8">// PreToolUse Hook -&gt; model_router.py</text>
+  <text x="92" y="238" class="f-mono" font-size="12.5" fill="#f0f6fc">invoke_subagent({</text>
+  <text x="92" y="258" class="f-mono" font-size="12.5" fill="#00ff9d">  Role: "Test Runner", Model: "flash",</text>
+  <text x="92" y="276" class="f-mono" font-size="12.5" fill="#f0f6fc">  Prompt: "Run cargo test -q &amp; fix limiter.rs"</text>
+
+  <rect x="76" y="310" width="432" height="110" rx="6" fill="#06192e" stroke="#00ff9d" stroke-width="1.5" />
+  <text x="92" y="335" class="f-mono" font-size="12.5" font-weight="700" fill="#00ff9d">RETURNED TO PRIMARY CONTEXT (&lt;=10 LINES):</text>
+  <text x="92" y="360" class="f-mono" font-size="12.5" fill="#f0f6fc">Status: PASS (74/74 tests, 0 warnings in 1.8s)</text>
+  <text x="92" y="382" class="f-mono" font-size="12.5" fill="#38bdf8">Modified: src/limiter.rs (+6, -2)</text>
+  <text x="92" y="404" class="f-mono" font-size="12" fill="#94a3b8">Context Growth: +180 tokens (vs +18,400 raw stdout)</text>
+
+  <rect x="76" y="440" width="432" height="72" rx="6" fill="#071328" stroke="#00e5ff" stroke-width="1.2" />
+  <text x="92" y="466" class="f-mono" font-size="12.5" font-weight="700" fill="#00e5ff">FINOPS IMPACT (token-finops):</text>
+  <text x="92" y="492" class="f-mono" font-size="12" fill="#00ff9d">• 0 KB compiler noise replayed across subsequent turns</text>
+
+  <!-- Center Quarantine Firewall -->
+  <line x1="598" y1="120" x2="598" y2="534" stroke="#ff2a85" stroke-width="2" stroke-dasharray="8 6" />
+  <rect x="556" y="294" width="84" height="56" rx="6" fill="#1a081e" stroke="#ff2a85" stroke-width="1.6" />
+  <text x="598" y="318" text-anchor="middle" class="f-mono" font-size="11" font-weight="700" fill="#ff2a85">LOG</text>
+  <text x="598" y="336" text-anchor="middle" class="f-mono" font-size="11" font-weight="700" fill="#ff2a85">FIREWALL</text>
+
+  <!-- Right: Ephemeral Worker Subagent -->
+  <rect x="664" y="118" width="484" height="418" rx="10" fill="url(#panel-grad)" stroke="#38bdf8" stroke-width="1.8" />
+  <text x="688" y="148" class="f-mono" font-size="14" font-weight="700" fill="#38bdf8">EPHEMERAL WORKER SUBAGENT (flash / Haiku)</text>
+  <text x="688" y="172" class="f-sans" font-size="13" fill="#94a3b8">Absorbs verbose compiler &amp; test retry loops in isolated scratch context</text>
+
+  <rect x="688" y="192" width="436" height="228" rx="6" fill="#040812" stroke="#0284c7" stroke-width="1.2" />
+  <text x="704" y="218" class="f-mono" font-size="12" fill="#94a3b8">$ cargo test -q</text>
+  <text x="704" y="240" class="f-mono" font-size="12" fill="#ff2a85">error[E0308]: mismatched types in src/limiter.rs:42</text>
+  <text x="704" y="262" class="f-mono" font-size="12" fill="#94a3b8">  --&gt; [420 lines of rustc backtrace quarantined here]</text>
+  <text x="704" y="290" class="f-mono" font-size="12" fill="#38bdf8">// Worker applies atomic fix &amp; re-runs gate</text>
+  <text x="704" y="314" class="f-mono" font-size="12" fill="#94a3b8">$ cargo test -q</text>
+  <text x="704" y="336" class="f-mono" font-size="12" fill="#00ff9d">running 74 tests ... test result: ok. 74 passed; 0 failed</text>
+  <text x="704" y="366" class="f-mono" font-size="12" fill="#ffb800">[Scratch context discarded upon subagent completion]</text>
+  <text x="704" y="392" class="f-mono" font-size="12" fill="#00e5ff">-&gt; Emits compact 4-line summary across boundary</text>
+
+  <rect x="688" y="440" width="436" height="72" rx="6" fill="#071328" stroke="#38bdf8" stroke-width="1.2" />
+  <text x="704" y="466" class="f-mono" font-size="12.5" font-weight="700" fill="#38bdf8">ADAPTIVE MODEL ROUTING (model_router.py):</text>
+  <text x="704" y="492" class="f-mono" font-size="11.5" fill="#f0f6fc">• Mechanical test/lint loops -&gt; flash  |  Security/Arch -&gt; pro</text>
+
+
+  <!-- Footer Telemetry -->
+  <line x1="42" y1="566" x2="1158" y2="566" stroke="#0284c7" stroke-width="1" stroke-opacity="0.5" />
+  <text x="42" y="590" class="f-mono" font-size="11.5" fill="#38bdf8">SKILLS: orchestrating-subagents • adaptive-model-routing • token-finops</text>
+  <text x="1158" y="590" text-anchor="end" class="f-mono" font-size="11.5" fill="#00ff9d">REPLAY REDUCTION: -99% LOG TOKENS</text>
+</svg>

@@ -21,7 +21,7 @@ Commits are the unit of review and rollback. Keep them **atomic, verified, and e
 
 - Default to git with GitHub as the remote; use `gh` for PRs, checks (`gh pr checks`), and releases.
 - Work on `feature/…`, `fix/…`, `refactor/…`; `main` stays green.
-- Push once, after local verification, to conserve CI minutes; avoid WIP pushes.
+- **Conserve GitHub Actions CI minutes (`running-local-ci`):** Run the full verification suite and any cross-OS VM checks locally (`using-local-tool-registry`) before pushing. Push once per verified milestone or PR; never push WIP or unverified commits unless explicitly overridden by the user.
 - PR description: summary, why, how verified (commands + results), risks, follow-ups. For grouping issues into PRs and the full template, load `writing-pull-requests`.
 - Squash or merge per project convention; delete merged branches.
 

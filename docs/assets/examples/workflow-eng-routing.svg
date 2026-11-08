@@ -1,0 +1,187 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-void" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#03060d" />
+      <stop offset="45%" stop-color="#071022" />
+      <stop offset="100%" stop-color="#030710" />
+    </linearGradient>
+    <radialGradient id="neon-aura" cx="50%" cy="42%" r="60%">
+      <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.18" />
+      <stop offset="45%" stop-color="#38bdf8" stop-opacity="0.07" />
+      <stop offset="100%" stop-color="#03060d" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="cyan-beam" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.05" />
+      <stop offset="50%" stop-color="#00e5ff" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.05" />
+    </linearGradient>
+    <linearGradient id="core-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00ff9d" />
+      <stop offset="50%" stop-color="#00e5ff" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+    <linearGradient id="panel-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0b162c" stop-opacity="0.92" />
+      <stop offset="100%" stop-color="#060c1a" stop-opacity="0.95" />
+    </linearGradient>
+    <pattern id="minor-grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#38bdf8" stroke-width="0.6" stroke-opacity="0.09" />
+    </pattern>
+    <pattern id="major-grid" width="96" height="96" patternUnits="userSpaceOnUse">
+      <rect width="96" height="96" fill="url(#minor-grid)" />
+      <path d="M 96 0 L 0 0 0 96" fill="none" stroke="#00e5ff" stroke-width="1.0" stroke-opacity="0.20" />
+      <circle cx="0" cy="0" r="1.6" fill="#00e5ff" fill-opacity="0.45" />
+    </pattern>
+    <filter id="glow-strong" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="5" result="b1" />
+      <feGaussianBlur stdDeviation="2" result="b2" />
+      <feMerge>
+        <feMergeNode in="b1" />
+        <feMergeNode in="b2" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter id="glow-soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2.5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <style>
+      .f-mono { font-family: ui-monospace, 'Cascadia Code', 'Fira Code', 'JetBrains Mono', 'Source Code Pro', Menlo, Consolas, monospace; }
+      .f-sans { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Ubuntu, sans-serif; }
+    </style>
+  </defs>
+  <rect width="1200" height="620" rx="16" fill="url(#bg-void)" />
+  <rect width="1200" height="620" rx="16" fill="url(#major-grid)" />
+  <g id="perspective-grid">
+    <line x1="0" y1="495" x2="1200" y2="495" stroke="#00e5ff" stroke-width="1" stroke-opacity="0.09" />
+    <line x1="0" y1="509" x2="1200" y2="509" stroke="#00e5ff" stroke-width="1" stroke-opacity="0.11" />
+    <line x1="0" y1="526" x2="1200" y2="526" stroke="#00e5ff" stroke-width="1" stroke-opacity="0.14" />
+    <line x1="0" y1="548" x2="1200" y2="548" stroke="#00e5ff" stroke-width="1" stroke-opacity="0.16" />
+    <line x1="0" y1="574" x2="1200" y2="574" stroke="#00e5ff" stroke-width="1" stroke-opacity="0.20" />
+    <line x1="0" y1="603" x2="1200" y2="603" stroke="#00e5ff" stroke-width="1" stroke-opacity="0.24" />
+    <line x1="348" y1="485" x2="-435" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.08" />
+    <line x1="376" y1="485" x2="-320" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.10" />
+    <line x1="404" y1="485" x2="-205" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.12" />
+    <line x1="432" y1="485" x2="-90" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.13" />
+    <line x1="460" y1="485" x2="25" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.15" />
+    <line x1="488" y1="485" x2="140" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.16" />
+    <line x1="516" y1="485" x2="255" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.17" />
+    <line x1="544" y1="485" x2="370" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.19" />
+    <line x1="572" y1="485" x2="485" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.21" />
+    <line x1="600" y1="485" x2="600" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.22" />
+    <line x1="628" y1="485" x2="715" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.21" />
+    <line x1="656" y1="485" x2="830" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.19" />
+    <line x1="684" y1="485" x2="945" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.17" />
+    <line x1="712" y1="485" x2="1060" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.16" />
+    <line x1="740" y1="485" x2="1175" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.15" />
+    <line x1="768" y1="485" x2="1290" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.13" />
+    <line x1="796" y1="485" x2="1405" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.12" />
+    <line x1="824" y1="485" x2="1520" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.10" />
+    <line x1="852" y1="485" x2="1635" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.08" />
+  </g>
+  <rect width="1200" height="620" rx="16" fill="url(#neon-aura)" />
+  <rect x="12" y="12" width="1176" height="596" rx="12" fill="none" stroke="#0284c7" stroke-width="1.5" stroke-opacity="0.65" />
+  <path d="M 22 42 L 22 22 L 42 22" fill="none" stroke="#00e5ff" stroke-width="2.4" />
+  <path d="M 1158 22 L 1178 22 L 1178 42" fill="none" stroke="#00e5ff" stroke-width="2.4" />
+  <path d="M 22 578 L 22 598 L 42 598" fill="none" stroke="#00e5ff" stroke-width="2.4" />
+  <path d="M 1158 598 L 1178 598 L 1178 578" fill="none" stroke="#00e5ff" stroke-width="2.4" />
+
+  <!-- Header -->
+  <rect x="42" y="30" width="260" height="26" rx="5" fill="#071936" stroke="#00e5ff" stroke-width="1.3" />
+  <text x="172" y="47" text-anchor="middle" class="f-mono" font-size="11.5" font-weight="700" fill="#00e5ff" letter-spacing="1.2">EXAMPLE 01 // ROUTING &amp; TDD</text>
+  <text x="320" y="49" class="f-sans" font-size="22.5" font-weight="800" fill="#f0f6fc" letter-spacing="0.4">/eng Dispatch, Bounded Skill Set &amp; 8-Tier Verification Matrix</text>
+  <text x="42" y="77" class="f-mono" font-size="13" fill="#94a3b8">How /eng sizes a task, loads 1-3 skills, designs pre-build RED tests, and gates post-build completion</text>
+  <line x1="42" y1="92" x2="1158" y2="92" stroke="url(#cyan-beam)" stroke-width="1.5" />
+
+  <!-- Body Content -->
+
+  <!-- Step 1: User Input -->
+  <rect x="52" y="116" width="330" height="175" rx="10" fill="url(#panel-grad)" stroke="#00e5ff" stroke-width="1.8" />
+  <text x="72" y="144" class="f-mono" font-size="13" font-weight="700" fill="#00e5ff">1. /ENG ENTRY &amp; SIZING</text>
+  <rect x="72" y="158" width="290" height="44" rx="6" fill="#040812" stroke="#0284c7" stroke-width="1" />
+  <text x="84" y="177" class="f-mono" font-size="12" fill="#00ff9d">$ /eng add rate-limiter to</text>
+  <text x="84" y="194" class="f-mono" font-size="12" fill="#f0f6fc">  POST /v1/auth/tokens</text>
+  <text x="72" y="226" class="f-mono" font-size="12.5" fill="#38bdf8">• Scale Detected: APP (multi-module)</text>
+  <text x="72" y="248" class="f-mono" font-size="12.5" fill="#f0f6fc">• Active Set Cap: 3 skills loaded</text>
+  <text x="72" y="270" class="f-mono" font-size="12" fill="#94a3b8">• Token Overhead: ~420 tok (vs 3,050)</text>
+
+  <!-- Arrow 1->2 -->
+  <path d="M 382 203 L 430 203" stroke="#00e5ff" stroke-width="2.5" />
+  <polygon points="426,197 438,203 426,209" fill="#00ff9d" />
+
+  <!-- Step 2: Selected Skills -->
+  <rect x="440" y="116" width="330" height="175" rx="10" fill="url(#panel-grad)" stroke="#00ff9d" stroke-width="1.8" />
+  <text x="460" y="144" class="f-mono" font-size="13" font-weight="700" fill="#00ff9d">2. BOUNDED SKILL DISPATCH</text>
+  <rect x="460" y="160" width="290" height="32" rx="5" fill="#071936" stroke="#00e5ff" stroke-width="1.2" />
+  <text x="474" y="181" class="f-mono" font-size="12.5" fill="#f0f6fc">1. planning-with-contracts</text>
+  <rect x="460" y="200" width="290" height="32" rx="5" fill="#071936" stroke="#00ff9d" stroke-width="1.2" />
+  <text x="474" y="221" class="f-mono" font-size="12.5" fill="#f0f6fc">2. designing-exhaustive-test-cases</text>
+  <rect x="460" y="240" width="290" height="32" rx="5" fill="#071936" stroke="#38bdf8" stroke-width="1.2" />
+  <text x="474" y="261" class="f-mono" font-size="12.5" fill="#f0f6fc">3. security-best-practices</text>
+
+  <!-- Arrow 2->3 -->
+  <path d="M 770 203 L 818 203" stroke="#00e5ff" stroke-width="2.5" />
+  <polygon points="814,197 826,203 814,209" fill="#00ff9d" />
+
+  <!-- Step 3: Pre-Build RED Matrix -->
+  <rect x="828" y="116" width="320" height="175" rx="10" fill="url(#panel-grad)" stroke="#38bdf8" stroke-width="1.8" />
+  <text x="848" y="144" class="f-mono" font-size="13" font-weight="700" fill="#38bdf8">3. 6-DIM PRE-BUILD MATRIX</text>
+  <text x="848" y="170" class="f-mono" font-size="12" fill="#f0f6fc">[✓] D1 Happy Path &amp; Contract</text>
+  <text x="848" y="190" class="f-mono" font-size="12" fill="#f0f6fc">[✓] D2 Boundary (0, 1, N, N+1)</text>
+  <text x="848" y="210" class="f-mono" font-size="12" fill="#f0f6fc">[✓] D3 Malformed &amp; Adversarial</text>
+  <text x="848" y="230" class="f-mono" font-size="12" fill="#f0f6fc">[✓] D4 Concurrency &amp; Idempotency</text>
+  <text x="848" y="250" class="f-mono" font-size="12" fill="#f0f6fc">[✓] D5 Dependency Timeout Fakes</text>
+  <text x="848" y="270" class="f-mono" font-size="12" fill="#00ff9d">[✓] D6 Wired into scripts/verify.sh</text>
+
+  <!-- Bottom Wide Panel: 8-Tier Verification Runner -->
+  <rect x="52" y="322" width="1096" height="218" rx="10" fill="url(#panel-grad)" stroke="#00e5ff" stroke-width="1.8" />
+  <text x="76" y="352" class="f-mono" font-size="14" font-weight="700" fill="#00e5ff">4. HIERARCHICAL POST-BUILD VERIFICATION GATE (scripts/verify.sh --quick / --tier)</text>
+
+  <g class="f-mono" font-size="11.5">
+    <rect x="76"  y="370" width="122" height="58" rx="6" fill="#06152d" stroke="#00ff9d" stroke-width="1.4" />
+    <text x="137" y="394" text-anchor="middle" fill="#00ff9d" font-weight="700">1. SMOKE</text>
+    <text x="137" y="414" text-anchor="middle" fill="#94a3b8">&lt;10s sanity</text>
+
+    <rect x="210" y="370" width="122" height="58" rx="6" fill="#06152d" stroke="#00ff9d" stroke-width="1.4" />
+    <text x="271" y="394" text-anchor="middle" fill="#00ff9d" font-weight="700">2. UNIT</text>
+    <text x="271" y="414" text-anchor="middle" fill="#94a3b8">Pure logic</text>
+
+    <rect x="344" y="370" width="122" height="58" rx="6" fill="#06152d" stroke="#00ff9d" stroke-width="1.4" />
+    <text x="405" y="394" text-anchor="middle" fill="#00ff9d" font-weight="700">3. INTEGR.</text>
+    <text x="405" y="414" text-anchor="middle" fill="#94a3b8">DB / IPC seams</text>
+
+    <rect x="478" y="370" width="122" height="58" rx="6" fill="#06152d" stroke="#00e5ff" stroke-width="1.4" />
+    <text x="539" y="394" text-anchor="middle" fill="#00e5ff" font-weight="700">4. SYSTEM</text>
+    <text x="539" y="414" text-anchor="middle" fill="#94a3b8">Full E2E CLI/UI</text>
+
+    <rect x="612" y="370" width="122" height="58" rx="6" fill="#06152d" stroke="#38bdf8" stroke-width="1.4" />
+    <text x="673" y="394" text-anchor="middle" fill="#38bdf8" font-weight="700">5. PERF</text>
+    <text x="673" y="414" text-anchor="middle" fill="#94a3b8">p95 &amp; allocs</text>
+
+    <rect x="746" y="370" width="122" height="58" rx="6" fill="#06152d" stroke="#38bdf8" stroke-width="1.4" />
+    <text x="807" y="394" text-anchor="middle" fill="#38bdf8" font-weight="700">6. STRESS</text>
+    <text x="807" y="414" text-anchor="middle" fill="#94a3b8">Contention</text>
+
+    <rect x="880" y="370" width="122" height="58" rx="6" fill="#06152d" stroke="#a855f7" stroke-width="1.4" />
+    <text x="941" y="394" text-anchor="middle" fill="#a855f7" font-weight="700">7. TORTURE</text>
+    <text x="941" y="414" text-anchor="middle" fill="#94a3b8">Kill -9 / fault</text>
+
+    <rect x="1014" y="370" width="112" height="58" rx="6" fill="#06152d" stroke="#00ff9d" stroke-width="1.4" />
+    <text x="1070" y="394" text-anchor="middle" fill="#00ff9d" font-weight="700">8. SECURITY</text>
+    <text x="1070" y="414" text-anchor="middle" fill="#94a3b8">OWASP / CVE</text>
+  </g>
+
+  <!-- Terminal Output Strip -->
+  <rect x="76" y="446" width="1050" height="72" rx="6" fill="#040812" stroke="#0284c7" stroke-width="1.2" />
+  <text x="96" y="472" class="f-mono" font-size="13" fill="#00e5ff">$ scripts/verify.sh --quick</text>
+  <text x="96" y="498" class="f-mono" font-size="13" fill="#00ff9d">PASS  smoke(0.4s)  unit(1.2s)  integration(2.1s)  security(0.8s)  |  0 failed  |  report: target/verify/report.md</text>
+
+
+  <!-- Footer Telemetry -->
+  <line x1="42" y1="566" x2="1158" y2="566" stroke="#0284c7" stroke-width="1" stroke-opacity="0.5" />
+  <text x="42" y="590" class="f-mono" font-size="11.5" fill="#38bdf8">SKILLS: using-swe-skills • designing-exhaustive-test-cases • layered-verification-gates</text>
+  <text x="1158" y="590" text-anchor="end" class="f-mono" font-size="11.5" fill="#00ff9d">TOKEN SAVINGS: -85% CATALOG OVERHEAD</text>
+</svg>

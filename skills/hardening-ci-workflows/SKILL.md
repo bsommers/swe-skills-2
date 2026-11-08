@@ -17,10 +17,10 @@ A workflow runs with your repo's credentials on code and inputs you don't fully 
 4. **Checkout with `persist-credentials: false`** unless a later step must push.
 5. **No expression interpolation into `run:`.** Never write `${{ inputs.x }}` or `${{ github.event.* }}` inside a script (script injection). Pass via `env:` and quote `"$VAR"`.
 6. **Untrusted code uses `pull_request`**, not `pull_request_target` (which runs with secrets and write token on fork code).
-7. **`concurrency`** group per ref with cancel-in-progress for PR runs.
+7. **`concurrency` & quota conservation (`running-local-ci`).** Set a `concurrency` group per ref with `cancel-in-progress: true`, set explicit `timeout-minutes` on every job, and gate heavy multi-OS matrices to tags or `workflow_dispatch` so routine work runs via local CI (`using-local-tool-registry`) and conserves hosted GitHub Actions minutes.
 8. **Dependency policy gate** (cargo-deny, `npm audit`, pip-audit equivalent): advisories, license allowlist, unknown registries and git sources denied, wildcard versions denied. Derive the license allowlist from the real dependency tree and justify each license inline.
 9. **Failures are readable.** Print failure excerpts inside collapsible log groups so the cause is visible without downloading artifacts.
-10. **Test on every OS you ship to.**
+10. **Test on every OS you ship to** — run cross-OS checks locally first via VMs (`using-local-tool-registry`, `running-local-ci`) before burning remote matrix minutes.
 11. **Format gate with legacy drift:** land a mechanical format-only PR first, then enable the gate. Never mix them.
 
 ## Landing order

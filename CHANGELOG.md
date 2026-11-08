@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.17.0] - 2026-11-08
+
+### Added
+- `skills/using-local-tool-registry/` (`references/local-tools-and-vm-catalog.md`), `scripts/tool-registry.py`, & `docs/tool-registry.seed.json`: Searchable local tool and VM registry indexing 110+ repositories in `~/src` (highlighting `cvm`, `win-devvm`, `gha-vm-runners`, `fedora-vms`, `freebsd-kvm`, `flowscope`, `synth`, `eval`, `gitnexus`, `ontologic`, `cli-anything`) with `update`, `search`, `recommend --phase`, `show`, and `list` commands (`/eng tools`, `/eng vms`, `/eng registry`).
+- `skills/running-local-ci/` (`references/local-ci-and-vm-runners.md`): Standing local-first CI rule and execution guide that runs all linters, builds, and test matrices locally (`scripts/verify.sh`, `~/src/gha-vm-runners/local-ci.sh`, `cvm`, `win-devvm`, `gha-vm-runners.sh`) and conserves hosted GitHub Actions CI minutes unless explicitly overridden by the user (`/eng local-ci`, `/eng ci`).
+- `skills/rendering-graphic-examples/` & `references/svg-png-pipeline.md`: Deterministic SVG + Hi-DPI PNG visual generation skill for accompanying documentation recipes, architecture guides, and CLI telemetry (`/eng graphics`, `/eng svg`).
+- `skills/showcasing-graphics-in-docs/` & `references/futuristic-neon-grid-theme.md`: Visual documentation styling skill featuring the signature futuristic obsidian-black background (`#050811`) with light-blue neon cyber grid (`#00e5ff` / `#38bdf8`), high-contrast HUD panels, and user-theme override support (`/eng showcase`, `/eng neon`).
+- `skills/designing-logos-and-icons/` & `references/logo-and-icon-templates.md`: Brand and icon kit skill generating the wide hero banner (`docs/assets/logo.{svg,png}`), square `512x512` plugin icon (`assets/logo.{svg,png}` wired into `plugin.json` `"logo"`, and `docs/assets/icon.{svg,png}`), and `64x64` subsystem neon icons (`docs/assets/icons/icon-*.{svg,png}`) (`/eng logo`, `/eng icons`).
+- `skills/building-github-pages-sites/` & `references/github-pages-template.md`: GitHub Pages showcase skill and deterministic generator (`scripts/build-pages.py`) producing `docs/index.html` and `docs/.nojekyll` with live 68-skill search, category filters, SVG/PNG visual gallery, and copy-pasteable recipes (`/eng pages`, `/eng gh-pages`).
+- `scripts/render-graphics.py` & `scripts/build-pages.py`: Deterministic generators producing 15 `.svg` + 15 `.png` neon-grid graphics (including `workflow-local-tools-and-ci.{svg,png}`) and the accompanying GitHub Pages portal (`docs/index.html`).
+- `tests/test_graphics_and_pages.py`: Automated tests verifying the 6 new skills, `scripts/tool-registry.py`, updated documentation & CI skills, XML/PNG validity of all 30 rendered graphic assets, `plugin.json` logo wiring, and zero broken links across `docs/index.html` and `README.md`.
+
+### Changed
+- `skills/writing-user-guides/SKILL.md` & `skills/keeping-docs-in-sync/SKILL.md`: Expanded to govern the complete documentation suite (`README.md`, `docs/purpose.md`, `docs/architecture.md`, `docs/running.md`, `docs/how-to.md`, `docs/usermanual/`, rendered graphics, and `docs/index.html`).
+- `skills/hardening-ci-workflows/SKILL.md`, `skills/layered-verification-gates/SKILL.md`, `skills/committing-and-releasing-cleanly/SKILL.md`, & `templates/AGENTS.snippet.md`: Integrated the standing local-first CI rule (`running-local-ci`) and local tool/VM discovery (`using-local-tool-registry`) to conserve hosted GitHub Actions minutes.
+- Refreshed `README.md`, `docs/README.md`, `docs/purpose.md`, `docs/architecture.md`, `docs/running.md`, `docs/how-to.md`, `docs/usermanual/`, `docs/EVIDENCE.md`, `docs/TESTING.md`, and `docs/CHECKPOINT.md` with embedded SVG/PNG visual examples and synchronized all manifests to `0.17.0` (68 skills).
+
 ## [0.16.0] - 2026-11-07
 
 ### Added

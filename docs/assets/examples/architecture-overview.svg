@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-void" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#03060d" />
+      <stop offset="45%" stop-color="#071022" />
+      <stop offset="100%" stop-color="#030710" />
+    </linearGradient>
+    <radialGradient id="neon-aura" cx="50%" cy="42%" r="60%">
+      <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.18" />
+      <stop offset="45%" stop-color="#38bdf8" stop-opacity="0.07" />
+      <stop offset="100%" stop-color="#03060d" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="cyan-beam" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.05" />
+      <stop offset="50%" stop-color="#00e5ff" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.05" />
+    </linearGradient>
+    <linearGradient id="core-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00ff9d" />
+      <stop offset="50%" stop-color="#00e5ff" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+    <linearGradient id="panel-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0b162c" stop-opacity="0.92" />
+      <stop offset="100%" stop-color="#060c1a" stop-opacity="0.95" />
+    </linearGradient>
+    <pattern id="minor-grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#38bdf8" stroke-width="0.6" stroke-opacity="0.09" />
+    </pattern>
+    <pattern id="major-grid" width="96" height="96" patternUnits="userSpaceOnUse">
+      <rect width="96" height="96" fill="url(#minor-grid)" />
+      <path d="M 96 0 L 0 0 0 96" fill="none" stroke="#00e5ff" stroke-width="1.0" stroke-opacity="0.20" />
+      <circle cx="0" cy="0" r="1.6" fill="#00e5ff" fill-opacity="0.45" />
+    </pattern>
+    <filter id="glow-strong" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="5" result="b1" />
+      <feGaussianBlur stdDeviation="2" result="b2" />
+      <feMerge>
+        <feMergeNode in="b1" />
+        <feMergeNode in="b2" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter id="glow-soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2.5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <style>
+      .f-mono { font-family: ui-monospace, 'Cascadia Code', 'Fira Code', 'JetBrains Mono', 'Source Code Pro', Menlo, Consolas, monospace; }
+      .f-sans { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Ubuntu, sans-serif; }
+    </style>
+  </defs>
+  <rect width="1200" height="620" rx="16" fill="url(#bg-void)" />
+  <rect width="1200" height="620" rx="16" fill="url(#major-grid)" />
+  <g id="perspective-grid">
+    <line x1="0" y1="495" x2="1200" y2="495" stroke="#00e5ff" stroke-width="1" stroke-opacity="0.09" />
+    <line x1="0" y1="509" x2="1200" y2="509" stroke="#00e5ff" stroke-width="1" stroke-opacity="0.11" />
+    <line x1="0" y1="526" x2="1200" y2="526" stroke="#00e5ff" stroke-width="1" stroke-opacity="0.14" />
+    <line x1="0" y1="548" x2="1200" y2="548" stroke="#00e5ff" stroke-width="1" stroke-opacity="0.16" />
+    <line x1="0" y1="574" x2="1200" y2="574" stroke="#00e5ff" stroke-width="1" stroke-opacity="0.20" />
+    <line x1="0" y1="603" x2="1200" y2="603" stroke="#00e5ff" stroke-width="1" stroke-opacity="0.24" />
+    <line x1="348" y1="485" x2="-435" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.08" />
+    <line x1="376" y1="485" x2="-320" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.10" />
+    <line x1="404" y1="485" x2="-205" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.12" />
+    <line x1="432" y1="485" x2="-90" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.13" />
+    <line x1="460" y1="485" x2="25" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.15" />
+    <line x1="488" y1="485" x2="140" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.16" />
+    <line x1="516" y1="485" x2="255" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.17" />
+    <line x1="544" y1="485" x2="370" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.19" />
+    <line x1="572" y1="485" x2="485" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.21" />
+    <line x1="600" y1="485" x2="600" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.22" />
+    <line x1="628" y1="485" x2="715" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.21" />
+    <line x1="656" y1="485" x2="830" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.19" />
+    <line x1="684" y1="485" x2="945" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.17" />
+    <line x1="712" y1="485" x2="1060" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.16" />
+    <line x1="740" y1="485" x2="1175" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.15" />
+    <line x1="768" y1="485" x2="1290" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.13" />
+    <line x1="796" y1="485" x2="1405" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.12" />
+    <line x1="824" y1="485" x2="1520" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.10" />
+    <line x1="852" y1="485" x2="1635" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.08" />
+  </g>
+  <rect width="1200" height="620" rx="16" fill="url(#neon-aura)" />
+  <rect x="12" y="12" width="1176" height="596" rx="12" fill="none" stroke="#0284c7" stroke-width="1.5" stroke-opacity="0.65" />
+  <path d="M 22 42 L 22 22 L 42 22" fill="none" stroke="#00e5ff" stroke-width="2.4" />
+  <path d="M 1158 22 L 1178 22 L 1178 42" fill="none" stroke="#00e5ff" stroke-width="2.4" />
+  <path d="M 22 578 L 22 598 L 42 598" fill="none" stroke="#00e5ff" stroke-width="2.4" />
+  <path d="M 1158 598 L 1178 598 L 1178 578" fill="none" stroke="#00e5ff" stroke-width="2.4" />
+
+  <!-- Header -->
+  <rect x="42" y="30" width="170" height="26" rx="5" fill="#071936" stroke="#00e5ff" stroke-width="1.3" />
+  <text x="127" y="47" text-anchor="middle" class="f-mono" font-size="11.5" font-weight="700" fill="#00e5ff" letter-spacing="1.2">ARCHITECTURE</text>
+  <text x="230" y="49" class="f-sans" font-size="22.5" font-weight="800" fill="#f0f6fc" letter-spacing="0.4">5-Tier Runtime Engineering Governance Architecture</text>
+  <text x="42" y="77" class="f-mono" font-size="13" fill="#94a3b8">Ambient control plane across Claude Code, Antigravity (agy), and Cursor — 68 modular skills + lifecycle guards</text>
+  <line x1="42" y1="92" x2="1158" y2="92" stroke="url(#cyan-beam)" stroke-width="1.5" />
+
+  <!-- Body Content -->
+  <rect x="64" y="110" width="1072" height="72" rx="8" fill="url(#panel-grad)" stroke="#00e5ff" stroke-width="1.8" />  <rect x="64" y="110" width="8" height="72" rx="4" fill="#00e5ff" />  <text x="90" y="134" class="f-mono" font-size="14" font-weight="700" fill="#00e5ff">TIER 1 // HARNESS INTEGRATION LAYER</text>  <text x="90" y="155" class="f-mono" font-size="12.5" fill="#f0f6fc">Claude Code (~/.claude/skills)   •   Antigravity (plugin.json + hooks.json)   •   Cursor (~/.cursor/skills + .mdc)   •   ~/.agents/skills</text>  <text x="90" y="173" class="f-sans" font-size="12.5" fill="#94a3b8">Zero-fork multi-runtime adapters &amp; profile-based surfacing (--profile core|build|review|ship|all)</text>
+  <line x1="600" y1="182" x2="600" y2="198" stroke="#00e5ff" stroke-width="2" />  <polygon points="594,193 606,193 600,199" fill="#00ff9d" />
+  <rect x="64" y="198" width="1072" height="72" rx="8" fill="url(#panel-grad)" stroke="#38bdf8" stroke-width="1.8" />  <rect x="64" y="198" width="8" height="72" rx="4" fill="#38bdf8" />  <text x="90" y="222" class="f-mono" font-size="14" font-weight="700" fill="#38bdf8">TIER 2 // LIFECYCLE HOOKS &amp; CONTEXT GUARDS (scripts/hooks/)</text>  <text x="90" y="243" class="f-mono" font-size="12.5" fill="#f0f6fc">context_guard.py (70% / 50-step / 12-turn cadence / 30m idle cache / PreCompact block)   •   model_router.py   •   git_pre_commit.py</text>  <text x="90" y="261" class="f-sans" font-size="12.5" fill="#94a3b8">Deterministic Python stdlib interceptors protecting context windows, model budgets &amp; git history</text>
+  <line x1="600" y1="270" x2="600" y2="286" stroke="#00e5ff" stroke-width="2" />  <polygon points="594,281 606,281 600,287" fill="#00ff9d" />
+  <rect x="64" y="286" width="1072" height="72" rx="8" fill="url(#panel-grad)" stroke="#00ff9d" stroke-width="1.8" />  <rect x="64" y="286" width="8" height="72" rx="4" fill="#00ff9d" />  <text x="90" y="310" class="f-mono" font-size="14" font-weight="700" fill="#00ff9d">TIER 3 // TASK SIZING &amp; /eng ROUTING ENGINE</text>  <text x="90" y="331" class="f-mono" font-size="12.5" fill="#f0f6fc">Scale Classifier (Tool &lt;=1d  |  App days  |  System multi-service)   -&gt;   Bounded Active Set (1-3 skills max, phase eviction)</text>  <text x="90" y="349" class="f-sans" font-size="12.5" fill="#94a3b8">Eliminates prompt replay bloat by loading only active-phase domain judgment</text>
+  <line x1="600" y1="358" x2="600" y2="374" stroke="#00e5ff" stroke-width="2" />  <polygon points="594,369 606,369 600,375" fill="#00ff9d" />
+  <rect x="64" y="374" width="1072" height="72" rx="8" fill="url(#panel-grad)" stroke="#00e5ff" stroke-width="1.8" />  <rect x="64" y="374" width="8" height="72" rx="4" fill="#00e5ff" />  <text x="90" y="398" class="f-mono" font-size="14" font-weight="700" fill="#00e5ff">TIER 4 // EVIDENCE-DERIVED DOMAIN SKILL LIBRARY (68 SKILLS)</text>  <text x="90" y="419" class="f-mono" font-size="12.5" fill="#f0f6fc">Frame &amp; Plan (9)  •  Architecture &amp; Tri-OS Drivers (12)  •  AI Loops (2)  •  Build &amp; Local CI (14)  •  Verify &amp; Browser QA (9)  •  Sustain &amp; Docs (20)</text>  <text x="90" y="437" class="f-sans" font-size="12.5" fill="#94a3b8">Distilled from concrete post-mortems across 20+ production repositories (&lt;=500-word target per skill)</text>
+  <line x1="600" y1="446" x2="600" y2="462" stroke="#00e5ff" stroke-width="2" />  <polygon points="594,457 606,457 600,463" fill="#00ff9d" />
+  <rect x="64" y="462" width="1072" height="72" rx="8" fill="url(#panel-grad)" stroke="#a855f7" stroke-width="1.8" />  <rect x="64" y="462" width="8" height="72" rx="4" fill="#a855f7" />  <text x="90" y="486" class="f-mono" font-size="14" font-weight="700" fill="#a855f7">TIER 5 // SUBAGENT LOG ISOLATION &amp; HIERARCHICAL VERIFICATION</text>  <text x="90" y="507" class="f-mono" font-size="12.5" fill="#f0f6fc">Primary Orchestrator (pro / Sonnet)  --delegates noisy build/test loops--&gt;  Ephemeral Worker (flash / Haiku)  +  scripts/verify.sh (8 tiers)</text>  <text x="90" y="525" class="f-sans" font-size="12.5" fill="#94a3b8">Quarantines compiler/test stdout inside throwaway workers; returns &lt;=10-line verified diff summary</text>
+
+  <!-- Footer Telemetry -->
+  <line x1="42" y1="566" x2="1158" y2="566" stroke="#0284c7" stroke-width="1" stroke-opacity="0.5" />
+  <text x="42" y="590" class="f-mono" font-size="11.5" fill="#38bdf8">SOURCE: docs/architecture.md  •  scripts/hooks/context_guard.py</text>
+  <text x="1158" y="590" text-anchor="end" class="f-mono" font-size="11.5" fill="#00ff9d">VERIFIED: agy plugin validate . -&gt; PASS</text>
+</svg>

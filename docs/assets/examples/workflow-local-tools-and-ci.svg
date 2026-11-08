@@ -1,0 +1,153 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-void" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#03060d" />
+      <stop offset="45%" stop-color="#071022" />
+      <stop offset="100%" stop-color="#030710" />
+    </linearGradient>
+    <radialGradient id="neon-aura" cx="50%" cy="42%" r="60%">
+      <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.18" />
+      <stop offset="45%" stop-color="#38bdf8" stop-opacity="0.07" />
+      <stop offset="100%" stop-color="#03060d" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="cyan-beam" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.05" />
+      <stop offset="50%" stop-color="#00e5ff" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.05" />
+    </linearGradient>
+    <linearGradient id="core-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00ff9d" />
+      <stop offset="50%" stop-color="#00e5ff" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+    <linearGradient id="panel-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0b162c" stop-opacity="0.92" />
+      <stop offset="100%" stop-color="#060c1a" stop-opacity="0.95" />
+    </linearGradient>
+    <pattern id="minor-grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#38bdf8" stroke-width="0.6" stroke-opacity="0.09" />
+    </pattern>
+    <pattern id="major-grid" width="96" height="96" patternUnits="userSpaceOnUse">
+      <rect width="96" height="96" fill="url(#minor-grid)" />
+      <path d="M 96 0 L 0 0 0 96" fill="none" stroke="#00e5ff" stroke-width="1.0" stroke-opacity="0.20" />
+      <circle cx="0" cy="0" r="1.6" fill="#00e5ff" fill-opacity="0.45" />
+    </pattern>
+    <filter id="glow-strong" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="5" result="b1" />
+      <feGaussianBlur stdDeviation="2" result="b2" />
+      <feMerge>
+        <feMergeNode in="b1" />
+        <feMergeNode in="b2" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter id="glow-soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2.5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <style>
+      .f-mono { font-family: ui-monospace, 'Cascadia Code', 'Fira Code', 'JetBrains Mono', 'Source Code Pro', Menlo, Consolas, monospace; }
+      .f-sans { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Ubuntu, sans-serif; }
+    </style>
+  </defs>
+  <rect width="1200" height="620" rx="16" fill="url(#bg-void)" />
+  <rect width="1200" height="620" rx="16" fill="url(#major-grid)" />
+  <g id="perspective-grid">
+    <line x1="0" y1="495" x2="1200" y2="495" stroke="#00e5ff" stroke-width="1" stroke-opacity="0.09" />
+    <line x1="0" y1="509" x2="1200" y2="509" stroke="#00e5ff" stroke-width="1" stroke-opacity="0.11" />
+    <line x1="0" y1="526" x2="1200" y2="526" stroke="#00e5ff" stroke-width="1" stroke-opacity="0.14" />
+    <line x1="0" y1="548" x2="1200" y2="548" stroke="#00e5ff" stroke-width="1" stroke-opacity="0.16" />
+    <line x1="0" y1="574" x2="1200" y2="574" stroke="#00e5ff" stroke-width="1" stroke-opacity="0.20" />
+    <line x1="0" y1="603" x2="1200" y2="603" stroke="#00e5ff" stroke-width="1" stroke-opacity="0.24" />
+    <line x1="348" y1="485" x2="-435" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.08" />
+    <line x1="376" y1="485" x2="-320" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.10" />
+    <line x1="404" y1="485" x2="-205" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.12" />
+    <line x1="432" y1="485" x2="-90" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.13" />
+    <line x1="460" y1="485" x2="25" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.15" />
+    <line x1="488" y1="485" x2="140" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.16" />
+    <line x1="516" y1="485" x2="255" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.17" />
+    <line x1="544" y1="485" x2="370" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.19" />
+    <line x1="572" y1="485" x2="485" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.21" />
+    <line x1="600" y1="485" x2="600" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.22" />
+    <line x1="628" y1="485" x2="715" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.21" />
+    <line x1="656" y1="485" x2="830" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.19" />
+    <line x1="684" y1="485" x2="945" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.17" />
+    <line x1="712" y1="485" x2="1060" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.16" />
+    <line x1="740" y1="485" x2="1175" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.15" />
+    <line x1="768" y1="485" x2="1290" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.13" />
+    <line x1="796" y1="485" x2="1405" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.12" />
+    <line x1="824" y1="485" x2="1520" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.10" />
+    <line x1="852" y1="485" x2="1635" y2="620" stroke="#38bdf8" stroke-width="0.9" stroke-opacity="0.08" />
+  </g>
+  <rect width="1200" height="620" rx="16" fill="url(#neon-aura)" />
+  <rect x="12" y="12" width="1176" height="596" rx="12" fill="none" stroke="#0284c7" stroke-width="1.5" stroke-opacity="0.65" />
+  <path d="M 22 42 L 22 22 L 42 22" fill="none" stroke="#00e5ff" stroke-width="2.4" />
+  <path d="M 1158 22 L 1178 22 L 1178 42" fill="none" stroke="#00e5ff" stroke-width="2.4" />
+  <path d="M 22 578 L 22 598 L 42 598" fill="none" stroke="#00e5ff" stroke-width="2.4" />
+  <path d="M 1158 598 L 1178 598 L 1178 578" fill="none" stroke="#00e5ff" stroke-width="2.4" />
+
+  <!-- Header -->
+  <rect x="42" y="30" width="286" height="26" rx="5" fill="#071936" stroke="#00e5ff" stroke-width="1.3" />
+  <text x="185" y="47" text-anchor="middle" class="f-mono" font-size="11.5" font-weight="700" fill="#00e5ff" letter-spacing="1.2">EXAMPLE 05 // TOOLS &amp; LOCAL CI</text>
+  <text x="346" y="49" class="f-sans" font-size="22.5" font-weight="800" fill="#f0f6fc" letter-spacing="0.4">Searchable Local Tool Registry, VM Sandboxes &amp; Zero-Minute Local CI</text>
+  <text x="42" y="77" class="f-mono" font-size="13" fill="#94a3b8">Discovering ~/src VMs (cvm, win-devvm, gha-vm-runners) and enforcing local-first CI to conserve GitHub Actions quota</text>
+  <line x1="42" y1="92" x2="1158" y2="92" stroke="url(#cyan-beam)" stroke-width="1.5" />
+
+  <!-- Body Content -->
+
+  <!-- Left Panel: Local Tool Registry & VMs -->
+  <rect x="52" y="118" width="532" height="418" rx="10" fill="url(#panel-grad)" stroke="#00e5ff" stroke-width="1.8" />
+  <text x="76" y="148" class="f-mono" font-size="14" font-weight="700" fill="#00e5ff">LOCAL TOOL REGISTRY (using-local-tool-registry)</text>
+  <text x="76" y="172" class="f-sans" font-size="13" fill="#94a3b8">Centralized ~/src scanner, updater &amp; lifecycle recommender (111+ local tools)</text>
+
+  <rect x="76" y="190" width="484" height="92" rx="6" fill="#040812" stroke="#0284c7" stroke-width="1.2" />
+  <text x="94" y="214" class="f-mono" font-size="12" fill="#00ff9d">$ python3 scripts/tool-registry.py update</text>
+  <text x="94" y="236" class="f-mono" font-size="12" fill="#00e5ff">$ python3 scripts/tool-registry.py recommend --task "windows + ci"</text>
+  <text x="94" y="258" class="f-mono" font-size="12" fill="#f0f6fc">• gha-vm-runners [READY]  • win-devvm [READY]  • cvm [READY]</text>
+
+  <g class="f-mono" font-size="11.2">
+    <rect x="76" y="298" width="484" height="52" rx="6" fill="#06152d" stroke="#00ff9d" stroke-width="1.3" />
+    <text x="92" y="320" font-weight="700" fill="#00ff9d">cvm (~/src/ai/projects/cvm)</text>
+    <text x="92" y="339" fill="#cbd5e1">13 VM/container backends (KVM, Firecracker, Apple VZ) + COW snapshots</text>
+
+    <rect x="76" y="360" width="484" height="52" rx="6" fill="#06152d" stroke="#00e5ff" stroke-width="1.3" />
+    <text x="92" y="382" font-weight="700" fill="#00e5ff">win-devvm (~/src/infra/win-devvm)</text>
+    <text x="92" y="401" fill="#cbd5e1">Unattended Windows 11 x64 (KVM) &amp; ARM64 (Parallels) + MSVC &amp; SSH</text>
+
+    <rect x="76" y="422" width="484" height="52" rx="6" fill="#06152d" stroke="#38bdf8" stroke-width="1.3" />
+    <text x="92" y="444" font-weight="700" fill="#38bdf8">fedora-vms &amp; freebsd-kvm (~/src/infra/fedora-vms · ~/src/vms)</text>
+    <text x="92" y="463" fill="#cbd5e1">Fedora RPM/SELinux &amp; FreeBSD 15.x kqueue/bhyve KVM guest verification</text>
+
+    <text x="76" y="502" fill="#00e5ff">Shortcuts: /eng tools  |  /eng vms  |  /eng registry</text>
+  </g>
+
+  <!-- Right Panel: Local-First CI & Quota Conservation -->
+  <rect x="616" y="118" width="532" height="418" rx="10" fill="url(#panel-grad)" stroke="#00ff9d" stroke-width="1.8" />
+  <text x="640" y="148" class="f-mono" font-size="14" font-weight="700" fill="#00ff9d">STANDING RULE: LOCAL CI FIRST (running-local-ci)</text>
+  <text x="640" y="172" class="f-sans" font-size="13" fill="#94a3b8">Conserve hosted GitHub Actions minutes unless explicitly overridden by user</text>
+
+  <rect x="640" y="190" width="484" height="154" rx="6" fill="#040812" stroke="#0284c7" stroke-width="1.2" />
+  <text x="658" y="214" class="f-mono" font-size="12" fill="#00ff9d">$ ~/src/gha-vm-runners/local-ci.sh ~/src/flowscope</text>
+  <text x="658" y="236" class="f-mono" font-size="11.5" fill="#f0f6fc">[local-ci] Running workflow mirror on workstation (0 GHA min)...</text>
+  <text x="658" y="258" class="f-mono" font-size="11.5" fill="#00ff9d">[local-ci] fmt: PASS  clippy: PASS  test: PASS  sarif: PASS</text>
+  <text x="658" y="284" class="f-mono" font-size="12" fill="#38bdf8">$ ~/src/gha-vm-runners/gha-vm-runners.sh start</text>
+  <text x="658" y="306" class="f-mono" font-size="11.5" fill="#cbd5e1">[kvm-runner] Disposable Ubuntu 24.04 KVM runner online</text>
+  <text x="658" y="328" class="f-mono" font-size="12" fill="#00ff9d">Hosted GitHub Actions Minutes Burned: 0.0 min</text>
+
+  <rect x="640" y="360" width="484" height="152" rx="6" fill="#06152d" stroke="#00e5ff" stroke-width="1.4" />
+  <text x="658" y="386" class="f-mono" font-size="12.5" font-weight="700" fill="#00e5ff">QUOTA-CONSERVING WORKFLOW DISCIPLINE:</text>
+  <text x="658" y="410" class="f-mono" font-size="12" fill="#f0f6fc">1. Run scripts/verify.sh + local-ci.sh + local VMs before push</text>
+  <text x="658" y="432" class="f-mono" font-size="12" fill="#f0f6fc">2. Never push WIP commits just to test in remote GitHub Actions</text>
+  <text x="658" y="454" class="f-mono" font-size="12" fill="#f0f6fc">3. Set concurrency cancel-in-progress: true &amp; timeout-minutes</text>
+  <text x="658" y="476" class="f-mono" font-size="12" fill="#00ff9d">4. Gate heavy multi-OS matrices to release tags (v*) or dispatch</text>
+  <text x="658" y="498" class="f-mono" font-size="12" fill="#00e5ff">Shortcuts: /eng local-ci  |  /eng ci</text>
+
+
+  <!-- Footer Telemetry -->
+  <line x1="42" y1="566" x2="1158" y2="566" stroke="#0284c7" stroke-width="1" stroke-opacity="0.5" />
+  <text x="42" y="590" class="f-mono" font-size="11.5" fill="#38bdf8">SKILLS: using-local-tool-registry • running-local-ci • hardening-ci-workflows</text>
+  <text x="1158" y="590" text-anchor="end" class="f-mono" font-size="11.5" fill="#00ff9d">HOSTED GHA MINUTES SAVED: 100% ON ROUTINE DEV</text>
+</svg>

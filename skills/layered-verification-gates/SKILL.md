@@ -37,9 +37,8 @@ Organize suites hierarchically (`tests/<tier>/` or runner markers/tags) so any t
 - **Evidence before assertion.** State results with the command and its output ("`pytest -q` → 384 passed in 6.1s"), never "should be fine".
 - **Never lower the bar to reach green.** No deleting tests, `@ts-ignore`/`noqa` sprees, assertions removed, thresholds edited down, stubs left. If a check is wrong, fix it in its own reviewed change with the reason.
 - **Coverage is a tripwire**, not a goal. Use a threshold (e.g. ≥ 90% line, ≥ 85% branch) to catch untested code; then read the untested code (`hunting-silent-failures`).
-- **Conserve CI.** Run everything locally before pushing; batch commits; avoid WIP pushes that burn remote minutes.
-- **Scripted verification beats quiet flags.** Use the scripted gate above where one exists. Otherwise:
-- **Quiet verification by default.** Run test and build commands with quiet flags (`cargo test -q`, `pytest -q`, `npm test -s`). Routine progress lines (`Compiling <crate>`, `test ... ok`) permanently bloat conversation context and replay on every subsequent turn; quiet flags cut output tokens by ~90% while preserving failures.
+- **Local CI first (`running-local-ci`, `using-local-tool-registry`).** Run all checks and cross-OS VM gates locally before pushing; conserve hosted GitHub Actions minutes as a standing rule unless overridden.
+- **Quiet verification by default.** Run test/build commands with quiet flags (`cargo test -q`, `pytest -q`, `npm test -s`) or via `scripts/verify.sh` so progress noise doesn't bloat turn context.
 - **Counts are derived.** Don't hand-type "530 tests" in docs (`keeping-docs-in-sync`).
 - **Clean clone.** Suites must pass without optional generated outputs present.
 
