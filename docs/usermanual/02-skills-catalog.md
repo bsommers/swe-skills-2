@@ -2,7 +2,7 @@
 
 [← Back to User Manual](README.md) · [← Previous: Getting Started](01-getting-started.md) · [Next: Hooks & Context Guards →](03-hooks-and-context-guards.md)
 
-This chapter provides a structured breakdown of the **61 skills** in `swe-skills`, organized into seven functional domains.
+This chapter provides a structured breakdown of the **62 skills** in `swe-skills`, organized into seven functional domains.
 
 ---
 
@@ -93,6 +93,7 @@ Every skill adheres to strict authoring principles:
 | Skill | Trigger ("Use when...") | Primary Deliverable |
 |---|---|---|
 | [`layered-verification-gates`](../../skills/layered-verification-gates/SKILL.md) | Deciding what "done" or "green" means, before committing, before a phase or release, when tests are skipped or unavailable, or when tempted to weaken a check to get past a gate. | 4-tier verification ladder (Syntax → Types/Lint → Unit/Invariance → End-to-End). |
+| [`driving-browsers-for-qa`](../../skills/driving-browsers-for-qa/SKILL.md) | Automating a web app's manual QA plan or UI checklist with a browser driver (Playwright, Selenium, Puppeteer), recording video, screenshot or trace evidence, running against an already-running dev stack, or reporting per-step pass/fail results. | Serial Playwright driver in a self-contained `qa/` package plus `QA-REPORT.md` (`/eng qa-drive`, `/eng qa-report`). |
 | [`hunting-silent-failures`](../../skills/hunting-silent-failures/SKILL.md) | Reviewing code with low test coverage, after adding a permissive parser or adapter, when output looks plausible but subtly wrong or empty, or when asked to QA a test suite for real gaps rather than count coverage. | Fault injection and edge-case probing to uncover swallowed exceptions. |
 | [`debugging-across-layers`](../../skills/debugging-across-layers/SKILL.md) | A failure persists no matter which setting you change, when behavior differs between environments, when imports or config resolve to the wrong thing, or after resuming work from a checkpoint where state may have changed. | Layer-by-layer diagnostic isolation (transport, config, kernel, runtime). |
 | [`clustering-failures-by-root-cause`](../../skills/clustering-failures-by-root-cause/SKILL.md) | Facing many failing tests, false positives, review findings, or bug reports at once, or when improving a metric like precision or recall without regressing another. | Root-cause taxonomy grouping bulk issues into atomic fixes. |

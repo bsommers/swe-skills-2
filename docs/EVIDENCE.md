@@ -56,6 +56,7 @@ Skills were distilled from the standards, specs, audits, changelogs, fix-commit 
 | `engineering-for-determinism` | deterministic generation standards (SHA pinning, seeded generators); `synth` regeneration/SHA pins; `airflow` seeded generators and Python-version seed-type bug |
 | `nix-environments` | `OntoLogic` and multi-substrate compiler toolchains; hermetic dev shells with `flake.nix` wrapping native toolchains while preserving unprivileged portability via `uv`/`cargo` fallback |
 | `layered-verification-gates` | multi-tier verification standards; `airflow` skip behavior; `agent-manager-fe` coverage report; constraint-weakening patterns |
+| `driving-browsers-for-qa` | `agent-manager-fe` Playwright QA driver (live tmux/xterm stack, prefixed cleanup, serial session video, fixme steps) |
 | `hunting-silent-failures` | `uitoolbox` QA review (four P0 silent bugs) |
 | `debugging-across-layers` | `ai-model-learning` hidden context ceiling; `airflow` shadowing and checkpoint with missing data; port-conflict fix |
 | `clustering-failures-by-root-cause` | `flowscope` improvement plan 003; `synth` no-degradation ratchets |

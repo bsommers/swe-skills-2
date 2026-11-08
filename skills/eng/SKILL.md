@@ -49,6 +49,7 @@ Only the first word is matched, and only exactly. "review the auth module" runs 
 | `driver`, `drivers` | `designing-plugin-contracts` |
 | `chain` | `handing-off-sessions` |
 | `binaries` | `building-release-binaries` |
+| `qa-drive`, `qa-report` | `driving-browsers-for-qa` |
 
 ## Rules
 

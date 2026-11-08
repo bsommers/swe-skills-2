@@ -51,6 +51,7 @@ Unsure? `right-sizing-process`.
 | structure system, decouple business logic, set module boundaries | `architecture-best-practices` |
 | configure reproducible dev environments, toolchains, or Nix flakes | `nix-environments` |
 | decide what "done" means | `layered-verification-gates` |
+| automate a manual QA plan or UI checklist with a browser driver and recorded evidence | `driving-browsers-for-qa` |
 | suspect untested code hides bugs | `hunting-silent-failures` |
 | hit a failure that ignores fixes | `debugging-across-layers` |
 | face dozens of failures | `clustering-failures-by-root-cause` |
