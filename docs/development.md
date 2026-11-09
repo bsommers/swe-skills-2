@@ -13,6 +13,7 @@ How to work on **this repository** (the skill library itself). For using the ski
 - [Verification gates](#verification-gates)
 - [Documentation sync](#documentation-sync)
 - [Scripts and tests](#scripts-and-tests)
+- [Graphics rendering (cross-platform)](#graphics-rendering-cross-platform)
 - [Versioning and releases](#versioning-and-releases)
 - [Commits and pull requests](#commits-and-pull-requests)
 - [Portability and security](#portability-and-security)
@@ -105,6 +106,17 @@ Use relative links only. Mark old build logs and plans as historical.
 | `tests/` | `unittest` suites for hooks, router, shortcuts, graphics/pages, scenarios |
 
 Generators must be deterministic: identical input yields byte-identical output, so diffs stay quiet.
+
+## Graphics rendering (cross-platform)
+
+`scripts/render-graphics.py` writes SVGs, then converts them to PNG with the first converter it finds on `PATH`: `inkscape`, `rsvg-convert`, or `magick`. It aborts with "No SVG-to-PNG converter found" if none is installed.
+
+> **TODO: uniform rendering on Linux, macOS and Windows.** Different converters (and different font stacks) produce byte-different PNGs from the same SVG. Regenerating on one machine rewrites every committed PNG even when no SVG changed, which makes diffs noisy and the PNGs depend on whoever ran the script last. Before relying on PNGs as canonical, pick one pinned converter and font setup that works on all three platforms and document or enforce it (for example a fixed `rsvg-convert` version with bundled fonts, or a container image), and make the script choose it deterministically instead of taking the first match. Until then:
+
+- The SVGs are the source of truth; treat PNGs as derived.
+- After regenerating, commit only the PNGs whose SVG actually changed (`git status` shows which) and revert the rest with `git checkout -- <paths>`.
+- Record which converter and version produced the committed PNGs in the commit message. The current ones were produced with `rsvg-convert` 2.63.4 (macOS, Homebrew `librsvg`).
+- Install a converter with `brew install librsvg` (macOS), `apt install librsvg2-bin` (Debian/Ubuntu), or `choco install inkscape` (Windows).
 
 ## Versioning and releases
 
