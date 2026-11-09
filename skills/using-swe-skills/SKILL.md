@@ -37,6 +37,7 @@ Unsure? `right-sizing-process`.
 | build ETL, DAGs, graph loads | `designing-data-pipelines` |
 | build an unattended LLM/agent loop | `building-unattended-agent-loops` |
 | feed LLM output into a decision | `grounding-ai-outputs` |
+| integrate TypeSafe System One / Jev decision models | `typesafe-ai` |
 | start a new repo | `scaffolding-new-projects` |
 | write a CLI or script | `building-small-cli-tools` |
 | build an installer, `init`, or next-step CLI guide | `building-installers-and-onboarding` |

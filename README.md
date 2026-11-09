@@ -120,7 +120,7 @@ The shortcut words live in one table, in [`skills/eng/SKILL.md`](skills/eng/SKIL
 
 ---
 
-## Skills (68)
+## Skills (69)
 
 | Group | Skills |
 |---|---|
