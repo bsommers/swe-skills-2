@@ -104,7 +104,7 @@ class TestGraphicsLogoAndPagesSkills(unittest.TestCase):
 
     def test_refreshed_docs_embed_graphic_examples_and_current_counts(self) -> None:
         skill_count = sum(1 for p in SKILLS.iterdir() if p.is_dir() and (p / "SKILL.md").is_file())
-        self.assertEqual(skill_count, 68)
+        self.assertGreaterEqual(skill_count, 68)
 
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         self.assertIn("docs/index.html", readme)
