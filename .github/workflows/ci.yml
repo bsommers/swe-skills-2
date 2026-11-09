@@ -1,11 +1,12 @@
-# Lint skills and run the script/hook test suite on every PR and on pushes to main.
-# Everything here also runs locally (see CONTRIBUTING.md); hosted CI is the final gate.
+# Final confirmation gate for pull requests. Every check lives in scripts/verify.sh;
+# run it locally before pushing. Hosted CI is not a debugger (`running-local-ci`).
+# Runs on PRs only (not on push to main, which would re-test the same merged tree)
+# and on manual dispatch. No path filters: this is a required check, and a skipped
+# required check would leave PRs pending.
 name: ci
 
 on:
   pull_request:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -25,14 +26,5 @@ jobs:
           persist-credentials: false
 
       # Stdlib-only Python: the runner's python3 is enough, no setup action needed.
-      - name: Python version
-        run: python3 --version
-
-      - name: Lint skills (frontmatter, cross-refs, word limits, doc coverage, manifest versions)
-        run: python3 scripts/lint-skills.py --words
-
-      - name: Unit tests
-        run: python3 -m unittest discover -v tests
-
-      - name: Installer dry run
-        run: scripts/install.sh --dry-run --all
+      - name: Verify (same script as local CI)
+        run: scripts/verify.sh

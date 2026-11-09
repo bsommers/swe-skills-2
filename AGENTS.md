@@ -9,6 +9,7 @@ A library of engineering skills (`skills/<name>/SKILL.md`) for Claude Code, Anti
 ## Commands
 
 ```bash
+scripts/verify.sh                        # local CI: everything hosted CI runs
 python3 scripts/lint-skills.py --words   # validate all skills; must print OK
 python3 -m unittest discover tests       # tests for scripts/hooks/
 agy plugin validate .                    # validate the Antigravity plugin (read-only)

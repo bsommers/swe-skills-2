@@ -8,7 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added (CI and community)
-- `.github/workflows/ci.yml`: lint, unit tests, and installer dry run on every PR and push to `main`; read-only token, SHA-pinned `actions/checkout`, concurrency cancel, 10-minute timeout.
+- `scripts/verify.sh`: local CI that runs lint, unit tests, and an isolated installer dry run; the single source of truth for checks.
+- `.github/workflows/ci.yml`: runs `scripts/verify.sh` on pull requests and manual dispatch only (no push-to-main rerun, no path filters on the required check); read-only token, SHA-pinned `actions/checkout`, concurrency cancel, 10-minute timeout.
 - `SECURITY.md`, `CODE_OF_CONDUCT.md`, issue forms (bug report, skill feedback, skill proposal), and a PR template with the contribution checklist.
 - `scripts/lint-skills.py`: fails when manifest versions (`plugin.json`, `.claude-plugin/`, `.cursor-plugin/`, marketplace entry) differ or a manifest is invalid JSON.
 
