@@ -28,7 +28,9 @@ Only the first word is matched, and only exactly. "review the auth module" runs 
 | `pr` | `writing-pull-requests` |
 | `issues` | `drafting-issue-reports` |
 | `plan` | `planning-with-contracts` |
+| `protocol`, `ipc` | `planning-with-contracts` |
 | `tdd`, `testcases` | `designing-exhaustive-test-cases` |
+| `prove`, `regression` | `designing-exhaustive-test-cases` |
 | `debug` | `debugging-across-layers` |
 | `size` | `right-sizing-process` |
 | `handoff` | `handing-off-sessions` |
@@ -57,6 +59,7 @@ Only the first word is matched, and only exactly. "review the auth module" runs 
 | `pages`, `gh-pages` | `building-github-pages-sites` |
 | `tools`, `vms`, `registry` | `using-local-tool-registry` |
 | `local-ci`, `ci` | `running-local-ci` |
+| `cross`, `macos` | `running-local-ci` |
 
 ## Rules
 

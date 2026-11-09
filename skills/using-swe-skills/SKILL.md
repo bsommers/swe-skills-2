@@ -23,6 +23,9 @@ Unsure? `right-sizing-process`.
 |---|---|
 | get a fuzzy request | `writing-intent-briefs` |
 | write a plan or spec | `planning-with-contracts` |
+| specify IPC, daemon, or remote connection state machines | `planning-with-contracts` |
+| prove a bugfix or regression with red test first | `designing-exhaustive-test-cases` |
+| verify cross-platform compilation & #[cfg] coverage | `running-local-ci` |
 | plan/build new functionality; pre-build test matrix | `designing-exhaustive-test-cases` |
 | set a timeout, token cap, batch or pool size | `sizing-limits-from-measurement` |
 | pick a language, library, runtime | `choosing-tools-and-substrates` |
