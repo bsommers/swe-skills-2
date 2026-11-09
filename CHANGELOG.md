@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added (CI and community)
+- `.github/workflows/ci.yml`: lint, unit tests, and installer dry run on every PR and push to `main`; read-only token, SHA-pinned `actions/checkout`, concurrency cancel, 10-minute timeout.
+- `SECURITY.md`, `CODE_OF_CONDUCT.md`, issue forms (bug report, skill feedback, skill proposal), and a PR template with the contribution checklist.
+- `scripts/lint-skills.py`: fails when manifest versions (`plugin.json`, `.claude-plugin/`, `.cursor-plugin/`, marketplace entry) differ or a manifest is invalid JSON.
+
+### Fixed
+- `tests/test_context_guard.py`: the hook-installer dry-run test no longer assumes `uv` is installed (it failed on runners without `uv`).
+
 ### Changed
 - `scripts/lint-skills.py`: the 900-word body limit is now explicitly soft (warns); bodies over 1035 words (15% over) fail lint. Lint also fails when a skill is missing from the README table, `docs/EVIDENCE.md`, or `docs/TESTING.md`, and accepts `--root DIR`.
 - `tests/test_exhaustive_test_design.py`: the lint test allows soft word-count warnings and still fails on errors and any other warning.

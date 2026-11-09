@@ -1,0 +1,30 @@
+name: New skill proposal
+description: Propose a new skill for the library.
+labels: [enhancement, skill]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Proposed name
+      description: Lowercase, hyphenated, verb-first where possible (e.g. `designing-testable-seams`).
+    validations:
+      required: true
+  - type: textarea
+    id: failure
+    attributes:
+      label: The failure it prevents
+      description: What agents get wrong today without it. Skills here are grounded in real incidents — describe at least one (generalized, no private details).
+    validations:
+      required: true
+  - type: textarea
+    id: triggers
+    attributes:
+      label: Triggers
+      description: When should it load? This becomes the `Use when ...` description.
+    validations:
+      required: true
+  - type: textarea
+    id: overlap
+    attributes:
+      label: Existing skills it overlaps
+      description: Check `skills/using-swe-skills/SKILL.md`. Why is extending an existing skill not enough?

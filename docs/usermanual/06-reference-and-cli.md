@@ -60,6 +60,7 @@ python3 scripts/lint-skills.py [options]
 5. **Portability:** Verifies that no absolute user paths (`/home/` or `/Users/`) exist in skill documentation.
 6. **Body Length:** Warns over 900 words (soft limit); fails over 1035 words (hard limit, 15% over).
 7. **Documentation Coverage:** Fails if any skill is missing from `using-swe-skills`, the README table, `docs/EVIDENCE.md`, or `docs/TESTING.md`.
+8. **Manifest Versions:** Fails if `plugin.json`, `.claude-plugin/plugin.json`, `.cursor-plugin/plugin.json`, and the marketplace entry disagree on `version`.
 
 ---
 

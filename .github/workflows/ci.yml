@@ -1,0 +1,38 @@
+# Lint skills and run the script/hook test suite on every PR and on pushes to main.
+# Everything here also runs locally (see CONTRIBUTING.md); hosted CI is the final gate.
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      # Stdlib-only Python: the runner's python3 is enough, no setup action needed.
+      - name: Python version
+        run: python3 --version
+
+      - name: Lint skills (frontmatter, cross-refs, word limits, doc coverage, manifest versions)
+        run: python3 scripts/lint-skills.py --words
+
+      - name: Unit tests
+        run: python3 -m unittest discover -v tests
+
+      - name: Installer dry run
+        run: scripts/install.sh --dry-run --all

@@ -1,0 +1,36 @@
+name: Skill feedback
+description: A skill gave bad guidance, fired when it should not, or did not fire when it should.
+labels: [skill]
+body:
+  - type: input
+    id: skill
+    attributes:
+      label: Skill name
+      placeholder: hardening-ci-workflows
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Kind of problem
+      options:
+        - Wrong or outdated guidance
+        - Did not trigger when it should have
+        - Triggered when it should not have
+        - Overlaps or conflicts with another skill
+        - Too long / wastes context
+    validations:
+      required: true
+  - type: textarea
+    id: prompt
+    attributes:
+      label: Prompt and what the agent did
+      description: The task you gave, which skills loaded, and what went wrong. Remove anything private.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What the skill should have said or done
+    validations:
+      required: true

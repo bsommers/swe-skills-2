@@ -1,5 +1,7 @@
 # swe-skills
 
+[![ci](https://github.com/bsommers/swe-skills-2/actions/workflows/ci.yml/badge.svg)](https://github.com/bsommers/swe-skills-2/actions/workflows/ci.yml)
+
 <p align="center">
   <img src="docs/assets/logo.svg" alt="swe-skills futuristic cyber-core banner" width="100%" />
 </p>
@@ -217,6 +219,10 @@ Authoring rules: description starts with "Use when…" and states triggers only 
 v0.17.0 (69 skills). Skills are evidence-derived and verified against multi-agent test scenarios; [docs/TESTING.md](docs/TESTING.md) lists the scenarios to run.
 
 ---
+
+## Contributing and security
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) and the [Code of Conduct](CODE_OF_CONDUCT.md). Report vulnerabilities privately as described in [SECURITY.md](SECURITY.md).
 
 ## License
 

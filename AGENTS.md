@@ -34,4 +34,4 @@ scripts/install.sh --dry-run --all       # preview installation
 
 ## Before committing
 
-Lint passes, `agy plugin validate .` passes, manifests' versions match, and changes to a skill are reflected in `docs/TESTING.md` if the behavior it guards changed.
+Lint passes (it also checks manifest versions match), `agy plugin validate .` passes, and changes to a skill are reflected in `docs/TESTING.md` if the behavior it guards changed.

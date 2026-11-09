@@ -1,4 +1,5 @@
 """Tests for scripts/lint-skills.py word limits and documentation coverage checks."""
+import json
 import subprocess
 import sys
 import tempfile
@@ -85,6 +86,43 @@ class TestLintSkills(unittest.TestCase):
             proc = self._lint(Path(tmp))
             self.assertEqual(proc.returncode, 1, proc.stdout)
             self.assertIn("coverage: docs/TESTING.md is missing", proc.stdout)
+
+
+    def _write_manifests(self, root, versions):
+        (root / ".claude-plugin").mkdir(exist_ok=True)
+        (root / ".cursor-plugin").mkdir(exist_ok=True)
+        top, claude, cursor, market = versions
+        (root / "plugin.json").write_text(json.dumps({"version": top}), encoding="utf-8")
+        (root / ".claude-plugin" / "plugin.json").write_text(json.dumps({"version": claude}), encoding="utf-8")
+        (root / ".cursor-plugin" / "plugin.json").write_text(json.dumps({"version": cursor}), encoding="utf-8")
+        (root / ".claude-plugin" / "marketplace.json").write_text(
+            json.dumps({"plugins": [{"name": "swe-skills", "version": market}]}), encoding="utf-8")
+
+    def test_matching_manifest_versions_pass(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            self._make_tree(Path(tmp))
+            self._write_manifests(Path(tmp), ("1.2.3",) * 4)
+            proc = self._lint(Path(tmp))
+            self.assertEqual(proc.returncode, 0, proc.stdout)
+
+    def test_any_mismatched_manifest_version_fails(self):
+        for i in range(4):
+            versions = ["1.2.3"] * 4
+            versions[i] = "1.2.4"
+            with self.subTest(index=i), tempfile.TemporaryDirectory() as tmp:
+                self._make_tree(Path(tmp))
+                self._write_manifests(Path(tmp), versions)
+                proc = self._lint(Path(tmp))
+                self.assertEqual(proc.returncode, 1, proc.stdout)
+                self.assertIn("manifests: versions differ", proc.stdout)
+
+    def test_invalid_manifest_json_fails(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            self._make_tree(Path(tmp))
+            (Path(tmp) / "plugin.json").write_text("{not json", encoding="utf-8")
+            proc = self._lint(Path(tmp))
+            self.assertEqual(proc.returncode, 1, proc.stdout)
+            self.assertIn("manifests: invalid JSON", proc.stdout)
 
 
 if __name__ == "__main__":

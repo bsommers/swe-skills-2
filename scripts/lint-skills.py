@@ -3,7 +3,7 @@
 
 Supporting files (e.g. references/) are checked for portability and TODO/TBD too.
 
-Also checks that every skill is listed in the README table, docs/EVIDENCE.md and docs/TESTING.md.
+Also checks that manifest versions match and that every skill is listed in the README table, docs/EVIDENCE.md and docs/TESTING.md.
 
 Body length: WARN_WORDS is a soft limit (guidance); going over is allowed up to
 MAX_WORDS (15% over), beyond which it is an error.
@@ -11,6 +11,7 @@ MAX_WORDS (15% over), beyond which it is an error.
 Exit 0 when clean, 1 when any error is found. Stdlib only.
 Usage: python3 scripts/lint-skills.py [--words] [--root DIR]
 """
+import json
 import re
 import sys
 from pathlib import Path
@@ -24,6 +25,23 @@ WARN_WORDS = 900                      # soft limit: guidance, warn only
 MAX_WORDS = int(WARN_WORDS * 1.15)    # hard limit: 15% over the soft limit is an error
 # Files that must mention every skill as `skill-name` (AGENTS.md rule 6).
 COVERAGE_DOCS = ("README.md", "docs/EVIDENCE.md", "docs/TESTING.md")
+# Per-tool manifests whose versions must match (AGENTS.md "Keep versions equal").
+MANIFESTS = ("plugin.json", ".claude-plugin/plugin.json", ".cursor-plugin/plugin.json")
+MARKETPLACE = ".claude-plugin/marketplace.json"
+
+
+def manifest_versions(root):
+    """Return {label: version} for every manifest present under root."""
+    found = {}
+    for rel in MANIFESTS:
+        path = root / rel
+        if path.exists():
+            found[rel] = json.loads(path.read_text(encoding="utf-8")).get("version")
+    path = root / MARKETPLACE
+    if path.exists():
+        for plugin in json.loads(path.read_text(encoding="utf-8")).get("plugins", []):
+            found[f"{MARKETPLACE} ({plugin.get('name')})"] = plugin.get("version")
+    return found
 
 
 def parse_frontmatter(text):
@@ -129,6 +147,16 @@ def main(argv=None):
         for name in names:
             if f"`{name}`" not in doc_text:
                 errors.append(f"coverage: {doc} does not mention `{name}`")
+
+    # manifest versions must all be equal
+    try:
+        versions = manifest_versions(root)
+    except json.JSONDecodeError as exc:
+        errors.append(f"manifests: invalid JSON ({exc})")
+        versions = {}
+    if len(set(versions.values())) > 1:
+        detail = ", ".join(f"{k}={v}" for k, v in versions.items())
+        errors.append(f"manifests: versions differ: {detail}")
 
     # /eng shortcuts: each targets an existing skill; words are unique and never shadow a skill name
     eng_file = SKILLS / "eng" / "SKILL.md"

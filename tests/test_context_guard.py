@@ -2,6 +2,7 @@
 """Tests for scripts/hooks/context_guard.py. Stdlib only: python3 -m unittest discover tests"""
 import json
 import os
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -388,7 +389,12 @@ class InstallerCase(unittest.TestCase):
         self.assertIn("PreInvocation", r.stdout)
         self.assertIn("SessionStart", r.stdout)
         self.assertIn("PreToolUse", r.stdout)
-        self.assertIn("uv run", r.stdout)
+        # The default runner is `uv run` when uv is on PATH, else plain python (e.g. stock CI runners).
+        if shutil.which("uv"):
+            self.assertIn("uv run", r.stdout)
+        else:
+            self.assertNotIn("uv run", r.stdout)
+            self.assertIn("context_guard.py sessionstart", r.stdout)
 
     def test_install_runner_flags(self):
         r_uv = subprocess.run(
