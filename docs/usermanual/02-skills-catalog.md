@@ -2,7 +2,7 @@
 
 [← Back to User Manual](README.md) · [← Previous: Getting Started](01-getting-started.md) · [Next: Hooks & Context Guards →](03-hooks-and-context-guards.md)
 
-This chapter provides a structured breakdown of the **68 skills** in `swe-skills`, organized into seven functional domains.
+This chapter provides a structured breakdown of the **69 skills** in `swe-skills`, organized into seven functional domains.
 
 ---
 
@@ -66,6 +66,7 @@ Every skill adheres to strict authoring principles:
 |---|---|---|
 | [`building-unattended-agent-loops`](../../skills/building-unattended-agent-loops/SKILL.md) | Building an LLM or agent system that generates and runs code, retries on failure, or runs for hours or days without supervision, including self-healing loops, daemons, batch runners, and sandboxes. | Hard stop conditions, isolated execution sandboxes, and circuit breakers. |
 | [`grounding-ai-outputs`](../../skills/grounding-ai-outputs/SKILL.md) | An LLM's output feeds a decision of record (compliance, audit, security mapping, requirements, status), when synthesizing specs from notes, or when a model might invent details the source never contained. | Verifiable claim extraction with direct source citations. |
+| [`typesafe-ai`](../../skills/typesafe-ai/SKILL.md) | Building, reviewing, or debugging code that calls TypeSafe; replacing an LLM prompt-and-parse step or brittle heuristic with a typed question. |
 
 ---
 

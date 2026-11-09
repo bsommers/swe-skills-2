@@ -48,7 +48,7 @@ scripts/install.sh --claude --profile review
 | **`build`** | 22 | ~990 tokens | Greenfields, scaffolding, CLI tools, drivers | `core` + `architecture-best-practices`, `building-small-cli-tools`, `building-code-generators`, `building-installers-and-onboarding`, `designing-plugin-contracts`, `designing-testable-seams`, `designing-uniform-surfaces`, `engineering-for-determinism`, `scaffolding-new-projects`, `debugging-across-layers`, `driving-browsers-for-qa` |
 | **`review`** | 20 | ~920 tokens | PR audits, security review, QA | `core` + `security-best-practices`, `pr-review`, `driving-browsers-for-qa`, `code-architecture-review`, `dependency-audit`, `api-contract-audit`, `test-coverage`, `running-multi-lens-audits`, `hunting-silent-failures` |
 | **`ship`** | 20 | ~920 tokens | Releases, binaries, docs, graphics & GitHub Pages | `core` + `release`, `building-release-binaries`, `writing-pull-requests`, `keeping-docs-in-sync`, `writing-user-guides`, `rendering-graphic-examples`, `showcasing-graphics-in-docs`, `designing-logos-and-icons`, `building-github-pages-sites`, `github-issues-script` |
-| **`all`** | 68 | ~3,200 tokens | Full comprehensive library | All 68 skills in `skills/` |
+| **`all`** | 69 | ~3,200 tokens | Full comprehensive library | All 69 skills in `skills/` |
 
 ---
 
@@ -74,7 +74,7 @@ python3 scripts/hooks/install-hooks.py --git
 
 | Command | Purpose |
 |---|---|
-| `python3 scripts/lint-skills.py --words` | Validates frontmatter, word count limits, cross-references, and naming across all 68 skills. |
+| `python3 scripts/lint-skills.py --words` | Validates frontmatter, word count limits, cross-references, and naming across all 69 skills. |
 | `python3 scripts/tool-registry.py search "<query>"` | Searches or updates (`update`, `recommend`, `show`, `list`) the centralized local tool & VM registry across `~/src`. |
 | `python3 scripts/render-graphics.py` | Deterministically generates all 15 `.svg` + 15 `.png` neon-grid logos, icons, and example visuals. |
 | `python3 scripts/build-pages.py` | Generates the accompanying GitHub Pages showcase (`docs/index.html` + `docs/.nojekyll`). |

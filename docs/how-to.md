@@ -166,4 +166,4 @@ cvm run -- name=verify-linux "pytest -q"
 | `[context guard]` periodic cadence reminder fires | 12 assistant turns (Claude) or 25 steps (`agy`) elapsed without a fresh `<20m` checkpoint. | Refresh `docs/CHECKPOINT.md` at the current milestone boundary. |
 | Tool runs produce thousands of tokens of compile progress | Missing quiet flags in build/test commands. | Always append quiet flags: `cargo test -q`, `cargo build -q`, `pytest -q`, `npm test -s`. |
 | Git commit fails with `absolute path` error | A skill or test file contains hardcoded machine paths (e.g. `~username/...` or `C:\Users\...`). | Replace absolute machine paths with repo-relative paths (`./` or `$REPO_ROOT`). |
-| System prompt token overhead is high (>3,000 tokens) | All 68 skills are mounted in user skill directory. | Run `scripts/install.sh --claude --profile core` to mount only the 11 essential core skills. |
+| System prompt token overhead is high (>3,000 tokens) | All 69 skills are mounted in user skill directory. | Run `scripts/install.sh --claude --profile core` to mount only the 11 essential core skills. |

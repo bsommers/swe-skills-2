@@ -4,7 +4,7 @@
   <img src="assets/logo.svg" alt="swe-skills banner" width="100%" />
 </p>
 
-Welcome to the comprehensive documentation suite for **swe-skills** — the 68-skill engineering, architecture, and verification library designed for autonomous and paired AI coding agents (**Claude Code**, **Antigravity (`agy`)**, and **Cursor**).
+Welcome to the comprehensive documentation suite for **swe-skills** — the 69-skill engineering, architecture, and verification library designed for autonomous and paired AI coding agents (**Claude Code**, **Antigravity (`agy`)**, and **Cursor**).
 
 > 🌐 **Interactive Web Showcase:** Open [`docs/index.html`](index.html) (or visit the repository's GitHub Pages site) for an interactive skill explorer, category filter tabs, and SVG/PNG visual gallery.
 
@@ -20,6 +20,7 @@ docs/
 ├── purpose.md              # Problem statement, threat model, token economics, principles
 ├── architecture.md         # 5-tier architecture, lifecycle hooks, routing, subagent isolation
 ├── running.md              # Installation guide, profile management, CLI tools, env vars
+├── development.md          # Contributor guidelines: authoring, gates, doc sync, releases
 ├── how-to.md               # Step-by-step recipes with rendered SVG/PNG visual walkthroughs
 ├── AGENT_AUTONOMY_AND_PERMISSIONS.md # Super-permissive autonomy & canonical permission policies
 ├── HOOKS.md                # Periodic cadence hooks, PreInvocation, PreCompact, model routing
@@ -54,4 +55,5 @@ docs/
 2. **Installation & Profiles:** Follow [Running & Installation](running.md) to install skills with targeted profiles (`core`, `build`, `review`, `ship`, `all`) and save ~85% in prompt catalog tokens.
 3. **Architecture & Internal Design:** Study [Architecture](architecture.md) and explore the visual models in [Rendered Examples](assets/examples/architecture-overview.svg) and [Diagrams](diagrams/README.md).
 4. **Hands-On Visual Recipes:** Follow [How-To Guides](how-to.md) for concrete recipes accompanied by rendered SVG/PNG diagrams covering `/eng` routing, subagent log isolation, 5-step session chaining, and automated browser QA.
-5. **Detailed User Manual:** Dive into the [7-Chapter User Manual](usermanual/README.md) for exhaustive reference material.
+5. **Contributing:** Read [Development Guidelines](development.md) before changing the repository.
+6. **Detailed User Manual:** Dive into the [7-Chapter User Manual](usermanual/README.md) for exhaustive reference material.

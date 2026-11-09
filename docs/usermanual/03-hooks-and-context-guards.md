@@ -94,7 +94,7 @@ The pre-commit guard [`scripts/hooks/git_pre_commit.py`](../../scripts/hooks/git
 1. **Absolute Home Paths:** Rejects any staged file containing hardcoded machine home paths (`$HOME` or user directory paths), enforcing portability (`keeping-repos-portable`).
 2. **Secret & Key Leakage:** Rejects unmasked private keys (`BEGIN PRIVATE KEY`), AWS/GitHub API tokens, and secret patterns.
 3. **Manifest Version Parity:** Verifies that version strings match exactly across `plugin.json`, `.claude-plugin/plugin.json`, `.cursor-plugin/plugin.json`, and `.claude-plugin/marketplace.json`.
-4. **Skill Linter Compliance:** Executes `lint-skills.py` to ensure all 50 skills pass frontmatter and word count validation.
+4. **Skill Linter Compliance:** Executes `lint-skills.py` to ensure all 69 skills pass frontmatter and word count validation.
 5. **Single Changelog:** Rejects a staged `docs/CHANGELOG.md`; the root `CHANGELOG.md` is the only changelog, so a second copy would drift out of date.
 
 ---
