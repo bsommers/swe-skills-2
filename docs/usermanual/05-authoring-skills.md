@@ -129,7 +129,7 @@ All commands must exit with code 0 (`OK`).
 | Anti-Pattern | Why It Fails | Remedy |
 |---|---|---|
 | **Process in description** | LLM executes from description without loading body. | Describe triggers only ("Use when..."). |
-| **Bloated body (> 900 words)** | Consumes excessive context window on every load. | Split details into `references/`. |
+| **Bloated body (> 900 words soft, > 1035 hard)** | Consumes excessive context window on every load; lint fails past 1035. | Split details into `references/`. |
 | **Absolute machine paths** | Breaks on other machines; rejected by pre-commit. | Use repo-relative paths (`src/...`). |
 | **Invented cross-references** | Typos in skill links confuse agents. | Run `lint-skills.py` to check link targets. |
 | **Missing provenance** | Unverifiable opinions creep into library. | Document real incidents in `docs/EVIDENCE.md`. |

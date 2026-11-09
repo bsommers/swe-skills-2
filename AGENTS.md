@@ -26,11 +26,11 @@ scripts/install.sh --dry-run --all       # preview installation
 ## Authoring rules
 
 1. Frontmatter has only `name` and `description`. Description starts with `Use when`, third person, ≤ 1024 chars (prefer ≤ 500), states **triggers only**, never the process.
-2. Body target ≤ 500 words; heavy reference goes in a `references/` file inside the skill.
+2. Body targets ≤ 500 words; 900 is a soft limit (lint warns) and 1035 (15% over) is a hard limit (lint fails); heavy reference goes in a `references/` file inside the skill.
 3. Guidance form follows the failure it addresses: discipline gaps get rules plus a mistakes list; wrong-shaped output gets a positive recipe or template.
 4. Cross-reference other skills as `` `skill-name` `` (lint checks they exist). No `@file` force-loading.
 5. No absolute machine paths, no project-private names or secrets in skill text. Concrete incidents are generalized.
-6. Adding a skill also means: add it to `using-swe-skills`, README table, `docs/EVIDENCE.md`, and `docs/TESTING.md`.
+6. Adding a skill also means: add it to `using-swe-skills`, README table, `docs/EVIDENCE.md`, and `docs/TESTING.md` (lint fails if any is missing).
 
 ## Before committing
 

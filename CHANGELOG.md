@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Changed
+- `scripts/lint-skills.py`: the 900-word body limit is now explicitly soft (warns); bodies over 1035 words (15% over) fail lint. Lint also fails when a skill is missing from the README table, `docs/EVIDENCE.md`, or `docs/TESTING.md`, and accepts `--root DIR`.
+- `tests/test_exhaustive_test_design.py`: the lint test allows soft word-count warnings and still fails on errors and any other warning.
+
+### Added
+- `tests/test_lint_skills.py`: fixture-tree tests for the soft/hard word limits and documentation-coverage checks.
+- `typesafe-ai` rows in `docs/EVIDENCE.md` and `docs/TESTING.md`.
+
 ## [0.17.0] - 2026-11-08
 
 ### Added

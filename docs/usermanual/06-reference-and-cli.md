@@ -48,7 +48,8 @@ python3 scripts/lint-skills.py [options]
 ```
 
 ### Options
-- `--words`: Print word counts for every skill and total library word count. Warns on skills exceeding 900 words.
+- `--words`: Print word counts for every skill and total library word count. Warns on skills over 900 words (soft limit); skills over 1035 words (15% over) are an error regardless of flags.
+- `--root DIR`: Lint a different repository tree (used by the tests).
 - `-h, --help`: Display help.
 
 ### Validation Checks Performed
@@ -57,6 +58,8 @@ python3 scripts/lint-skills.py [options]
 3. **Trigger-Only Check:** Ensures description begins with `"Use when"` and does not exceed 1024 characters.
 4. **Cross-Reference Integrity:** Verifies that all `` `skill-name` `` cross-references target existing skills.
 5. **Portability:** Verifies that no absolute user paths (`/home/` or `/Users/`) exist in skill documentation.
+6. **Body Length:** Warns over 900 words (soft limit); fails over 1035 words (hard limit, 15% over).
+7. **Documentation Coverage:** Fails if any skill is missing from `using-swe-skills`, the README table, `docs/EVIDENCE.md`, or `docs/TESTING.md`.
 
 ---
 
