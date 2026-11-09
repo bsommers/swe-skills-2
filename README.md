@@ -92,6 +92,7 @@ All architecture and workflow examples are rendered deterministically in both ve
 - **[Visual Diagrams Catalog](docs/diagrams/README.md)** — Visual models across SVG/PNG (`docs/assets/examples/`), ASCII, Mermaid (`.mmd`), and native draw.io (`.drawio`).
 - **[Running & Installation](docs/running.md)** — Multi-target installation, skill profiles (`--profile`), and CLI reference.
 - **[How-To Guides & Recipes](docs/how-to.md)** — Step-by-step recipes accompanied by rendered SVG/PNG visual walkthroughs.
+- **[Development Guidelines](docs/development.md)** — Contributor workflow, authoring rules, verification gates, doc sync ([CONTRIBUTING.md](CONTRIBUTING.md)).
 - **[User Manual](docs/usermanual/README.md)** — 7-chapter comprehensive guide.
 
 ---
@@ -172,7 +173,7 @@ See [docs/HOOKS.md](docs/HOOKS.md), [How-To Recipe 5](docs/how-to.md#recipe-5-em
 ## Repository layout
 
 ```
-skills/<name>/SKILL.md        the 68 skills (single source of truth)
+skills/<name>/SKILL.md        the 69 skills (single source of truth)
 assets/logo.{svg,png}         square 512x512 plugin/brand icon (referenced by plugin.json)
 plugin.json                   Antigravity plugin manifest
 .claude-plugin/               Claude Code plugin + marketplace manifests
@@ -213,7 +214,7 @@ Authoring rules: description starts with "Use when…" and states triggers only 
 
 ## Status
 
-v0.17.0 (68 skills). Skills are evidence-derived and verified against multi-agent test scenarios; [docs/TESTING.md](docs/TESTING.md) lists the scenarios to run.
+v0.17.0 (69 skills). Skills are evidence-derived and verified against multi-agent test scenarios; [docs/TESTING.md](docs/TESTING.md) lists the scenarios to run.
 
 ---
 

@@ -13,7 +13,7 @@ Autonomous and paired AI coding agents possess tremendous generative speed but s
 3. **Lossy Context Compaction:** Compaction commands (`/compact`) or session resets without verified disk checkpoints destroy user corrections, architectural constraints, and working-tree state.
 4. **Architectural & Platform Drift:** In multi-turn sessions, agents lose track of subsystem boundaries, hardcode single-OS assumptions (breaking Windows or macOS), or let documentation and visual diagrams drift behind code changes.
 
-**swe-skills** provides a deterministic engineering immune system: a modular library of **68 battle-tested skills**, lifecycle hooks, a searchable local tool & VM registry, rendered visual verification guides, and hierarchical gates that enforce disciplined software engineering practices directly within AI agent harnesses.
+**swe-skills** provides a deterministic engineering immune system: a modular library of **69 battle-tested skills**, lifecycle hooks, a searchable local tool & VM registry, rendered visual verification guides, and hierarchical gates that enforce disciplined software engineering practices directly within AI agent harnesses.
 
 ---
 

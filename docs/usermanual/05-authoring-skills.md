@@ -95,7 +95,7 @@ Add a row to [`docs/EVIDENCE.md`](../EVIDENCE.md) identifying the historical inc
 Add a pressure scenario to [`docs/TESTING.md`](../TESTING.md) specifying a realistic user prompt and expected agent behaviors.
 
 ### 6. Update `README.md`
-Increment the skill count (e.g. `Skills (51)`) and list `my-new-skill` under the appropriate functional category in the main table.
+Increment the skill count (e.g. `Skills (70)`) and list `my-new-skill` under the appropriate functional category in the main table.
 
 ---
 

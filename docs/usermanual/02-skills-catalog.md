@@ -2,7 +2,7 @@
 
 [← Back to User Manual](README.md) · [← Previous: Getting Started](01-getting-started.md) · [Next: Hooks & Context Guards →](03-hooks-and-context-guards.md)
 
-This chapter provides a structured breakdown of the **68 skills** in `swe-skills`, organized into seven functional domains.
+This chapter provides a structured breakdown of the **69 skills** in `swe-skills`, organized into seven functional domains.
 
 ---
 
