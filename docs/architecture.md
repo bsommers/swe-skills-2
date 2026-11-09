@@ -34,9 +34,9 @@ flowchart TD
     end
 
     subgraph SkillTaxonomy["4. Domain Skill Library (69 Skills)"]
-        FramePlan["Frame, Plan, Tools & Test Matrix (9)"]
+        FramePlan["Entry, Frame, Plan, Tools & Test Matrix (11)"]
         ArchDomain["Architecture & Tri-OS Drivers (12)"]
-        BuildDomain["Build, AI Loops, Security & Local CI (16)"]
+        BuildDomain["Build, AI Loops, Security & Local CI (17)"]
         VerifyDomain["Verify, Coverage & Browser QA (9)"]
         CollabDomain["Collaborate, Docs, Graphics & Release (20)"]
     end

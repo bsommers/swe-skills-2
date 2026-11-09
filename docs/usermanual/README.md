@@ -50,9 +50,9 @@ flowchart TD
     subgraph SkillSuite["swe-skills Library (69 Skills)"]
         Plan["Frame & Plan (9)"]
         Arch["Architecture & Modeling (12)"]
-        AI["AI Systems & Loops (2)"]
-        Build["Build & Generation (13)"]
-        Verify["Verify & Measure (10)"]
+        AI["AI Systems & Loops (3)"]
+        Build["Build & Generation (14)"]
+        Verify["Verify & Measure (9)"]
         Ops["Collaborate, Docs & Ops (20)"]
     end
 
