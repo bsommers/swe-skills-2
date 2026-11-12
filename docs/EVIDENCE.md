@@ -85,6 +85,7 @@ Skills were distilled from the standards, specs, audits, changelogs, fix-commit 
 | `pr-review` | `committing-and-releasing-cleanly` review standard; `feed-brain-gh` multi-lens PR review workflow with `gh pr review` |
 | `committing-and-releasing-cleanly` | commit and release hygiene standards; `flowscope` dual-remote sync; existing release skills |
 | `adaptive-model-routing` | multi-tier model router benchmarks and subagent dispatch; token conservation benchmarks across pro, flash, flash_lite tiers |
+| `typesafe-ai` | vendored from TypeSafe AI's published skill (MIT; license kept at `skills/typesafe-ai/LICENSE`); live API docs at docs.typesafe.ai are the source of truth for request syntax and question types |
 
 ## Provenance notes
 

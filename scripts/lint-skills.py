@@ -3,20 +3,45 @@
 
 Supporting files (e.g. references/) are checked for portability and TODO/TBD too.
 
+Also checks that manifest versions match and that every skill is listed in the README table, docs/EVIDENCE.md and docs/TESTING.md.
+
+Body length: WARN_WORDS is a soft limit (guidance); going over is allowed up to
+MAX_WORDS (15% over), beyond which it is an error.
+
 Exit 0 when clean, 1 when any error is found. Stdlib only.
-Usage: python3 scripts/lint-skills.py [--words]
+Usage: python3 scripts/lint-skills.py [--words] [--root DIR]
 """
+import json
 import re
 import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SKILLS = ROOT / "skills"
 NAME_RE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 ABS_PATH_RE = re.compile(r"(/home/[A-Za-z0-9_-]+|/Users/[A-Za-z0-9_-]+|[A-Za-z]:\\Users\\[A-Za-z0-9_-]+)")
 MAX_DESC = 1024
 WARN_DESC = 500
-WARN_WORDS = 900
+WARN_WORDS = 900                      # soft limit: guidance, warn only
+MAX_WORDS = int(WARN_WORDS * 1.15)    # hard limit: 15% over the soft limit is an error
+# Files that must mention every skill as `skill-name` (AGENTS.md rule 6).
+COVERAGE_DOCS = ("README.md", "docs/EVIDENCE.md", "docs/TESTING.md")
+# Per-tool manifests whose versions must match (AGENTS.md "Keep versions equal").
+MANIFESTS = ("plugin.json", ".claude-plugin/plugin.json", ".cursor-plugin/plugin.json")
+MARKETPLACE = ".claude-plugin/marketplace.json"
+
+
+def manifest_versions(root):
+    """Return {label: version} for every manifest present under root."""
+    found = {}
+    for rel in MANIFESTS:
+        path = root / rel
+        if path.exists():
+            found[rel] = json.loads(path.read_text(encoding="utf-8")).get("version")
+    path = root / MARKETPLACE
+    if path.exists():
+        for plugin in json.loads(path.read_text(encoding="utf-8")).get("plugins", []):
+            found[f"{MARKETPLACE} ({plugin.get('name')})"] = plugin.get("version")
+    return found
 
 
 def parse_frontmatter(text):
@@ -31,8 +56,17 @@ def parse_frontmatter(text):
     return fm, text[m.end():]
 
 
-def main():
-    show_words = "--words" in sys.argv
+def main(argv=None):
+    argv = sys.argv[1:] if argv is None else argv
+    show_words = "--words" in argv
+    root = ROOT
+    if "--root" in argv:
+        i = argv.index("--root")
+        if i + 1 >= len(argv):
+            print("--root needs DIR", file=sys.stderr)
+            return 2
+        root = Path(argv[i + 1]).resolve()
+    SKILLS = root / "skills"
     names = sorted(p.name for p in SKILLS.iterdir() if p.is_dir())
     errors, warnings = [], []
     total_words = 0
@@ -90,8 +124,10 @@ def main():
                 errors.append(f"{rel}: contains TODO/TBD")
         words = len(body.split())
         total_words += words
-        if words > WARN_WORDS:
-            warnings.append(f"{name}: {words} words (> {WARN_WORDS}); consider a references/ file")
+        if words > MAX_WORDS:
+            errors.append(f"{name}: {words} words (> {MAX_WORDS} hard limit); move content to references/")
+        elif words > WARN_WORDS:
+            warnings.append(f"{name}: {words} words (> {WARN_WORDS} soft limit); consider a references/ file")
         if show_words:
             print(f"{words:5d}  {name}")
 
@@ -100,6 +136,27 @@ def main():
     for name in names:
         if name != "using-swe-skills" and f"`{name}`" not in router:
             errors.append(f"router: using-swe-skills does not mention `{name}`")
+
+    # every skill must be listed in the README table, EVIDENCE and TESTING
+    for doc in COVERAGE_DOCS:
+        path = root / doc
+        if not path.exists():
+            errors.append(f"coverage: {doc} is missing")
+            continue
+        doc_text = path.read_text(encoding="utf-8")
+        for name in names:
+            if f"`{name}`" not in doc_text:
+                errors.append(f"coverage: {doc} does not mention `{name}`")
+
+    # manifest versions must all be equal
+    try:
+        versions = manifest_versions(root)
+    except json.JSONDecodeError as exc:
+        errors.append(f"manifests: invalid JSON ({exc})")
+        versions = {}
+    if len(set(versions.values())) > 1:
+        detail = ", ".join(f"{k}={v}" for k, v in versions.items())
+        errors.append(f"manifests: versions differ: {detail}")
 
     # /eng shortcuts: each targets an existing skill; words are unique and never shadow a skill name
     eng_file = SKILLS / "eng" / "SKILL.md"

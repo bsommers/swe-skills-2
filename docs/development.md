@@ -45,7 +45,7 @@ See [architecture.md](architecture.md) for how the pieces fit together.
 
 1. Frontmatter has only `name` and `description`; `name` equals the directory name.
 2. `description` starts with `Use when`, is third person, at most 1024 characters (prefer 500), and states **triggers only**, never the process. An agent that reads the process in the description skips the body.
-3. Body targets 500 words or fewer. Move long reference into `references/`.
+3. Body targets 500 words or fewer. 900 words is a soft limit (lint warns); more than 1035 (15% over) fails lint. Move long reference into `references/`.
 4. Match the form to the failure: discipline gaps get rules plus a mistakes list; wrong-shaped output gets a positive recipe or template.
 5. Cross-reference other skills as `` `skill-name` ``; the linter checks they exist. Do not use `@file` force-loading.
 6. No absolute machine paths, project-private names, or secrets. Generalize incidents.

@@ -1,0 +1,30 @@
+# Final confirmation gate for pull requests. Every check lives in scripts/verify.sh;
+# run it locally before pushing. Hosted CI is not a debugger (`running-local-ci`).
+# Runs on PRs only (not on push to main, which would re-test the same merged tree)
+# and on manual dispatch. No path filters: this is a required check, and a skipped
+# required check would leave PRs pending.
+name: ci
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      # Stdlib-only Python: the runner's python3 is enough, no setup action needed.
+      - name: Verify (same script as local CI)
+        run: scripts/verify.sh

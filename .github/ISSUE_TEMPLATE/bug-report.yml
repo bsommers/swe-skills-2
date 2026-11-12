@@ -1,0 +1,38 @@
+name: Bug report
+description: A script, hook, installer, or lint check misbehaves.
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you ran, what you expected, and what happened instead. Paste exact error output.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. scripts/install.sh --dry-run --claude
+        2. ...
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: swe-skills version or commit
+      placeholder: v0.17.0 or a commit SHA
+    validations:
+      required: true
+  - type: dropdown
+    id: tool
+    attributes:
+      label: Agent tool
+      multiple: true
+      options: [Claude Code, Antigravity (agy), Cursor, Codex / Copilot CLI / Gemini CLI, Not applicable]
+  - type: input
+    id: os
+    attributes:
+      label: OS and Python version
+      placeholder: Ubuntu 24.04, Python 3.12

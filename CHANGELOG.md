@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added (CI and community)
+- `scripts/verify.sh`: local CI that runs lint, unit tests, and an isolated installer dry run; the single source of truth for checks.
+- `.github/workflows/ci.yml`: runs `scripts/verify.sh` on pull requests and manual dispatch only (no push-to-main rerun, no path filters on the required check); read-only token, SHA-pinned `actions/checkout`, concurrency cancel, 10-minute timeout.
+- `SECURITY.md`, `CODE_OF_CONDUCT.md`, issue forms (bug report, skill feedback, skill proposal), and a PR template with the contribution checklist.
+- `scripts/lint-skills.py`: fails when manifest versions (`plugin.json`, `.claude-plugin/`, `.cursor-plugin/`, marketplace entry) differ or a manifest is invalid JSON.
+
+### Fixed
+- `tests/test_context_guard.py`: the hook-installer dry-run test no longer assumes `uv` is installed (it failed on runners without `uv`).
+
+### Changed
+- `scripts/lint-skills.py`: the 900-word body limit is now explicitly soft (warns); bodies over 1035 words (15% over) fail lint. Lint also fails when a skill is missing from the README table, `docs/EVIDENCE.md`, or `docs/TESTING.md`, and accepts `--root DIR`.
+- `tests/test_exhaustive_test_design.py`: the lint test allows soft word-count warnings and still fails on errors and any other warning.
+
+### Added
+- `tests/test_lint_skills.py`: fixture-tree tests for the soft/hard word limits and documentation-coverage checks.
+- `typesafe-ai` rows in `docs/EVIDENCE.md` and `docs/TESTING.md`.
+
 ## [0.17.0] - 2026-11-08
 
 ### Added

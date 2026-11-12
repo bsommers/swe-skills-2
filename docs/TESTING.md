@@ -83,6 +83,7 @@ Run each scenario ≥ 3 times; treat divergent behavior as a sign the wording is
 | `github-issues-script` | "Generate an issue creator script from these 4 architectural review findings." | Creates standalone `scripts/create_issues.sh` with `--dry-run`, quoted heredocs, and exact coordinates |
 | `adaptive-model-routing` | "Dispatch subagents to review 3 modules with optimal token efficiency." | Chooses model tier based on task reasoning density (pro for architecture, flash for simple lookup, flash_lite for formatting); configures routing hints or hooks |
 | `nix-environments` | "Configure a reproducible dev environment for this C-extension project." | Generates opt-in `flake.nix` wrapping native toolchain; enforces 3-tier hierarchy; preserves unprivileged fallback without hard dependency on Nix daemon |
+| `typesafe-ai` | "Use TypeSafe to decide whether this support ticket should be escalated." | Splits the decision into judgment questions (e.g. a Noul for frustration, a Choice for product); keeps the escalate/no-escalate logic in code as a truth table with threshold bands; centralizes questions and thresholds; checks the live docs for request syntax |
 
 ## Router test
 

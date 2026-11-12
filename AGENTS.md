@@ -9,6 +9,7 @@ A library of engineering skills (`skills/<name>/SKILL.md`) for Claude Code, Anti
 ## Commands
 
 ```bash
+scripts/verify.sh                        # local CI: everything hosted CI runs
 python3 scripts/lint-skills.py --words   # validate all skills; must print OK
 python3 -m unittest discover tests       # tests for scripts/hooks/
 agy plugin validate .                    # validate the Antigravity plugin (read-only)
@@ -26,12 +27,12 @@ scripts/install.sh --dry-run --all       # preview installation
 ## Authoring rules
 
 1. Frontmatter has only `name` and `description`. Description starts with `Use when`, third person, ≤ 1024 chars (prefer ≤ 500), states **triggers only**, never the process.
-2. Body target ≤ 500 words; heavy reference goes in a `references/` file inside the skill.
+2. Body targets ≤ 500 words; 900 is a soft limit (lint warns) and 1035 (15% over) is a hard limit (lint fails); heavy reference goes in a `references/` file inside the skill.
 3. Guidance form follows the failure it addresses: discipline gaps get rules plus a mistakes list; wrong-shaped output gets a positive recipe or template.
 4. Cross-reference other skills as `` `skill-name` `` (lint checks they exist). No `@file` force-loading.
 5. No absolute machine paths, no project-private names or secrets in skill text. Concrete incidents are generalized.
-6. Adding a skill also means: add it to `using-swe-skills`, README table, `docs/EVIDENCE.md`, and `docs/TESTING.md`.
+6. Adding a skill also means: add it to `using-swe-skills`, README table, `docs/EVIDENCE.md`, and `docs/TESTING.md` (lint fails if any is missing).
 
 ## Before committing
 
-Lint passes, `agy plugin validate .` passes, manifests' versions match, and changes to a skill are reflected in `docs/TESTING.md` if the behavior it guards changed.
+Lint passes (it also checks manifest versions match), `agy plugin validate .` passes, and changes to a skill are reflected in `docs/TESTING.md` if the behavior it guards changed.
