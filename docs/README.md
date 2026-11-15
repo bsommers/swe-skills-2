@@ -4,7 +4,7 @@
   <img src="assets/logo.svg" alt="swe-skills banner" width="100%" />
 </p>
 
-Welcome to the comprehensive documentation suite for **swe-skills** — the 69-skill engineering, architecture, and verification library designed for autonomous and paired AI coding agents (**Claude Code**, **Antigravity (`agy`)**, and **Cursor**).
+Welcome to the comprehensive documentation suite for **swe-skills** — the 73-skill engineering, architecture, and verification library designed for autonomous and paired AI coding agents (**Claude Code**, **Antigravity (`agy`)**, and **Cursor**).
 
 > 🌐 **Interactive Web Showcase:** Open [`docs/index.html`](index.html) (or visit the repository's GitHub Pages site) for an interactive skill explorer, category filter tabs, and SVG/PNG visual gallery.
 

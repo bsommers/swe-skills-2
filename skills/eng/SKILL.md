@@ -23,6 +23,10 @@ Only the first word is matched, and only exactly. "review the auth module" runs 
 | Word | Skill |
 |---|---|
 | `review` | `running-multi-lens-audits` |
+| `health`, `grade` | `reviewing-repo-health` |
+| `docalign` | `auditing-doc-alignment` |
+| `uplift` | `planning-grade-a-uplift` |
+| `harness`, `tiers` | `routing-work-across-harnesses` |
 | `coverage` | `hunting-silent-failures` |
 | `commit` | `committing-and-releasing-cleanly` |
 | `pr` | `writing-pull-requests` |

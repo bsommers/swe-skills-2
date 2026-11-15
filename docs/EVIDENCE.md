@@ -68,6 +68,10 @@ Skills were distilled from the standards, specs, audits, changelogs, fix-commit 
 | `dependency-audit` | `synth` and `security-skills` package CVE vulnerability scanning, CVSS scoring triage, and outdated dependency audits |
 | `orchestrating-subagents` | `synth` model-selection guidance; multi-tier subagent verification protocols; `eval` four-agent partitioning; a two-agent incident in this repo where a second agent staged files in a shared checkout and they were swept into the other agent's amend |
 | `running-multi-lens-audits` | `eval` benchmark-audit skill; `synth` 51-issue audit |
+| `reviewing-repo-health` | user request (2026-11): fan a whole-repo review out to model-matched parallel subagents, run a high-effort code review, check docs and plans for consistency, and plan toward an A+ grade; generalizes `running-multi-lens-audits` to goals, plans and multiple harnesses |
+| `auditing-doc-alignment` | same request; this repo's own README, checkpoint and docs carrying different skill counts (68, 69) at once |
+| `planning-grade-a-uplift` | same request; the A+ question needs a rubric tied to the project's goals, not a generic checklist |
+| `routing-work-across-harnesses` | user request (2026-11) to run the same skills in Claude, agy, pi, opencode and later Cursor; harness facts are unverified (see its matrix) |
 | `supervising-autonomous-sessions` | bounded autonomous operation rules (variable-gear autonomy, halt-after-3-retries, boundary isolation, evidence rule) |
 | `handing-off-sessions` | `airflow` Phase 4.1 checkpoint; `ai-model-learning` full-system rebuild spec; session journaling and incidental tooling standards; `uitoolbox` REBUILD |
 | `compacting-context-safely` | `ai-model-learning` measured token failures; `airflow` checkpoint notes; recurring loss of user corrections and repeated dead ends after context compaction |

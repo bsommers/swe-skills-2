@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Install swe-skills for Claude Code, Antigravity (agy), Cursor, and the cross-runtime ~/.agents alias.
+# Install swe-skills for Claude Code, Antigravity (agy), opencode, pi, Cursor, and the cross-runtime ~/.agents alias.
 # Default is symlinks (edits here propagate); use --copy for standalone copies.
 set -euo pipefail
 
@@ -15,10 +15,12 @@ Targets (user-level, any combination; default is --all):
   --claude          ~/.claude/skills/            (Claude Code)
   --agy             `agy plugin install` if agy is on PATH, else ~/.agents/skills/
   --cursor          ~/.cursor/skills/            (Cursor user skills)
+  --opencode        ~/.config/opencode/skills/   (opencode)
+  --pi              ~/.pi/agent/skills/          (pi)
   --agents          ~/.agents/skills/            (cross-runtime alias: Codex, Copilot CLI, Gemini, agy)
   --all             all of the above
   --project DIR     project-level: DIR/.claude/skills, DIR/.agents/skills, DIR/.cursor/skills,
-                    DIR/.cursor/rules/swe-skills.mdc
+                    DIR/.opencode/skills, DIR/.pi/skills, DIR/.cursor/rules/swe-skills.mdc
 
 Options:
   --profile NAME    install subset: core (8 essential), build, review, ship, all (default: all)
@@ -33,8 +35,8 @@ EOF
 TARGETS=(); PROJECT=""; MODE=link; FORCE=0; UNINSTALL=0; DRY=0; PROFILE="all"
 while [ $# -gt 0 ]; do
   case "$1" in
-    --claude|--agy|--cursor|--agents) TARGETS+=("${1#--}") ;;
-    --all) TARGETS=(claude agy cursor agents) ;;
+    --claude|--agy|--cursor|--agents|--opencode|--pi) TARGETS+=("${1#--}") ;;
+    --all) TARGETS=(claude agy cursor agents opencode pi) ;;
     --project) PROJECT="${2:?--project needs DIR}"; shift ;;
     --profile) PROFILE="${2:?--profile needs name (core, build, review, ship, all)}"; shift ;;
     --copy) MODE=copy ;;
@@ -46,7 +48,7 @@ while [ $# -gt 0 ]; do
   esac
   shift
 done
-[ ${#TARGETS[@]} -eq 0 ] && [ -z "$PROJECT" ] && TARGETS=(claude agy cursor agents)
+[ ${#TARGETS[@]} -eq 0 ] && [ -z "$PROJECT" ] && TARGETS=(claude agy cursor agents opencode pi)
 
 run() { if [ "$DRY" = 1 ]; then echo "DRY: $*"; else "$@"; fi; }
 MARK=".swe-skills-2"   # marker file inside copied skill dirs
@@ -69,7 +71,7 @@ is_in_profile() {
     review)
       case "$name" in
         using-swe-skills|planning-with-contracts|designing-exhaustive-test-cases|using-local-tool-registry|running-local-ci|compacting-context-safely|layered-verification-gates|committing-and-releasing-cleanly|orchestrating-subagents|token-finops|adaptive-model-routing|\
-        pr-review|driving-browsers-for-qa|code-architecture-review|dependency-audit|api-contract-audit|test-coverage|running-multi-lens-audits|hunting-silent-failures|security-best-practices) return 0 ;;
+        pr-review|driving-browsers-for-qa|code-architecture-review|dependency-audit|api-contract-audit|test-coverage|running-multi-lens-audits|hunting-silent-failures|security-best-practices|reviewing-repo-health|auditing-doc-alignment|planning-grade-a-uplift|routing-work-across-harnesses) return 0 ;;
         *) return 1 ;;
       esac ;;
     ship)
@@ -114,6 +116,8 @@ for t in "${TARGETS[@]:-}"; do
     claude) install_into "$HOME/.claude/skills" ;;
     cursor) install_into "$HOME/.cursor/skills" ;;
     agents) install_into "$HOME/.agents/skills" ;;
+    opencode) install_into "${XDG_CONFIG_HOME:-$HOME/.config}/opencode/skills" ;;
+    pi) install_into "$HOME/.pi/agent/skills" ;;
     agy)
       if command -v agy >/dev/null 2>&1 && [ "$UNINSTALL" = 0 ]; then
         run agy plugin install "$REPO_ROOT"
@@ -129,7 +133,7 @@ done
 if [ -n "$PROJECT" ]; then
   [ -d "$PROJECT" ] || { echo "no such directory: $PROJECT" >&2; exit 1; }
   PROJECT="$(cd "$PROJECT" && pwd)"
-  for d in .claude/skills .agents/skills .cursor/skills; do install_into "$PROJECT/$d"; done
+  for d in .claude/skills .agents/skills .cursor/skills .opencode/skills .pi/skills; do install_into "$PROJECT/$d"; done
   rule="$PROJECT/.cursor/rules/swe-skills.mdc"
   if [ "$UNINSTALL" = 1 ]; then run rm -f "$rule"
   else run mkdir -p "$PROJECT/.cursor/rules"; run cp "$REPO_ROOT/templates/cursor/swe-skills.mdc" "$rule"; fi
