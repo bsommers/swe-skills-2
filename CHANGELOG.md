@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.18.0] - 2026-11-15
+
 ### Added (repo-health review, multi-harness)
 - Skills `reviewing-repo-health`, `auditing-doc-alignment`, `planning-grade-a-uplift`, `routing-work-across-harnesses`; routed from `using-swe-skills` and `/eng` (`health`, `grade`, `docalign`, `uplift`, `harness`, `tiers`).
 - `scripts/detect-harness.py`, `scripts/review-kickoff.py`, `scripts/doc-claims.py`; `templates/commands/repo-health.md`.
