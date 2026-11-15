@@ -65,6 +65,9 @@ Unsure? `right-sizing-process`.
 | report a number or status | `making-verifiable-claims` |
 | delegate to subagents | `orchestrating-subagents` |
 | audit in depth | `running-multi-lens-audits` |
+| review a whole repo, grade it, plan A+ and milestones | `reviewing-repo-health`, `planning-grade-a-uplift` |
+| check docs and plans against code and each other | `auditing-doc-alignment` |
+| run one workflow across Claude, agy, opencode, pi, Cursor | `routing-work-across-harnesses` |
 | run unattended for hours | `supervising-autonomous-sessions` |
 | pause, resume, hand off | `handing-off-sessions` |
 | context filling up; compact or clear | `compacting-context-safely` |

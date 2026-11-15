@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added (repo-health review, multi-harness)
+- Skills `reviewing-repo-health`, `auditing-doc-alignment`, `planning-grade-a-uplift`, `routing-work-across-harnesses`; routed from `using-swe-skills` and `/eng` (`health`, `grade`, `docalign`, `uplift`, `harness`, `tiers`).
+- `scripts/detect-harness.py`, `scripts/review-kickoff.py`, `scripts/doc-claims.py`; `templates/commands/repo-health.md`.
+- `scripts/install.sh`: `--opencode` and `--pi` targets (and project dirs `.opencode/skills`, `.pi/skills`). Harness paths are unverified; see `skills/routing-work-across-harnesses/references/harness-matrix.md`.
+
 ### Added (CI and community)
 - `scripts/verify.sh`: local CI that runs lint, unit tests, and an isolated installer dry run; the single source of truth for checks.
 - `.github/workflows/ci.yml`: runs `scripts/verify.sh` on pull requests and manual dispatch only (no push-to-main rerun, no path filters on the required check); read-only token, SHA-pinned `actions/checkout`, concurrency cancel, 10-minute timeout.
