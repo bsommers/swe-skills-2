@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Harness matrix verified against official docs (2026-11-15): corrected agy user skills/subagent paths, opencode commands dir, Cursor model values.
+
 ## [0.18.0] - 2026-11-15
 
 ### Added (repo-health review, multi-harness)
