@@ -28,11 +28,14 @@ Options:
   --force           replace existing entries with the same name
   --uninstall       remove what this script installed (only entries pointing here / marked)
   --dry-run         print actions, change nothing
+  --companion ID    show the pinned install command for a companion pack from companions.json and
+                    ask y/N on a terminal before running it; never runs without a typed yes
+                    (non-interactive: prints the command only). Installs no swe-skills.
   -h, --help
 EOF
 }
 
-TARGETS=(); PROJECT=""; MODE=link; FORCE=0; UNINSTALL=0; DRY=0; PROFILE="all"
+TARGETS=(); PROJECT=""; MODE=link; FORCE=0; UNINSTALL=0; DRY=0; PROFILE="all"; COMPANION=""
 while [ $# -gt 0 ]; do
   case "$1" in
     --claude|--agy|--cursor|--agents|--opencode|--pi) TARGETS+=("${1#--}") ;;
@@ -43,11 +46,41 @@ while [ $# -gt 0 ]; do
     --force) FORCE=1 ;;
     --uninstall) UNINSTALL=1 ;;
     --dry-run) DRY=1 ;;
+    --companion) COMPANION="${2:?--companion needs an id (see companions.json)}"; shift ;;
     -h|--help) usage; exit 0 ;;
     *) echo "unknown option: $1" >&2; usage >&2; exit 2 ;;
   esac
   shift
 done
+
+if [ -n "$COMPANION" ]; then
+  command -v python3 >/dev/null 2>&1 || { echo "python3 is required for --companion" >&2; exit 1; }
+  if ! info="$(python3 - "$REPO_ROOT/companions.json" "$COMPANION" <<'PY'
+import json, sys
+data = json.load(open(sys.argv[1], encoding="utf-8"))
+for c in data.get("companions", []):
+    if c["id"] == sys.argv[2]:
+        print(c["install"]); print(c["summary"]); sys.exit(0)
+sys.exit(1)
+PY
+)"; then
+    echo "unknown companion: $COMPANION (see companions.json)" >&2; exit 2
+  fi
+  cmd="$(printf '%s\n' "$info" | sed -n 1p)"; summary="$(printf '%s\n' "$info" | sed -n 2p)"
+  echo "Companion pack '$COMPANION' (not part of swe-skills): $summary"
+  echo "Install command (pinned tag, public HTTPS):"
+  echo "  $cmd"
+  if [ "$DRY" = 1 ] || [ ! -t 0 ] || [ ! -t 1 ]; then
+    echo "Not running it (dry run or non-interactive). Run the command yourself if you want the pack."
+    exit 0
+  fi
+  printf 'Run it now? [y/N] '; read -r ans
+  case "$ans" in
+    y|Y|yes|YES) bash -c "$cmd" ;;
+    *) echo "skipped" ;;
+  esac
+  exit 0
+fi
 [ ${#TARGETS[@]} -eq 0 ] && [ -z "$PROJECT" ] && TARGETS=(claude agy cursor agents opencode pi)
 
 run() { if [ "$DRY" = 1 ]; then echo "DRY: $*"; else "$@"; fi; }

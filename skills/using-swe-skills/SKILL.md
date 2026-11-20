@@ -91,6 +91,10 @@ Unsure? `right-sizing-process`.
 | calculate SemVer, changelog, publish a release | `release` |
 | build, package, upload release binaries | `building-release-binaries` |
 
+## Companion packs
+
+`companions.json` lists optional packs outside this library (today: security-skills). When the task matches a pack's `triggers` and none of its `detect` paths exist, say once per session: "The security-skills pack (not installed) adds scan and remediate skills. Install it? `<install command>`". Show the exact pinned command; run it only after an explicit yes, and never install on your own. If a `detect` path exists, route to the pack's skills instead. A no is final for the session.
+
 ## Rules
 
 - Announce loaded skills and why in one line.

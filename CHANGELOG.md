@@ -14,6 +14,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `install.sh --agy` fallback now targets `~/.gemini/antigravity-cli/skills` (the agy CLI does not read `~/.agents/skills`).
 - `doc-claims.py`: `.doc-claims-ignore` globs; history files (CHANGELOG, checkpoints, plans) skip path checks. Triage of 90 reported paths: all intentional or target-project paths.
 
+- Companion packs: `companions.json` (first entry `security-skills`, pinned `v1.0.0`), a "Companion packs" offer in `using-swe-skills` and `/eng security` (asks first, never auto-installs), `scripts/install.sh --companion ID` (prints the pinned command, runs it only after a typed yes on a terminal), a `companions.json` check in `scripts/lint-skills.py`, and `tests/test_companions.py`.
+
 ### Changed
 - `using-swe-skills` trimmed to 898 words (merged duplicate router rows).
 - Harness matrix verified against official docs (2026-11-15): corrected agy user skills/subagent paths, opencode commands dir, Cursor model values.
