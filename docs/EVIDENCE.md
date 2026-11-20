@@ -12,7 +12,7 @@ Skills were distilled from the standards, specs, audits, changelogs, fix-commit 
 | Ontologies & semantics | `OntoLogic`, `ontological-firewall`, `morphisms-bfo-ext-domains` | compiler with frontend → ModelIR → emitters; security hardening of emitters; replay playbook; semantic boundary validation |
 | Infrastructure | `airflow` | 11-stage pipeline, package shadowing, connection leak, data-dir bug, checkpoint notes |
 | Software engineering | `feed-brain-gh`, `uitoolbox`, `gemini-chat-exporter` | context-isolated ingestion pipeline; a plugin-contract UI library with a QA pass that found silent bugs; a browser extension with DOM-cascade scraping and hardening |
-| Hardware / media | `floppy-music`, `greener-noise` | small CLI/GUI tools: a line-oriented song DSL, CLI+GUI parity, input validation |
+| Hardware / media | `floppy-music`, `greener-noise`, `cameo4` | small CLI/GUI tools (line-oriented song DSL, CLI+GUI parity, input validation); desktop/hardware vinyl-cutter studio (cross-pipeline geometry/margin desync, stale texture cache across document switches, missing PNG `pHYs` DPI metadata, reference-program parity audit) |
 
 ## Skill → evidence
 
@@ -60,6 +60,7 @@ Skills were distilled from the standards, specs, audits, changelogs, fix-commit 
 | `layered-verification-gates` | multi-tier verification standards; `airflow` skip behavior; `agent-manager-fe` coverage report; constraint-weakening patterns |
 | `driving-browsers-for-qa` | `agent-manager-fe` Playwright QA driver (live tmux/xterm stack, prefixed cleanup, serial session video, fixme steps) |
 | `hunting-silent-failures` | `uitoolbox` QA review (four P0 silent bugs) |
+| `hunting-cross-pipeline-desync` | `cameo4` desktop/hardware studio audit: UI preview vs. export/wire margin desync (hardcoded defaults), stale GPU image cache on `open A → open B`, exported PNGs missing `pHYs` physical-DPI chunks, and Silhouette Studio behavioral parity (hidden guides excluded, inner-before-outer cut order, keepout zones, keyboard ergonomics) |
 | `debugging-across-layers` | `ai-model-learning` hidden context ceiling; `airflow` shadowing and checkpoint with missing data; port-conflict fix |
 | `clustering-failures-by-root-cause` | `flowscope` improvement plan 003; `synth` no-degradation ratchets |
 | `building-trustworthy-benchmarks` | `synth` audit plan and governance docs; `eval` benchmark-audit prompts and statistical guide |
