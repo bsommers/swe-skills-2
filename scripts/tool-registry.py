@@ -272,6 +272,93 @@ CURATED_TOOLS: list[dict[str, Any]] = [
         ],
         "tags": ["seeding", "standards", "templates", "meta", "seed-brain-gh"],
     },
+    {
+        "name": "build-tooling",
+        "path": "~/src/tools/build-tooling",
+        "category": "release-packaging",
+        "lifecycle_phases": ["plan", "build", "test", "release"],
+        "platforms": ["linux", "macos", "windows", "freebsd"],
+        "summary": "Cross-platform build host, VM, and tooling checkout catalog & locator CLI (`probe`, `targets`, `recipe`, `where`, `index`) plus `locating-build-tooling` skill.",
+        "entrypoints": [
+            "~/src/tools/build-tooling/bin/build-tooling probe",
+            "~/src/tools/build-tooling/bin/build-tooling where blender-swarm-kit",
+            "~/src/tools/build-tooling/bin/build-tooling index",
+        ],
+        "tags": ["build", "catalog", "locator", "hosts", "vm", "cross-platform", "release", "build-tooling"],
+    },
+    {
+        "name": "blender-swarm-kit",
+        "path": "~/src/tools/blender-swarm-kit",
+        "category": "cli-automation",
+        "lifecycle_phases": ["build", "execute", "test", "verify"],
+        "platforms": ["macos", "linux", "windows"],
+        "summary": "Reusable interactive Blender 5.0+ live GUI IPC bridge (sandbox-safe inbox/outbox), Collapsible Live Gantt Mission Control Tracker, binary STL/OBJ watertightness & bilateral symmetry QA verifier, multi-view ortho calibrator, and zero-dep WebGL STL viewer.",
+        "entrypoints": [
+            "python3 ~/src/tools/blender-swarm-kit/blender_ipc/ipc_client.py --ping",
+            "PYTHONPATH=~/src/tools/blender-swarm-kit python3 -m gantt_tracker.server --root . --port 8765",
+            "python3 ~/src/tools/blender-swarm-kit/mesh_qa/stl_verify.py model.stl --check-symmetry",
+            "cd ~/src/tools/blender-swarm-kit && python3 -m unittest discover -s tests -v",
+        ],
+        "tags": [
+            "blender",
+            "3d",
+            "stl",
+            "obj",
+            "mesh",
+            "qa",
+            "watertight",
+            "symmetry",
+            "ipc",
+            "gantt",
+            "tracker",
+            "dashboard",
+            "swarm",
+            "webgl",
+            "blender-swarm-kit",
+        ],
+    },
+    {
+        "name": "swarm-tracker",
+        "path": "~/src/tools/swarm-tracker",
+        "category": "cli-automation",
+        "lifecycle_phases": ["plan", "build", "execute", "verify"],
+        "platforms": ["macos", "linux", "windows"],
+        "summary": "Dependency-free Node 18+ parallel agent swarm progress protocol (`track.mjs`, `swarm-plan.mjs`) and SSE live dashboard with top collapsible Live Gantt timeline, agent cards, feed, checks, LOC, and screenshot gallery.",
+        "entrypoints": [
+            "node ~/src/tools/swarm-tracker/bin/swarm-plan.mjs",
+            "node ~/src/tools/swarm-tracker/dashboard/server.mjs",
+            "node ~/src/tools/swarm-tracker/bin/track.mjs <agent> start \"<msg>\"",
+        ],
+        "tags": ["swarm", "tracker", "gantt", "dashboard", "sse", "telemetry", "agents", "node", "swarm-tracker"],
+    },
+    {
+        "name": "build-tracker",
+        "path": "~/src/tools/build-tracker",
+        "category": "cli-automation",
+        "lifecycle_phases": ["build", "execute", "verify"],
+        "platforms": ["macos", "linux", "windows"],
+        "summary": "Zero-dependency Python stdlib live build tracker (`track.py` with O_EXCL concurrent locking, `serve.py`) featuring a top collapsible Live Build Gantt chart, NOW cursor, KPIs, and tooltips.",
+        "entrypoints": [
+            "python3 ~/src/tools/build-tracker/track.py init --tasks tasks.json",
+            "python3 ~/src/tools/build-tracker/serve.py --dir . --port 8791",
+            "python3 ~/src/tools/build-tracker/track.py set <id> running \"<note>\"",
+        ],
+        "tags": ["tracker", "gantt", "dashboard", "build", "swarm", "python", "stdlib", "build-tracker"],
+    },
+    {
+        "name": "game-factory",
+        "path": "~/src/tools/game-factory",
+        "category": "cli-automation",
+        "lifecycle_phases": ["plan", "build", "execute", "test", "release"],
+        "platforms": ["macos", "linux", "windows"],
+        "summary": "Reusable swarm-driven game & 3D asset factory: Godot test/screenshot/export pipelines, collapsible Live Gantt swarm dashboard, interactive Blender 5.0+ GUI IPC bridge, and binary STL print QA.",
+        "entrypoints": [
+            "~/src/tools/game-factory/bin/factory new <dir> \"<Title>\"",
+            "~/src/tools/game-factory/bin/factory sync <dir>",
+            "python3 ~/src/tools/game-factory/tools/print/stl_verify.py <model.stl>",
+        ],
+        "tags": ["game", "godot", "blender", "swarm", "gantt", "tracker", "stl", "3d", "factory", "game-factory"],
+    },
 ]
 
 
@@ -674,6 +761,12 @@ def cmd_recommend(args: argparse.Namespace) -> int:
         if any(w in task_l for w in ("security", "sast", "audit", "taint", "sarif", "vulnerability")) and t["name"] in ("flowscope", "synth"):
             score += 35
             reason.append("provides local SAST scanning & SARIF verification")
+        if any(w in task_l for w in ("blender", "stl", "mesh", "3d", "sculpt", "symmetry", "watertight", "webgl")) and t["name"] == "blender-swarm-kit":
+            score += 45
+            reason.append("provides live Blender 5.0 GUI IPC, STL watertightness QA, and WebGL STL viewer")
+        if any(w in task_l for w in ("gantt", "tracker", "dashboard", "swarm", "telemetry")) and t["name"] in ("swarm-tracker", "build-tracker", "blender-swarm-kit"):
+            score += 35
+            reason.append("provides live collapsible Gantt chart swarm/build dashboard")
 
         if score > 0:
             recs.append((score, "; ".join(reason) or t["summary"], t))
