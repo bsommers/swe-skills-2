@@ -1,0 +1,23 @@
+# Paths docs mention that are intentionally not in this repo: optional files, or files
+# the installer/skills create in a *target* project. One glob per line.
+docs/HANDOFF.md
+docs/CHANGELOG.md
+docs/CONTRACTS.md
+docs/AUDIT_REPORT.md
+docs/banner.txt
+docs/...
+scripts/...
+scripts/create_issues.sh
+usermanual/
+.cursor/*
+.claude/*
+.agents/*
+.planning/*
+.git/*
+DIR/*
+target/*
+qa/*
+input/
+src/*
+references/
+skills/my-new-skill/SKILL.md

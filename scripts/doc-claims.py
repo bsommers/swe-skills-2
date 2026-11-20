@@ -2,9 +2,11 @@
 """Mechanical doc-alignment pass: broken relative links, missing backticked paths, and count claims.
 
 Count claims ("69 skills") are listed for manual verification; a real count is shown when the
-noun matches a directory of that name. Exit 1 if broken links or paths are found. Stdlib only.
+noun matches a directory of that name. Paths in history files (CHANGELOG, checkpoints, plans) are not
+checked; intentionally absent paths go in `.doc-claims-ignore` (globs). Exit 1 if broken links or paths are found. Stdlib only.
 """
 import argparse
+import fnmatch
 import re
 import sys
 from pathlib import Path
@@ -14,6 +16,18 @@ LINK = re.compile(r"\[[^\]]*\]\(([^)\s]+)\)")
 TICK = re.compile(r"`([A-Za-z0-9_.][A-Za-z0-9_./-]*/[A-Za-z0-9_.*/-]*|[A-Za-z0-9_-]+\.(?:md|py|sh|json|toml|ya?ml))`")
 COUNT = re.compile(r"\b(\d{1,4})\s+([a-z][a-z-]{2,20})\b")
 NOUN_SKIP = {"lines", "words", "days", "hours", "minutes", "seconds", "bytes", "tokens", "times", "chars", "px"}
+
+
+HISTORY = ("CHANGELOG.md", "docs/CHECKPOINT.md", "docs/plans/")  # past-tense records: links checked, paths not
+IGNORE_FILE = ".doc-claims-ignore"
+
+
+def load_ignore(root):
+    """Glob patterns (one per line, # comments) for backticked paths that are intentionally absent."""
+    f = root / IGNORE_FILE
+    if not f.is_file():
+        return []
+    return [l.strip() for l in f.read_text(encoding="utf-8").splitlines() if l.strip() and not l.startswith("#")]
 
 
 def docs(root):
@@ -37,10 +51,11 @@ def real_counts(root):
 def scan(root):
     broken, counts = [], []
     real = real_counts(root)
+    ignore = load_ignore(root)
     for p in docs(root):
         rel = p.relative_to(root).as_posix()
         in_fence = False
-        example = rel.startswith(("skills/", "templates/"))  # these show example paths; check links only
+        example = rel.startswith(("skills/", "templates/") + HISTORY)  # these show example paths; check links only
         for i, line in enumerate(p.read_text(encoding="utf-8", errors="replace").splitlines(), 1):
             if line.lstrip().startswith("```"):
                 in_fence = not in_fence
@@ -54,6 +69,8 @@ def scan(root):
             for m in TICK.finditer(line if not example else ""):
                 t = m.group(1)
                 if "/" not in t or "*" in t or "<" in t or t.startswith(("~", "/", "http")) or t.count("/") == 0 and "." not in t:
+                    continue
+                if any(fnmatch.fnmatch(t, g) for g in ignore):
                     continue
                 if not (root / t).exists() and not (p.parent / t).exists():
                     broken.append((rel, i, "path", t))

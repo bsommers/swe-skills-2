@@ -1,6 +1,6 @@
 # Harness matrix
 
-**Status: checked against official docs on 2026-11-15** (sources at the bottom). Cells marked *unverified* could not be confirmed. Re-check when a harness ships a major release. Installer note: `install.sh --agy` falls back to `~/.agents/skills` when agy is absent, which the agy CLI does not read; prefer `agy plugin install`. Last verified: 2026-11-15.
+**Status: checked against official docs on 2026-11-15** (sources at the bottom). Cells marked *unverified* could not be confirmed. Re-check when a harness ships a major release. `install.sh --agy` uses `agy plugin install`, else falls back to the CLI skills dir. Last verified: 2026-11-15.
 
 | Harness | Project skills | User skills | Subagents | Model per subagent | Instruction file | Notes |
 |---|---|---|---|---|---|---|

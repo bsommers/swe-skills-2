@@ -92,11 +92,31 @@ class TestDocClaims(unittest.TestCase):
             self.assertFalse(any("ignored" in t for _, t in kinds))
             self.assertEqual(len(counts), 1)
 
+    def test_ignore_file_and_history(self):
+        with tempfile.TemporaryDirectory() as t:
+            r = Path(t)
+            (r / ".doc-claims-ignore").write_text("# c\ndocs/optional.md\n.cursor/*\n", encoding="utf-8")
+            (r / "README.md").write_text("`docs/optional.md` `.cursor/rules` `docs/real-gap.md`\n", encoding="utf-8")
+            (r / "CHANGELOG.md").write_text("Removed `old/thing.py`.\n", encoding="utf-8")
+            broken, _ = claims.scan(r)
+            self.assertEqual([b[3] for b in broken], ["docs/real-gap.md"])
+
     def test_cli_exit_code(self):
         with tempfile.TemporaryDirectory() as t:
             (Path(t) / "README.md").write_text("[x](nope.md)", encoding="utf-8")
             p = subprocess.run([sys.executable, str(ROOT / "scripts/doc-claims.py"), t], capture_output=True, text=True)
             self.assertEqual(p.returncode, 1)
+
+
+class AgyInstallFallback(unittest.TestCase):
+    def test_fallback_dir_is_cli_skills(self):
+        with tempfile.TemporaryDirectory() as h:
+            env = {"HOME": h, "PATH": "/usr/bin:/bin"}
+            p = subprocess.run(["bash", str(ROOT / "scripts/install.sh"), "--agy", "--dry-run"],
+                               capture_output=True, text=True, env=env)
+            self.assertEqual(p.returncode, 0, p.stderr)
+            self.assertIn(".gemini/antigravity-cli/skills", p.stdout + p.stderr)
+            self.assertNotIn(".agents/skills", p.stdout)
 
 
 if __name__ == "__main__":

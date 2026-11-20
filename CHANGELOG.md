@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- `install.sh --agy` fallback now targets `~/.gemini/antigravity-cli/skills` (the agy CLI does not read `~/.agents/skills`).
+- `doc-claims.py`: `.doc-claims-ignore` globs; history files (CHANGELOG, checkpoints, plans) skip path checks. Triage of 90 reported paths: all intentional or target-project paths.
+
 ### Changed
 - Harness matrix verified against official docs (2026-11-15): corrected agy user skills/subagent paths, opencode commands dir, Cursor model values.
 

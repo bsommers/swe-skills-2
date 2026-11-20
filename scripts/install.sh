@@ -13,7 +13,7 @@ Usage: scripts/install.sh [targets] [options]
 
 Targets (user-level, any combination; default is --all):
   --claude          ~/.claude/skills/            (Claude Code)
-  --agy             `agy plugin install` if agy is on PATH, else ~/.agents/skills/
+  --agy             `agy plugin install` if agy is on PATH, else ~/.gemini/antigravity-cli/skills/
   --cursor          ~/.cursor/skills/            (Cursor user skills)
   --opencode        ~/.config/opencode/skills/   (opencode)
   --pi              ~/.pi/agent/skills/          (pi)
@@ -124,8 +124,8 @@ for t in "${TARGETS[@]:-}"; do
       elif command -v agy >/dev/null 2>&1; then
         run agy plugin uninstall swe-skills || true
       else
-        echo "agy not found; using ~/.agents/skills instead" >&2
-        install_into "$HOME/.agents/skills"
+        echo "agy not found; using ~/.gemini/antigravity-cli/skills (the agy CLI does not read ~/.agents/skills)" >&2
+        install_into "$HOME/.gemini/antigravity-cli/skills"
       fi ;;
   esac
 done
