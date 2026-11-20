@@ -17,9 +17,16 @@ Before writing throwaway harness scripts, skipping cross-OS tests, or burning re
    python3 scripts/tool-registry.py recommend --task "<task description>" --phase test
 
    # Search by keyword, category, or lifecycle phase
-   python3 scripts/tool-registry.py search vm --phase test
-   python3 scripts/tool-registry.py show cvm
-   python3 scripts/tool-registry.py show win-devvm
+   python3 ~/src/swe/swe-skills-2/scripts/tool-registry.py search vm --phase test
+   python3 ~/src/swe/swe-skills-2/scripts/tool-registry.py show cvm
+   python3 ~/src/swe/swe-skills-2/scripts/tool-registry.py show blender-swarm-kit
+   python3 ~/src/swe/swe-skills-2/scripts/tool-registry.py recommend --task "blender stl watertight gantt tracker"
+
+   # Locate reusable tool checkouts & build hosts via build-tooling
+   ~/src/tools/build-tooling/bin/build-tooling where blender-swarm-kit
+   ~/src/tools/build-tooling/bin/build-tooling where swarm-tracker
+   ~/src/tools/build-tooling/bin/build-tooling where build-tracker
+   ~/src/tools/build-tooling/bin/build-tooling where game-factory
    ```
 2. **Match local VMs and tools to the engineering lifecycle:**
    - **Planning & Code Intelligence (`plan`):** Use `gitnexus`, `ontologic`, and `eval` to map dependency graphs and benchmark baselines before touching code.
