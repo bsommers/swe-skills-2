@@ -106,14 +106,14 @@ class TestInstallerCompanion(unittest.TestCase):
             env = dict(os.environ, HOME=home)
             r = subprocess.run(["bash", str(INSTALL), *args], capture_output=True, text=True,
                                stdin=stdin, env=env, timeout=30)
-            return r, home
+            return r, sorted(os.listdir(home))
 
     def test_non_tty_prints_command_and_never_runs(self):
-        r, home = self._run("--companion", "security-skills")
+        r, left = self._run("--companion", "security-skills")
         self.assertEqual(r.returncode, 0, r.stderr)
         self.assertIn("git clone --depth 1 --branch v1.0.0", r.stdout)
         self.assertIn("Not running it", r.stdout)
-        self.assertEqual(os.listdir(home), [])
+        self.assertEqual(left, [])
 
     def test_yes_on_piped_stdin_does_not_install(self):
         r = subprocess.run(["bash", str(INSTALL), "--companion", "security-skills"], input="y\n",
