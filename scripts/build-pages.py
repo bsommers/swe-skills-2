@@ -60,6 +60,7 @@ CATEGORY_MAP: dict[str, str] = {
     "layered-verification-gates": "verify",
     "driving-browsers-for-qa": "verify",
     "hunting-silent-failures": "verify",
+    "hunting-cross-pipeline-desync": "verify",
     "debugging-across-layers": "verify",
     "clustering-failures-by-root-cause": "verify",
     "building-trustworthy-benchmarks": "verify",

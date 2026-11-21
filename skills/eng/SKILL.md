@@ -28,6 +28,7 @@ Only the first word is matched, and only exactly. "review the auth module" runs 
 | `uplift` | `planning-grade-a-uplift` |
 | `harness`, `tiers` | `routing-work-across-harnesses` |
 | `coverage` | `hunting-silent-failures` |
+| `desync`, `parity` | `hunting-cross-pipeline-desync` |
 | `commit` | `committing-and-releasing-cleanly` |
 | `pr` | `writing-pull-requests` |
 | `issues` | `drafting-issue-reports` |

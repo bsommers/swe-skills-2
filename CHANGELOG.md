@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Skill `hunting-cross-pipeline-desync` (with `references/audit-checklist.md`) for systematic cross-pipeline desync hunting, state lifecycle & stale-cache auditing, output/wire metadata fidelity checks, and reference-program behavioral parity; routed from `using-swe-skills` and `/eng` (`desync`, `parity`).
+
 ### Fixed
 - `install.sh --agy` fallback now targets `~/.gemini/antigravity-cli/skills` (the agy CLI does not read `~/.agents/skills`).
 - `doc-claims.py`: `.doc-claims-ignore` globs; history files (CHANGELOG, checkpoints, plans) skip path checks. Triage of 90 reported paths: all intentional or target-project paths.

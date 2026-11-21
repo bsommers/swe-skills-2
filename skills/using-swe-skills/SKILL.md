@@ -56,6 +56,7 @@ Unsure? `right-sizing-process`.
 | decide what "done" means | `layered-verification-gates` |
 | automate browser QA plan with recorded evidence | `driving-browsers-for-qa` |
 | suspect untested code hides bugs | `hunting-silent-failures` |
+| suspect preview, export, wire, or cache stages disagree, or audit reference-tool parity | `hunting-cross-pipeline-desync` |
 | hit a failure that ignores fixes | `debugging-across-layers` |
 | face dozens of failures | `clustering-failures-by-root-cause` |
 | build or trust a benchmark | `building-trustworthy-benchmarks` |
