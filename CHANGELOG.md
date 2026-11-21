@@ -9,12 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Skill `hunting-cross-pipeline-desync` (with `references/audit-checklist.md`) for systematic cross-pipeline desync hunting, state lifecycle & stale-cache auditing, output/wire metadata fidelity checks, and reference-program behavioral parity; routed from `using-swe-skills` and `/eng` (`desync`, `parity`).
+- Companion packs: `companions.json` (first entry `security-skills`, pinned `v1.0.0`), a "Companion packs" offer in `using-swe-skills` and `/eng security` (asks first, never auto-installs), `scripts/install.sh --companion ID` (prints the pinned command, runs it only after a typed yes on a terminal), a `companions.json` check in `scripts/lint-skills.py`, and `tests/test_companions.py`.
 
 ### Fixed
 - `install.sh --agy` fallback now targets `~/.gemini/antigravity-cli/skills` (the agy CLI does not read `~/.agents/skills`).
 - `doc-claims.py`: `.doc-claims-ignore` globs; history files (CHANGELOG, checkpoints, plans) skip path checks. Triage of 90 reported paths: all intentional or target-project paths.
-
-- Companion packs: `companions.json` (first entry `security-skills`, pinned `v1.0.0`), a "Companion packs" offer in `using-swe-skills` and `/eng security` (asks first, never auto-installs), `scripts/install.sh --companion ID` (prints the pinned command, runs it only after a typed yes on a terminal), a `companions.json` check in `scripts/lint-skills.py`, and `tests/test_companions.py`.
 
 ### Changed
 - `using-swe-skills` trimmed to 898 words (merged duplicate router rows).
