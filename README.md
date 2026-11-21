@@ -154,6 +154,8 @@ scripts/install.sh --all              # symlinks into all user-level locations
 | **Cursor** | `~/.cursor/skills/<skill>` (Cursor Agent Skills) | project-level: `scripts/install.sh --project <dir>` also adds `.cursor/rules/swe-skills.mdc` |
 | **Others** (Codex, Copilot CLI, Gemini CLI) | `~/.agents/skills/<skill>` | `scripts/install.sh --agents` |
 
+Optional companion packs (listed in `companions.json`, e.g. `security-skills`) are never installed automatically: `scripts/install.sh --companion security-skills` shows the pinned install command and runs it only after you type `y` on a terminal.
+
 Per project: `scripts/install.sh --project /path/to/repo` installs into `.claude/skills`, `.agents/skills`, `.cursor/skills` and adds the thin Cursor rule. Use `--copy` for standalone copies, `--uninstall` to remove, `--force` to replace same-named entries.
 
 Add [`templates/AGENTS.snippet.md`](templates/AGENTS.snippet.md) to a project's `AGENTS.md` so every agent knows the library exists.

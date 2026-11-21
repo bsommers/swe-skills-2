@@ -44,6 +44,62 @@ def manifest_versions(root):
     return found
 
 
+COMPANION_ID_RE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
+COMPANION_REPO_RE = re.compile(r"^https://github\.com/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$")
+COMPANION_REF_RE = re.compile(r"^v\d+\.\d+\.\d+$")
+COMPANION_KEYS = {"id", "repo", "ref", "install", "detect", "skills", "triggers", "summary"}
+
+
+def check_companions(root):
+    """Validate companions.json (optional file). Returns a list of error strings."""
+    path = root / "companions.json"
+    if not path.exists():
+        return []
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        return [f"companions: invalid JSON ({exc})"]
+    errs = []
+    if data.get("schema") != "swe-skills.companions/1":
+        errs.append("companions: schema must be 'swe-skills.companions/1'")
+    items = data.get("companions")
+    if not isinstance(items, list) or not items:
+        return errs + ["companions: 'companions' must be a non-empty list"]
+    seen = set()
+    for i, c in enumerate(items):
+        cid = c.get("id") if isinstance(c, dict) else None
+        tag = f"companions[{cid or i}]"
+        if not isinstance(c, dict):
+            errs.append(f"{tag}: must be an object")
+            continue
+        if set(c) != COMPANION_KEYS:
+            errs.append(f"{tag}: keys must be exactly {sorted(COMPANION_KEYS)}")
+            continue
+        if not isinstance(cid, str) or not COMPANION_ID_RE.match(cid):
+            errs.append(f"{tag}: bad id")
+        elif cid in seen:
+            errs.append(f"{tag}: duplicate id")
+        seen.add(cid)
+        if not isinstance(c["repo"], str) or not COMPANION_REPO_RE.match(c["repo"]):
+            errs.append(f"{tag}: repo must be a public https://github.com/<owner>/<name> URL")
+        if not isinstance(c["ref"], str) or not COMPANION_REF_RE.match(c["ref"]):
+            errs.append(f"{tag}: ref must be a pinned vX.Y.Z tag, not a branch")
+        inst = c["install"]
+        if not isinstance(inst, str) or c["repo"] not in inst or f"--branch {c['ref']}" not in inst:
+            errs.append(f"{tag}: install must clone repo at --branch <ref>")
+        elif re.search(r"\bgit@|\|\s*(ba)?sh\b|\bsudo\b|\bcurl\b|\bwget\b", inst):
+            errs.append(f"{tag}: install must not use ssh, sudo, or piped downloads")
+        for key in ("detect", "skills", "triggers"):
+            v = c[key]
+            if not isinstance(v, list) or not v or not all(isinstance(x, str) and x for x in v):
+                errs.append(f"{tag}: {key} must be a non-empty list of strings")
+        if isinstance(c["detect"], list) and not all(str(x).startswith("~/") for x in c["detect"]):
+            errs.append(f"{tag}: detect paths must start with ~/")
+        if not isinstance(c["summary"], str) or not c["summary"]:
+            errs.append(f"{tag}: summary required")
+    return errs
+
+
 def parse_frontmatter(text):
     m = re.match(r"^---\n(.*?)\n---\n", text, re.S)
     if not m:
@@ -157,6 +213,8 @@ def main(argv=None):
     if len(set(versions.values())) > 1:
         detail = ", ".join(f"{k}={v}" for k, v in versions.items())
         errors.append(f"manifests: versions differ: {detail}")
+
+    errors.extend(check_companions(root))
 
     # /eng shortcuts: each targets an existing skill; words are unique and never shadow a skill name
     eng_file = SKILLS / "eng" / "SKILL.md"

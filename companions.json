@@ -1,0 +1,15 @@
+{
+  "schema": "swe-skills.companions/1",
+  "companions": [
+    {
+      "id": "security-skills",
+      "repo": "https://github.com/bsommers/security-skills",
+      "ref": "v1.0.0",
+      "install": "git clone --depth 1 --branch v1.0.0 https://github.com/bsommers/security-skills && ./security-skills/install.sh",
+      "detect": ["~/.claude/skills/security-scan/SKILL.md", "~/.agents/skills/security-scan/SKILL.md"],
+      "skills": ["security-scan", "security-evaluate", "security-remediate", "security-update-cve"],
+      "triggers": ["security", "vulnerab", "CVE", "OWASP", "SAST", "secret", "remediat", "dependency audit", "pentest"],
+      "summary": "scan, evaluate and remediate security issues and update CVEs"
+    }
+  ]
+}

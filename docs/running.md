@@ -16,6 +16,10 @@
 
 Use `scripts/install.sh` to install skills globally or on a per-project basis.
 
+### Companion packs
+
+`scripts/install.sh --companion ID` looks up `ID` in `companions.json`, prints the pinned (tag, public HTTPS) install command, and runs it only after an interactive `y`. With no terminal or with `--dry-run` it only prints the command. `using-swe-skills` makes the same offer when a task matches a pack's triggers; it asks first and never installs on its own.
+
 ### Targets
 
 ```bash
