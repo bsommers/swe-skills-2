@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.20.0] - 2026-11-21
+
+### Added
+- agy subagent profile templates (`templates/agy/agents/{architect,bulk-worker,ops-executor}.md` and README).
+- `model_router.py` maps tiers to agy models (`TIER_TO_AGY_MODEL`) and emits an `agy_model` field; tier matrix updated in `adaptive-model-routing`.
+- `darkos` entry in `docs/tool-registry.seed.json` (20 tools); `docs/AGY-MODEL-SETUP-EVALUATION.md`.
+
 ## [0.19.0] - 2026-11-20
 
 ### Added
