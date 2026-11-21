@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "description": "Portable seed catalog of local engineering, VM, sandbox, and CI tools in ~/src.",
-  "tool_count": 19,
+  "tool_count": 20,
   "tools": [
     {
       "name": "cvm",
@@ -605,6 +605,36 @@
         "3d",
         "factory",
         "game-factory"
+      ],
+      "source": "curated"
+    },
+    {
+      "name": "darkos",
+      "path": "~/darkos",
+      "category": "orchestration",
+      "lifecycle_phases": [
+        "plan",
+        "build",
+        "execute",
+        "test",
+        "ci",
+        "release"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "summary": "Dark Software Factory multi-agent autonomous operating system and orchestration engine.",
+      "entrypoints": [
+        "uv run darkos --help",
+        "uv run darkos audit .",
+        "./scripts/verify_factory_compliance.sh ."
+      ],
+      "tags": [
+        "darkos",
+        "orchestrator",
+        "compliance",
+        "ontology",
+        "raft"
       ],
       "source": "curated"
     }

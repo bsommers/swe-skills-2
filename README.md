@@ -182,7 +182,7 @@ assets/logo.{svg,png}         square 512x512 plugin/brand icon (referenced by pl
 plugin.json                   Antigravity plugin manifest
 .claude-plugin/               Claude Code plugin + marketplace manifests
 .cursor-plugin/               Cursor plugin manifest
-templates/                    Cursor always-on rule; AGENTS.md snippet
+templates/                    Cursor rule, agy subagent profiles, AGENTS.md snippet
 scripts/lint-skills.py        validates frontmatter, naming, cross-references, portability
 scripts/tool-registry.py      searchable ~/src tool & VM registry (update, search, list, show, recommend)
 scripts/render-graphics.py    generates deterministic SVG + PNG logos, icons, and example visuals
