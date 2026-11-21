@@ -22,14 +22,12 @@ Unsure? `right-sizing-process`.
 | When you… | Load |
 |---|---|
 | get a fuzzy request | `writing-intent-briefs` |
-| write a plan or spec | `planning-with-contracts` |
-| specify IPC, daemon, or remote connection state machines | `planning-with-contracts` |
-| prove a bugfix or regression with red test first | `designing-exhaustive-test-cases` |
-| verify cross-platform compilation & #[cfg] coverage | `running-local-ci` |
-| plan/build new functionality; pre-build test matrix | `designing-exhaustive-test-cases` |
+| write a plan or spec (incl. IPC/daemon state machines) | `planning-with-contracts` |
+| build new functionality; prove a bugfix red-first; pre-build test matrix | `designing-exhaustive-test-cases` |
+| verify cross-platform builds, run CI locally, save Actions minutes | `running-local-ci` |
 | set a timeout, token cap, batch or pool size | `sizing-limits-from-measurement` |
 | pick a language, library, runtime | `choosing-tools-and-substrates` |
-| discover local tools, VM sandboxes (`cvm`, `win-devvm`), or analyzers in `~/src` | `using-local-tool-registry` |
+| discover local tools, VM sandboxes, analyzers in `~/src` | `using-local-tool-registry` |
 | structure a multi-stage system | `designing-layered-pipelines` |
 | support swappable backends/drivers | `designing-plugin-contracts` |
 | expose a capability across UI, keys, CLI, API, MCP | `designing-uniform-surfaces` |
@@ -48,7 +46,6 @@ Unsure? `right-sizing-process`.
 | parse or scrape text/HTML | `parsing-untrusted-text-robustly` |
 | touch shell, SQL, paths, secrets, sandboxes | `hardening-trust-boundaries` |
 | write/review CI workflows, pin actions, dep gates | `hardening-ci-workflows` |
-| run CI locally first and conserve hosted GitHub Actions minutes | `running-local-ci` |
 | size or count from untrusted input; capped lists | `bounding-untrusted-resource-use` |
 | signal a PID from a pid/lock file; daemon control | `controlling-processes-safely` |
 | add a wait/poll handler to a request/serve loop | `keeping-event-loops-responsive` |
@@ -67,16 +64,15 @@ Unsure? `right-sizing-process`.
 | audit in depth | `running-multi-lens-audits` |
 | review a whole repo, grade it, plan A+ and milestones | `reviewing-repo-health`, `planning-grade-a-uplift` |
 | check docs and plans against code and each other | `auditing-doc-alignment` |
-| run one workflow across Claude, agy, opencode, pi, Cursor | `routing-work-across-harnesses` |
+| run one workflow across several harnesses | `routing-work-across-harnesses` |
 | run unattended for hours | `supervising-autonomous-sessions` |
 | pause, resume, hand off | `handing-off-sessions` |
 | context filling up; compact or clear | `compacting-context-safely` |
 | write CLAUDE.md/AGENTS.md/rules | `writing-agent-context-files` |
 | write/refresh user guides, README, arch, purpose | `writing-user-guides` |
-| render SVG/PNG visual diagrams for docs/examples | `rendering-graphic-examples` |
-| showcase graphics in docs with neon-grid theme | `showcasing-graphics-in-docs` |
+| render diagrams / showcase graphics | `rendering-graphic-examples`, `showcasing-graphics-in-docs` |
 | design project logo, banner, or SVG/PNG icons | `designing-logos-and-icons` |
-| build/update a GitHub Pages site in `docs/` | `building-github-pages-sites` |
+| build a GitHub Pages site in `docs/` | `building-github-pages-sites` |
 | change documented behavior | `keeping-docs-in-sync` |
 | hardcode paths or env assumptions | `keeping-repos-portable` |
 | audit architecture & code with Graphify/AST | `code-architecture-review` |
@@ -90,8 +86,8 @@ Unsure? `right-sizing-process`.
 | select/switch models dynamically; save tokens | `adaptive-model-routing` |
 | write up bugs or findings as issues | `drafting-issue-reports` |
 | turn issues or a branch into a PR | `writing-pull-requests` |
-| commit, push, tag, release | `committing-and-releasing-cleanly` |
-| calculate SemVer, tag, and publish releases | `release` |
+| commit, push, tag | `committing-and-releasing-cleanly` |
+| calculate SemVer, changelog, publish a release | `release` |
 | build, package, upload release binaries | `building-release-binaries` |
 
 ## Rules

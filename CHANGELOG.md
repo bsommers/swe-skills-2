@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `doc-claims.py`: `.doc-claims-ignore` globs; history files (CHANGELOG, checkpoints, plans) skip path checks. Triage of 90 reported paths: all intentional or target-project paths.
 
 ### Changed
+- `using-swe-skills` trimmed to 898 words (merged duplicate router rows).
 - Harness matrix verified against official docs (2026-11-15): corrected agy user skills/subagent paths, opencode commands dir, Cursor model values.
 
 ## [0.18.0] - 2026-11-15
