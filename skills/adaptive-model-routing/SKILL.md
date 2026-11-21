@@ -9,12 +9,14 @@ Dynamically route tasks to the most cost-effective model tier during execution. 
 
 ## Model Tier Matrix
 
-| Tier | Antigravity Target | Claude / OSS Target | Typical Workloads | Cost & Throughput |
-|---|---|---|---|---|
-| **Lite** | `flash_lite` | Haiku / 8B | Read surveys, grep filtering, boilerplate generation, formatting, lint fixes | Lowest (~10x savings) |
-| **Standard** | `flash` (Standard) | Sonnet / Medium | Modular CRUD implementation, boilerplate scaffolding, schema edits, doc updates | Balanced baseline |
-| **Fast Reasoning** | `flash` (High Thinking) | Sonnet (Extended) | Algorithmic logic, parser/regex synthesis, TDD unit test cycles, AST refactors | High throughput, test-time compute |
-| **Deep Reasoning** | `pro` (High Thinking) | Opus / R1 | System architecture, spec contracts, subtle security audits, multi-file diff review | Premium parametric scale |
+Use the abstract tier (`flash_lite`, `flash`, `pro`) in `invoke_subagent` and agent frontmatter `model:` (`agy` rejects concrete model IDs there); use concrete `agy models` IDs only for `--model` / `/model` on the main session.
+
+| Tier | `invoke_subagent` / Agent `model` | Main Session (`agy models`) | Claude / OSS Target | Typical Workloads | Cost & Throughput |
+|---|---|---|---|---|---|
+| **Lite** | `flash_lite` | `gemini-3.8-flash-low` | Haiku / `gpt-oss-120b-medium` | Read surveys, grep filtering, boilerplate generation, formatting, lint fixes | Lowest (~10x savings) |
+| **Standard** | `flash` | `gemini-3.8-flash-medium`, `gemini-4-hydrogen-medium` | `claude-sonnet-5-5-medium` | Modular CRUD implementation, boilerplate scaffolding, schema edits, doc updates | Balanced baseline |
+| **Fast Reasoning** | `flash` (High Thinking) | `gemini-3.8-flash-high`, `gemini-4-hydrogen-high` | `claude-sonnet-5-5-high` | Algorithmic logic, parser/regex synthesis, TDD unit test cycles, AST refactors | High throughput, test-time compute |
+| **Deep Reasoning** | `pro` | `gemini-4-argon-high`, `gemini-4-carbon-high` | `claude-opus-5-5-high` | System architecture, spec contracts, subtle security audits, multi-file diff review | Premium parametric scale |
 
 Pair with `token-finops` for budget forecasting and `orchestrating-subagents` for subagent process boundaries.
 

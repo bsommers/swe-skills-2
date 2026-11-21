@@ -25,6 +25,14 @@ import sys
 
 DEFAULT_TIER = os.environ.get("SWE_SKILLS_MODEL_ROUTER_DEFAULT_TIER", "flash")
 
+# Advisory mapping to `agy models` IDs (for `evaluate` output / main-session `--model`).
+# `invoke_subagent` only accepts abstract tiers: inherit, flash_lite, flash, pro.
+TIER_TO_AGY_MODEL = {
+    "flash_lite": "gemini-3.8-flash-low",
+    "flash": "gemini-3.8-flash-medium",
+    "pro": "gemini-4-carbon-high",
+}
+
 HIGH_COMPLEXITY_PATTERNS = [
     r"\barchitect\w*\b",
     r"\brefactor\w*\b",
@@ -195,7 +203,7 @@ def main():
             prompt = payload.get("prompt", raw_in)
             files = payload.get("files", [])
             tier, reason = evaluate_task(role, prompt, files)
-            print(json.dumps({"tier": tier, "reason": reason}))
+            print(json.dumps({"tier": tier, "agy_model": TIER_TO_AGY_MODEL.get(tier, tier), "reason": reason}))
         else:
             print(json.dumps({"decision": "allow"}))
     except Exception as e:

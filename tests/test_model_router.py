@@ -166,6 +166,16 @@ class ModelRouterCase(unittest.TestCase):
         data = json.loads(proc.stdout)
         self.assertEqual(data, {"decision": "allow"})
 
+    def test_evaluate_includes_advisory_agy_model(self):
+        r = self.run_router(
+            "evaluate",
+            {"role": "Reviewer", "prompt": "Audit architecture for race conditions"},
+        )
+        self.assertEqual(r.returncode, 0)
+        data = json.loads(r.stdout)
+        self.assertEqual(data["tier"], "pro")
+        self.assertEqual(data["agy_model"], "gemini-4-carbon-high")
+
 
 if __name__ == "__main__":
     unittest.main()
