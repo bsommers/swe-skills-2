@@ -52,6 +52,8 @@ Only the first word is matched, and only exactly. "review the auth module" runs 
 | `nix` | `nix-environments` |
 | `onboard` | `building-installers-and-onboarding` |
 | `security` | `security-best-practices` |
+| `secrev`, `egress`, `privilege` | `reviewing-code-security`, `auditing-egress-and-telemetry`, `auditing-privilege-and-writes` |
+| `hygiene` | `reviewing-pr-hygiene` |
 | `patterns` | `architecture-best-practices` |
 | `driver`, `drivers` | `designing-plugin-contracts` |
 | `chain` | `handing-off-sessions` |

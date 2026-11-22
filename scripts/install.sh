@@ -104,7 +104,7 @@ is_in_profile() {
     review)
       case "$name" in
         using-swe-skills|planning-with-contracts|designing-exhaustive-test-cases|using-local-tool-registry|running-local-ci|compacting-context-safely|layered-verification-gates|committing-and-releasing-cleanly|orchestrating-subagents|token-finops|adaptive-model-routing|\
-        pr-review|driving-browsers-for-qa|code-architecture-review|dependency-audit|api-contract-audit|test-coverage|running-multi-lens-audits|hunting-silent-failures|security-best-practices|reviewing-repo-health|auditing-doc-alignment|planning-grade-a-uplift|routing-work-across-harnesses) return 0 ;;
+        pr-review|reviewing-pr-hygiene|reviewing-code-security|auditing-egress-and-telemetry|auditing-privilege-and-writes|driving-browsers-for-qa|code-architecture-review|dependency-audit|api-contract-audit|test-coverage|running-multi-lens-audits|hunting-silent-failures|security-best-practices|reviewing-repo-health|auditing-doc-alignment|planning-grade-a-uplift|routing-work-across-harnesses) return 0 ;;
         *) return 1 ;;
       esac ;;
     ship)

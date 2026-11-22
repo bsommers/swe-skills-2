@@ -47,7 +47,7 @@ flowchart TD
         UsingSwe["using-swe-skills Router"]
     end
 
-    subgraph SkillSuite["swe-skills Library (74 Skills)"]
+    subgraph SkillSuite["swe-skills Library (78 Skills)"]
         Plan["Frame & Plan (9)"]
         Arch["Architecture & Modeling (12)"]
         AI["AI Systems & Loops (3)"]

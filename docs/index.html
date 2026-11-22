@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>swe-skills v0.18.0 — Deterministic Engineering &amp; Architecture Skills for AI Coding Agents</title>
-  <meta name="description" content="74 evidence-derived software engineering, planning, architecture, and verification skills for Claude Code, Antigravity (agy), and Cursor." />
-  <meta property="og:title" content="swe-skills v0.18.0 — 74 Engineering Skills for AI Agents" />
+  <title>swe-skills v0.20.0 — Deterministic Engineering &amp; Architecture Skills for AI Coding Agents</title>
+  <meta name="description" content="78 evidence-derived software engineering, planning, architecture, and verification skills for Claude Code, Antigravity (agy), and Cursor." />
+  <meta property="og:title" content="swe-skills v0.20.0 — 78 Engineering Skills for AI Agents" />
   <meta property="og:description" content="Deterministic software engineering, architecture, Tri-OS drivers, 8-tier verification, and context-guard skills for Claude Code, Antigravity, and Cursor." />
   <meta property="og:image" content="assets/logo.png" />
   <link rel="icon" type="image/svg+xml" href="assets/icon.svg" />
@@ -610,12 +610,12 @@
       <div class="brand">
         <img src="assets/icon.svg" alt="swe-skills icon" width="32" height="32" />
         <span>SWE-SKILLS</span>
-        <span class="brand-badge">v0.18.0 • 74 SKILLS</span>
+        <span class="brand-badge">v0.20.0 • 78 SKILLS</span>
       </div>
       <div class="nav-links">
         <a href="#showcase">Visual Showcase</a>
         <a href="#quickstart">Quickstart &amp; Examples</a>
-        <a href="#explorer">Skill Explorer (74)</a>
+        <a href="#explorer">Skill Explorer (78)</a>
         <a href="#docs-hub">Documentation Hub</a>
         <a href="usermanual/README.md">User Manual</a>
         <a href="https://github.com/bsommers/swe-skills-2">GitHub</a>
@@ -635,7 +635,7 @@
         Distilled from real-world incidents across 20+ production repositories.
       </p>
       <div class="hero-actions">
-        <a href="#explorer" class="btn btn-primary">Explore All 74 Skills</a>
+        <a href="#explorer" class="btn btn-primary">Explore All 78 Skills</a>
         <a href="#showcase" class="btn btn-secondary">View Graphic Examples</a>
         <a href="usermanual/README.md" class="btn btn-secondary">Read 7-Chapter User Manual</a>
       </div>
@@ -644,7 +644,7 @@
     <!-- Telemetry Strip -->
     <section class="telemetry-grid">
       <div class="stat-card">
-        <div class="stat-value">74</div>
+        <div class="stat-value">78</div>
         <div class="stat-label">Verified Engineering Skills</div>
       </div>
       <div class="stat-card">
@@ -684,7 +684,7 @@
           </div>
           <div class="showcase-meta">
             <p class="showcase-caption">
-              <strong>5-Tier Runtime Governance Architecture:</strong> Multi-harness adapters, stdlib lifecycle hooks (<code>context_guard.py</code>, <code>model_router.py</code>), <code>/eng</code> task sizer, 74-skill taxonomy, and subagent log isolation.
+              <strong>5-Tier Runtime Governance Architecture:</strong> Multi-harness adapters, stdlib lifecycle hooks (<code>context_guard.py</code>, <code>model_router.py</code>), <code>/eng</code> task sizer, 78-skill taxonomy, and subagent log isolation.
             </p>
             <div class="format-links">
               <a class="format-pill" href="assets/examples/architecture-overview.svg">Vector SVG</a>
@@ -783,11 +783,10 @@
         <div class="recipe-card">
           <div>
             <div class="recipe-title">1. Multi-Harness Install &amp; Profiles</div>
-            <p class="recipe-desc">Install all 74 skills across Claude Code, Antigravity, and Cursor, or mount a focused profile to save ~85% prompt tokens.</p>
+            <p class="recipe-desc">Install all 78 skills across Claude Code, Antigravity, and Cursor, or mount a focused profile to save ~85% prompt tokens.</p>
           </div>
           <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>scripts/install.sh --all
 scripts/install.sh --claude --profile core
-scripts/install.sh --companion security-skills   # optional pack; shows command, asks first
 python3 scripts/hooks/install-hooks.py --claude --agy</div>
         </div>
 
@@ -820,7 +819,7 @@ python3 -m unittest discover tests -q</div>
       <div class="section-head">
         <div>
           <span class="section-tag">INTERACTIVE CATALOG</span>
-          <h2 class="section-title">Skill &amp; Shortcut Explorer (<span id="visible-count">74</span> / 74)</h2>
+          <h2 class="section-title">Skill &amp; Shortcut Explorer (<span id="visible-count">78</span> / 78)</h2>
         </div>
       </div>
 
@@ -829,11 +828,11 @@ python3 -m unittest discover tests -q</div>
           type="search"
           id="skill-search"
           class="search-input"
-          placeholder="Search 74 skills by name, trigger keyword, or /eng shortcut..."
+          placeholder="Search 78 skills by name, trigger keyword, or /eng shortcut..."
           oninput="filterSkills()"
         />
         <div class="filter-tabs">
-          <button class="filter-btn active" data-cat="all" onclick="setCategory('all', this)">All (74)</button>
+          <button class="filter-btn active" data-cat="all" onclick="setCategory('all', this)">All (78)</button>
           <button class="filter-btn" data-cat="entry" onclick="setCategory('entry', this)">Entry</button>
           <button class="filter-btn" data-cat="plan" onclick="setCategory('plan', this)">Frame &amp; Plan</button>
           <button class="filter-btn" data-cat="arch" onclick="setCategory('arch', this)">Architecture</button>
@@ -894,6 +893,32 @@ python3 -m unittest discover tests -q</div>
         <p class="skill-desc">Use when README, agent instruction files, docs, plans, changelog and manifests may disagree with the code or each other; before a release or public launch; or when asked whether documentation and planning are consistent and what it would take to fix them.</p>
         <div class="skill-footer">
           <div class="sc-wrap"><span class="sc-pill">/eng docalign</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="build" data-search="auditing-egress-and-telemetry use when reviewing a diff, dependency change, or unfamiliar code for hidden outbound network traffic, telemetry, analytics, crash reporting, update checks, host or environment fingerprinting, secret or pii collection, or install-time and build-time code execution. ">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-build.svg" alt="Build, AI &amp; Security" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>auditing-egress-and-telemetry</code></h3>
+            <span class="skill-cat-tag" style="border-color:#00e5ff;color:#00e5ff">Build, AI &amp; Security</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when reviewing a diff, dependency change, or unfamiliar code for hidden outbound network traffic, telemetry, analytics, crash reporting, update checks, host or environment fingerprinting, secret or PII collection, or install-time and build-time code execution.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-none">Router auto-selects</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="build" data-search="auditing-privilege-and-writes use when reviewing a diff or unfamiliar code for writes outside the project or runtime directory, shell-rc or ssh or cron or service edits, permissions and temp files, path traversal and symlinks, process spawning, unsafe or ffi code, local servers and tokens, deserialization, terminal-escape injection, or secrets in logs and argv. ">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-build.svg" alt="Build, AI &amp; Security" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>auditing-privilege-and-writes</code></h3>
+            <span class="skill-cat-tag" style="border-color:#00e5ff;color:#00e5ff">Build, AI &amp; Security</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when reviewing a diff or unfamiliar code for writes outside the project or runtime directory, shell-rc or ssh or cron or service edits, permissions and temp files, path traversal and symlinks, process spawning, unsafe or FFI code, local servers and tokens, deserialization, terminal-escape injection, or secrets in logs and argv.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-none">Router auto-selects</span></div>
         </div>
       </article>
       <article class="skill-card" data-category="build" data-search="bounding-untrusted-resource-use use when code allocates memory, buffers, or retained history based on sizes or counts that arrive in untrusted input (image or file headers, protocol lengths, escape sequences, notifications, events, links), or when a list that grows from external input has no cap. ">
@@ -1507,7 +1532,7 @@ python3 -m unittest discover tests -q</div>
           <div class="sc-wrap"><span class="sc-pill">/eng plan</span><span class="sc-pill">/eng protocol</span><span class="sc-pill">/eng ipc</span></div>
         </div>
       </article>
-      <article class="skill-card" data-category="sustain" data-search="pr-review use when reviewing pull requests and git branch diffs against architectural rules, breaking changes, test coverage, error handling, security boundaries, and edge cases to generate actionable line-by-line review comments. diff">
+      <article class="skill-card" data-category="sustain" data-search="pr-review use when reviewing pull requests, forks, or git branch diffs, deciding which review lenses apply (hygiene, security, dependencies, tests, architecture), or writing a review reply for a contributor. diff">
         <div class="skill-card-head">
           <img src="assets/icons/icon-sustain.svg" alt="Collaborate, Docs &amp; Release" class="skill-cat-icon" width="28" height="28" />
           <div class="skill-title-wrap">
@@ -1515,7 +1540,7 @@ python3 -m unittest discover tests -q</div>
             <span class="skill-cat-tag" style="border-color:#38bdf8;color:#38bdf8">Collaborate, Docs &amp; Release</span>
           </div>
         </div>
-        <p class="skill-desc">Use when reviewing pull requests and git branch diffs against architectural rules, breaking changes, test coverage, error handling, security boundaries, and edge cases to generate actionable line-by-line review comments.</p>
+        <p class="skill-desc">Use when reviewing pull requests, forks, or git branch diffs, deciding which review lenses apply (hygiene, security, dependencies, tests, architecture), or writing a review reply for a contributor.</p>
         <div class="skill-footer">
           <div class="sc-wrap"><span class="sc-pill">/eng diff</span></div>
         </div>
@@ -1557,6 +1582,32 @@ python3 -m unittest discover tests -q</div>
         <p class="skill-desc">Use when generating, rendering, or updating SVG and PNG visual diagrams, terminal captures, architecture schematics, or workflow illustrations to accompany code examples, recipes, and repository documentation.</p>
         <div class="skill-footer">
           <div class="sc-wrap"><span class="sc-pill">/eng graphics</span><span class="sc-pill">/eng svg</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="build" data-search="reviewing-code-security use when a diff, pull request, or unfamiliar codebase needs a security review and it is unclear which security checks apply, or when picking among egress, privilege, dependency, trust-boundary, parsing and resource-bound audits from the changes made. ">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-build.svg" alt="Build, AI &amp; Security" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>reviewing-code-security</code></h3>
+            <span class="skill-cat-tag" style="border-color:#00e5ff;color:#00e5ff">Build, AI &amp; Security</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when a diff, pull request, or unfamiliar codebase needs a security review and it is unclear which security checks apply, or when picking among egress, privilege, dependency, trust-boundary, parsing and resource-bound audits from the changes made.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-none">Router auto-selects</span></div>
+        </div>
+      </article>
+      <article class="skill-card" data-category="sustain" data-search="reviewing-pr-hygiene use when reviewing whether a pull request or branch is right-sized, coherent and reviewable, including bundled features, mixed refactor and release changes, commit quality, stale base, missing test or gate evidence, or a first-time or fork contributor. hygiene">
+        <div class="skill-card-head">
+          <img src="assets/icons/icon-sustain.svg" alt="Collaborate, Docs &amp; Release" class="skill-cat-icon" width="28" height="28" />
+          <div class="skill-title-wrap">
+            <h3 class="skill-name"><code>reviewing-pr-hygiene</code></h3>
+            <span class="skill-cat-tag" style="border-color:#38bdf8;color:#38bdf8">Collaborate, Docs &amp; Release</span>
+          </div>
+        </div>
+        <p class="skill-desc">Use when reviewing whether a pull request or branch is right-sized, coherent and reviewable, including bundled features, mixed refactor and release changes, commit quality, stale base, missing test or gate evidence, or a first-time or fork contributor.</p>
+        <div class="skill-footer">
+          <div class="sc-wrap"><span class="sc-pill">/eng hygiene</span></div>
         </div>
       </article>
       <article class="skill-card" data-category="sustain" data-search="reviewing-repo-health use when asked to review a whole repository against its goals, grade it, make it &quot;a+&quot;, or produce a plan with milestones; when a deep review should fan out to parallel subagents on matched model tiers; or when review, docs and plans may have drifted apart. health grade">
@@ -1856,7 +1907,7 @@ python3 -m unittest discover tests -q</div>
   </main>
 
   <footer>
-    <p>swe-skills v0.18.0 • 74 Evidence-Derived Engineering Skills • Apache-2.0 License</p>
+    <p>swe-skills v0.20.0 • 78 Evidence-Derived Engineering Skills • Apache-2.0 License</p>
   </footer>
 
   <script>

@@ -123,7 +123,7 @@ The shortcut words live in one table, in [`skills/eng/SKILL.md`](skills/eng/SKIL
 
 ---
 
-## Skills (74)
+## Skills (78)
 
 | Group | Skills |
 |---|---|
@@ -131,9 +131,9 @@ The shortcut words live in one table, in [`skills/eng/SKILL.md`](skills/eng/SKIL
 | <img src="docs/assets/icons/icon-plan.svg" width="20" height="20" align="absmiddle" alt="" /> **Frame & plan** | `right-sizing-process` · `writing-intent-briefs` · `planning-with-contracts` · `designing-exhaustive-test-cases` · `sizing-limits-from-measurement` · `token-finops` · `choosing-tools-and-substrates` · `using-local-tool-registry` · `adaptive-model-routing` |
 | <img src="docs/assets/icons/icon-arch.svg" width="20" height="20" align="absmiddle" alt="" /> **Architecture** | `architecture-best-practices` · `designing-layered-pipelines` · `designing-plugin-contracts` · `designing-uniform-surfaces` · `designing-testable-seams` · `evolving-schemas-and-contracts` · `defending-architecture-decisions` · `managing-complexity-budgets` · `designing-data-pipelines` · `code-architecture-review` · `api-contract-audit` · `refactor-execute` |
 | <img src="docs/assets/icons/icon-build.svg" width="20" height="20" align="absmiddle" alt="" /> **AI systems** | `building-unattended-agent-loops` · `grounding-ai-outputs` · `typesafe-ai` |
-| <img src="docs/assets/icons/icon-build.svg" width="20" height="20" align="absmiddle" alt="" /> **Build & security** | `scaffolding-new-projects` · `building-small-cli-tools` · `building-installers-and-onboarding` · `building-code-generators` · `parsing-untrusted-text-robustly` · `hardening-trust-boundaries` · `hardening-ci-workflows` · `running-local-ci` · `bounding-untrusted-resource-use` · `controlling-processes-safely` · `keeping-event-loops-responsive` · `security-best-practices` · `engineering-for-determinism` · `nix-environments` |
+| <img src="docs/assets/icons/icon-build.svg" width="20" height="20" align="absmiddle" alt="" /> **Build & security** | `scaffolding-new-projects` · `building-small-cli-tools` · `building-installers-and-onboarding` · `building-code-generators` · `parsing-untrusted-text-robustly` · `hardening-trust-boundaries` · `hardening-ci-workflows` · `running-local-ci` · `bounding-untrusted-resource-use` · `controlling-processes-safely` · `keeping-event-loops-responsive` · `security-best-practices` · `reviewing-code-security` · `auditing-egress-and-telemetry` · `auditing-privilege-and-writes` · `engineering-for-determinism` · `nix-environments` |
 | <img src="docs/assets/icons/icon-verify.svg" width="20" height="20" align="absmiddle" alt="" /> **Verify & measure** | `layered-verification-gates` · `driving-browsers-for-qa` · `hunting-silent-failures` · `hunting-cross-pipeline-desync` · `debugging-across-layers` · `clustering-failures-by-root-cause` · `building-trustworthy-benchmarks` · `making-verifiable-claims` · `test-coverage` · `dependency-audit` |
-| <img src="docs/assets/icons/icon-sustain.svg" width="20" height="20" align="absmiddle" alt="" /> **Collaborate, docs & sustain** | `orchestrating-subagents` · `running-multi-lens-audits` · `reviewing-repo-health` · `auditing-doc-alignment` · `planning-grade-a-uplift` · `routing-work-across-harnesses` · `supervising-autonomous-sessions` · `handing-off-sessions` · `compacting-context-safely` · `writing-agent-context-files` · `writing-user-guides` · `rendering-graphic-examples` · `showcasing-graphics-in-docs` · `designing-logos-and-icons` · `building-github-pages-sites` · `keeping-docs-in-sync` · `keeping-repos-portable` · `drafting-issue-reports` · `writing-pull-requests` · `pr-review` · `github-issues-script` · `committing-and-releasing-cleanly` · `release` · `building-release-binaries` |
+| <img src="docs/assets/icons/icon-sustain.svg" width="20" height="20" align="absmiddle" alt="" /> **Collaborate, docs & sustain** | `orchestrating-subagents` · `running-multi-lens-audits` · `reviewing-repo-health` · `auditing-doc-alignment` · `planning-grade-a-uplift` · `routing-work-across-harnesses` · `supervising-autonomous-sessions` · `handing-off-sessions` · `compacting-context-safely` · `writing-agent-context-files` · `writing-user-guides` · `rendering-graphic-examples` · `showcasing-graphics-in-docs` · `designing-logos-and-icons` · `building-github-pages-sites` · `keeping-docs-in-sync` · `keeping-repos-portable` · `drafting-issue-reports` · `writing-pull-requests` · `pr-review` · `reviewing-pr-hygiene` · `github-issues-script` · `committing-and-releasing-cleanly` · `release` · `building-release-binaries` |
 
 These complement general process skills (brainstorming, TDD, systematic debugging, code review) rather than replace them.
 
@@ -177,7 +177,7 @@ See [docs/HOOKS.md](docs/HOOKS.md), [How-To Recipe 5](docs/how-to.md#recipe-5-em
 ## Repository layout
 
 ```
-skills/<name>/SKILL.md        the 74 skills (single source of truth)
+skills/<name>/SKILL.md        the 78 skills (single source of truth)
 assets/logo.{svg,png}         square 512x512 plugin/brand icon (referenced by plugin.json)
 plugin.json                   Antigravity plugin manifest
 .claude-plugin/               Claude Code plugin + marketplace manifests
@@ -218,7 +218,7 @@ Authoring rules: description starts with "Use when…" and states triggers only 
 
 ## Status
 
-v0.20.0 (74 skills). Skills are evidence-derived and verified against multi-agent test scenarios; [docs/TESTING.md](docs/TESTING.md) lists the scenarios to run.
+v0.20.0 (78 skills). Skills are evidence-derived and verified against multi-agent test scenarios; [docs/TESTING.md](docs/TESTING.md) lists the scenarios to run.
 
 ---
 

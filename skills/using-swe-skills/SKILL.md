@@ -50,6 +50,7 @@ Unsure? `right-sizing-process`.
 | signal a PID from a pid/lock file; daemon control | `controlling-processes-safely` |
 | add a wait/poll handler to a request/serve loop | `keeping-event-loops-responsive` |
 | handle auth, sessions, crypto, input, exploits | `security-best-practices` |
+| security-review a diff: telemetry/egress, writes/privilege | `reviewing-code-security`, `auditing-egress-and-telemetry`, `auditing-privilege-and-writes` |
 | see flaky or churning output | `engineering-for-determinism` |
 | decouple business logic, set module boundaries | `architecture-best-practices` |
 | configure reproducible dev envs or Nix flakes | `nix-environments` |
@@ -77,7 +78,7 @@ Unsure? `right-sizing-process`.
 | change documented behavior | `keeping-docs-in-sync` |
 | hardcode paths or env assumptions | `keeping-repos-portable` |
 | audit architecture & code with Graphify/AST | `code-architecture-review` |
-| review a PR, branch diff, or staged changes | `pr-review` |
+| review a PR, branch diff, or staged changes; PR size, bundling, contributor reply | `pr-review`, `reviewing-pr-hygiene` |
 | execute refactoring plan safely with green tests | `refactor-execute` |
 | audit OpenAPI/GraphQL/DTO schema drift | `api-contract-audit` |
 | audit packages for CVEs and licenses | `dependency-audit` |
