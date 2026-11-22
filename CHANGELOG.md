@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Skills `reviewing-code-security` (router), `auditing-egress-and-telemetry`, `auditing-privilege-and-writes` (per-language `rg` recipes, severity rubric, findings schema) and `reviewing-pr-hygiene` (bundling heuristics, split proposals, external-contributor norms); `/eng` shortcuts `secrev`, `egress`, `privilege`, `hygiene`.
+- `pr-review` is now a router (routing table, untrusted-fork protocol, one consolidated output) with the `pr-review/v1` contributor reply format: JSON Schema, template, sample, dependency-free validator `skills/pr-review/scripts/validate_pr_review.py` and `tests/test_pr_review_validator.py`.
+- `docs/examples/pr169-review.md` and `pr169-evaluation.md`: a real-PR trial of the router and its evaluation.
+
 ## [0.20.0] - 2026-11-21
 
 ### Added
