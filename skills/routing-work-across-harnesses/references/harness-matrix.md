@@ -1,14 +1,14 @@
 # Harness matrix
 
-**Status: checked against official docs on 2026-11-15** (sources at the bottom). Cells marked *unverified* could not be confirmed. Re-check when a harness ships a major release. `install.sh --agy` uses `agy plugin install`, else falls back to the CLI skills dir. Last verified: 2026-11-15.
+**Status: checked against official docs on 2026-11-15** (sources at the bottom). Cells marked *unverified* could not be confirmed. Re-check when a harness ships a major release. `install.sh --agy` uses `agy plugin install`, else falls back to the CLI skills dir. Last verified: 2026-11-21 (pi, opencode, Cursor paths re-checked).
 
 | Harness | Project skills | User skills | Subagents | Model per subagent | Instruction file | Notes |
 |---|---|---|---|---|---|---|
 | Claude Code | `.claude/skills/` | `~/.claude/skills/` | Agent/Task tool; `.claude/agents/*.md` | `model` arg or agent frontmatter (`haiku`/`sonnet`/`opus`/`fable`), full IDs, or `inherit`; `CLAUDE_CODE_SUBAGENT_MODEL` overrides | `CLAUDE.md` | Native `/code-review <level>`; plugin via `.claude-plugin/` |
 | Antigravity (`agy`) | `.agents/skills/` | `~/.gemini/config/skills/` (app), `~/.gemini/antigravity-cli/skills/` (CLI; the CLI does not read `~/.agents/skills/`), or `agy plugin install` | `.agents/agents/<name>.md`; global `~/.gemini/config/agents/`; plugin `agents/` (repo templates: `templates/agy/agents`) | frontmatter `model`: `inherit` (default), `flash`, `pro` | `GEMINI.md`, `AGENTS.md`, `.agents/rules/*.md` | `agy plugin validate .` |
 | opencode | `.opencode/skills/` (also reads `.claude/skills`, `.agents/skills`) | `~/.config/opencode/skills/` | `.opencode/agents/*.md`, mode `subagent` | `model: provider/model` in agent file or `opencode.json` | `AGENTS.md` | Custom commands in `.opencode/commands/` (singular `command/` is legacy). Model may carry a `#variant` suffix |
-| pi | `.pi/skills/`, `.agents/skills/` | `~/.pi/agent/skills/` | none built in; run lenses sequentially, or launch `pi -p` per lens from a script | `--model` per process (`provider/id`, optional `:thinking`) | `AGENTS.md`, `CLAUDE.md` | Minimal harness; keep prompts self-contained. `.pi/skills` and `~/.pi/agent/skills` *unverified* (only `.agents/skills` and `~/.agents/skills` confirmed); prompts in `~/.pi/agent/prompts/` |
-| Cursor | `.cursor/skills/` | `~/.cursor/skills/` | `.cursor/agents/*.md` | frontmatter `model`: `inherit` (default) or a model ID; a `fast` alias is *not documented* | `.cursor/rules/*.mdc`, `AGENTS.md` | Slash commands in `.cursor/commands/` |
+| pi | `.pi/skills/`, `.agents/skills/` | `~/.pi/agent/skills/` | none built in; run lenses sequentially, or launch `pi -p` per lens from a script | `--model` per process (`provider/id`, optional `:thinking`) | `AGENTS.md`, `CLAUDE.md` | Minimal harness; keep prompts self-contained. Skill paths verified against pi docs (configuration.md, skills.md); prompt templates (slash commands) in `.pi/prompts/` and `~/.pi/agent/prompts/`; `--thinking` overrides a `:thinking` suffix |
+| Cursor | `.cursor/skills/` | `~/.cursor/skills/` | `.cursor/agents/*.md` | frontmatter `model`: `inherit` (default) or a model ID; a `fast` alias is *not documented* | `.cursor/rules/*.mdc`, `AGENTS.md` | Skills (`.cursor/skills/`) are the documented slash-command equivalent; `.cursor/commands/` and `~/.cursor/commands/` are *not documented* on cursor.com/docs (skills, rules pages) |
 
 ## Tier to model suggestions
 
