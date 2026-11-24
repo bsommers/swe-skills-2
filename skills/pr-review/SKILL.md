@@ -83,6 +83,14 @@ Evaluate the diff across 6 critical dimensions:
 | **5. Test Coverage** | New features or bugfixes missing corresponding unit/integration tests. | Modified core logic with zero test updates, untested conditional branches. |
 | **6. Security & Trust Boundaries** | Injection vulnerabilities, auth checks, hardcoded secrets, untrusted inputs. | Raw SQL concatenation, shell execution of user input, exposed API keys or tokens. |
 
+### Known bug classes (check each)
+
+Capability token reaching embedded content, missing CSP (`hardening-trust-boundaries`); unbounded responses or media frames (`bounding-untrusted-resource-use`); new surface bypassing gates (`designing-uniform-surfaces`); duplicated logic without a shared function, last-write-wins state (`designing-layered-pipelines`); Windows reserved names, control chars to terminals (`parsing-untrusted-text-robustly`); self-matching `pgrep -f` waits (`controlling-processes-safely`).
+
+Scanners do not see logic or design flaws, so a clean scan is not evidence. State which scanner covered which language (e.g. a Python-only analyzer says nothing about Rust; semgrep INFO unsafe-usage is noise, not a verdict).
+
+**Lessons loop:** after each review round, name any NEW bug class and add it to the owning skill (`clustering-failures-by-root-cause`).
+
 ---
 
 ## Step 3: Structured Review Output
