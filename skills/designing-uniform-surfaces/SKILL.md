@@ -30,7 +30,8 @@ Every capability is defined **once** as a command in a single core, then exposed
 4. **Parity test.** One table-driven test drives each surface and asserts the same resulting state/output. A new command without all surface entries fails the test.
 5. **Exceptions are written down.** Skip a surface only with a reason in an exclusion table (e.g. "needs free-form text: no menu entry"). Unlisted gaps are bugs.
 6. **Gate once.** Dangerous or config-writing commands are gated in the core, so remote surfaces cannot bypass what the UI enforces.
-7. **Structured output.** Return data, not just a status line, so APIs, MCP and scripts can read results.
+7. **New surfaces inherit existing gates.** A new RPC/MCP/palette entry must hit the same file-touch and config-write permission checks as the UI path. Test pattern: a gate matrix of every gated command across every surface.
+8. **Structured output.** Return data, not just a status line, so APIs, MCP and scripts can read results.
 
 ## Plan injection
 

@@ -83,6 +83,8 @@ Evaluate the diff across 6 critical dimensions:
 | **5. Test Coverage** | New features or bugfixes missing corresponding unit/integration tests. | Modified core logic with zero test updates, untested conditional branches. |
 | **6. Security & Trust Boundaries** | Injection vulnerabilities, auth checks, hardcoded secrets, untrusted inputs. | Raw SQL concatenation, shell execution of user input, exposed API keys or tokens. |
 
+Also check `references/known-bug-classes.md` (token leaks, caps, gates, shared logic, reserved names, self-matching waits; a clean scan is not evidence).
+
 ---
 
 ## Step 3: Structured Review Output

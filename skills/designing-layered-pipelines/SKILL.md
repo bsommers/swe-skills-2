@@ -24,6 +24,9 @@ Source ─▶ Parser ─▶ AST ─▶ Validator ─▶ IR ─▶ Emitter A / B 
 6. **Stage hand-offs are artifacts.** Stages exchange files or records with a schema (JSON, SARIF, tables), so any stage can be rerun from its input without re-running upstream.
 7. **Deterministic emission.** Sort, stabilize, and avoid timestamps so outputs diff cleanly (see `engineering-for-determinism`).
 
+8. **Duplicated behavior gets ONE shared function plus a parity test.** E.g. a resize guard repeated in three platform loops, or a palette ranker re-implemented locally.
+9. **Shared mutable state uses compare-and-set revisions** and surfaces conflicts to the caller; last-write-wins silently loses edits. Test pattern: two writers from the same revision, assert the second gets a conflict.
+
 ## Checks you can actually run
 
 - Can I add a new backend without touching the frontend? (If no, the IR leaks.)

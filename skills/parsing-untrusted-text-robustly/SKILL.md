@@ -21,6 +21,8 @@ Third-party formats change and users paste hostile edge cases. Parse structurall
 8. **Idempotent injection.** Guard content scripts with a `window.__loaded` flag so re-injection doesn't double-register listeners.
 9. **Least privilege for extensions.** Narrow host permissions; don't expose bundled libs as web-accessible resources; no telemetry; state permissions and why in a SECURITY note.
 10. **Exported HTML reflects untrusted DOM.** Sanitize, or document the risk and forbid opening exports from untrusted sources.
+11. **Validate names cross-platform.** Reject Windows reserved device names (`CON`, `PRN`, `AUX`, `NUL`, `COM1`..`COM9`, `LPT1`..`LPT9`, with or without extension) even on Linux/macOS.
+12. **Strip control characters** (ESC, C0/C1) from any text rendered to a terminal. Test pattern: names and payloads containing `\x1b[` and `NUL` are rejected or sanitized.
 
 ## Test fixtures to always include
 
