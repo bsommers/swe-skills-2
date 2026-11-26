@@ -40,6 +40,8 @@ git diff BASE...HEAD --stat                          # branch or local case
 
 Order: hygiene (sequential) -> chosen lenses (parallel; subagents get only the diff plus their skill) -> consolidate (sequential). Skipped lenses are listed with a reason. Correctness, breaking-change and error-handling lenses below always run.
 
+Also check `references/known-bug-classes.md` (token leaks, caps, gates, shared logic, reserved names, self-matching waits; a clean scan is not evidence).
+
 ## 4. Core lenses (always)
 
 | Lens | Flag |

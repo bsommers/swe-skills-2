@@ -19,6 +19,7 @@ A PID in a file is untrusted data, and "a process with that PID exists" does not
    - Unexpected error: refuse to signal.
 4. **The lock must live on the inode the daemon writes.** Write the PID by in-place truncate+write on the locked file. Atomic rename replaces the inode, so the flock check then inspects a different file and lies.
 5. **Report honestly:** distinct outcomes for not-running, stale-cleaned, signaled, refused.
+6. **Wait loops must not match themselves.** `while pgrep -f PATTERN` matches its own command line and never exits. Use `pgrep -x`, a pidfile, or exclude `$$`.
 
 ## Tests
 

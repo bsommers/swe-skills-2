@@ -21,6 +21,7 @@ Injection happens where data becomes code. At each boundary, **separate data fro
 | Executing model/third-party code | no network, drop all capabilities, `no-new-privileges`, pid/mem caps, host-enforced timeout | rely on the script's own restraint |
 | Extensions / plugins | narrowest host permissions; no unneeded web-accessible resources | request "all URLs" for convenience |
 | Control sequences forwarded to a privileged sink (clipboard, host terminal) | bound each by its own terminator; allowlist exact grammar; drop query forms; re-emit parsed parts | prefix-check then pass raw bytes (`references/forwarding-control-sequences.md`) |
+| Capability tokens (URL/bearer tokens) | keep out of any content you embed or render; give sandboxed content a CSP with `connect-src 'none'` | put the token in a URL that `srcdoc`/embedded content inherits as base (`document.baseURI` leaks it) |
 | Telemetry | none by default; offline-capable core | phone home silently |
 | Reflected content (exports, logs) | escape/sanitize for the output context | assume upstream content is safe |
 
@@ -47,4 +48,5 @@ A base-image allowlist and a pipe-to-shell check are **speed bumps, not a sandbo
 - Allowlists that match by prefix and are bypassed by lookalikes.
 - Treating "internal only" input as trusted.
 - Unbounded sizes from input (`bounding-untrusted-resource-use`); signalling a PID from a file (`controlling-processes-safely`); workflow files (`hardening-ci-workflows`).
+- Token leak test: serve the page, assert the token string is absent from the served HTML and the CSP header is present.
 - Security fixes without a regression test.

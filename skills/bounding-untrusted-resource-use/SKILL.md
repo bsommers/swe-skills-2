@@ -18,11 +18,16 @@ Attackers don't need an exploit when your parser trusts a number. A 12-byte head
 5. **One shared constant** across sibling decoders. Duplicated magic numbers diverge.
 6. **Choose the number from measurement** and a stated worst case (`sizing-limits-from-measurement`), not a guess.
 
+7. **Cap responses, not just inputs.** Per-read response size cap; listings return metadata only and page, full body only on an explicit read.
+8. **Cap each image/media frame and total payload**, and throttle repeat requests.
+
 ## Tests (always three)
 
 - Oversized input is rejected (and nothing large was allocated).
 - Exactly-max input is accepted (off-by-one check).
 - Cap behavior: after exceeding it, the newest entries are retained, the oldest dropped, and cursor consumers still see new items.
+
+Also: an oversized input or response is rejected or paged, never returned whole.
 
 ## Common mistakes
 
