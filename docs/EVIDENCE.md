@@ -55,6 +55,9 @@ Skills were distilled from the standards, specs, audits, changelogs, fix-commit 
 | `controlling-processes-safely` | stop command signalling a PID from a stale lockfile; PID range validation and flock-based ownership proof with a real bystander-process test |
 | `keeping-event-loops-responsive` | wait handler inside a single-owner request loop that deadlocked until timeout; parked-waiter redesign tested over a real socket; key auto-repeat filter placed before the router that swallowed passthrough keys held in a child editor |
 | `security-best-practices` | OWASP Top 10 mitigations and secure-by-default architecture distilled from `security-skills`, `synth`, and `ontological-firewall`; constant-time comparisons, strict tenant isolation, memory-hard key derivation, and leak-free error handling |
+| `reviewing-code-security` | router distilled from `pr-review` and the security skills; a real external-contributor PR review (loopback preview server, CSP, token handling) exposed the need to pick lenses from diff signals |
+| `auditing-egress-and-telemetry` | egress, telemetry and supply-chain checks derived from `dependency-audit` and `hardening-ci-workflows`; validated on an external-contributor PR touching network-adjacent code (`docs/examples/pr169-evaluation.md`) |
+| `auditing-privilege-and-writes` | filesystem, process, IPC and token checks derived from `hardening-trust-boundaries` and `security-best-practices`; validated on the same PR (loopback server, CSPRNG duplication, token in replies) |
 | `engineering-for-determinism` | deterministic generation standards (SHA pinning, seeded generators); `synth` regeneration/SHA pins; `airflow` seeded generators and Python-version seed-type bug |
 | `nix-environments` | `OntoLogic` and multi-substrate compiler toolchains; hermetic dev shells with `flake.nix` wrapping native toolchains while preserving unprivileged portability via `uv`/`cargo` fallback |
 | `layered-verification-gates` | multi-tier verification standards; `airflow` skip behavior; `agent-manager-fe` coverage report; constraint-weakening patterns |
@@ -88,6 +91,7 @@ Skills were distilled from the standards, specs, audits, changelogs, fix-commit 
 | `github-issues-script` | `running-multi-lens-audits` 51-finding issue filing; batch GitHub issue generation with coordinates, impact, and heredoc escaping |
 | `writing-pull-requests` | `committing-and-releasing-cleanly` PR-description rule; GitHub closing-keyword docs (one keyword per issue); `gh pr create --help` (2.88: `--dry-run` may still push); ~400-line default from the SmartBear/Cisco code-review study (defect-finding falls off beyond 200–400 lines per review) |
 | `pr-review` | `committing-and-releasing-cleanly` review standard; `feed-brain-gh` multi-lens PR review workflow with `gh pr review` |
+| `reviewing-pr-hygiene` | PR-size and bundling heuristics from `writing-pull-requests`; external-contributor review practice (bundled five-feature PR, stale base, skipped gate) |
 | `committing-and-releasing-cleanly` | commit and release hygiene standards; `flowscope` dual-remote sync; existing release skills |
 | `adaptive-model-routing` | multi-tier model router benchmarks and subagent dispatch; token conservation benchmarks across pro, flash, flash_lite tiers |
 | `typesafe-ai` | vendored from TypeSafe AI's published skill (MIT; license kept at `skills/typesafe-ai/LICENSE`); live API docs at docs.typesafe.ai are the source of truth for request syntax and question types |

@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "pr-review/v1",
+  "title": "pr-review/v1 machine-readable review block",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "pr", "head_sha", "verdict", "summary", "findings", "questions"],
+  "properties": {
+    "schema": {"const": "pr-review/v1"},
+    "pr": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["repo", "number"],
+      "properties": {
+        "repo": {"type": "string", "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"},
+        "number": {"type": "integer", "minimum": 1}
+      }
+    },
+    "head_sha": {"type": "string", "pattern": "^[0-9a-f]{7,40}$"},
+    "verdict": {"enum": ["approve", "changes_requested", "needs_info", "reject"]},
+    "summary": {"type": "string", "minLength": 1, "maxLength": 600},
+    "skills_run": {"type": "array", "items": {"type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"}},
+    "split_proposal": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["title", "paths"],
+        "properties": {
+          "title": {"type": "string", "minLength": 1},
+          "paths": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+          "depends_on": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "category", "severity", "file", "line", "evidence", "required_change", "acceptance_check", "blocking"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[A-Z]{2,5}-[a-z0-9][a-z0-9-]{2,60}$"},
+          "category": {"enum": ["hygiene", "egress", "privilege", "supply-chain", "trust-boundary", "resource-bounds", "parsing", "correctness", "tests", "architecture", "docs", "compat", "other"]},
+          "severity": {"enum": ["critical", "high", "medium", "low", "info"]},
+          "file": {"type": ["string", "null"]},
+          "line": {"type": ["integer", "null"], "minimum": 1},
+          "evidence": {"type": "string", "minLength": 1},
+          "required_change": {"type": "string", "minLength": 1},
+          "acceptance_check": {"type": "string", "minLength": 1},
+          "blocking": {"type": "boolean"},
+          "confidence": {"enum": ["high", "medium", "low"]},
+          "cwe": {"type": "string", "pattern": "^CWE-[0-9]+$"}
+        }
+      }
+    },
+    "questions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "text"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^Q-[a-z0-9][a-z0-9-]{2,60}$"},
+          "text": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  }
+}
